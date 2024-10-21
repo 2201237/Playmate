@@ -6,7 +6,7 @@
       $lastId=$pdo->lastInsertId();
       $sql=$pdo->prepare('insert into users(user_name, user_pass,'.
                         'user_mail) values(?,?,?)');
-      $sql->execute([$_POST['name'], $_POST['password'],$_POST['email']]);
+      $sql->execute([$_POST['name'], password_hash($_POST['password'], PASSWORD_DEFAULT),$_POST['email']]);
 
       header('Location:login-input.php');
 ?>
