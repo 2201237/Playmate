@@ -41,6 +41,9 @@
             <div class="button-panel">
                 <input type="submit" class="button" title="Sign Up" value="Sign UP"></input>
             </div>
+            <div class="new_profile">
+                <input type="textarea" class="profile" required="required" placeholder="Profile"></input>
+            </div>
         
         </form>
     </div>
