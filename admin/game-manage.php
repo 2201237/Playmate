@@ -14,9 +14,6 @@
 
     <div>
         <button class="menu-button" onclick="location.href='game-title.html'">ゲームタイトル</button><br>
-        <button class="menu-button" onclick="location.href='tournament-results.html'">大会戦績管理</button><br>
-        <button class="menu-button" onclick="location.href='win-loss-images.html'">勝敗画像管理</button><br>
-        <button class="menu-button" onclick="location.href='create-tournament.html'">大会作成</button>
     </div>
 </body>
 </html>
