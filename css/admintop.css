@@ -1,0 +1,34 @@
+/* styles.css */
+body {
+    background-color: #b2fab4;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+h1 {
+    font-size: 48px;
+    margin-top: 50px;
+}
+
+.logout {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 20px;
+}
+
+.menu-button {
+    background-color: #d2b48c;
+    color: black;
+    font-size: 24px;
+    border: none;
+    border-radius: 20px;
+    padding: 15px 40px;
+    margin: 20px;
+    cursor: pointer;
+    width: 300px;
+}
+
+.menu-button:hover {
+    background-color: #c69c6d;
+}
