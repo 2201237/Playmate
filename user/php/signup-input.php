@@ -38,13 +38,15 @@
                 <label for="password"></label>
                 <input type="password" name="password" required="required" placeholder="Password"></input>
             </div>
-            <div class="button-panel">
-                <input type="submit" class="button" title="Sign Up" value="Sign UP"></input>
-            </div>
             <div class="new_profile">
                 <input type="textarea" class="profile" required="required" placeholder="Profile"></input>
             </div>
-        
+            <div>
+                <button type="submit" class="back" value="戻る" onclick=history.back()></button>
+            </div>
+            <div class="button-panel">
+                <input type="submit" class="button" title="Sign Up" value="Sign UP"></input>
+            </div>
         </form>
     </div>
 </body>
