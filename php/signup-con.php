@@ -3,9 +3,9 @@ session_start();
 require 'db-connect.php';
 
 // 入力データのサニタイズ
-$user_name = htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8');
-$user_pass = htmlspecialchars($_POST['password'], ENT_QUOTES, 'UTF-8');
-$user_mail = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8');
+$user_name = htmlspecialchars($_POST['name']);
+$user_pass = htmlspecialchars($_POST['password']);
+$user_mail = htmlspecialchars($_POST['email']);
 
 try {
     // データベース接続

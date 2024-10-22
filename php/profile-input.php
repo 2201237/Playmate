@@ -1,6 +1,7 @@
 <?php
       session_start();
       require 'db-connect.php';
+      require './home.html';
       $pdo=new PDO($connect,USER,PASS);
 
       $lastId=$pdo->lastInsertId();
@@ -9,6 +10,7 @@
       $user_name = htmlspecialchars($_POST['name']);
       $user_pass = htmlspecialchars($_POST['password']);
       $user_mail = htmlspecialchars($_POST['email']);
+      $user_profile = htmlspecialchars($_POST['profile']);
 ?>
 
 <!DOCTYPE html>
@@ -40,31 +42,17 @@
             <tr>
                 <th colspan="2" class="h1-pro">プロフィール</th>
             </tr>
-
             <tr>
-                <td colspan="2" align="center">
+                <th>名前</th>
+                <td><?php echo 'user_name';?></td>
             </tr>
             <tr>
-                <th>学籍番号</th>
-                <td>2201222</td>
+                <th>メールアドレス</th>
+                <td><?php echo 'usere_name';?></td>
             </tr>
             <tr>
-                <th>ユーザー名</th>
-                <td>白石涼太</td>
-            </tr>
-            <tr>
-                <th>所属学校</th>
-                <td>麻生情報ビジネス専門学校<br />
-福岡校</td>
-            </tr>
-
-
-            <tr>
-                <th colspan="2" align="center">説明文</th>
-            </tr>
-            <tr>
-                <td colspan="2" align="center">説明文がありません
-            </tr>
+                <th>自己紹介</th>
+                <td><?php echo 'user_prpfile';?><br/>
         </table>
 
         <div id="logoutModal" class="modal-logout">
