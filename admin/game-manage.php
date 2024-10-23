@@ -8,7 +8,7 @@
 </head>
 <body>
     <a href="admintop.php" class="back">←戻る</a>
-    <a href="login.html" class="logout">ログアウト</a>
+    <a href="login.php" class="logout">ログアウト</a>
 
     <h2>ゲーム管理</h2>
 
