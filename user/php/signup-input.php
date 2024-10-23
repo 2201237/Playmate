@@ -8,6 +8,7 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user_name = $_POST['user_name'];
         $user_mail = $_POST['user_mail'];
+        $user_profile = $_POST['profile'];
         $user_pw = $_POST['user_pw'];
     }
 ?>
@@ -25,7 +26,7 @@
 <body>
     <div class="form-wrapper">
         <h1>Sign Up</h1>
-        <form action="signup-output.php" method="post">
+        <form action="signup-confirm.php" method="post">
             <div class="form-item">
                 <label for="name"></label>
                 <input type="name" name="name" required="required" placeholder="User Name"></input>
@@ -39,10 +40,10 @@
                 <input type="password" name="password" required="required" placeholder="Password"></input>
             </div>
             <div class="new_profile">
-                <input type="textarea" class="profile" required="required" placeholder="Profile"></input>
+                <input type="textarea" name="profile" class="profile" placeholder="Profile"></input>
             </div>
             <div>
-                <button type="submit" class="back" value="戻る" onclick=history.back()></button>
+                <button type="submit" class="back" onclick=history.back()>戻る</button>
             </div>
             <div class="button-panel">
                 <input type="submit" class="button" title="Sign Up" value="Sign UP"></input>
