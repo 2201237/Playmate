@@ -11,7 +11,7 @@
     <a href="login.php" class="logout">ログアウト</a>
 
     <div>
-        <button class="menu-button" onclick="location.href='user-manage.php'">ユーザー管理</button><br>
+        <button class="menu-button" onclick="location.href='usermanage.php'">ユーザー管理</button><br>
         <button class="menu-button" onclick="location.href='game-manage.php'">ゲーム管理</button><br>
         <button class="menu-button" onclick="location.href='tournament.php'">大会管理</button><br>
         <button class="menu-button" onclick="location.href='contact.php'">お問い合わせ</button>
