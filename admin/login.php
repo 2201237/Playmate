@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if ($error_message): ?>
             <div class="error-message"><?php echo htmlspecialchars($error_message, ENT_QUOTES, 'UTF-8'); ?></div>
         <?php endif; ?>
-        <form method="POST" action="a.php">
+        <form method="POST" action="admintop.php">
             <div class="form-group">
                 <label for="admin_id">管理者ID</label>
                 <input type="text" id="admin_id" name="admin_id" required>
