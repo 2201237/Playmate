@@ -4,7 +4,7 @@ require 'db-connect.php';
 
 // ログイン済みの場合はダッシュボードへリダイレクト
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
-    header('Location: a.php');
+    header('Location: admintop.php');
     exit;
 }
 
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $pdo->prepare('UPDATE administrators SET last_login = NOW() WHERE id = ?');
             $stmt->execute([$admin['id']]);
 
-            header('Location: a.php');
+            header('Location: admintop.php');
             exit;
         } else {
             $error_message = '管理者IDまたはパスワードが正しくありません。';
