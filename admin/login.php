@@ -12,11 +12,11 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
 $error_message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+        $admin_id = filter_input(INPUT_POST, 'admin_id', FILTER_SANITIZE_STRING);
         $password = $_POST['password'];
 
-        $stmt = $pdo->prepare('SELECT * FROM administrators WHERE email = ?');
-        $stmt->execute([$email]);
+        $stmt = $pdo->prepare('SELECT * FROM administrators WHERE admin_id = ?');
+        $stmt->execute([$admin_id]);
         $admin = $stmt->fetch();
 
         if ($admin && password_verify($password, $admin['password_hash'])) {
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: dashboard.php');
             exit;
         } else {
-            $error_message = 'メールアドレスまたはパスワードが正しくありません。';
+            $error_message = '管理者IDまたはパスワードが正しくありません。';
         }
     } catch (PDOException $e) {
         $error_message = 'システムエラーが発生しました。';
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-bottom: 5px;
             color: #555;
         }
-        input[type="email"],
+        input[type="text"],
         input[type="password"] {
             width: 100%;
             padding: 8px;
@@ -112,8 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
         <form method="POST" action="">
             <div class="form-group">
-                <label for="email">メールアドレス</label>
-                <input type="email" id="email" name="email" required>
+                <label for="admin_id">管理者ID</label>
+                <input type="text" id="admin_id" name="admin_id" required>
             </div>
             <div class="form-group">
                 <label for="password">パスワード</label>
