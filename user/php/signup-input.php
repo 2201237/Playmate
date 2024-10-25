@@ -39,16 +39,18 @@
                 <label for="password"></label>
                 <input type="password" name="password" required="required" placeholder="Password"></input>
             </div>
-            <div class="new_profile">
-                <input type="textarea" name="profile" class="profile" placeholder="Profile"></input>
-            </div>
-            <div>
-                <button type="submit" class="back" onclick=history.back()>戻る</button>
+            <div class="form-profile">
+                <label for="profile"></label>
+                <textarea name="profile" placeholder="Profile"></textarea>
             </div>
             <div class="button-panel">
                 <input type="submit" class="button" title="Sign Up" value="Sign UP"></input>
             </div>
         </form>
+        <div class="form-footer">
+            <a href="#" onclick="history.back()" return false;>back</a>
+            <!-- <p><a href="#">Forgot password?</a></p> -->
+        </div>
     </div>
 </body>
 
