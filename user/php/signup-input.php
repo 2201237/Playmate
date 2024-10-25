@@ -39,7 +39,7 @@
                 <label for="password"></label>
                 <input type="password" name="password" required="required" placeholder="Password"></input>
             </div>
-            <div class="form-profile">
+            <div class="form-item">
                 <label for="profile"></label>
                 <textarea name="profile" placeholder="Profile"></textarea>
             </div>
