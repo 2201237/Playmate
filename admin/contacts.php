@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../user/css/game-manage.css">
-    <title>大会管理</title>
+    <title>お問い合わせ管理画面</title>
 
 </head>
 <body>
