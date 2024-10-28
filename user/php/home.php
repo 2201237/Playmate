@@ -1,12 +1,12 @@
 <?php session_start(); 
 require 'db-connect.php';
-require '../../home.html';
+require '../header.html';
 $pdo=new PDO($connect,USER,PASS);
 $tsql=$pdo->prepare('select * FROM tournament');
 $tsql->execute();
 
-$csql=$pdo->prepare('select * FROM chat_boards');
-$csql->execute();
+$bsql=$pdo->prepare('select * FROM board_chat');
+$bsql->execute();
 
 $rsql=$pdo->prepare('select * FROM ranking');
 $rsql->execute();
@@ -31,12 +31,12 @@ $rsql->execute();
     }
     echo "</div>";
 
-    echo "<h3 class = 'chat'>掲示板</h3>";
-    $chat_bords = $csql->fetchAll(PDO::FETCH_ASSOC);
-    echo "<div class = 'Chat_bord'>";
-    foreach($chat_bords as $chat_bord){
-        echo "<a href = 'chat_bord.php?chat_id=" . $chat_bord['chat_id'] . "'>" . $chat_bord['chat_id'];
-        echo $chat_bord['chat_name'];
+    echo "<h3 class = 'board'>掲示板</h3>";
+    $board_chats = $bsql->fetchAll(PDO::FETCH_ASSOC);
+    echo "<div class = 'Board_chat'>";
+    foreach($board_chats as $board_chat){
+        echo "<a href = 'board_chat.php?boardchat_id=" . $board_chat['boardchat_id'] . "'>" . $board_chat['boardchat_id'];
+        echo $board_chat['board_title_id'];
     }
     echo "</div>";
 
