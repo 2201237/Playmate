@@ -1,16 +1,10 @@
 /* アニメーションの設定 */
-@keyframes backgroundWave {
+@keyframes waveAnimation {
   0% {
     background-position: 0% 50%;
   }
-  25% {
-    background-position: 50% 100%;
-  }
   50% {
     background-position: 100% 50%;
-  }
-  75% {
-    background-position: 50% 0%;
   }
   100% {
     background-position: 0% 50%;
@@ -20,8 +14,8 @@
 /* アニメーションを適用 */
 body {
   font-family: Arial, sans-serif;
-  animation: backgroundWave 10s ease infinite;
-  background: linear-gradient(45deg, #ff0000, #ffa200, #fbff00);
+  animation: waveAnimation 8s ease-in-out infinite;
+  background: linear-gradient(120deg, #87CEEB 0%, #FFFFFF 30%, #F4D9AE 60%, #FFD700 100%);
   background-size: 200% 200%;
   margin: 0;
   padding: 20px;
@@ -30,6 +24,7 @@ body {
   align-items: center;
   min-height: 100vh;
 }
+
 
   
   /* ログインコンテナのスタイル */
