@@ -1,43 +1,30 @@
+/* アニメーションの設定 */
 @keyframes backgroundChange {
-  0% {
-    background-position: 0% 50%;
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* アニメーションを適用 */
+  body {
+    font-family: Arial, sans-serif;
+    animation: backgroundChange 10s ease infinite;
+    background: linear-gradient(45deg, #ff0000, #ffa200,#fbff00);
     background-size: 200% 200%;
-    filter: hue-rotate(0deg);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
   }
-  25% {
-    background-position: 100% 25%;
-    background-size: 250% 250%;
-    filter: hue-rotate(90deg);
-  }
-  50% {
-    background-position: 100% 50%;
-    background-size: 200% 200%;
-    filter: hue-rotate(180deg);
-  }
-  75% {
-    background-position: 0% 75%;
-    background-size: 250% 250%;
-    filter: hue-rotate(270deg);
-  }
-  100% {
-    background-position: 0% 50%;
-    background-size: 200% 200%;
-    filter: hue-rotate(360deg);
-  }
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(45deg, #ff0000, #ffa200, #fbff00);
-  animation: backgroundChange 10s ease infinite;
-  background-size: 200% 200%;
-  margin: 0;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
+  
   /* ログインコンテナのスタイル */
   .login-container {
     background-color: rgb(255, 164, 84);
@@ -106,6 +93,6 @@ body {
   }
   
   button:hover {
-    background-color: #9b0000;
+    background-color: #980000;
   }
   
