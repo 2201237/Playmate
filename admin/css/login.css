@@ -15,7 +15,7 @@
 body {
   font-family: Arial, sans-serif;
   animation: waveAnimation 8s ease-in-out infinite;
-  background: linear-gradient(120deg, #0066ff 0%,#0099ff 0%, #b5f1ff 30%, #F4D9AE 60%,);
+  background: linear-gradient(120deg, #0099ff 20%, #7be7ff 30%, #F4D9AE 60%, #FFD700 80%);
   background-size: 200% 200%;
   margin: 0;
   padding: 20px;
