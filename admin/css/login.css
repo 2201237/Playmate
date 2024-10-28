@@ -1,4 +1,3 @@
-/* アニメーションの設定 */
 @keyframes backgroundChange {
   0% {
     background-position: 0% 50%;
@@ -27,27 +26,18 @@
   }
 }
 
-/* 使用例 */
-.animated-background {
-  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96e6a1);
-  animation: backgroundChange 15s ease infinite;
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(45deg, #ff0000, #ffa200, #fbff00);
+  animation: backgroundChange 10s ease infinite;
   background-size: 200% 200%;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
-  
-  /* アニメーションを適用 */
-  body {
-    font-family: Arial, sans-serif;
-    animation: backgroundChange 10s ease infinite;
-    background: linear-gradient(45deg, #ff0000, #ffa200,#fbff00);
-    background-size: 200% 200%;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
-  
   /* ログインコンテナのスタイル */
   .login-container {
     background-color: rgb(255, 164, 84);
