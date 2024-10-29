@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/game-manage.css">
 </head>
 <body>
-    <h1>PlayMate Admin</h1>
+    <h1>ユーザー管理</h1>
     <a href="admintop.php" class="back">←戻る</a>
     <a href="login.php" class="logout">ログアウト</a>
 
