@@ -1,33 +1,35 @@
 /* アニメーションの設定 */
-@keyframes backgroundChange {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+@keyframes waveAnimation {
+  0% {
+    background-position: 0% 50%;
   }
-  
-  /* アニメーションを適用 */
-  body {
-    font-family: Arial, sans-serif;
-    animation: backgroundChange 10s ease infinite;
-    background: linear-gradient(45deg, #ff0000, #0000ff, #00ff00, #ff00ff);
-    background-size: 200% 200%;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  50% {
+    background-position: 100% 50%;
   }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* アニメーションを適用 */
+body {
+  font-family: Arial, sans-serif;
+  animation: waveAnimation 8s ease-in-out infinite;
+  background: linear-gradient(120deg, #0099ff 20%, #7be7ff 30%, #b89c40 60%, #ffe65b 80%);
+  background-size: 200% 200%;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+
   
   /* ログインコンテナのスタイル */
   .login-container {
-    background-color: white;
+    background-color: rgba(0, 209, 245, 0.961);
     padding: 30px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -38,7 +40,7 @@
   /* タイトルのスタイル */
   h1 {
     text-align: center;
-    color: #333;
+    color: #000000;
     margin-bottom: 30px;
   }
 
@@ -46,11 +48,12 @@
     position: absolute;
     top: 0;
     left: 0;
-    margin: 10px; /* 任意でマージンを追加して、少し内側に配置 */
+    margin: 10px;
     font-size: 3.5em;
-    color: #333;
+    color: #ffffff;
+    padding: 10px; /* 内側の余白 */
+    background-color: #ff0000;
   }
-  
   
   /* フォームグループのスタイル */
   .form-group {
@@ -61,7 +64,7 @@
   label {
     display: block;
     margin-bottom: 5px;
-    color: #555;
+    color: #000000;
   }
   
   /* テキスト入力のスタイル */
@@ -84,7 +87,7 @@
   button {
     width: 100%;
     padding: 10px;
-    background-color: #4CAF50;
+    background-color: #0022ff;
     color: white;
     border: none;
     border-radius: 4px;
@@ -92,6 +95,6 @@
   }
   
   button:hover {
-    background-color: #45a049;
+    background-color: #00138b;
   }
   

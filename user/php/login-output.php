@@ -4,7 +4,7 @@
 
   unset($_SESSION['User']);
   $pdo=new PDO($connect, USER, PASS);
-  $sql=$pdo->prepare('select * from users where user_mail=? and ');
+  $sql=$pdo->prepare('select * from users where user_mail=?');
   $sql->execute([$_REQUEST['login'],$_REQUEST['password']]);
 
   if(password_verify($_POST['password'],$row['user_pw'])==true)
