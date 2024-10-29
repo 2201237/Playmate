@@ -5,7 +5,7 @@ $pdo=new PDO($connect,USER,PASS);
 $tsql=$pdo->prepare('select * FROM tournament');
 $tsql->execute();
 
-$bsql=$pdo->prepare('select * FROM board_chat');
+$bsql=$pdo->prepare('select * FROM genre');
 $bsql->execute();
 
 $rsql=$pdo->prepare('select * FROM ranking');
@@ -26,17 +26,21 @@ $rsql->execute();
     $tournaments = $tsql->fetchAll(PDO::FETCH_ASSOC);
     echo "<div class = 'Tournament'>";
     foreach ($tournaments as $tournament) {
-        echo "<a href = 'tournament.php?tournament_id=" . $tournament['tournament_id'] . "'>" . $tournament['tournament_id'];
+        echo "<a href = 'tournament.php?tournament_id=" . $tournament['tournament_id'] . "'>" . $tournament['tournament_id'] . "</a>";
         echo $tournament['tournament_name'];
     }
     echo "</div>";
 
     echo "<h3 class = 'board'>掲示板</h3>";
-    $board_chats = $bsql->fetchAll(PDO::FETCH_ASSOC);
-    echo "<div class = 'Board_chat'>";
-    foreach($board_chats as $board_chat){
-        echo "<a href = 'board_chat.php?boardchat_id=" . $board_chat['boardchat_id'] . "'>" . $board_chat['boardchat_id'];
-        echo $board_chat['board_title_id'];
+    $genres = $bsql->fetchAll(PDO::FETCH_ASSOC);
+    echo "<div class = 'genre'>";
+    foreach($genres as $genre){
+        $genre_id = $genre['genre_id']; 
+        $image_path = "../img/" . $genre_id . ".jpg";
+        // echo "<img src = '$image_path' width = '180' height = '' >";
+        echo "<a href = 'genre.php?genre_id=" . $genre['genre_id'] . "'>" .
+                 "<img src = '$image_path' width = '180' height = '' >" . "</a><br>";
+        echo $genre['genre'];
     }
     echo "</div>";
 
@@ -45,11 +49,10 @@ $rsql->execute();
     echo "<div class = 'Ranking'>";
     foreach($rankings as $ranking){
         echo $ranking['ranking_id'];
-        echo "<a href = 'user-part.php?user_id=" . $ranking['user_id'] . "'>" . $ranking['user_id'];
+        echo "<a href = 'user-part.php?user_id=" . $ranking['user_id'] . "'>" . $ranking['user_id'] . "</a>";
         echo $ranking['player_rank'];
     }
     echo "</div>";
     ?>
-    <a href = "infomation.php">お問い合わせ</a>
 </body>
 </html>

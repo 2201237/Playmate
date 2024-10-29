@@ -25,23 +25,29 @@
 <?php
 $pdo = new PDO($connect, USER, PASS);
 if(isset($_POST['keyword'])){
-    $sql = $pdo->prepare('SELECT * FROM users where user_mail=? || user_name=? || profile=?');
+    $sql = $pdo->prepare('SELECT * FROM users where (user_mail=? || user_name=? || profile=?) and user_id not in (select user_id from ban)');
     $sql->execute([$_POST['keyword'], $_POST['keyword'], $_POST['keyword']]);
     foreach($sql as $row){
         echo '<tr>';
         echo '<td>', $row['user_mail'], '</td>';
         echo '<td>', $row['user_name'], '</td>';
         echo '<td>', $row['profile'], '</td>';
+        echo '<td>';
+        echo '<div class="ban"><a href="user_block.php?id=', $row['user_id'],'"><button type="button">BAN</button></a></div>';
+        echo '</td>';
         echo '</tr>';
     }
 }else{
-    $sql = $pdo->query('SELECT * FROM users');
+    $sql = $pdo->query('SELECT * FROM users where user_id not in (select user_id from ban)');
     foreach($sql as $row){
 
     echo '<tr>';
     echo '<td>', $row['user_mail'], '</td>';
     echo '<td>', $row['user_name'], '</td>';
     echo '<td>', $row['profile'], '</td>';
+    echo '<td>';
+        echo '<div class="ban"><a href="user_block.php?id=', $row['user_id'],'"><button type="button">BAN</button></a></div>';
+        echo '</td>';
     echo '</tr>';
     }
 }
