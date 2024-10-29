@@ -8,6 +8,7 @@
 </head>
 <body>
     <h1>PlayMate Admin</h1>
+    <a href="admintop.php" class="back">←戻る</a>
     <a href="login.php" class="logout">ログアウト</a>
 
     <div>
