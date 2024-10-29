@@ -14,9 +14,10 @@
     <h2>ゲーム管理</h2>
 
     <div>
-    <button class="menu-button" onclick="location.href='tournament-results.html'">大会戦績管理</button><br>
-        <button class="menu-button" onclick="location.href='win-loss-images.html'">勝敗画像管理</button><br>
-        <button class="menu-button" onclick="location.href='create-tournament.html'">大会作成</button>
+    <button class="menu-button" onclick="location.href='tournament-results.php'">大会戦績管理</button><br>
+        <button class="menu-button" onclick="location.href='win-loss-images.php'">勝敗画像管理</button><br>
+        <button class="menu-button" onclick="location.href='tournament-create.php'">大会作成</button>
+        <button class="menu-button" onclick="location.href='tournament-edit.php'">大会削除・更新</button>
     </div>
 </body>
 </html>
