@@ -14,7 +14,7 @@ $sql->execute([$_POST['name'],$_POST['profile'] ,password_hash($_POST['password'
         // 3秒後にログインページに自動的に遷移
         echo '<script type="text/javascript">
                 setTimeout(function() {
-                    window.location.href = "home.php";
+                    window.location.href = "login-input.php";
                 }, 3000);
               </script>';
         echo "<p>3秒後にホームページに自動的に遷移します...</p>";
