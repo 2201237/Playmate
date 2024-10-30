@@ -35,6 +35,7 @@
     ?>
 
     <div id="logoutModal" class="modal-logout">
+        <spqn class = "close"></span>
         <div class="modal-pro">
             <p>本当にログアウトしますか？</p>
             <form action="logout-output.php" method="post">

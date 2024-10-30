@@ -1,33 +1,33 @@
 <?php
 session_start();
 require 'db-connect.php';
-
+ 
 // ログイン済みの場合はダッシュボードへリダイレクト
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
     header('Location: dashboard.php');
     exit;
 }
-
+ 
 // ログイン処理
 $error_message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $admin_id = filter_input(INPUT_POST, 'admin_id', FILTER_SANITIZE_STRING);
         $password = $_POST['password'];
-
+ 
         $stmt = $pdo->prepare('SELECT * FROM administrators WHERE admin_id = ?');
         $stmt->execute([$admin_id]);
         $admin = $stmt->fetch();
-
+ 
         if ($admin && password_verify($password, $admin['password_hash'])) {
             // ログイン成功
             $_SESSION['admin_logged_in'] = true;
             $_SESSION['admin_id'] = $admin['id'];
-            
+           
             // 最終ログイン日時を更新
             $stmt = $pdo->prepare('UPDATE administrators SET last_login = NOW() WHERE id = ?');
             $stmt->execute([$admin['id']]);
-
+ 
             header('Location: dashboard.php');
             exit;
         } else {
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
+ 
 <!DOCTYPE html>
 <html lang="ja">
 <head>
