@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    <a href="admintop.php" class="back">戻る</a>
+    <a href="tournament.php" class="back">戻る</a>
     <a href="admintop.php" class="create">作成</a>
     <div class="element_wrap">
         <label>大会名</label>
