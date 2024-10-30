@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/tournament-create.css">
-    <title>大会管理</title>
+    <title>大会作成</title>
 
 </head>
 <body>
-    <a href="tournament.php" class="back">戻る</a>
-    <a href="admintop.php" class="create">作成</a>
+<div class="container">
+    <div class="back">戻る</div>
+    <div class="create">作成</div>
+</div>
     <div class="element_wrap">
         <label>大会名</label>
         <textarea name="contact"></textarea>
