@@ -10,11 +10,20 @@
 </head>
 <body>
     <a href="admintop.php" class="back">←戻る</a>
-    <a href="tournament-list.php" class="logout">作成</a>
     <div class="element_wrap">
-        <label>お問い合わせ内容</label>
+        <label>大会名</label>
         <textarea name="contact"></textarea>
-      </div>
-
+    </div>
+    <form method="post" action="">
+    <select name="item_id">
+        <option value="">選択してください</option>
+        <?php foreach ($items as $item): ?>
+            <option value="<?php echo htmlspecialchars($item['id']); ?>">
+                <?php echo htmlspecialchars($item['name']); ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    <input type="submit" value="作成">
+</form>
 </body>
 </html>
