@@ -10,7 +10,7 @@
 </head>
 <body>
     <a href="admintop.php" class="back">戻る</a>
-    <a href="admintop.php" class="back">作成</a>
+    <a href="admintop.php" class="cteate">作成</a>
     <div class="element_wrap">
         <label>大会名</label>
         <textarea name="contact"></textarea>

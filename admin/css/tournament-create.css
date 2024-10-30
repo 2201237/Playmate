@@ -1,0 +1,45 @@
+/* styles.css */
+
+/* 戻るリンクとログアウトリンクのスタイル */
+body {
+    background-color: #b2fab4;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+.back, .create {
+    position: absolute;
+    top: 20px;
+    font-size: 20px;
+}
+.back {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+}
+
+.create {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+/* ゲーム管理タイトル */
+h2 {
+    font-size: 40px;
+    margin-top: 30px;
+}
+
+.menu-button {
+    background-color: #d2b48c;
+    color: black;
+    font-size: 24px;
+    border: none;
+    border-radius: 20px;
+    padding: 15px 40px;
+    margin: 20px;
+    cursor: pointer;
+    width: 300px;
+}
+
+.menu-button:hover {
+    background-color: #c69c6d;
+}
