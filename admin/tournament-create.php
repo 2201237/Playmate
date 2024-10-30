@@ -9,21 +9,23 @@
 
 </head>
 <body>
-    <a href="admintop.php" class="back">←戻る</a>
+    <a href="admintop.php" class="back">戻る</a>
+    <a href="admintop.php" class="back">作成</a>
     <div class="element_wrap">
         <label>大会名</label>
         <textarea name="contact"></textarea>
     </div>
     <form method="post" action="">
     <select name="item_id">
-        <option value="">選択してください</option>
+        <option value="">ゲームタイトル</option>
         <?php foreach ($items as $item): ?>
             <option value="<?php echo htmlspecialchars($item['id']); ?>">
                 <?php echo htmlspecialchars($item['name']); ?>
             </option>
         <?php endforeach; ?>
     </select>
-    <input type="submit" value="作成">
+    <textarea name="contact"></textarea>
+    
 </form>
 </body>
 </html>
