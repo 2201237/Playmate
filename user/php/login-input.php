@@ -10,6 +10,7 @@
     <title>PlayMateログイン</title>
 </head>
 <body>
+    <img src="../img/logo.png" class="logo" width="180" height="">
     <div class="form-wrapper">
         <h1>Sign In</h1>
         <form action="login-output.php" method="post">
