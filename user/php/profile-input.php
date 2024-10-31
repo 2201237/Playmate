@@ -1,7 +1,7 @@
 <?php
       session_start();
       require 'db-connect.php';
-      require '../header_profile.html';
+      require '../header.html';
       $pdo=new PDO($connect,USER,PASS);
 
       $lastId=$pdo->lastInsertId();
@@ -27,9 +27,11 @@
 
     <?php
     echo "<form action='profile-edit.php' method='post'>";
-    echo $_POST['email'] . "<br>";
-    echo $_POST['name'] . "<br>";
-    echo $_POST['profile'] . "<br>";
+    echo $_SESSION['users']['icon'] . "<br>";
+    echo $_SESSION['users']['user_name'] . "<br>";
+    echo $_SESSION['users']['profile'] . "<br>";
+    echo $_SESSION['users']['user_mail'] . "<br>";
+    echo $_SESSION['game_favo']['game_favo'] . "<br>";
     echo "<input type='submit' class='edit' value='Profile edit'>";
     echo "</form>";
     ?>

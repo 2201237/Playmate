@@ -26,7 +26,11 @@ $rsql->execute();
     $tournaments = $tsql->fetchAll(PDO::FETCH_ASSOC);
     echo "<div class = 'Tournament'>";
     foreach ($tournaments as $tournament) {
-        echo "<a href = 'tournament.php?tournament_id=" . $tournament['tournament_id'] . "'>" . $tournament['tournament_id'] . "</a>";
+        $game_id = $tournament['game_id']; 
+        $game_image_path = "../img/" . $game_id . ".jpg";
+
+        echo "<a href = 'tournament-input.php?tournament_id=" . $tournament['tournament_id'] . "'>" .
+                "<img src = '$game_image_path' width = '180' height = '' >" . "</a><br>";
         echo $tournament['tournament_name'];
     }
     echo "</div>";
