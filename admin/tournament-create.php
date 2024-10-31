@@ -10,8 +10,8 @@
 </head>
 <body>
 <div class="container">
-    <div class="back">戻る</div>
-    <div class="create">作成</div>
+    <div href="tournament.php" class="back">戻る</div>
+    <div href="admintop.php" class="create">作成</div>
 </div>
     <div class="element_wrap">
         <label>大会名</label>
@@ -26,6 +26,19 @@
             </option>
         <?php endforeach; ?>
     </select>
+    <?php
+    echo '<tr>';
+    echo '<form action="title_change.php?id=', $row['title'], '" method="post">';
+    echo '<td><input type="text" name="title" value="', $row['title'], '"></td>';
+    $sql2 = $pdo->prepare('SELECT * FROM game where game_id=?');
+    $sql2->execute([$row['game_id']]);
+    foreach($sql2 as $row2){
+        echo '<td>', $row2['game_name'], '</td>';
+    }
+    echo '<td><button type ="submit">更新</button></td>';
+    echo '</form>';
+    echo '</tr>';
+    ?>
     <textarea name="contact"></textarea>
     
 </form>
