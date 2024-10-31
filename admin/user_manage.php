@@ -33,7 +33,7 @@ if(isset($_POST['keyword'])){
         echo '<td>', $row['user_name'], '</td>';
         echo '<td>', $row['profile'], '</td>';
         echo '<td>';
-        echo '<div class="ban"><a href="user_block.php?id=', $row['user_id'],'"><button type="button">BAN</button></a></div>';
+        echo '<div class="BAN"><a href="user_block.php?id=', $row['user_id'],'"><button type="button">BAN</button></a></div>';
         echo '</td>';
         echo '</tr>';
     }
@@ -46,7 +46,7 @@ if(isset($_POST['keyword'])){
     echo '<td>', $row['user_name'], '</td>';
     echo '<td>', $row['profile'], '</td>';
     echo '<td>';
-        echo '<div class="ban"><a href="user_block.php?id=', $row['user_id'],'"><button type="button">BAN</button></a></div>';
+        echo '<div class="BAN"><a href="user_block.php?id=', $row['user_id'],'"><button type="button">BAN</button></a></div>';
         echo '</td>';
     echo '</tr>';
     }
