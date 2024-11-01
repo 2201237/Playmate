@@ -1,53 +1,29 @@
+<?php session_start();?>
+<?php require 'db-connect.php'; ?>
 <?php
-session_start();
-require 'db-connect.php';
 
-// ログイン済みの場合はダッシュボードへリダイレクト
-if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
-    header('Location: dashboard.php');
-    exit;
-}
+  unset($_SESSION['admins']);
+  $pdo=new PDO($connect, USER, PASS);
+  $sql=$pdo->prepare('select * from admins where admin_mail=?');
+  $sql->execute([$_POST['email']]);
 
-// トークン生成
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
+  if (empty($sql->fetchAll())) {
+    echo 'メールアドレスが間違っています';
+  }
 
-// ログイン処理
-$error_message = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
-        $error_message = '不正なリクエストです。';
-    } else {
-        try {
-            $admin_id = filter_input(INPUT_POST, 'admin_id', FILTER_SANITIZE_STRING);
-            $password = $_POST['password'];
+  $sql=$pdo->prepare('select * from admins where admin_mail=?');
+  $sql->execute([$_POST['email']]);
 
-            $stmt = $pdo->prepare('SELECT * FROM administrators WHERE admin_id = ?');
-            $stmt->execute([$admin_id]);
-            $admin = $stmt->fetch();
-
-            if ($admin && password_verify($password, $admin['password_hash'])) {
-                // ログイン成功
-                session_regenerate_id(true); // セッションIDの再生成
-                $_SESSION['admin_logged_in'] = true;
-                $_SESSION['admin_id'] = $admin['id'];
-
-                // 最終ログイン日時を更新
-                $stmt = $pdo->prepare('UPDATE administrators SET last_login = NOW() WHERE id = ?');
-                $stmt->execute([$admin['id']]);
-
-                header('Location: dashboard.php');
-                exit;
-            } else {
-                $error_message = '管理者IDまたはパスワードが正しくありません。';
-            }
-        } catch (PDOException $e) {
-            $error_message = 'システムエラーが発生しました。';
-            error_log($e->getMessage());
-        }
+  foreach($sql as $row){
+    if(password_verify($_POST['password'],$row['admin_pass'])){
+      $_SESSION['admins']=[
+        'admin_id'=>$row['admin_id'],'admin_name'=>$row['admin_name'],
+      ]; 
+      header('Location:home.php');
+    }else{
+      echo 'パスワードが違います';
     }
-}
+  }
 ?>
 
 <!DOCTYPE html>
