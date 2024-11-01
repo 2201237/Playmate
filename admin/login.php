@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'admin_id' => $row['admin_id'],
                     'admin_name' => $row['admin_name']
                 ];
-                header('Location: home.php');
+                header('Location: admintop.php');
                 exit;
             } else {
                 $error_message = 'パスワードまたは管理者IDが間違っています';
