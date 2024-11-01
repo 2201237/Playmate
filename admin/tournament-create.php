@@ -1,6 +1,7 @@
 <?php require 'db-connect.php'; ?>
 <!DOCTYPE html>
 <html lang="ja">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,21 @@
     <title>大会作成</title>
 </head>
 <body>
+<div class="add">
+        <form action="Admin_Groupadd.php" method="post">
+            <input type="text" name="name" class="r1">
+            <select name="genre2_id" class="genre2">
+            <?php
+                $pdo = new PDO($connect, USER, PASS);
+                $sql3 = $pdo->query('select * from Genre2');
+                foreach($sql3 as $row3){
+                    echo '<option value="', $row3['genre2_id'], '">', $row3['genre2_name'], '</option>';
+                }
+            ?>
+            </select>
+            <button type="submit" class="r2">追加</button>
+        </form>
+    </div>
     <div class="container">
         <a href="tournament.php" class="back">戻る</a>
     </div>
@@ -29,20 +45,12 @@
     $stmt->execute();
     
     // データをループで表示
-    foreach($stmt as $row){
-        echo '<option value="' . htmlspecialchars($row['game_id']) . '">'
-             . htmlspecialchars($row['title']) . '</option>';
-    }
+
     ?>
+                <button type="submit">作成</button>
 </select>
         </div>
 
-        <div class="element_wrap">
-            <label>大会詳細</label>
-            <textarea name="description"></textarea>
-        </div>
-
-        <button type="submit">作成</button>
     </form>
 </body>
 </html>
