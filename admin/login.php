@@ -1,45 +1,48 @@
 <?php
 session_start();
 require 'db-connect.php';
- 
-// ログイン済みの場合はダッシュボードへリダイレクト
-if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
-    header('Location: dashboard.php');
-    exit;
-}
- 
-// ログイン処理
-$error_message = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die('不正なリクエストです。');
+    }
+
+    unset($_SESSION['admins']);
+    $error_message = '';
+
     try {
-        $admin_id = filter_input(INPUT_POST, 'admin_id', FILTER_SANITIZE_STRING);
-        $password = $_POST['password'];
- 
-        $stmt = $pdo->prepare('SELECT * FROM administrators WHERE admin_id = ?');
-        $stmt->execute([$admin_id]);
-        $admin = $stmt->fetch();
- 
-        if ($admin && password_verify($password, $admin['password_hash'])) {
-            // ログイン成功
-            $_SESSION['admin_logged_in'] = true;
-            $_SESSION['admin_id'] = $admin['id'];
-           
-            // 最終ログイン日時を更新
-            $stmt = $pdo->prepare('UPDATE administrators SET last_login = NOW() WHERE id = ?');
-            $stmt->execute([$admin['id']]);
- 
-            header('Location: dashboard.php');
-            exit;
+        $pdo = new PDO($connect, USER, PASS);
+        $sql = $pdo->prepare('SELECT * FROM admins WHERE admin_id = ?');
+        $sql->execute([$_POST['admin_id']]);
+        $row = $sql->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            // データベースのパスワードがハッシュ化されている場合
+            // if (password_verify($_POST['password'], $row['admin_pass'])) {
+            //    ↓↓ ハッシュ化されていない場合はこちらを使用
+            if ($_POST['password'] === $row['admin_pass']) {
+                $_SESSION['admins'] = [
+                    'admin_id' => $row['admin_id'],
+                    'admin_name' => $row['admin_name']
+                ];
+                header('Location: admintop.php');
+                exit;
+            } else {
+                $error_message = 'パスワードまたは管理者IDが間違っています';
+            }
         } else {
-            $error_message = '管理者IDまたはパスワードが正しくありません。';
+            $error_message = 'パスワードまたは管理者IDが間違っています';
         }
     } catch (PDOException $e) {
-        $error_message = 'システムエラーが発生しました。';
-        error_log($e->getMessage());
+        $error_message = 'データベースエラーが発生しました: ' . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');
     }
 }
+
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 ?>
- 
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -52,10 +55,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="login-container">
         <h1>管理者ログイン</h1>
         <h2>PlayMate</h2>
-        <?php if ($error_message): ?>
+        <?php if (!empty($error_message)): ?>
             <div class="error-message"><?php echo htmlspecialchars($error_message, ENT_QUOTES, 'UTF-8'); ?></div>
         <?php endif; ?>
-        <form method="POST" action="admintop.php">
+        <form method="POST" action="">
+            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
             <div class="form-group">
                 <label for="admin_id">管理者ID</label>
                 <input type="text" id="admin_id" name="admin_id" required>
