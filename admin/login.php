@@ -25,16 +25,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header('Location: home.php');
                 exit;
             } else {
-                $error_message = 'パスワードが違います';
+                $error_message = 'パスワードまたは管理者IDが間違っています';
             }
         } else {
-            $error_message = '管理者IDが間違っています';
+            $error_message = 'パスワードまたは管理者IDが間違っています';
         }
     } catch (PDOException $e) {
         $error_message = 'データベースエラーが発生しました: ' . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');
     }
 }
 
+// CSRFトークンの生成
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
