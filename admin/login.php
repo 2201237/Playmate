@@ -1,29 +1,43 @@
-<?php session_start();?>
-<?php require 'db-connect.php'; ?>
 <?php
+session_start();
+require 'db-connect.php';
 
-  unset($_SESSION['admins']);
-  $pdo=new PDO($connect, USER, PASS);
-  $sql=$pdo->prepare('select * from admins where admin_mail=?');
-  $sql->execute([$_POST['email']]);
-
-  if (empty($sql->fetchAll())) {
-    echo 'メールアドレスが間違っています';
-  }
-
-  $sql=$pdo->prepare('select * from admins where admin_mail=?');
-  $sql->execute([$_POST['email']]);
-
-  foreach($sql as $row){
-    if(password_verify($_POST['password'],$row['admin_pass'])){
-      $_SESSION['admins']=[
-        'admin_id'=>$row['admin_id'],'admin_name'=>$row['admin_name'],
-      ]; 
-      header('Location:home.php');
-    }else{
-      echo 'パスワードが違います';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die('不正なリクエストです。');
     }
-  }
+
+    unset($_SESSION['admins']);
+    $error_message = '';
+
+    try {
+        $pdo = new PDO($connect, USER, PASS);
+        $sql = $pdo->prepare('SELECT * FROM admins WHERE admin_id = ?');
+        $sql->execute([$_POST['admin_id']]);
+        $row = $sql->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            if (password_verify($_POST['password'], $row['admin_pass'])) {
+                $_SESSION['admins'] = [
+                    'admin_id' => $row['admin_id'],
+                    'admin_name' => $row['admin_name']
+                ];
+                header('Location: home.php');
+                exit;
+            } else {
+                $error_message = 'パスワードが違います';
+            }
+        } else {
+            $error_message = '管理者IDが間違っています';
+        }
+    } catch (PDOException $e) {
+        $error_message = 'データベースエラーが発生しました: ' . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');
+    }
+}
+
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +52,7 @@
     <div class="login-container">
         <h1>管理者ログイン</h1>
         <h2>PlayMate</h2>
-        <?php if ($error_message): ?>
+        <?php if (!empty($error_message)): ?>
             <div class="error-message"><?php echo htmlspecialchars($error_message, ENT_QUOTES, 'UTF-8'); ?></div>
         <?php endif; ?>
         <form method="POST" action="">
