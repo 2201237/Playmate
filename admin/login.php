@@ -17,7 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $row = $sql->fetch(PDO::FETCH_ASSOC);
 
         if ($row) {
-            if (password_verify($_POST['password'], $row['admin_pass'])) {
+            // データベースのパスワードがハッシュ化されている場合
+            // if (password_verify($_POST['password'], $row['admin_pass'])) {
+            //    ↓↓ ハッシュ化されていない場合はこちらを使用
+            if ($_POST['password'] === $row['admin_pass']) {
                 $_SESSION['admins'] = [
                     'admin_id' => $row['admin_id'],
                     'admin_name' => $row['admin_name']
@@ -35,7 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// CSRFトークンの生成
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
