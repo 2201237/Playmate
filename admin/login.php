@@ -17,18 +17,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $row = $sql->fetch(PDO::FETCH_ASSOC);
 
         if ($row) {
-            if (password_verify($_POST['password'], $row['admin_pass'])) {
+            // データベースのパスワードがハッシュ化されている場合
+            // if (password_verify($_POST['password'], $row['admin_pass'])) {
+            //    ↓↓ ハッシュ化されていない場合はこちらを使用
+            if ($_POST['password'] === $row['admin_pass']) {
                 $_SESSION['admins'] = [
                     'admin_id' => $row['admin_id'],
                     'admin_name' => $row['admin_name']
                 ];
-                header('Location: home.php');
+                header('Location: admintop.php');
                 exit;
             } else {
-                $error_message = 'パスワードが違います';
+                $error_message = 'パスワードまたは管理者IDが間違っています';
             }
         } else {
-            $error_message = '管理者IDが間違っています';
+            $error_message = 'パスワードまたは管理者IDが間違っています';
         }
     } catch (PDOException $e) {
         $error_message = 'データベースエラーが発生しました: ' . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');

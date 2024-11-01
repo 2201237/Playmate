@@ -18,7 +18,7 @@
     if(password_verify($_POST['password'],$row['user_pass'])){
       $_SESSION['User']=[
         'user_id'=>$row['user_id'],'user_name'=>$row['user_name'],
-        'user_mail'=>$row['user_mail']
+        'user_mail'=>$row['user_mail'],'user_profile'=>$row['profile']
       ]; 
       header('Location:home.php');
     }else{
