@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (isset($_SESSION["status_message"])) {
+    echo "<p>" . htmlspecialchars($_SESSION["status_message"]) . "</p>";
+    unset($_SESSION["status_message"]); // 表示後、メッセージを削除
+}
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <?php
