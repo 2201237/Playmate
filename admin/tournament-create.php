@@ -26,12 +26,7 @@
         </form>
     </div>
     <div class="container">
-        <a href="tournament.php" class="back">戻る</a>
-    </div>
-
-    <div class="element_wrap">
-        <label>大会名</label>
-        <textarea name="tournament_name"></textarea>
+    <button type="submit" onclick="history.back()">戻る</button>
     </div>
 </body>
 </html>
