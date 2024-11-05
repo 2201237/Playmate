@@ -5,7 +5,7 @@
       $pdo=new PDO($connect,USER,PASS);
 
       $lastId=$pdo->lastInsertId();
-      $sql=$pdo->prepare('select * from users');
+      $sql=$pdo->prepare('select * from User');
       $sql->execute();
 ?>
 
@@ -27,11 +27,9 @@
 
     <?php
     echo "<form action='profile-edit.php' method='post'>";
-    echo $_SESSION['users']['icon'] . "<br>";
-    echo $_SESSION['users']['user_name'] . "<br>";
-    echo $_SESSION['users']['profile'] . "<br>";
-    echo $_SESSION['users']['user_mail'] . "<br>";
-    echo $_SESSION['game_favo']['game_favo'] . "<br>";
+    echo $_SESSION['User']['user_name'] . "<br>";
+    echo $_SESSION['User']['profile'] . "<br>";
+    echo $_SESSION['User']['user_mail'] . "<br>";
     echo "<input type='submit' class='edit' value='Profile edit'>";
     echo "</form>";
     ?>

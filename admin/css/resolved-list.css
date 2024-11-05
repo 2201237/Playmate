@@ -1,0 +1,174 @@
+/* 背景と全体の設定 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #b2fab4; /* 柔らかい緑色の背景 */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* タイトル */
+h1 {
+    text-align: center;
+    color: #333;
+    padding: 20px;
+    margin-top: 0;
+}
+
+/* 戻るリンクとログアウトリンクのスタイル */
+.back, .logout {
+    position: absolute;
+    top: 20px;
+    font-size: 20px;
+    color: #007bff; /* 青色 */
+    text-decoration: none;
+}
+
+.back {
+    left: 20px;
+}
+
+.logout {
+    right: 20px;
+}
+
+.back:hover, .logout:hover {
+    text-decoration: underline;
+}
+
+/* 検索ボックス */
+.search-container {
+    text-align: center;
+    margin: 20px;
+}
+
+.search-container input[type="text"] {
+    font-size: 16px;
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.search-container button {
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #2196f3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: #1976d2;
+}
+
+/* テーブルのスタイル */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #4caf50; /* テーブルのヘッダーに緑色 */
+    color: white;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* 解決・保留ボタンのスタイル */
+button.resolve {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button.hold {
+    background-color: #ff9800;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button.resolve:hover {
+    background-color: #388e3c;
+}
+
+button.hold:hover {
+    background-color: #e65100;
+}
+
+/* 戻すボタンのスタイル */
+button.return {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button.return:hover {
+    background-color: #d32f2f;
+}
+
+/* メッセージ表示エリア */
+.message {
+    text-align: center;
+    padding: 15px;
+    margin: 10px auto;
+    background-color: #e0f7fa;
+    color: #00796b;
+    width: 80%;
+    border-radius: 5px;
+    font-size: 16px;
+}
+/* 検索フォームのスタイル */
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.search-form input[type="text"] {
+    padding: 8px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-form button {
+    padding: 8px 12px;
+    margin-left: 5px;
+    border: none;
+    background-color: #5bc0de;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background-color: #31b0d5;
+}
