@@ -1,4 +1,4 @@
-<?php require 'db-connect.php'; ?>
+    <?php require 'db-connect.php'; ?>
 <!DOCTYPE html>
 <html lang="ja">
     
@@ -22,6 +22,9 @@
                 }
             ?>
             </select>
+            <textarea id="story" name="story" rows="5" cols="33">
+            ~ルール~
+            </textarea>
             <button type="submit">作成</button>
         </form>
     </div>
