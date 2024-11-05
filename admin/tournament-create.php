@@ -11,7 +11,7 @@
 <body>
 <div class="game-title-dropdown">
     <form action="your_action_page.php" method="post">
-    <input type="text" name="tournament-name" value="">
+    <input type="text" name="tournament-name" value="" placeholder="大会名"><br>
         <label for="game_title">ゲームタイトルを選択:</label>
         <select name="game_title" id="game_title">
             <?php
