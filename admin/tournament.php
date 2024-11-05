@@ -11,7 +11,7 @@
     <a href="admintop.php" class="back">←戻る</a>
     <a href="login.php" class="logout">ログアウト</a>
 
-    <h2>ゲーム管理</h2>
+    <h2>大会管理</h2>
 
     <div>
     <button class="menu-button" onclick="location.href='tournament-results.php'">大会戦績管理</button><br>
