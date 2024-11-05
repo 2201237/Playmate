@@ -17,7 +17,7 @@
                     $pdo = new PDO($connect, USER, PASS);
                     $sql = $pdo->query('SELECT * FROM game');
                     foreach ($sql as $row) {
-                        echo '<option value="', $row['game_id'], '">', $row['title'], '</option>';
+                        echo '<option value="', htmlspecialchars($row['game_id']), '">', htmlspecialchars($row['title']), '</option>';
                     }
                 ?>
             </select>
