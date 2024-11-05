@@ -10,30 +10,27 @@ body {
 }
 .container {
     background-color: #d2f2c2;
-    padding: 30px;
+    padding: 20px;
     border: 1px solid #ccc;
-    width: 400px;
+    width: 300px;
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .container input[type="text"], 
 .container select, 
 .container textarea {
-    width: 90%;
-    margin: 15px 0;
+    width: 80%;
+    margin: 10px 0;
     padding: 8px;
-    font-size: 18px;
+    font-size: 16px;
     box-sizing: border-box;
-    border: 1px solid #ccc;
 }
 .container textarea {
     resize: none;
-    height: 80px;
 }
 .button-group {
     display: flex;
     justify-content: space-between;
-    margin-top: 15px;
 }
 .button-group button {
     width: 45%;
@@ -45,12 +42,4 @@ body {
 }
 .button-group button:hover {
     background-color: #bbb;
-}
-/* セレクトボックスとそのアイコンを整える */
-.container select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 10px center;
-    background-color: white;
 }
