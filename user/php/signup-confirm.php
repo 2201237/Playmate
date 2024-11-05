@@ -23,19 +23,30 @@ require 'db-connect.php';
 
                   <div class="form-item">
                         <label for="name"></label>
-                        <p>User Name：<span><?php echo $_POST['name']; ?></span></p>
+                        <p>User Name：
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <span name="name"><?php echo $_POST['name']; ?></span>
+                        </p>
                   </div>
                   <div class="form-item">
                         <label for="email"></label>
-                        <p>Email Address：<span><?php echo $_POST['email']; ?></span></p>
+                        <p>Email Address：
+                              &nbsp;&nbsp;&nbsp;
+                              <span name="email"><?php echo $_POST['email']; ?></span>
+                        </p>
                   </div>
                   <div class="form-item">
                         <label for="password"></label>
-                        <p>Password：<span><?php echo $_POST['password']; ?></span></p>
+                        <p>Password：
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <span name="password"><?php echo $_POST['password']; ?></span>
+                        </p>
                   </div>
                   <div class="form-item">
                         <label for="profile"></label>
-                        <p>Profile：<br>　<span><?php echo $_POST['profile']; ?></span></p>
+                        <p>Profile：
+                              <br><span name="profile"><?php echo $_POST['profile']; ?></span>
+                        </p>
                   </div>
                   <div class="button-panel">
                         <input type="submit" class="button" title="Sign Up" value="Sign UP"></input>
