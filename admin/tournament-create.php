@@ -22,7 +22,7 @@
                 }
             ?>
             </select>
-            <textarea id="story" name="story" rows="5" cols="33">
+            <textarea id="story" name="story" rows="5" cols="33"><br>
             ~ルール~
             </textarea>
             <button type="submit">作成</button>
