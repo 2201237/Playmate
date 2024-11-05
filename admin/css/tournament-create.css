@@ -1,50 +1,45 @@
-/* styles.css */
 
-/* 戻るリンクとログアウトリンクのスタイル */
+/* レイアウト全体のスタイル */
 body {
-    background-color: #b2fab4;
-    text-align: center;
-    font-family: 'Arial', sans-serif;
-}
-.back, .create {
-    position: absolute;
-    top: 20px;
-    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
 }
 .container {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* 画面全体の高さ */
-}
-.back {
-    position: absolute;
-    left: 20px;
-    bottom: 20px;
-}
-
-.create {
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-}
-/* ゲーム管理タイトル */
-h2 {
-    font-size: 40px;
-    margin-top: 30px;
-}
-
-.menu-button {
-    background-color: #d2b48c;
-    color: black;
-    font-size: 24px;
-    border: none;
-    border-radius: 20px;
-    padding: 15px 40px;
-    margin: 20px;
-    cursor: pointer;
+    background-color: #d2f2c2;
+    padding: 20px;
+    border: 1px solid #ccc;
     width: 300px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
-.menu-button:hover {
-    background-color: #c69c6d;
+.container input[type="text"], 
+.container select, 
+.container textarea {
+    width: 80%;
+    margin: 10px 0;
+    padding: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+.container textarea {
+    resize: none;
+}
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+.button-group button {
+    width: 45%;
+    padding: 10px;
+    background-color: #ccc;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+.button-group button:hover {
+    background-color: #bbb;
 }
