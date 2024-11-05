@@ -9,15 +9,15 @@
     <title>大会作成</title>
 </head>
 <body>
-<div class="add">
-        <form action="Admin_Groupadd.php" method="post">
-            <input type="text" name="name" class="r1">
-            <select name="genre2_id" class="genre2">
+<div class="game-title-dropdown">
+    <form action="your_action_page.php" method="post">
+        <label for="game_title">ゲームタイトルを選択:</label>
+        <select name="game_title" id="game_title">
             <?php
                 $pdo = new PDO($connect, USER, PASS);
-                $sql3 = $pdo->query('select * from Genre2');
-                foreach($sql3 as $row3){
-                    echo '<option value="', $row3['genre2_id'], '">', $row3['genre2_name'], '</option>';
+                $sql3 = $pdo->query('select * from game');
+                foreach ($sql as $row) {
+                    echo '<option value="', $row['game_id'], '">', $row['title'], '</option>';
                 }
             ?>
             </select>
