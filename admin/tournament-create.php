@@ -11,6 +11,7 @@
 <body>
 <div class="game-title-dropdown">
     <form action="your_action_page.php" method="post">
+    <input type="text" name="tournament-name" value="">
         <label for="game_title">ゲームタイトルを選択:</label>
         <select name="game_title" id="game_title">
             <?php
@@ -21,7 +22,7 @@
                 }
             ?>
             </select>
-            <button type="submit" class="r2">追加</button>
+            <button type="submit">作成</button>
         </form>
     </div>
     <div class="container">
@@ -32,25 +33,5 @@
         <label>大会名</label>
         <textarea name="tournament_name"></textarea>
     </div>
-
-    <form method="post" action="">
-        <div class="element_wrap">
-            <label>ゲームタイトル</label>
-            <select name="game_name">
-    <option value="">ゲームタイトルを選択</option>
-    <?php
-    // SQLでデータベースからゲームタイトルを取得
-    $sql = "SELECT game_id, title FROM game"; // game_idとtitleを取得するように修正
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    
-    // データをループで表示
-
-    ?>
-                <button type="submit">作成</button>
-</select>
-        </div>
-
-    </form>
 </body>
 </html>
