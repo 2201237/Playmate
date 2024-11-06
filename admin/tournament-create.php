@@ -9,24 +9,26 @@
 </head>
 <body>
     <div class="container">
-        <form action="your_action_page.php" method="post">
-            <input type="text" name="tournament-name" placeholder="大会名"><br>
-            <label for="game_title">ゲームタイトルを選択:</label>
-            <select name="game_title" id="game_title">
-                <?php
-                    $pdo = new PDO($connect, USER, PASS);
-                    $sql = $pdo->query('SELECT * FROM game');
-                    foreach ($sql as $row) {
-                        echo '<option value="', htmlspecialchars($row['game_id']), '">', htmlspecialchars($row['title']), '</option>';
-                    }
-                ?>
-            </select>
-            <textarea id="story" name="story" rows="5" cols="33">[ルール]</textarea>
-            <div class="button-group">
-                <button type="button" onclick="history.back()">戻る</button>
-                <button type="submit" onclick="history.back()">作成</button>
-            </div>
-        </form>
+    <form action="your_action_page.php" method="post">
+    <input type="text" name="tournament-name" placeholder="大会名"><br>
+    <label for="game_title">ゲームタイトルを選択:</label>
+    <select name="game_title" id="game_title">
+        <?php
+            $pdo = new PDO($dsn, $user, $password);
+            $sql = $pdo->query('SELECT * FROM game');
+            foreach ($sql as $row) {
+                echo '<option value="', htmlspecialchars($row['game_id']), '">', htmlspecialchars($row['title']), '</option>';
+            }
+        ?>
+    </select>
+    <textarea id="story" name="story" rows="5" cols="33">[ルール]</textarea>
+    <div class="button-group">
+        <button type="button" onclick="history.back()">戻る</button>
+        <button type="submit">作成</button>
+    </div>
+</form>
+
     </div>
 </body>
 </html>
+//データベースに格納する機能が未実装
