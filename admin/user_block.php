@@ -11,7 +11,7 @@
     <a href="#" onclick="history.back()" return false; class = "back1">◀戻る</a>
     <h1>BANユーザー</h1>
     <a href="login.php" class="logout1">ログアウト</a>
-    <form action="user_manage.php" method="post" id="submit_form">
+    <form action="user_block.php" method="post" id="submit_form">
     <input type="text" name="keyword" placeholder="キーワードを検索" class = "searchBox">
     <button type="submit" class="kennsaku">検索</button>
     <div class="grouptable">
