@@ -8,7 +8,7 @@
 
 </head>
 <body>
-    <a href="admintop.php" class="back">←戻る</a>
+    <a onclick="history.back()" class="back">←戻る</a>
     <a href="login.php" class="logout">ログアウト</a>
 
     <h2>大会一覧</h2>
