@@ -29,11 +29,12 @@ try {
     $pdo = new PDO($connect, USER, PASS);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    // contactsテーブルからデータを取得
-    $sql = "SELECT contacts.contacts_id, contacts.contacts, users.user_name, contacts.status, contacts_ge.conge_name 
+    // 未解決のcontactsデータを取得
+    $sql = "SELECT contacts.contacts_id, contacts.contacts, users.user_name, contacts_ge.conge_name 
             FROM contacts 
             JOIN users ON contacts.user_id = users.user_id
-            JOIN contacts_ge ON contacts.contacts_ge_id = contacts_ge.conge_id";
+            JOIN contacts_ge ON contacts.contacts_ge_id = contacts_ge.conge_id
+            WHERE contacts.status = 0"; // 未解決のみ表示
     $stmt = $pdo->query($sql);
 
     // テーブル表示
@@ -43,7 +44,6 @@ try {
                     <th>お問い合わせジャンル</th>
                     <th>お問い合わせ内容</th>
                     <th>ユーザー名</th>
-                    <th>ステータス</th>
                     <th>解決</th>
                     <th>保留</th>
                     <th>返信</th>
@@ -53,21 +53,6 @@ try {
             echo '<td>' . htmlspecialchars($row["conge_name"]) . '</td>';
             echo '<td>' . htmlspecialchars($row["contacts"]) . '</td>';
             echo '<td>' . htmlspecialchars($row["user_name"]) . '</td>';
-
-            // ステータス表示
-            $status_text = '';
-            switch ($row["status"]) {
-                case 0:
-                    $status_text = '未解決';
-                    break;
-                case 1:
-                    $status_text = '解決';
-                    break;
-                case 2:
-                    $status_text = '保留';
-                    break;
-            }
-            echo '<td>' . htmlspecialchars($status_text) . '</td>';
 
             // 解決と保留ボタン
             echo '<td>
@@ -98,7 +83,7 @@ try {
         }
         echo '</table>';
     } else {
-        echo "お問い合わせはありません。";
+        echo "未解決のお問い合わせはありません。";
     }
 } catch (PDOException $e) {
     echo "エラー: " . $e->getMessage();
