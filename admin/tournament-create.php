@@ -1,6 +1,7 @@
 <?php require 'db-connect.php'; ?>
 <!DOCTYPE html>
 <html lang="ja">
+    //データベースに格納する機能がまだ未実装です。
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +18,7 @@
                     $pdo = new PDO($connect, USER, PASS);
                     $sql = $pdo->query('SELECT * FROM game');
                     foreach ($sql as $row) {
-                        echo '<option value="', htmlspecialchars($row['game_id']), '">', htmlspecialchars($row['title']), '</option>';
+                        echo '<option value="', $row['game_id'], '">', $row['title'], '</option>';
                     }
                 ?>
             </select>
