@@ -1,7 +1,7 @@
 <?php
       session_start();
       require 'db-connect.php';
-      require '../header.html';
+      require '../header_profile.html';
       $pdo=new PDO($connect,USER,PASS);
 
       $lastId=$pdo->lastInsertId();
@@ -27,11 +27,19 @@
 
     <?php
     echo "<form action='profile-edit.php' method='post'>";
-    echo $_SESSION['users']['icon'] . "<br>";
-    echo $_SESSION['users']['user_name'] . "<br>";
-    echo $_SESSION['users']['profile'] . "<br>";
-    echo $_SESSION['users']['user_mail'] . "<br>";
-    echo $_SESSION['game_favo']['game_favo'] . "<br>";
+    echo "<p class = 'profile-icon'>";
+    if (isset($user['icon']) && $user['icon'] !== '') {
+        echo "<img src='{$user['icon']}' class='icon_user' width='50' height='50'>";
+    } else {
+        echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
+    }    echo "</p>";
+    echo "<p class = 'user' >" . $_SESSION['User']['user_name'] . "</p>";
+    echo "<p class = 'user' >" . $_SESSION['User']['user_mail'] . "</p>";
+    $profileText = isset($_SESSION['User']['profile']) && $_SESSION['User']['profile'] !== '' ? $_SESSION['User']['profile'] : "";
+    echo '<p class = "profile-p" >自己紹介</p>';
+    echo '<textarea rows="4" cols="50" class = "profile-area" readonly placeholder="プロフィールは未設定です">';
+    echo $profileText;
+    echo '</textarea><br>';
     echo "<input type='submit' class='edit' value='Profile edit'>";
     echo "</form>";
     ?>

@@ -1,4 +1,4 @@
-<?php require 'db-connect.php'?>
+<?php require 'db-connect.php'; ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -6,28 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/tournament-create.css">
     <title>大会作成</title>
-
 </head>
 <body>
-<div class="container">
-    <div class="back">戻る</div>
-    <div class="create">作成</div>
-</div>
-    <div class="element_wrap">
-        <label>大会名</label>
-        <textarea name="contact"></textarea>
+    <div class="container">
+        <form action="your_action_page.php" method="post">
+            <input type="text" name="tournament-name" placeholder="大会名"><br>
+            <label for="game_title">ゲームタイトルを選択:</label>
+            <select name="game_title" id="game_title">
+                <?php
+                    $pdo = new PDO($connect, USER, PASS);
+                    $sql = $pdo->query('SELECT * FROM game');
+                    foreach ($sql as $row) {
+                        echo '<option value="', htmlspecialchars($row['game_id']), '">', htmlspecialchars($row['title']), '</option>';
+                    }
+                ?>
+            </select>
+            <textarea id="story" name="story" rows="5" cols="33">[ルール]</textarea>
+            <div class="button-group">
+                <button type="button" onclick="history.back()">戻る</button>
+                <button type="submit">作成</button>
+            </div>
+        </form>
     </div>
-    <form method="post" action="">
-    <select name="item_id">
-        <option value="">ゲームタイトル</option>
-        <?php foreach ($items as $item): ?>
-            <option value="<?php echo htmlspecialchars($item['id']); ?>">
-                <?php echo htmlspecialchars($item['name']); ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-    <textarea name="contact"></textarea>
-    
-</form>
 </body>
 </html>

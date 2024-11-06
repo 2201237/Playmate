@@ -17,6 +17,7 @@
         $sql=$pdo->prepare('select * from tournament where tournament_id = ?');
         $sql->execute([$_GET['tournament_id']]);
         foreach($sql as $tournament){
+            echo "<div style='text-align:center'>";
             $tournament_id = $tournament['game_id']; 
             $image_path = "../img/" . $tournament_id . ".jpg";    
             echo "<h1>" . $tournament['tournament_name'] . "</h1>";
@@ -24,11 +25,16 @@
             echo '<div class="rure">';
             echo "<p> ~ルール~ <br>" . $tournament['rure']. "</p>";
             echo "</div>";
-            echo '<input type ="submit" class = "button" value = "送信">';
+            echo '<input type ="submit" class = "button" value = "参加">';
+            echo "</div>";
 
         }
 
     ?>
     </form>
+    <form action = "home.php"  method = "post">
+        <button type="button" class="button" onclick="history.back()">戻る</button>
+    </form>
+
 </body>
 </html>

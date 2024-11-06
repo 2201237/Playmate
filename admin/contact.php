@@ -14,7 +14,7 @@
 
     <div>
         <button class="menu-button" onclick="location.href='inquiry-list.php'">お問い合わせ一覧</button><br>
-        <button class="menu-button" onclick="location.href='inquiry-solved.php'">お問い合わせ解決</button>
+        <button class="menu-button" onclick="location.href='resolved-list.php'">お問い合わせ解決</button>
         <button class="menu-button" onclick="location.href='inquiry-solved.php'">ジャンル管理</button>
     </div>
 </body>
