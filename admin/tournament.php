@@ -18,6 +18,7 @@
         <button class="menu-button" onclick="location.href='win-loss-images.php'">勝敗画像管理</button><br>
         <button class="menu-button" onclick="location.href='tournament-create.php'">大会作成</button><br>
         <button class="menu-button" onclick="location.href='tournament-edit.php'">大会削除・更新</button>
+        <button class="menu-button" onclick="location.href='tournament-view.php'">大会一覧</button>
     </div>
 </body>
 </html>
