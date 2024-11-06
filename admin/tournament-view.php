@@ -13,10 +13,11 @@
     <a href="login.php" class="logout">ログアウト</a>
 
     <h2>大会一覧</h2>
+    <?php
 
-    <div>
-        <?php
-        $stmt = $pdo->query('SELECT tournament_name FROM tournament');
+try {
+    // tournamentテーブルからtournament_nameを取得
+    $stmt = $pdo->query('SELECT tournament_name FROM tournament');
 
     // 結果を表示
     echo "<ul>";
@@ -24,7 +25,11 @@
         echo "<li>" . htmlspecialchars($row['tournament_name']) . "</li>";
     }
     echo "</ul>";
-        ?>
-    </div>
+
+} catch (PDOException $e) {
+    echo 'データ取得エラー: ' . $e->getMessage();
+}
+?>
+
 </body>
 </html>
