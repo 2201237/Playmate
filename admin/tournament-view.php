@@ -12,7 +12,6 @@
 
     <h2>大会一覧</h2>
     <div class="container">
-        <form action="your_action_page.php" method="post">
             <select name="tournament">
                 <?php
                     // PDOの接続
