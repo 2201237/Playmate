@@ -16,6 +16,11 @@
         <h3>大会名</h3>
         <ul>
             <?php
+                // データベース接続情報
+                $connect = 'mysql:host=mysql311.phx.lolipop.lan;dbname=LAA1516826-playmate;charset=utf8';
+                $USER = 'LAA1516826';
+                $PASS = 'joyman';
+
                 try {
                     $pdo = new PDO($connect, $USER, $PASS);
                     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -33,4 +38,3 @@
     </div>
 </body>
 </html>
-
