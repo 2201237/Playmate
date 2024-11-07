@@ -1,4 +1,13 @@
 <?php
+session_start(); // セッション開始
+
+// ログインチェック
+if (!isset($_SESSION['user_id'])) { // user_idがセッションにない場合
+    header('Location: notlogin.php'); // login.phpにリダイレクト
+    exit(); // 以降のコードを実行しない
+}
+?>
+<?php
 require 'db-connect.php';
 
 try {
