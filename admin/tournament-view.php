@@ -12,14 +12,12 @@
 
     <h2>大会一覧</h2>
     <div class="container">
-        <input type="text" name="tournament-name" placeholder="大会名"><br>
-            <label for="game_title">ゲームタイトルを選択:</label>
-            <select name="game_title" id="game_title">
+        <form action="your_action_page.php" method="post">
                 <?php
                     $pdo = new PDO($connect, USER, PASS);
-                    $sql = $pdo->query('SELECT * FROM game');
+                    $sql = $pdo->query('SELECT * FROM tournament');
                     foreach ($sql as $row) {
-                        echo '<option value="', $row['tournament_name'], '">','</option>';
+                        echo '<option value="', $row['tournament_name'], '">', '</option>';
                     }
                 ?>
             </select>
