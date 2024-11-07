@@ -1,7 +1,7 @@
 <?php require 'db-connect.php'; ?>
 <!DOCTYPE html>
 <html lang="ja">
-    //データベースに格納する機能がまだ未実装です。
+    //データベースに格納する機能がまだ未実装
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
