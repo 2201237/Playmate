@@ -12,26 +12,24 @@
 
     <h2>大会一覧</h2>
     <?php
-    require 'db-connect.php';
+require 'db-connect.php';
 
-    try {
-        // tournamentテーブルからtournament_nameを取得
-        $stmt = $pdo->query('SELECT tournament_name FROM tournament');
+// データベースからデータを取得するクエリを作成
+$sql = "SELECT tournament_name FROM tournament";
+$result = $conn->query($sql);
 
-        // データがあるか確認
-        if ($stmt->rowCount() > 0) {
-            echo "<ul>";
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<li>" . htmlspecialchars($row['tournament_name']) . "</li>";
-            }
-            echo "</ul>";
-        } else {
-            echo "データがありません。";
-        }
-
-    } catch (PDOException $e) {
-        echo 'データ取得エラー: ' . $e->getMessage();
+// 結果が1行以上あるかを確認
+if ($result->num_rows > 0) {
+    // 結果をループして表示
+    while ($row = $result->fetch_assoc()) {
+        echo $row['tournament_name'] . "<br>";
     }
-    ?>
+} else {
+    echo "データがありません。";
+}
+
+// 接続を閉じる
+$conn->close();
+?>
 </body>
 </html>
