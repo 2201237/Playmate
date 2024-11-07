@@ -17,7 +17,7 @@
         <ul>
             <?php
                 // データベース接続情報
-                $connect = 'mysql:host=mysql311.phx.lolipop.lan;dbname=LAA1516826-playmate;charset=utf8';
+                $connect = 'mysql:host=mysql311.phy.lolipop.lan;dbname=LAA1516826-playmate;charset=utf8';
                 $USER = 'LAA1516826';
                 $PASS = 'joyman';
 
