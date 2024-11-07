@@ -1,6 +1,7 @@
 <?php require 'db-connect.php'; ?>
 <!DOCTYPE html>
 <html lang="ja">
+    //データベースに格納する機能がまだ未実装です。
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +22,7 @@
                     }
                 ?>
             </select>
-            <textarea id="story" name="story" rows="5" cols="33">[ルール]</textarea><br>
+            <textarea id="story" name="story" rows="5" cols="33">[ルール]</textarea>
             <div class="button-group">
                 <button type="button" onclick="history.back()">戻る</button>
                 <button type="submit">作成</button>
