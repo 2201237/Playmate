@@ -12,15 +12,21 @@
 
     <h2>大会一覧</h2>
     <div class="container">
-        <!-- Display tournament names -->
-        <h3>登録済み大会名</h3>
+        <!-- 大会名の表示 -->
+        <h3>大会名</h3>
         <ul>
             <?php
-                $pdo = new PDO($connect, USER, PASS);
-                // Fetch and display tournament names
-                $tournament_sql = $pdo->query('SELECT tournament_name FROM tournament');
-                foreach ($tournament_sql as $tournament) {
-                    echo '<li>', htmlspecialchars($tournament['tournament_name']), '</li>';
+                try {
+                    $pdo = new PDO($connect, $USER, $PASS);
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                    // データベースから大会名を取得して表示
+                    $tournament_sql = $pdo->query('SELECT tournament_name FROM tournament');
+                    foreach ($tournament_sql as $tournament) {
+                        echo '<li>', htmlspecialchars($tournament['tournament_name'], ENT_QUOTES, 'UTF-8'), '</li>';
+                    }
+                } catch (PDOException $e) {
+                    echo 'データベース接続に失敗しました: ' . $e->getMessage();
                 }
             ?>
         </ul>
