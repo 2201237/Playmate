@@ -11,27 +11,17 @@
     <a href="login.php" class="logout">ログアウト</a>
 
     <h2>大会一覧</h2>
-    <?php
-    require 'db-connect.php';
-
-    try {
-        // tournamentテーブルからtournament_nameを取得
-        $stmt = $pdo->query('SELECT tournament_name FROM tournament');
-
-        // データがあるか確認
-        if ($stmt->rowCount() > 0) {
-            echo "<ul>";
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<li>" . htmlspecialchars($row['tournament_name']) . "</li>";
-            }
-            echo "</ul>";
-        } else {
-            echo "データがありません。";
-        }
-
-    } catch (PDOException $e) {
-        echo 'データ取得エラー: ' . $e->getMessage();
-    }
-    ?>
+    <div class="container">
+        <input type="text" name="tournament-name" placeholder="大会名"><br>
+            <label for="game_title">ゲームタイトルを選択:</label>
+            <select name="game_title" id="game_title">
+                <?php
+                    $pdo = new PDO($connect, USER, PASS);
+                    $sql = $pdo->query('SELECT * FROM game');
+                    foreach ($sql as $row) {
+                        echo '<option value="', $row['tournament_name'], '">','</option>';
+                    }
+                ?>
+            </select>
 </body>
 </html>

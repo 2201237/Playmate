@@ -25,24 +25,43 @@
         <a href="" id="logoutButton">ログアウト</a>
     </div>
 
+    <form action='profile-edit.php' method='post'>
+
     <?php
-    echo "<form action='profile-edit.php' method='post'>";
-    echo "<p class = 'profile-icon'>";
-    if (isset($user['icon']) && $user['icon'] !== '') {
-        echo "<img src='{$user['icon']}' class='icon_user' width='50' height='50'>";
-    } else {
-        echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
-    }    echo "</p>";
-    echo "<p class = 'user' >" . $_SESSION['User']['user_name'] . "</p>";
-    echo "<p class = 'user' >" . $_SESSION['User']['user_mail'] . "</p>";
-    $profileText = isset($_SESSION['User']['profile']) && $_SESSION['User']['profile'] !== '' ? $_SESSION['User']['profile'] : "";
-    echo '<p class = "profile-p" >自己紹介</p>';
-    echo '<textarea rows="4" cols="50" class = "profile-area" readonly placeholder="プロフィールは未設定です">';
-    echo $profileText;
-    echo '</textarea><br>';
-    echo "<input type='submit' class='edit' value='Profile edit'>";
-    echo "</form>";
-    ?>
+        
+        echo "<input type = 'hidden' name = '" . $_SESSION['User']['user_id'] . "' value = '" . $_SESSION['User']['user_id'] . "'></input>";
+        echo "<input type = 'hidden' name = '" . $_SESSION['User']['user_name'] . "' value = '" . $_SESSION['User']['user_name'] . "'></input>";
+        
+
+
+        echo "<p class = 'profile-icon'>";
+            if (isset($_SESSION['User']['icon']) && $_SESSION['User']['icon'] !== '') {
+                echo "<input type = 'hidden' name = '" . $_SESSION['User']['icon'] . "' value = '" . $_SESSION['User']['icon'] . "'></input>";
+
+                echo "<img src='".$_SESSION['User']['icon']."' class='icon_user' width='50' height='50'>";
+            } else {
+                echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
+            }
+        echo "</p>";
+
+        echo "<p class = 'user' >" . $_SESSION['User']['user_name'] . "</p>";
+        echo "<p class = 'user' >" . $_SESSION['User']['user_mail'] . "</p>";
+
+        echo '<p class = "profile-p" >自己紹介</p>';
+            if(isset($_SESSION['User']['profile']) && $_SESSION['User']['profile'] !== ''){
+                echo '<input type = "hidden" name = "' . $_SESSION['User']['profile'] . '" value = "' . $_SESSION['User']['profile'] . '"></input>';
+
+                echo '<textarea rows="4" cols="50" class = "profile-area" readonly value = "' . $_SESSION['User']['profile'] . '">';
+                echo '</texrarea><br>';
+            }else{
+                echo '<textarea rows="4" cols="50" class = "profile-area" readonly placeholder="プロフィールは未設定です">';
+                echo '</textarea><br>';
+            }
+        echo "<input type='submit' class='edit' value='Profile edit'>";
+        
+   ?>
+   </form>
+
 
     <div id="logoutModal" class="modal-logout">
         <spqn class = "close"></span>

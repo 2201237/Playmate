@@ -5,8 +5,8 @@ $pdo=new PDO($connect,USER,PASS);
 
 $lastId=$pdo->lastInsertId();
 
-$sql=$pdo->prepare('insert into contacts(contacts, contacts_ge_id) values(?,?)');
-$sql->execute([$_POST['infomation'],$_POST['conge_id']]);
+$sql=$pdo->prepare('insert into contacts(contacts, user_id, contacts_ge_id) values(?,?,?)');
+$sql->execute([$_POST['infomation'],$_SESSION['User']['user_id'],$_POST['conge_id']]);
 
 echo '<h1>お問い合わせ内容が送信されました。</h1>';
 echo '<p>返信内容が返却されるまでしばらくお待ちください</p>';
