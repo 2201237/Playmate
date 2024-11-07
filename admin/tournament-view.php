@@ -13,13 +13,27 @@
     <h2>大会一覧</h2>
     <div class="container">
         <form action="your_action_page.php" method="post">
+            <select name="tournament">
                 <?php
-                    $pdo = new PDO($connect, USER, PASS);
-                    $sql = $pdo->query('SELECT * FROM tournament');
-                    foreach ($sql as $row) {
-                        echo '<option value="', $row['tournament_name'], '">', '</option>';
+                    // PDOの接続
+                    try {
+                        $pdo = new PDO($connect, USER, PASS);
+                        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        
+                        // SQLクエリの実行
+                        $sql = $pdo->query('SELECT * FROM tournament');
+                        foreach ($sql as $row) {
+                            echo '<option value="', htmlspecialchars($row['tournament']), '">',
+                                 htmlspecialchars($row['tournament_name']),
+                                 '</option>';
+                        }
+                    } catch (PDOException $e) {
+                        echo '接続に失敗しました: ' . $e->getMessage();
                     }
                 ?>
             </select>
+        </form>
+    </div>
 </body>
 </html>
+
