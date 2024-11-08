@@ -1,10 +1,10 @@
 <?php
-session_start(); // セッション開始
+session_start();
 
 // ログインチェック
-if (!isset($_SESSION['user_id'])) { // user_idがセッションにない場合
-    header('Location: notlogin.php'); // login.phpにリダイレクト
-    exit(); // 以降のコードを実行しない
+if (!isset($_SESSION['admins']['admin_id'])) {
+    header('Location: notlogin.php'); 
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -20,7 +20,7 @@ require 'db-connect.php';
 <body>
 <h1>お問い合わせ一覧（解決）</h1>
 <a href="inquiry-list.php" class="back">←戻る</a>
-<a href="login.php" class="logout">ログアウト</a>
+<a href="logout.php" class="logout">ログアウト</a>
 
 <!-- ユーザー名検索フォーム -->
 <form method="GET" action="resolved-list.php" class="search-form">

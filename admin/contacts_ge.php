@@ -1,10 +1,10 @@
 <?php
-session_start(); // セッション開始
+session_start();
 
 // ログインチェック
-if (!isset($_SESSION['user_id'])) { // user_idがセッションにない場合
-    header('Location: notlogin.php'); // login.phpにリダイレクト
-    exit(); // 以降のコードを実行しない
+if (!isset($_SESSION['admins']['admin_id'])) {
+    header('Location: notlogin.php'); 
+    exit();
 }
 ?>
 <?php
@@ -111,7 +111,7 @@ try {
 <body>
     <h1>ジャンル管理</h1>
     <a href="contact.php" class="back">←戻る</a>
-    <a href="login.php" class="logout">ログアウト</a>
+    <a href="logout.php" class="logout">ログアウト</a>
     <?php if ($message): ?>
         <p><?= htmlspecialchars($message) ?></p>
     <?php endif; ?>
