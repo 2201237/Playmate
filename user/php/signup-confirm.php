@@ -1,6 +1,14 @@
 <?php
-session_start();
-require 'db-connect.php';
+      session_start();
+      require 'db-connect.php';
+
+      $sql=$pdo->prepare('select * from users where user_mail=?');
+      $sql->execute([$_POST['email']]);
+
+      if ( !empty($sql->fetchAll()) ) {
+            $_SESSION['User']['message'] = 'このEメールアドレスを持つアカウントはすでに存在しています';
+            header('Location:signup-input.php');
+      }
 ?>
 <!DOCTYPE html>
 <html lang="ja">
