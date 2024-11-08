@@ -1,14 +1,14 @@
 <?php
-session_start(); // セッション開始
+session_start();
 
 // ログインチェック
-if (!isset($_SESSION['user_id'])) { // user_idがセッションにない場合
-    header('Location: notlogin.php'); // login.phpにリダイレクト
-    exit(); // 以降のコードを実行しない
+if (!isset($_SESSION['admins']['admin_id'])) {
+    header('Location: notlogin.php'); 
+    exit();
 }
 ?>
 <?php
-session_start();
+
 
 if (isset($_SESSION["status_message"])) {
     echo "<p>" . htmlspecialchars($_SESSION["status_message"]) . "</p>";
@@ -28,7 +28,7 @@ require 'db-connect.php';
 <body>
 <h1>お問い合わせ一覧</h1>
 <a href="contact.php" class="back">←戻る</a>
-<a href="login.php" class="logout">ログアウト</a>
+<a href="logout.php" class="logout">ログアウト</a>
 <div class="button-container">
     <button onclick="window.location.href='resolved-list.php'">解決一覧</button>
     <button onclick="window.location.href='on-hold-list.php'">保留一覧</button>
