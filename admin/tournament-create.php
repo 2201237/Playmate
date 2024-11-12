@@ -35,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>大会作成</title>
 </head>
 <body>
+<h1>大会作成</h1>
     <div class="container">
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
             <input type="text" name="tournament-name" placeholder="大会名" required><br>
@@ -58,8 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <textarea id="story" name="story" rows="5" cols="33" required>[ルール]</textarea>
             
             <div class="button-group">
-                <button type="button" onclick="history.back()">戻る</button>
-                <button type="submit">作成</button>
+                <button type="button" class="back" onclick="history.back()">戻る</button>
+                <button type="submit" class="create">作成</button>
             </div>
         </form>
     </div>
