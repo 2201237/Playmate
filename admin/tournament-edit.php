@@ -46,7 +46,7 @@
                 
                 try {
                     // 関連する参加者データを削除
-                    $stmt = $pdo->prepare("DELETE FROM tournament_me WHERE tournament_id = ?");
+                    $stmt = $pdo->prepare("DELETE FROM tournament_member WHERE tournament_id = ?");
                     $stmt->execute([$delete_id]);
                     
                     // 大会データを削除
@@ -63,7 +63,7 @@
             
             // 大会一覧の表示
             $sql = "SELECT t.tournament_id, t.tournament_name, 
-                          (SELECT COUNT(*) FROM tournament_me tm WHERE tm.tournament_id = t.tournament_id) as participant_count 
+                          (SELECT COUNT(*) FROM tournament_member tm WHERE tm.tournament_id = t.tournament_id) as participant_count 
                    FROM tournament t";
             $stmt = $pdo->query($sql);
             
@@ -115,7 +115,7 @@ if (isset($_POST['update']) && isset($_POST['tournament_id'])) {
 
 // SQLクエリも rules カラムを含むように更新
 $sql = "SELECT t.tournament_id, t.tournament_name, t.rule,
-              (SELECT COUNT(*) FROM tournament_me tm WHERE tm.tournament_id = t.tournament_id) as participant_count 
+              (SELECT COUNT(*) FROM tournament_member tm WHERE tm.tournament_id = t.tournament_id) as participant_count 
        FROM tournament t";
             
         } catch (PDOException $e) {
