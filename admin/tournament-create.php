@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             <div class="button-group">
                 <button type="button" onclick="history.back()">戻る</button>
-                <button type="submit">作成</button>
+                <button type="submit" onclick="tournament-view">作成</button>
             </div>
         </form>
     </div>
