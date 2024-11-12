@@ -68,9 +68,9 @@ body {
     border: 1px solid #ebccd1;
 }
 .nav-links {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    position: absolute;
+    top: 20px;
+    font-size: 20px;
 }
 
 /* スタイルに以下を追加 */
