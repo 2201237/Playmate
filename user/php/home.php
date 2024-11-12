@@ -1,6 +1,5 @@
-<?php session_start(); 
-require 'db-connect.php';
-require '../header.html';
+<?php 
+require '../header.php';
 $pdo=new PDO($connect,USER,PASS);
 $tsql=$pdo->prepare('select * FROM tournament');
 $tsql->execute();
