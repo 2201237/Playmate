@@ -1,0 +1,10 @@
+/* ファイル選択のinputを非表示 */
+#fileInput {
+    display: none;
+}
+/* ラベルのスタイル設定 */
+#fileLabel {
+    cursor: pointer;
+    color: #007bff;
+    text-decoration: underline;
+}
