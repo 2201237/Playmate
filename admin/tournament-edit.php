@@ -7,10 +7,8 @@
     <title>大会管理（更新・削除）</title>
 </head>
 <body>
-    <div class="nav-links">
         <a href="tournament.php" class="back">←戻る</a>
         <a href="login.php" class="logout">ログアウト</a>
-    </div>
     
     <div class="container">
         <h2>大会管理（更新・削除）</h2>

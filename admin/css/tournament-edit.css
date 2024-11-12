@@ -46,12 +46,6 @@ body {
 .btn-delete {
     background-color: #f44336;
 }
-.back {
-    display: inline-block;
-    margin-bottom: 20px;
-    text-decoration: none;
-    color: #333;
-}
 .message {
     padding: 10px;
     margin-bottom: 15px;
@@ -67,10 +61,17 @@ body {
     color: #a94442;
     border: 1px solid #ebccd1;
 }
-.nav-links {
+.back, .logout {
     position: absolute;
     top: 20px;
     font-size: 20px;
+}
+.back {
+    left: 20px;
+}
+
+.logout{
+    right: 20px;
 }
 
 /* スタイルに以下を追加 */
