@@ -82,7 +82,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     // ルール入力フィールド
     echo '<div class="input-group">';
     echo '<label>ルール:</label>';
-    echo '<textarea name="tournament_rule" rows="4" required>' . htmlspecialchars($row['tournament_rule'], ENT_QUOTES, 'UTF-8') . '</textarea>';
+    echo '<textarea name="rule" rows="4" required>' . htmlspecialchars($row['rule'], ENT_QUOTES, 'UTF-8') . '</textarea>';
     echo '</div>';
     
     echo '<p>参加者数: ' . $row['participant_count'] . '人</p>';
@@ -102,9 +102,9 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 if (isset($_POST['update']) && isset($_POST['tournament_id'])) {
     $update_id = $_POST['tournament_id'];
     $new_name = $_POST['tournament_name'];
-    $new_rules = $_POST['tournament_rule'];
+    $new_rules = $_POST['rule'];
     
-    $stmt = $pdo->prepare("UPDATE tournament SET tournament_name = ?, tournament_rule = ? WHERE tournament_id = ?");
+    $stmt = $pdo->prepare("UPDATE tournament SET tournament_name = ?, rule = ? WHERE tournament_id = ?");
     if ($stmt->execute([$new_name, $new_rules, $update_id])) {
         echo '<div class="message success">大会情報が更新されました。</div>';
     } else {
@@ -113,7 +113,7 @@ if (isset($_POST['update']) && isset($_POST['tournament_id'])) {
 }
 
 // SQLクエリも rules カラムを含むように更新
-$sql = "SELECT t.tournament_id, t.tournament_name, t.tournament_rule,
+$sql = "SELECT t.tournament_id, t.tournament_name, t.rule,
               (SELECT COUNT(*) FROM tournament_me tm WHERE tm.tournament_id = t.tournament_id) as participant_count 
        FROM tournament t";
             
