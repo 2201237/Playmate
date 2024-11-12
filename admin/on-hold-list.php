@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+// ログインチェック
+if (!isset($_SESSION['admins']['admin_id'])) {
+    header('Location: notlogin.php'); 
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <?php
@@ -14,7 +23,7 @@ require 'db-connect.php';
     <button onclick="window.location.href='resolved-list.php'">解決一覧</button>
 </div>
 <a href="inquiry-list.php" class="back">←戻る</a>
-<a href="login.php" class="logout">ログアウト</a>
+<a href="logout.php" class="logout">ログアウト</a>
 
 <?php
 try {

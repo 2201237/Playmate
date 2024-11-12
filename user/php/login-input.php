@@ -11,6 +11,14 @@
 </head>
 <body>
     <img src="../img/logo.png" class="logo" width="180" height="">
+    <div class="message-area">
+        <?php
+            if ( isset($_SESSION['User']['message']) ) {
+                echo '<div class="">！ご確認ください</div>';
+                echo '<span>', $_SESSION['User']['message'] ,'</span>';
+            }
+        ?>
+    </div>
     <div class="form-wrapper">
         <h1>Sign In</h1>
         <form action="login-output.php" method="post">

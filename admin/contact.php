@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+// ログインチェック
+if (!isset($_SESSION['admins']['admin_id'])) {
+    header('Location: notlogin.php'); 
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -8,7 +17,7 @@
 </head>
 <body>
     <a href="admintop.php" class="back">←戻る</a>
-    <a href="login.php" class="logout">ログアウト</a>
+    <a href="logout.php" class="logout">ログアウト</a>
 
     <h2>お問い合わせ管理</h2>
 

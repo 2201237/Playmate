@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+// ログインチェック
+if (!isset($_SESSION['admins']['admin_id'])) {
+    header('Location: notlogin.php'); 
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -8,8 +17,8 @@
 </head>
 <body>
     <h1>PlayMate Admin</h1>
-    <a href="login.php" class="logout">ログアウト</a>
-
+ 
+   <a href="logout.php" class="logout">ログアウト</a>
     <div>
         <button class="menu-button" onclick="location.href='user.php'">ユーザー管理</button><br>
         <button class="menu-button" onclick="location.href='game-manage.php'">ゲーム管理</button><br>

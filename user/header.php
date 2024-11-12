@@ -28,7 +28,7 @@ $userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '../i
             <ul>
                 <li><a class=”current” href="home.php">ホーム</a></li>
                 <li><a href="tournament-list.php">大会一覧</a></li>
-                <li><a href="#">掲示板</a></li>
+                <li><a href="chatboard-title.php">掲示板</a></li>
                 <li><a href="#">ランキング</a></li>
                 <li><a href="infomation-input.php">お問い合わせ</a></li>
             </ul>
