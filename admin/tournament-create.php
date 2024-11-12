@@ -59,8 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <textarea id="story" name="story" rows="5" cols="33" required>[ルール]</textarea>
             
             <div class="button-group">
-                <button type="button" onclick="history.back()">戻る</button>
-                <button type="submit">作成</button>
+                <button type="button" class="back" onclick="history.back()">戻る</button>
+                <button type="submit" class="create">作成</button>
             </div>
         </form>
     </div>

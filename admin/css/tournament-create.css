@@ -89,6 +89,19 @@ button[type="button"] {
 button[type="button"]:hover {
     background-color: #8f252f;
 }
+.back, .create {
+    position: absolute;
+    top: 20px;
+    font-size: 20px;
+}
+
+.back {
+    left: 20px;
+}
+
+.create {
+    right: 20px;
+}
 
 /* レスポンシブデザイン */
 @media (max-width: 480px) {
