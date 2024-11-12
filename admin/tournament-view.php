@@ -35,7 +35,7 @@
                     foreach ($stmt as $row) {
                         echo '<li>';
                         echo htmlspecialchars($row['tournament_name'], ENT_QUOTES, 'UTF-8');
-                        echo ' (参加人数: ' . $row['participant_count'] . '人)';
+                        echo ' (参加人数: ' . $row['participant_count'] . '人)';//参加人数がまだ反映されていません
                         echo '</li>';
                     }
                 } catch (PDOException $e) {
