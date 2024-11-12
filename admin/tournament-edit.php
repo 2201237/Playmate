@@ -67,22 +67,55 @@
                    FROM tournament t";
             $stmt = $pdo->query($sql);
             
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo '<div class="tournament-item">';
-                echo '<div class="form-group">';
-                echo '<form method="POST" class="tournament-form">';
-                echo '<label>大会名:</label>';
-                echo '<input type="text" name="tournament_name" value="' . htmlspecialchars($row['tournament_name'], ENT_QUOTES, 'UTF-8') . '" required>';
-                echo '<p>参加者数: ' . $row['participant_count'] . '人</p>';
-                echo '<input type="hidden" name="tournament_id" value="' . $row['tournament_id'] . '">';
-                echo '<div class="button-group">';
-                echo '<button type="submit" name="update" class="btn btn-update">更新</button>';
-                echo '<button type="submit" name="delete" class="btn btn-delete" onclick="return confirm(\'本当にこの大会を削除しますか？\');">削除</button>';
-                echo '</div>';
-                echo '</form>';
-                echo '</div>';
-                echo '</div>';
-            }
+// データベース表示部分のコードを以下のように変更します
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    echo '<div class="tournament-item">';
+    echo '<div class="form-group">';
+    echo '<form method="POST" class="tournament-form">';
+    
+    // 大会名入力フィールド
+    echo '<div class="input-group">';
+    echo '<label>大会名:</label>';
+    echo '<input type="text" name="tournament_name" value="' . htmlspecialchars($row['tournament_name'], ENT_QUOTES, 'UTF-8') . '" required>';
+    echo '</div>';
+    
+    // ルール入力フィールド
+    echo '<div class="input-group">';
+    echo '<label>ルール:</label>';
+    echo '<textarea name="tournament_rule" rows="4" required>' . htmlspecialchars($row['tournament_rule'], ENT_QUOTES, 'UTF-8') . '</textarea>';
+    echo '</div>';
+    
+    echo '<p>参加者数: ' . $row['participant_count'] . '人</p>';
+    echo '<input type="hidden" name="tournament_id" value="' . $row['tournament_id'] . '">';
+    
+    echo '<div class="button-group">';
+    echo '<button type="submit" name="update" class="btn btn-update">更新</button>';
+    echo '<button type="submit" name="delete" class="btn btn-delete" onclick="return confirm(\'本当にこの大会を削除しますか？\');">削除</button>';
+    echo '</div>';
+    
+    echo '</form>';
+    echo '</div>';
+    echo '</div>';
+}
+
+// 更新処理の部分も以下のように変更します
+if (isset($_POST['update']) && isset($_POST['tournament_id'])) {
+    $update_id = $_POST['tournament_id'];
+    $new_name = $_POST['tournament_name'];
+    $new_rules = $_POST['tournament_rule'];
+    
+    $stmt = $pdo->prepare("UPDATE tournament SET tournament_name = ?, tournament_rule = ? WHERE tournament_id = ?");
+    if ($stmt->execute([$new_name, $new_rules, $update_id])) {
+        echo '<div class="message success">大会情報が更新されました。</div>';
+    } else {
+        echo '<div class="message error">更新中にエラーが発生しました。</div>';
+    }
+}
+
+// SQLクエリも rules カラムを含むように更新
+$sql = "SELECT t.tournament_id, t.tournament_name, t.tournament_rule,
+              (SELECT COUNT(*) FROM tournament_me tm WHERE tm.tournament_id = t.tournament_id) as participant_count 
+       FROM tournament t";
             
         } catch (PDOException $e) {
             echo '<div class="message error">データベース接続に失敗しました: ' . $e->getMessage() . '</div>';
