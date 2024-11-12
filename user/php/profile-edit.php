@@ -24,7 +24,7 @@ $userProfile = isset($_SESSION['User']['user_profile']) ? $_SESSION['User']['use
 <input type = 'hidden' name = 'user_id' value = "<?php echo $userId; ?>"></input>
 
     <div  style='text-align:center'>
-        <form action="profile-input.php" method="post" enctype="multipart/form-data">
+        <form action="profile-fin.php" method="post" enctype="multipart/form-data">
 
         <input type='hidden' name='user_id' value='<?php echo $userId; ?>'>
 
