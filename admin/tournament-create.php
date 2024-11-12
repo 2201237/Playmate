@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // 実行
         if ($stmt->execute([$tournament_name, $game_id, $rules])) {
-            echo '<script>alert("大会が正常に作成されました。"); window.location.href = "tournament-list.php";</script>';
+            echo '<script>alert("大会が正常に作成されました。"); window.location.href = "tournament-view.php";</script>';
         } else {
             echo '<script>alert("大会の作成に失敗しました。");</script>';
         }
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             <div class="button-group">
                 <button type="button" onclick="history.back()">戻る</button>
-                <button type="submit" onclick="tournament-view">作成</button>
+                <button type="submit">作成</button>
             </div>
         </form>
     </div>
