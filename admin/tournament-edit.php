@@ -82,7 +82,8 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     // ルール入力フィールド
     echo '<div class="input-group">';
     echo '<label>ルール:</label>';
-    echo '<textarea name="rule" rows="4" required[ルール]>' . htmlspecialchars($row['rule'], ENT_QUOTES, 'UTF-8') . '</textarea>';
+    echo '<textarea name="rule" rows="4" required>' . htmlspecialchars('[ルール]' . $row['rule'], ENT_QUOTES, 'UTF-8') . '</textarea>';
+
     echo '</div>';
     
     echo '<p>参加者数: ' . $row['participant_count'] . '人</p>';
