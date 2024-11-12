@@ -35,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>大会作成</title>
 </head>
 <body>
+<h2>大会作成</h2>
     <div class="container">
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
             <input type="text" name="tournament-name" placeholder="大会名" required><br>
