@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+require 'php/db-connect.php';
+$pdo = new PDO($connect, USER, PASS);
+
+
+// セッションからアイコンのパスを取得
+$userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '../img/icon_user.png';
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -12,7 +22,14 @@
     <div class="header">
             <img src="../img/logo.png" class="logo" width="180" height="">
         <a href="./profile-input.php">
-        <img src="../img/icon_user.png" class="icon_user" width="100" height="100">
+        <?php 
+           if (isset($userIcon) && $userIcon !== '') {
+
+            echo "<img src='".$userIcon."' class='icon_user' width='50' height='50'>";
+            } else {
+                echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
+            }
+        ?>
         </a>
 
         <nav>

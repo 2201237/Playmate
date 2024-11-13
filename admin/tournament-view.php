@@ -27,7 +27,7 @@
                     // 大会名と参加人数を取得するSQL
                     $sql = "SELECT t.tournament_name, COUNT(DISTINCT tm.user_id) as participant_count 
                            FROM tournament t 
-                           LEFT JOIN tournament_me tm ON t.tournament_id = tm.tournament_id 
+                           LEFT JOIN tournament_member tm ON t.tournament_id = tm.tournament_id 
                            GROUP BY t.tournament_id, t.tournament_name";
                     
                     $stmt = $pdo->query($sql);
@@ -35,7 +35,7 @@
                     foreach ($stmt as $row) {
                         echo '<li>';
                         echo htmlspecialchars($row['tournament_name'], ENT_QUOTES, 'UTF-8');
-                        echo ' (参加人数: ' . $row['participant_count'] . '人)';
+                        echo ' (参加人数: ' . $row['participant_count'] . '人)';//参加人数がまだ反映されていません
                         echo '</li>';
                     }
                 } catch (PDOException $e) {
