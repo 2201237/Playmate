@@ -1,7 +1,8 @@
 <?php
       session_start();
       require 'db-connect.php';
-
+      
+      $pdo=new PDO($connect, USER, PASS);
       $sql=$pdo->prepare('select * from users where user_mail=?');
       $sql->execute([$_POST['email']]);
 
@@ -31,37 +32,34 @@
 
                   <div class="form-item">
                         <label for="name"></label>
-                        <p>User Name：
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <p>お名前：
                               <span name="name"><?php echo $_POST['name']; ?></span>
                         </p>
                   </div>
                   <div class="form-item">
                         <label for="email"></label>
-                        <p>Email Address：
-                              &nbsp;&nbsp;&nbsp;
+                        <p>Eメールアドレス：
                               <span name="email"><?php echo $_POST['email']; ?></span>
                         </p>
                   </div>
                   <div class="form-item">
                         <label for="password"></label>
-                        <p>Password：
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <p>パスワード：
                               <span name="password"><?php echo $_POST['password']; ?></span>
                         </p>
                   </div>
                   <div class="form-item">
                         <label for="profile"></label>
-                        <p>Profile：
+                        <p>プロフィール：
                               <br><span name="profile"><?php echo $_POST['profile']; ?></span>
                         </p>
                   </div>
                   <div class="button-panel">
-                        <input type="submit" class="button" title="Sign Up" value="Sign UP"></input>
+                        <input type="submit" class="button" title="Sign Up" value="ログイン"></input>
                   </div>
             </form>
             <div class="form-footer">
-                  <a href="#" onclick="history.back()" return false;>back</a>
+                  <a href="#" onclick="history.back()" return false;>戻る</a>
             </div>
       </div>
 </body>

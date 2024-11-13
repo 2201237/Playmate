@@ -1,6 +1,8 @@
 <?php
-
-      require '../header.php';
+      session_start();
+      require 'db-connect.php';
+      require '../header.html';
+      $pdo=new PDO($connect,USER,PASS);
 ?>
 <!DOCTYPE html>
 <html lang="ja">

@@ -1,12 +1,3 @@
-<?php
-session_start();
-require 'php/db-connect.php';
-$pdo = new PDO($connect, USER, PASS);
-
-
-// セッションからアイコンのパスを取得
-$userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '../img/icon_user.png';
-?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -21,22 +12,14 @@ $userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '../i
     <div class="header">
             <img src="../img/logo.png" class="logo" width="180" height="">
         <a href="./profile-input.php">
-        <?php 
-           if (isset($userIcon) && $userIcon !== '') {
-
-            echo "<img src='".$userIcon."' class='icon_user' width='50' height='50'>";
-            } else {
-                echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
-            }
-        ?>
-
+        <img src="../img/icon_user.png" class="icon_user" width="100" height="100">
         </a>
 
         <nav>
             <ul>
                 <li><a class=”current” href="home.php">ホーム</a></li>
                 <li><a href="tournament-list.php">大会一覧</a></li>
-                <li><a href="chatboard-title.php">掲示板</a></li>
+                <li><a href="#">掲示板</a></li>
                 <li><a href="#">ランキング</a></li>
                 <li><a href="infomation-input.php">お問い合わせ</a></li>
             </ul>
