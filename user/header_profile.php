@@ -32,17 +32,19 @@ $userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '../i
         ?>
         </a>
 
-        <nav>
-            <ul>
-                <li><a class=”current” href="home.php">ホーム</a></li>
-                <li><a href="tournament-list.php">大会一覧</a></li>
-                <li><a href="#">掲示板</a></li>
-                <li><a href="#">ランキング</a></li>
-                <li><a href="infomation-input.php">お問い合わせ</a></li>
+        <nav  class = "header-side">
+            <ul class = "header-ul " >
+                <li class = "header-li"><a class=”current” href="home.php">ホーム</a></li>
+                <li class = "header-li"><a class=”current” href="tournament-list.php">大会一覧</a></li>
+                <li class = "header-li"><a class=”current” href="#">掲示板</a></li>
+                <li class = "header-li"><a class=”current” href="#">ランキング</a></li>
+                <li class = "header-li"><a class=”current” href="infomation-input.php">お問い合わせ</a></li>
             </ul>
         </nav>
-        <nav class = "profile">
-            <ul class = "profile">
+    </div>
+    <div class = "profile-header">
+        <nav class = "profile-nav">
+            <ul class = "profile-ul">
                 <li class = "profile"><a class = "profile" href="profile-input.php">プロフィール</a></li>
                 <li class = "profile"><a class = "profile" href="#">フォロー</a></li>
                 <li class = "profile"><a class = "profile" href="#">フォロワー</a></li>

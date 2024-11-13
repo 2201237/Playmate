@@ -74,30 +74,30 @@ $cacheBuster = file_exists($iconPath) ? filemtime($iconPath) : time();
 
     <?php
         
-        echo "<input type = 'hidden' name = '" . $_SESSION['User']['user_id'] . "' value = '" . $_SESSION['User']['user_id'] . "'></input>";
-        echo "<input type = 'hidden' name = '" . $_SESSION['User']['user_name'] . "' value = '" . $_SESSION['User']['user_name'] . "'></input>";
+        // echo "<input type = 'hidden' name = '" . $_SESSION['User']['user_id'] . "' value = '" . $_SESSION['User']['user_id'] . "'></input>";
+        // echo "<input type = 'hidden' name = '" . $_SESSION['User']['user_name'] . "' value = '" . $_SESSION['User']['user_name'] . "'></input>";
         
 
 
         echo "<p class = 'profile-icon'>";
-            if (isset($_SESSION['User']['icon']) && $_SESSION['User']['icon'] !== '') {
-                echo "<input type = 'hidden' name = '" . $_SESSION['User']['icon'] . "' value = '" . $_SESSION['User']['icon'] . "'></input>";
+            if (isset($iconPath) && $iconPath !== '') {
+                echo "<input type = 'hidden' name = '" . $iconPath . "' value = '" . $iconPath . "'></input>";
 
-                echo "<img src='".$_SESSION['User']['icon']."' class='icon_user' width='50' height='50'>";
+                echo "<img src='".$iconPath."' class='icon_user' width='50' height='50'>";
             } else {
                 echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
             }
         echo "</p>";
 
-        echo "<p class = 'user' >" . $_SESSION['User']['user_name'] . "</p>";
-        echo "<p class = 'user' >" . $_SESSION['User']['user_mail'] . "</p>";
+        echo "<p class = 'user' >" . $userName . "</p>";
+        echo "<p class = 'user' >" . $userMail . "</p>";
 
         echo '<p class = "profile-p" >自己紹介</p>';
-            if(isset($_SESSION['User']['profile']) && $_SESSION['User']['profile'] !== ''){
-                echo '<input type = "hidden" name = "' . $_SESSION['User']['profile'] . '" value = "' . $_SESSION['User']['profile'] . '"></input>';
+            if(isset($userProfile) && $userProfile !== ''){
+                // echo '<input type = "hidden" name = "' . $_SESSION['User']['profile'] . '" value = "' . $_SESSION['User']['profile'] . '"></input>';
 
-                echo '<textarea rows="4" cols="50" class = "profile-area" readonly value = "' . $_SESSION['User']['profile'] . '">';
-                echo '</texrarea><br>';
+                echo '<textarea rows="4" cols="50" class = "profile-area">' .$userProfile. '</textarea>';
+                echo '<br>';
             }else{
                 echo '<textarea rows="4" cols="50" class = "profile-area" readonly placeholder="プロフィールは未設定です">';
                 echo '</textarea><br>';

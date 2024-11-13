@@ -1,7 +1,5 @@
 <?php
-    session_start(); 
-    require 'db-connect.php';
-    require '../header.html';
+    require '../header.php';
     
     $pdo=new PDO($connect,USER,PASS);
     $tsql=$pdo->prepare('select * FROM tournament');
@@ -62,7 +60,7 @@
             $game_id = $tournament['game_id']; 
             $game_image_path = "../img/" . $game_id . ".jpg";
 
-            echo "<a href = 'tournament-input.php?tournament_id=" . $tournament['tournament_id'] . "'>" .
+            echo "<a href = 'tournament-join.php?tournament_id=" . $tournament['tournament_id'] . "'>" .
                     "<img src = '$game_image_path' width = '180' height = '' >" . "</a><br>";
             echo $tournament['tournament_name'];
         }
