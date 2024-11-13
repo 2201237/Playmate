@@ -25,7 +25,7 @@
       header('Location:home.php');
     }else{
       //パスワード不一致
-      $_SESSION['User']['message'] = 'このEメールアドレスを持つアカウントが見つかりません';
+      $_SESSION['User']['message'] = 'パスワードが間違っています';
       header('Location:login-input.php');
     }
   }

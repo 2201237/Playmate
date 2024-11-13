@@ -1,8 +1,11 @@
-<?php 
-require '../header.php';
-$pdo=new PDO($connect,USER,PASS);
-$tsql=$pdo->prepare('select * FROM tournament');
-$tsql->execute();
+<?php
+    session_start(); 
+    require 'db-connect.php';
+    require '../header.html';
+    
+    $pdo=new PDO($connect,USER,PASS);
+    $tsql=$pdo->prepare('select * FROM tournament');
+    $tsql->execute();
 
     $bsql=$pdo->prepare('select * FROM genre');
     $bsql->execute();
@@ -16,11 +19,10 @@ $tsql->execute();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/home.scss">
     <title>PlayMate</title>
 </head>
 <body>
-    <script src="../js/home.js"></script>
     <h3 class = "join" >現在大会中の参加</h3>
 
     <!-- スライダー -->
@@ -37,10 +39,10 @@ $tsql->execute();
                     $game_image_path = "../img/" . $game_id . ".jpg";
                     echo '<div class="item">
                             <div class="shadow-effect">
-                                <a href = "tournament-input.php?tournament_id=" ', $tournament['tournament_id'] ,'">
+                                <a href = "tournament-join.php?tournament_id=" ', $tournament['tournament_id'] ,'">
                                 <img class="img-circle" src="', $game_image_path ,'" alt="">
                                 </a>
-                                <p>', $tournament['rure'] ,'</p>
+                                <p>', $tournament['rule'] ,'</p>
                             </div>
                             <div class="testimonial-name">', $tournament['tournament_name'] ,'</div>
                         </div>';
@@ -89,5 +91,7 @@ $tsql->execute();
         }
         echo "</div>";
     ?>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../js/home.js"></script>
 </body>
 </html>
