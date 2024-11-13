@@ -30,7 +30,7 @@
                         echo "<tr>";
                             echo "<td><img src = '$image_path' width = '180' height = '' ></td>";
                             echo "<td  style='word-wrap: break-word;  max-width: 150px;'>". $list['tournament_name'] ."</td>";
-                            echo "<form action = 'tournament-input.php?tournament_id=" . $list['tournament_id'] ."' method = 'post'>";
+                            echo "<form action = 'tournament-join.php?tournament_id=" . $list['tournament_id'] ."' method = 'post'>";
                             echo "<td><input type = 'submit' class = 'button' value = '参加'></td>";
                             echo "</form>";
                     echo "</tr>";
