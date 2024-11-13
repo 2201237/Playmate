@@ -23,6 +23,7 @@
     <title>PlayMate</title>
 </head>
 <body>
+    <script src="../js/home.js"></script>
     <h3 class = "join" >現在大会中の参加</h3>
 
     <!-- スライダー -->
@@ -91,6 +92,5 @@
         }
         echo "</div>";
     ?>
-    <script src="../js/home.js"></script>
 </body>
 </html>
