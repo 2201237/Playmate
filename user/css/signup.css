@@ -7,10 +7,9 @@
   font-family: 'FontAwesome', sans-serif;
 }
 
-/* Simple Reset */
+/* リセット */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* body */
 body {
   background: #e9e9e9;
   color: #5e5e5e;
@@ -18,10 +17,39 @@ body {
   min-height: 400px;
 }
 
+.msg_area {
+  width: 410px;
+  height: 70px;
+  text-align: center;
+  font-family: "ヒラギノ明朝 ProN","Hiragino Mincho ProN";
+  margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
+.err_con {
+  color: #f16272;
+  font-size: 17px;
+  position: relative;
+  top: -7.5px;
+  left: 5px;
+}
+
+.err_msg {
+  font-size: 14px;
+}
+
+.msg_area img {
+  width: 30px;
+  height: 30px;
+  margin-top: 5px;
+}
+
 /* Form Layout */
 .form-wrapper {
   background: #fafafa;
-  margin: 3em auto;
+  margin: 2em auto;
   padding: 0 1em;
   max-width: 370px;
   min-height: 400px;
@@ -59,8 +87,7 @@ form {
 }
 
 textarea{
-  width: 300px;
-  max-width: 300px;
+  width: 100%;
   height: 105px;
   background: #fafafa;
   border: none;

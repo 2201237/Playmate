@@ -10,9 +10,9 @@
     <a href="tournament.php" class="back">←戻る</a>
     <a href="login.php" class="logout">ログアウト</a>
     
-    <h2>大会一覧</h2>
+    <h2>大会参加者一覧</h2>
     <div class="container">
-        <h3>大会名と参加人数</h3>
+        <h1>大会名</h1>
         <ul>
             <?php
                 // データベース接続情報
@@ -34,7 +34,7 @@
                     
                     foreach ($stmt as $row) {
                         echo '<li>';
-                        echo '<a href="tournament-member">',htmlspecialchars($row['tournament_name'], ENT_QUOTES, 'UTF-8');
+                        echo htmlspecialchars($row['tournament_name'], ENT_QUOTES, 'UTF-8');
                         echo ' (参加人数: ' . $row['participant_count'] . '人)';//参加人数がまだ反映されていません
                         echo '</li>';
                     }
