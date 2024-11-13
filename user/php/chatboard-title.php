@@ -2,7 +2,7 @@
 require '../header.php';
 
 $pdo=new PDO($connect,USER,PASS);
-$sql=$pdo->prepare('select * from chatboard_title');
+$sql=$pdo->prepare('select * from board_title');
 $sql->execute();
 
 ?>

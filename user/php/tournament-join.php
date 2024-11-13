@@ -1,4 +1,9 @@
+<?php
+session_start();
+require 'db-connect.php';
+$pdo=new PDO($connect,USER,PASS);
 
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
