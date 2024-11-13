@@ -1,6 +1,5 @@
-<?php session_start(); 
-require 'db-connect.php';
-require '../header.html';
+<?php
+require '../header.php';
 $pdo=new PDO($connect,USER,PASS);
 
 $sql=$pdo->prepare('select * FROM contacts');

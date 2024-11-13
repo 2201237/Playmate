@@ -19,7 +19,7 @@
       unset($_SESSION['User']);
       $_SESSION['User']=[
         'user_id'=>$row['user_id'],'user_name'=>$row['user_name'],
-        'user_mail'=>$row['user_mail'],'user_profile'=>$row['profile'],
+        'user_mail'=>$row['user_mail'],'user_profile'=>$row['profile'],'icon' => $row['icon'], 
         'user_message'=>null
       ]; 
       header('Location:home.php');
