@@ -8,31 +8,31 @@ body{
 .header{
 }
 
-nav{
+.header-side{
     text-align: center;
     }
-    nav ul{
+    .header-side .header-ul{
     margin: 0 ;
     padding: 0 ;
     }
-    nav li{
+    .header-side .header-li{
     list-style: none;
     display: inline-block;
     width: 13%;
     min-width: 90px;
     }
-    nav li:not(:last-child){
+    .header-side .header-li:not(:last-child){
     border-right:2px solid #ddd;
     }
-    nav a{
+    .header-side a{
     text-decoration: none;
     color: #333;
     }
-    nav a.current{
+    .header-side a.current{
     color: #00B0F0;
     border-bottom:2px solid #00B0F0;
     }
-    nav a:hover{
+    .header-side a:hover{
     color:#F7CB4D;
     border-bottom:2px solid #F7CB4D;
     }
@@ -54,11 +54,11 @@ nav{
         letter-spacing: 0.1em;
     }
 
-    .btn-gNav {
+    .btn-g.header-side {
         display: block;
     }
 
-    .gNav {
+    .g.header-side {
         color: #000;
         position: fixed;
         top: 0;
@@ -73,11 +73,11 @@ nav{
         transition: .3s;
     }
 
-    .gNav.open {
+    .g.header-side.open {
         right: 0;
     }
 
-    .gNav .gNav-menu {
+    .g.header-side .g.header-side-menu {
         padding: 0;
         width: 100%;
         height: 100%;
@@ -87,7 +87,7 @@ nav{
         /*justify-content: center;*/
     }
 
-    .gNav .gNav-menu li {
+    .g.header-side .g.header-side-menu li {
         width: 86%;
         padding: 15px;
         border-bottom: #525252 1px solid;
@@ -95,19 +95,41 @@ nav{
 
 }
 
-/* 縦に並べたいナビゲーションのスタイル */
-nav.profile ul.profile {
+
+.profile-header{
+    
+}
+
+/* ヘッダーの全体の高さ */
+.profile-height {
+    height: 100vh; /* ヘッダー全体の高さを画面いっぱいに */
     display: flex;
-    flex-direction: column; /* 縦方向に並べる */
-    align-items: flex-start; /* 左揃えにする */
-    padding: 0; /* 不要な余白を削除 */
+    justify-content: center; /* コンテンツを中央に配置 */
+    align-items: center; /* コンテンツを中央に配置 */
+}
+
+/* リストを縦に並べる設定 */
+.profile-ul {
+    list-style-type: none; /* デフォルトのリストスタイルを解除 */
+    padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column; /* リストを縦に配置 */
+    gap: 10px; /* リスト間のスペースを調整 */
 }
 
-nav.profile ul.profile li.profile {
-    list-style: none; /* リストマーカーを削除 */
+/* リンクのスタイル */
+.profile a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
 }
 
-nav.profile ul.profile li.profile a {
-    padding: 8px 0; /* リンクに余白を追加して見やすくする */
+/* リンクのホバー時のスタイル */
+.profile a:hover {
+    background-color: #f0f0f0; /* ホバー時の背景色 */
+    color: #000; /* ホバー時のテキスト色 */
 }
