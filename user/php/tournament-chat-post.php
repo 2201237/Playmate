@@ -9,9 +9,9 @@ if (!isset($_SESSION['User']['user_id'])) {
 
 $user_id = $_SESSION['User']['user_id'];
 
-// POSTでメッセージ、tournament_id、roundが送信されていることを確認
-if (isset($_POST['message']) && !empty($_POST['message']) && isset($_POST['tournament_id']) && isset($_POST['round'])) {
-    $message = $_POST['message'];
+// POSTでチャット、tournament_id、roundが送信されていることを確認
+if (isset($_POST['chat']) && !empty($_POST['chat']) && isset($_POST['tournament_id']) && isset($_POST['round'])) {
+    $chat = $_POST['chat'];  // 変数名を $chat に変更
     $tournament_id = $_POST['tournament_id'];
     $round = $_POST['round'];
 
@@ -22,7 +22,7 @@ if (isset($_POST['message']) && !empty($_POST['message']) && isset($_POST['tourn
         // チャットメッセージをtournament_chatテーブルに挿入
         $sql = $pdo->prepare("INSERT INTO tournament_chat (chat, user_id, is_read, created_at, tournament_id, round) 
                               VALUES (?, ?, 0, NOW(), ?, ?)");
-        $sql->execute([$message, $user_id, $tournament_id, $round]);
+        $sql->execute([$chat, $user_id, $tournament_id, $round]);  // $chat を使用
 
         // 投稿後、リダイレクトしてチャットページに戻る
         header("Location: tournament-chat.php?tournament_id=$tournament_id&round=$round");
