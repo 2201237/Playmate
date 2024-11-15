@@ -3,7 +3,7 @@ session_start();
 
 require 'php/db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
-
+$current_page = basename($_SERVER['REQUEST_URI']);
 
 // セッションからアイコンのパスを取得
 $userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '../img/icon_user.png';
@@ -45,9 +45,9 @@ $userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '../i
     <div class = "profile-header">
         <nav class = "profile-nav">
             <ul class = "profile-ul">
-                <li class = "profile"><nobr><a class = "profile<?php echo ($current_page == 'profile-input.php') ? 'active' : ''; ?>"  href="profile-input.php">プロフィール</a></nobr></li>
-                <li class = "profile"><nobr><a class = "profile" href="#">フォロー</a></nobr></li>
-                <li class = "profile"><nobr><a class = "profile" href="#">フォロワー</a></nobr></li>
+                <li class = "profile"><nobr><a class = "profile <?php echo ($current_page == 'profile-input.php') ? 'active' : ''; ?>"  href="profile-input.php">プロフィール</a></nobr></li>
+                <li class = "profile"><nobr><a class = "profile <?php echo ($current_page == 'follow.php') ? 'active' : ''; ?>" href="follow.php">フォロー</a></nobr></li>
+                <li class = "profile"><nobr><a class = "profile <?php echo ($current_page == 'folloewr.php') ? 'active' : ''; ?>" href="folloewr.php">フォロワー</a></nobr></li>
             </ul>
         </nav>
     </div>
