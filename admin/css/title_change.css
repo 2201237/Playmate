@@ -13,20 +13,26 @@ h1{
     text-align: center;
 }
 
-.back1{
-    font-size: 40px;
-    text-align: center;
-    position: relative;
-    top: 80px;
-    left: 150px;
+.back, .logout {
+    position: absolute;
+    top: 20px;
+    color: #4109ec;
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.logout1{
-    font-size: 40px;
-    text-align: center;
-    position: relative;
-    left: 900px;
-    top: -65px;
+.back {
+    left: 20px;
+}
+
+.logout {
+    right: 20px;
+}
+
+.back:hover, .logout:hover {
+    color: #e9e01c;
+    text-decoration: underline;
 }
 
 table{
@@ -40,17 +46,82 @@ table{
     padding-bottom: 5%;
 }
 
-.searchBox{
-    font-size: 20px;
+/* フォーム全体のスタイル */
+form {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 入力フィールドとボタンの間にスペースを追加 */
+    padding: 10px;
+}
+
+/* テーブルセルに適用するスタイル */
+td {
+    padding: 5px;
     text-align: center;
-    position: relative;
-    left: 470px;
-    top: -30px;
-   }
-   .kennsaku{
-    font-size: 15px;
-    text-align: center;
-    position: relative;
-    left: 470px;
-    top: -32px;
-   }
+}
+
+/* 入力フィールドのスタイル */
+input[type="text"] {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px; /* フィールドの幅を指定 */
+    box-sizing: border-box; /* パディングとボーダーを含めて幅を計算 */
+}
+
+/* 更新ボタンのスタイル */
+button[type="submit"] {
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #fbe001;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* ボタンにホバー効果を追加 */
+button[type="submit"]:hover {
+    background-color: #edd607;
+}
+
+/* フォーム内のフィールドがフォーカスされたときのスタイル */
+input[type="text"]:focus {
+    border-color: #edd607;
+    outline: none; /* フォーカス時のデフォルトアウトラインを削除 */
+}
+
+/* ボタンが無効な場合のスタイル */
+button[type="submit"]:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.submit-form {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.submit-form input[type="text"] {
+    padding: 8px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.submit-form button {
+    padding: 8px 12px;
+    margin-left: 5px;
+    border: none;
+    background-color: #5bc0de;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submit-form button:hover {
+    background-color: #31b0d5;
+}

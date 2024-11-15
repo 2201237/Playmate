@@ -13,7 +13,7 @@
 
     <div>
         <button class="menu-button" onclick="location.href='user_manage.php'">ユーザー一覧</button><br>
-        <button class="menu-button" onclick="location.href='user_block.php'">ブロックユーザ管理</button><br>
+        <button class="menu-button" onclick="location.href='user_block.php'">ブロックユーザー管理</button><br>
     </div>
 </body>
 </html>

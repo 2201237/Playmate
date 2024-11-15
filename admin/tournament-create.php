@@ -1,4 +1,4 @@
-<?php 
+<?php
 require 'db-connect.php';
 
 // フォーム送信時の処理
@@ -10,13 +10,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $tournament_name = $_POST['tournament-name'];
         $game_id = $_POST['game_title'];
         $rules = $_POST['story'];
+        $deadline = $_POST['deadline']; // 締め切り時間を取得
         
         // SQLインジェクション対策のためプリペアドステートメントを使用
-        $sql = 'INSERT INTO tournament (tournament_name, game_id, rule) VALUES (?, ?, ?)';
+        $sql = 'INSERT INTO tournament (tournament_name, game_id, rule, deadline) VALUES (?, ?, ?, ?)';
         $stmt = $pdo->prepare($sql);
         
         // 実行
-        if ($stmt->execute([$tournament_name, $game_id, $rules])) {
+        if ($stmt->execute([$tournament_name, $game_id, $rules, $deadline])) {
             echo '<script>alert("大会が正常に作成されました。"); window.location.href = "tournament-view.php";</script>';
         } else {
             echo '<script>alert("大会の作成に失敗しました。");</script>';
@@ -35,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>大会作成</title>
 </head>
 <body>
-<h1>大会作成</h1>
+    <h1>大会作成</h1>
     <div class="container">
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
             <input type="text" name="tournament-name" placeholder="大会名" required><br>
@@ -47,8 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $pdo = new PDO($connect, USER, PASS);
                     $sql = $pdo->query('SELECT * FROM game');
                     foreach ($sql as $row) {
-                        echo '<option value="', htmlspecialchars($row['game_id']), '">', 
-                             htmlspecialchars($row['title']), '</option>';
+                        echo '<option value="', htmlspecialchars($row['game_id']), '">',
+                              htmlspecialchars($row['title']), '</option>';
                     }
                 } catch (PDOException $e) {
                     echo '<option value="">エラーが発生しました</option>';
@@ -57,6 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </select>
             
             <textarea id="story" name="story" rows="5" cols="33" required>[ルール]</textarea>
+            
+            <!-- 締め切り時間入力フィールドを追加 -->
+            <label for="deadline">締め切り時間:</label>
+            <input type="datetime-local" id="deadline" name="deadline" required><br>
             
             <div class="button-group">
                 <button type="button" class="back" onclick="history.back()">戻る</button>
