@@ -9,6 +9,9 @@ th, td {
     padding: 8px;
     text-align: left;
 }
+body{
+    background-color: #b2fab4;
+}
 th {
     background-color: #b2fab4;
 }
