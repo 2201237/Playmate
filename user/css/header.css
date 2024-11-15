@@ -6,12 +6,14 @@ body{
 }
 
 .header{
+    border-bottom: inset;
 }
 
 nav{
     text-align: center;
     }
     nav ul{
+    border-top: outset;
     margin: 0 ;
     padding: 0 ;
     }
