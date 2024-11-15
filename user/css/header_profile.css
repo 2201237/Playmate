@@ -6,6 +6,8 @@ body{
 }
 
 .header{
+    border-bottom: inset;
+
 }
 
 .header-side{
@@ -14,6 +16,7 @@ body{
     .header-side .header-ul{
     margin: 0 ;
     padding: 0 ;
+    border-top: outset;
     }
     .header-side .header-li{
     list-style: none;
@@ -110,26 +113,31 @@ body{
 
 /* リストを縦に並べる設定 */
 .profile-ul {
-    list-style-type: none; /* デフォルトのリストスタイルを解除 */
-    padding: 0;
+    list-style-type: none;
+    padding: 10px 0 0 0;
     margin: 0;
     display: flex;
-    flex-direction: column; /* リストを縦に配置 */
-    gap: 10px; /* リスト間のスペースを調整 */
+    flex-direction: column;
+    gap: 30px;
+    /* position-area: right; */
+    position: absolute;
+    left: 80%;   
+    border-left: outset;
 }
 
 /* リンクのスタイル */
 .profile a {
-    display: block;
-    padding: 10px 15px;
     text-decoration: none;
     color: #333;
-    font-weight: bold;
-    text-align: center;
+    padding: 10px;
+    margin: 10px;
 }
 
-/* リンクのホバー時のスタイル */
 .profile a:hover {
-    background-color: #f0f0f0; /* ホバー時の背景色 */
-    color: #000; /* ホバー時のテキスト色 */
+    color:#F7CB4D;
+    border-bottom:2px solid #F7CB4D;
+}
+.profile.active{
+    color: #3498db; /* 現在のページにいるときの色 */
+    font-weight: bold;
 }
