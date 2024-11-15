@@ -1,18 +1,5 @@
-body {
-    animation: blinkBackground 1s infinite;
-}
 
-@keyframes blinkBackground {
-    0% {
-        background-color: black;
-    }
-    50% {
-        background-color: red;
-    }
-    100% {
-        background-color: black;
-    }
-}
+
 h1 {
     color: red;
     text-align: center;
