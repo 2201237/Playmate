@@ -10,14 +10,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $tournament_name = $_POST['tournament-name'];
         $game_id = $_POST['game_title'];
         $rules = $_POST['story'];
-        $deadline = $_POST['deadline']; // 締め切り時間を取得
+        $tournament_deadline = $_POST['tournament_deadline']; // 締め切り時間を取得
         
         // SQLインジェクション対策のためプリペアドステートメントを使用
-        $sql = 'INSERT INTO tournament (tournament_name, game_id, rule, deadline) VALUES (?, ?, ?, ?)';
+        $sql = 'INSERT INTO tournament (tournament_name, game_id, rule, tournament_deadline) VALUES (?, ?, ?, ?)';
         $stmt = $pdo->prepare($sql);
         
         // 実行
-        if ($stmt->execute([$tournament_name, $game_id, $rules, $deadline])) {
+        if ($stmt->execute([$tournament_name, $game_id, $rules, $tournament_deadline])) {
             echo '<script>alert("大会が正常に作成されました。"); window.location.href = "tournament-view.php";</script>';
         } else {
             echo '<script>alert("大会の作成に失敗しました。");</script>';
@@ -60,8 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <textarea id="story" name="story" rows="5" cols="33" required>[ルール]</textarea>
             
             <!-- 締め切り時間入力フィールドを追加 -->
-            <label for="deadline">締め切り時間:</label>
-            <input type="datetime-local" id="deadline" name="deadline" required><br>
+            <label for="tournament_deadline">締め切り時間:</label>
+            <input type="datetime-local" id="tournament_deadline" name="tournament_deadline" required><br>
             
             <div class="button-group">
                 <button type="button" class="back" onclick="history.back()">戻る</button>
