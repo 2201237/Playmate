@@ -11,6 +11,9 @@
     <a href="login.php" class="logout">ログアウト</a>
     
     <h2>大会一覧</h2>
+    <br>
+    <br>
+    <br>
     <div class="container">
         <h3>大会名と参加人数</h3>
         <ul>

@@ -85,8 +85,8 @@ tr:hover {
 .back, .logout {
     position: absolute;
     top: 20px;
+    color: #4109ec;
     font-size: 20px;
-    color: #333;
     text-decoration: none;
     font-weight: bold;
 }
@@ -100,6 +100,6 @@ tr:hover {
 }
 
 .back:hover, .logout:hover {
-    color: #4caf50;
+    color: #e9e01c;
     text-decoration: underline;
 }

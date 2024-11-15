@@ -20,13 +20,13 @@
         }
     </script>
     <div class="list_field">
-        <a href="#" onclick="history.back(); return false;" class="back1">◀戻る</a>
+        <a href="game-manage.php" return false;" class="back">←戻る</a>
         <h1>ゲームタイトル変更</h1>
-        <a href="login.php" class="logout1">ログアウト</a>
+        <a href="login.php" class="logout">ログアウト</a>
         
-        <form action="user_manage.php" method="post" id="submit_form">
-            <input type="text" name="keyword" placeholder="キーワードを検索" class="searchBox">
-            <button type="submit" class="kennsaku">検索</button>
+        <form action="title_change.php" method="post" class="submit-form">
+        <input type="text" name="user_name" placeholder="キーワード検索">
+        <button type="submit">検索</button>
         </form>
         
         <div class="grouptable">

@@ -9,7 +9,10 @@ body {
 .back, .logout {
     position: absolute;
     top: 20px;
+    color: #4109ec;
     font-size: 20px;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .back {
@@ -18,6 +21,11 @@ body {
 
 .logout {
     right: 20px;
+}
+
+.back:hover, .logout:hover {
+    color: #e9e01c;
+    text-decoration: underline;
 }
 
 /* ゲーム管理タイトル */
