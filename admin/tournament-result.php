@@ -27,7 +27,8 @@ class TournamentParticipant {
     // 全参加者を取得（大会名を含む）
     public function getAllParticipants() {
         try {
-            $query = "SELECT 
+            $query = "SELECT
+                        g
                         u.user_id,
                         u.user_name,
                         t.tournament_id,
@@ -35,6 +36,7 @@ class TournamentParticipant {
                         tm.tournament_member_id
                     FROM 
                         users u
+                        INNER JOIN game g ON u.user_id = tm.user_id
                         INNER JOIN tournament_member tm ON u.user_id = tm.user_id
                         INNER JOIN tournament t ON tm.tournament_id = t.tournament_id
                     ORDER BY 
@@ -145,7 +147,7 @@ class TournamentParticipant {
             echo "<h2>選択された大会の参加者一覧</h2>";
         } else {
             $participants = $tournamentParticipant->getAllParticipants();
-            echo "<h2>全大会参加者一覧</h2>";
+            echo "<h1>大会戦績</h1>";
         }
 
         if ($participants) {
@@ -154,17 +156,15 @@ class TournamentParticipant {
                 <tr>
                     <th>ユーザーID</th>
                     <th>ユーザー名</th>
-                    <th>大会名</th>
-                    <th>大会ID</th>
-                    <th>大会メンバーID</th>
+                    <th>ゲーム名</th>
+                    <th>大会戦績一覧</th>
                 </tr>
                 <?php foreach ($participants as $participant) { ?>
                     <tr>
                         <td><?php echo htmlspecialchars($participant['user_id']); ?></td>
                         <td><?php echo htmlspecialchars($participant['user_name']); ?></td>
-                        <td><?php echo htmlspecialchars($participant['tournament_name']); ?></td>
+                        <td><?php echo htmlspecialchars($participant['title']); ?></td>
                         <td><?php echo htmlspecialchars($participant['tournament_id']); ?></td>
-                        <td><?php echo htmlspecialchars($participant['tournament_member_id']); ?></td>
                     </tr>
                 <?php } ?>
             </table>

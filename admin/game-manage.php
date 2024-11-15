@@ -23,7 +23,7 @@ if (!isset($_SESSION['admins']['admin_id'])) {
 
     <div>
         <button class="menu-button" onclick="location.href='game-title.html'">ゲームタイトル追加</button><br>
-        <button class="menu-button" onclick="location.href='game-title.html'">ゲームタイトル変更</button><br>
+        <button class="menu-button" onclick="location.href='title_change.php'">ゲームタイトル変更</button><br>
     </div>
 </body>
 </html>

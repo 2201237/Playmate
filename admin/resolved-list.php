@@ -19,7 +19,7 @@ require 'db-connect.php';
 </head>
 <body>
 <h1>お問い合わせ一覧（解決）</h1>
-<a href="inquiry-list.php" class="back">←戻る</a>
+<a href="contact.php" class="back">←戻る</a>
 <a href="logout.php" class="logout">ログアウト</a>
 
 <!-- ユーザー名検索フォーム -->

@@ -13,20 +13,26 @@ h1{
     text-align: center;
 }
 
-.back1{
-    font-size: 40px;
-    text-align: center;
-    position: relative;
-    top: 80px;
-    left: 150px;
+.back, .logout {
+    position: absolute;
+    top: 20px;
+    color: #4109ec;
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.logout1{
-    font-size: 40px;
-    text-align: center;
-    position: relative;
-    left: 900px;
-    top: -65px;
+.back {
+    left: 20px;
+}
+
+.logout {
+    right: 20px;
+}
+
+.back:hover, .logout:hover {
+    color: #e9e01c;
+    text-decoration: underline;
 }
 
 table{
@@ -40,17 +46,86 @@ table{
     padding-bottom: 5%;
 }
 
-.searchBox{
-    font-size: 20px;
-    text-align: center;
-    position: relative;
-    left: 470px;
-    top: -30px;
-   }
-   .kennsaku{
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.search-form input[type="text"] {
+    padding: 8px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-form button {
+    padding: 8px 12px;
+    margin-left: 5px;
+    border: none;
+    background-color: #5bc0de;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background-color: #31b0d5;
+}
+
+.add {
+    display: inline-block;              /* インラインブロック要素 */
+    padding: 10px 20px;                 /* 上下10px、左右20pxの余白 */
+    font-size: 16px;                    /* フォントサイズ */
+    color: white;                       /* テキストの色（白） */
+    background-color: #f06909;          
+    border: none;                       /* ボーダーなし */
+    border-radius: 5px;                 /* 角を丸くする */
+    text-align: center;                 /* テキストを中央揃え */
+    text-decoration: none;              /* テキストの下線なし */
+    cursor: pointer;                   /* カーソルをポインタに変更 */
+    transition: background-color 0.3s, transform 0.2s;
+    position: absolute;
+    top: 85px;
+    left: 85px;
     font-size: 15px;
-    text-align: center;
-    position: relative;
-    left: 470px;
-    top: -32px;
-   }
+  }
+  
+  /* ホバー時のスタイル */
+  .add:hover {
+    background-color: #e05d02;          
+    /*transform: scale(1.05);*/              /* 少し拡大 */
+  }
+  
+  /* フォーカス時のスタイル */
+  .add:focus {
+    outline: none;                      /* フォーカス時のアウトラインなし */
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.5); /* 薄い緑色のアウトライン */
+  }
+
+  .BAN {
+    text-align: center;  /* ボタンを中央に配置 */
+    margin: 10px;        /* 周囲にマージンを追加 */
+  }
+  
+  .BAN a {
+    text-decoration: none; /* リンクの下線を削除 */
+  }
+  
+  /* ボタンのスタイル */
+  .BAN button {
+    background-color: #e74c3c; /* ボタンの背景色（赤） */
+    color: white;              /* ボタンの文字色（白） */
+    border: none;              /* ボタンの枠線を削除 */
+    padding: 10px 20px;        /* ボタンの内側に余白を追加 */
+    font-size: 16px;           /* 文字サイズ */
+    font-weight: bold;         /* 文字を太字に */
+    border-radius: 5px;        /* 角を丸くする */
+    cursor: pointer;          /* ボタンにカーソルを合わせると指カーソルに */
+    transition: background-color 0.3s ease; /* ホバー時に色が変わるトランジション */
+  }
+  
+  /* ホバー時のボタンのスタイル */
+  .BAN button:hover {
+    background-color: #c0392b; /* ホバー時に背景色を少し暗く */
+  }

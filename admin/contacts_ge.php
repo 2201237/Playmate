@@ -71,42 +71,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <title>ジャンル管理</title>
-    <style>
-        body { 
-            background-color: #aaffaa; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-        }
-        h1 { text-align: center; }
-        form { 
-            margin: 10px 0; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-        }
-        table {
-            border-collapse: collapse; 
-            margin-top: 20px;
-        }
-        td, th {
-            border: 1px solid black; 
-            padding: 5px; 
-        }
-        .back, .logout {
-    position: absolute;
-    top: 20px;
-    font-size: 20px;
-}
-
-.back {
-    left: 20px;
-}
-
-.logout {
-    right: 20px;
-}
-    </style>
+    <link rel="stylesheet" href="css/contacts_ge.css">
 </head>
 <body>
     <h1>ジャンル管理</h1>
