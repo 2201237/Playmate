@@ -37,6 +37,7 @@ body {
 }
 
 .err_msg {
+  color: #f16272;
   font-size: 14px;
 }
 

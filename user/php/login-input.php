@@ -6,10 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/login.css">
-    <link rel="stylesheet" href="css/reset.css" />
     <title>PlayMateログイン</title>
 </head>
 <body>
+    <!-- エラーメッセージある場合表示される -->
     <?php
         if(isset( $_SESSION['User']['message'] )){
             echo '<div class="msg_area">',

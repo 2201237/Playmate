@@ -23,7 +23,7 @@
 </head>
 <body>
       <div class="form-wrapper">
-            <h1>Confirm</h1>
+            <h1>登録確認</h1>
             <form action="signup-complete.php" method="post">
                   <input type="hidden" name="name" value="<?php echo $_POST['name']; ?>"></input>
                   <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>"></input>
@@ -32,30 +32,26 @@
 
                   <div class="form-item">
                         <label for="name"></label>
-                        <p>お名前：
-                              <span name="name"><?php echo $_POST['name']; ?></span>
-                        </p>
+                        <div class="signup_label">お名前：</div>
+                        <div class="signup_input" name="name"><?php echo $_POST['name']; ?></div>
                   </div>
                   <div class="form-item">
                         <label for="email"></label>
-                        <p>Eメールアドレス：
-                              <span name="email"><?php echo $_POST['email']; ?></span>
-                        </p>
+                        <div class="signup_label">Eメールアドレス：</div>
+                        <div class="signup_input" name="email"><?php echo $_POST['email']; ?></div>
                   </div>
                   <div class="form-item">
                         <label for="password"></label>
-                        <p>パスワード：
-                              <span name="password"><?php echo $_POST['password']; ?></span>
-                        </p>
+                        <div class="signup_label">パスワード：</div>
+                        <div class="signup_input" name="password"><?php echo $_POST['password']; ?></div>
                   </div>
                   <div class="form-item">
                         <label for="profile"></label>
-                        <p>プロフィール：
-                              <br><span name="profile"><?php echo $_POST['profile']; ?></span>
-                        </p>
+                        <div class="signup_label">プロフィール：</div>
+                        <div class="signup_input_profile" name="profile"><?php echo $_POST['profile']; ?></div>
                   </div>
                   <div class="button-panel">
-                        <input type="submit" class="button" title="Sign Up" value="ログイン"></input>
+                        <input type="submit" class="button" title="Sign Up" value="登録"></input>
                   </div>
             </form>
             <div class="form-footer">

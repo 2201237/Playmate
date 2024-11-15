@@ -10,6 +10,7 @@
     <title>PlayMate登録</title>
 </head>
 <body>
+    <!-- エラーメッセージある場合表示される -->
     <?php
         if(isset( $_SESSION['User']['message'] )){
             echo '<div class="msg_area">',
