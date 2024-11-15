@@ -109,6 +109,8 @@ class TournamentParticipant {
     <title>大会参加者一覧</title>
 </head>
 <body>
+<a href="tournament-view.php" class="back">←戻る</a>
+<a href="login.php" class="logout">ログアウト</a>
     <div class="container">
         <?php
         // データベース接続

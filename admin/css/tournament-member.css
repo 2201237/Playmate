@@ -10,10 +10,10 @@ th, td {
     text-align: left;
 }
 th {
-    background-color: #f2f2f2;
+    background-color: #b2fab4;
 }
 tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #b2fab4;
 }
 .container {
     max-width: 800px;
@@ -27,4 +27,16 @@ h2 {
 .tournament-select {
     margin: 20px 0;
     padding: 5px;
+}
+.back, .logout {
+    position: absolute;
+    top: 20px;
+    font-size: 20px;
+}
+.back {
+    left: 20px;
+}
+
+.logout{
+    right: 20px;
 }
