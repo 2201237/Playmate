@@ -1,51 +1,64 @@
 <?php
 session_start();
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+ob_start();  // 出力バッファリング開始
+
 require 'db-connect.php';
 require '../header.html';
 
-// データベース接続
-$pdo = new PDO($connect, USER, PASS);
+try {
+    // データベース接続
+    $pdo = new PDO($connect, USER, PASS, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    ]);
 
-// gameテーブルからデータを取得し、セレクトボックス用に格納
-$stmt = $pdo->prepare("SELECT game_id, title FROM game");
-$stmt->execute();
-$games = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // ゲームデータ取得
+    $stmt = $pdo->prepare("SELECT game_id, title FROM game");
+    $stmt->execute();
+    $games = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// ログインチェック
-if (!isset($_SESSION['User']['user_id'])) {
-    // ユーザーがログインしていない場合はログインページにリダイレクト
-    header('Location: login-input.php');
-    exit;
+    // ログインチェック
+    if (!isset($_SESSION['User']['user_id'])) {
+        header('Location: login-input.php');
+        exit;
+    }
+
+    // フォームが送信された場合の処理
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // フォームデータを取得
+        $game_id = $_POST['game_id'];
+        $title = $_POST['title'];
+        $chat = $_POST['chat'];
+        $user_id = $_SESSION['User']['user_id'];
+
+        // board_titleテーブルにタイトルを挿入
+        $stmt = $pdo->prepare("INSERT INTO board_title (game_id, title, user_id) VALUES (:game_id, :title, :user_id)");
+        $stmt->bindParam(':game_id', $game_id, PDO::PARAM_INT);
+        $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $board_title_id = $pdo->lastInsertId();
+
+        // board_chatテーブルに投稿内容を挿入
+        $stmt = $pdo->prepare("INSERT INTO board_chat (board_title_id, chat) VALUES (:board_title_id, :chat)");
+        $stmt->bindParam(':board_title_id', $board_title_id, PDO::PARAM_INT);
+        $stmt->bindParam(':chat', $chat, PDO::PARAM_STR);
+        $stmt->execute();
+
+        // リダイレクト
+        header("Location: chatboard.php?board_title_id=" . $board_title_id);
+        exit;
+    }
+
+} catch (PDOException $e) {
+    echo "データベースエラー: " . htmlspecialchars($e->getMessage());
+} catch (Exception $e) {
+    echo "エラー: " . htmlspecialchars($e->getMessage());
 }
 
-// フォームが送信された場合の処理
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // フォームの入力内容を取得
-    $game_id = $_POST['game_id'];
-    $title = $_POST['title'];
-    $chat = $_POST['chat'];
-    $user_id = $_SESSION['User']['user_id']; // ログイン中のユーザーIDを取得
-
-    // board_titleテーブルにタイトルを挿入
-    $stmt = $pdo->prepare("INSERT INTO board_title (game_id, title, user_id) VALUES (:game_id, :title, :user_id)");
-    $stmt->bindParam(':game_id', $game_id, PDO::PARAM_INT);
-    $stmt->bindParam(':title', $title, PDO::PARAM_STR);
-    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-    $stmt->execute();
-    $board_title_id = $pdo->lastInsertId(); // 挿入したレコードのIDを取得
-
-    // board_chatテーブルに投稿内容を挿入
-    $stmt = $pdo->prepare("INSERT INTO board_chat (board_title_id, chat) VALUES (:board_title_id, :chat)");
-    $stmt->bindParam(':board_title_id', $board_title_id, PDO::PARAM_INT);
-    $stmt->bindParam(':chat', $chat, PDO::PARAM_STR);
-    $stmt->execute();
-
-    // 完了メッセージを表示するためにリダイレクト
-    header('Location: success.php');
-    exit;
-}
+ob_end_flush();  // 出力バッファをフラッシュ
 ?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
