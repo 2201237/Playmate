@@ -6,36 +6,33 @@ body{
 }
 
 .header{
-    border-bottom: inset;
-
 }
 
-.header-side{
+nav{
     text-align: center;
     }
-    .header-side .header-ul{
+    nav ul{
     margin: 0 ;
     padding: 0 ;
-    border-top: outset;
     }
-    .header-side .header-li{
+    nav li{
     list-style: none;
     display: inline-block;
     width: 13%;
     min-width: 90px;
     }
-    .header-side .header-li:not(:last-child){
+    nav li:not(:last-child){
     border-right:2px solid #ddd;
     }
-    .header-side a{
+    nav a{
     text-decoration: none;
     color: #333;
     }
-    .header-side a.current{
+    nav a.current{
     color: #00B0F0;
     border-bottom:2px solid #00B0F0;
     }
-    .header-side a:hover{
+    nav a:hover{
     color:#F7CB4D;
     border-bottom:2px solid #F7CB4D;
     }
@@ -57,11 +54,11 @@ body{
         letter-spacing: 0.1em;
     }
 
-    .btn-g.header-side {
+    .btn-gNav {
         display: block;
     }
 
-    .g.header-side {
+    .gNav {
         color: #000;
         position: fixed;
         top: 0;
@@ -76,11 +73,11 @@ body{
         transition: .3s;
     }
 
-    .g.header-side.open {
+    .gNav.open {
         right: 0;
     }
 
-    .g.header-side .g.header-side-menu {
+    .gNav .gNav-menu {
         padding: 0;
         width: 100%;
         height: 100%;
@@ -90,7 +87,7 @@ body{
         /*justify-content: center;*/
     }
 
-    .g.header-side .g.header-side-menu li {
+    .gNav .gNav-menu li {
         width: 86%;
         padding: 15px;
         border-bottom: #525252 1px solid;
@@ -98,47 +95,19 @@ body{
 
 }
 
-
-.profile-header{
-    
-}
-
-/* ヘッダーの全体の高さ */
-.profile-height {
-    height: 100vh; /* ヘッダー全体の高さを画面いっぱいに */
+/* 縦に並べたいナビゲーションのスタイル */
+nav.profile ul.profile {
     display: flex;
-    justify-content: center; /* コンテンツを中央に配置 */
-    align-items: center; /* コンテンツを中央に配置 */
-}
-
-/* リストを縦に並べる設定 */
-.profile-ul {
-    list-style-type: none;
-    padding: 10px 0 0 0;
+    flex-direction: column; /* 縦方向に並べる */
+    align-items: flex-start; /* 左揃えにする */
+    padding: 0; /* 不要な余白を削除 */
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    /* position-area: right; */
-    position: absolute;
-    left: 80%;   
-    border-left: outset;
 }
 
-/* リンクのスタイル */
-.profile a {
-    text-decoration: none;
-    color: #333;
-    padding: 10px;
-    margin: 10px;
+nav.profile ul.profile li.profile {
+    list-style: none; /* リストマーカーを削除 */
 }
 
-.profile a:hover {
-    color:#F7CB4D;
-    border-bottom:2px solid #F7CB4D;
-}
-.profile a.active{
-    color: #3498db; /* 現在のページにいるときの色 */
-    font-weight: bold;
-    border-bottom: 2px solid #3498db;
+nav.profile ul.profile li.profile a {
+    padding: 8px 0; /* リンクに余白を追加して見やすくする */
 }

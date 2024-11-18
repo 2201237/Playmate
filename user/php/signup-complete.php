@@ -11,6 +11,7 @@
 
         $_SESSION['User']['message'] = '登録が完了しました';
         header('Location:login-input.php');
+        exit;
 
         // 3秒後にログインページに自動的に遷移
         /*echo '<script type="text/javascript">
