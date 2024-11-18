@@ -28,7 +28,7 @@ $rsql->execute();
 
 <body>
 
-    <?php require '../header.html'; ?>
+    <?php require 'header.php'; ?>
 
 
 
@@ -53,7 +53,7 @@ $rsql->execute();
                                 </div>
                                 <a href = "tournament-join.php?tournament_id=" ', $tournament['tournament_id'], '">
                                     <div class="testimonial-name">
-                                        参加はこちら
+                                        詳細はこちら
                                     </div>
                                 </a>
                             </div>';
