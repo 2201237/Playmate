@@ -1,3 +1,53 @@
+/* 全体のレイアウト */
+body {
+    background-color: #fafafa;
+    font-family: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
+}
+
+
+
+/* ロゴのレイアウト */
+.logo {
+    width: 130px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+
+
+/* 見出しのレイアウト */
+.headline {
+    margin-top: 10px;
+    padding-left: 30px;
+    padding-bottom: 8px;
+    font-weight: bold;
+    font-size: 1.17em;
+    position: relative;
+    overflow: hidden;
+}
+
+.headline::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background: #f16272;
+}
+
+.headline::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background: #cccccc;
+}
+
+
+
+
+/* 大会スライドショーのレイアウト */
 .shadow-effect {
     background: #fff;
     padding: 20px;
@@ -7,11 +57,25 @@
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.10), 0 15px 12px rgba(0, 0, 0, 0.02);
 }
 
+.shadow-effect span {
+    font-weight: bold;
+    display: block;
+    text-align: left;
+}
+
+.shadow-effect p {
+    text-align: center;
+    font-size: 17px;
+    font-weight: 700;
+}
+
 #customers-testimonials .shadow-effect p {
     font-family: inherit;
-    font-size: 17px;
+    font-size: 13px;
+    text-align: left;
     line-height: 1.5;
     margin: 0 0 17px 0;
+    padding-left: 10px;
     font-weight: 300;
 }
 
@@ -25,6 +89,10 @@
     text-align: center;
     color: #fff;
     box-shadow: 0 9px 18px rgba(0, 0, 0, 0.12), 0 5px 7px rgba(0, 0, 0, 0.05);
+}
+
+.testimonial-name:hover {
+    background: #006ccf;
 }
 
 #customers-testimonials .item {
@@ -47,7 +115,7 @@
 
 .owl-carousel .owl-item img {
     transform-style: preserve-3d;
-    max-width: 90px;
+    max-width: 100%;
     margin: 0 auto 17px;
 }
 
@@ -76,4 +144,72 @@
     transform-origin: 50% 50% 0;
     transition: all 250ms ease-out 0s;
     width: 20px;
+}
+
+.item a {
+    text-decoration: none;
+}
+
+
+
+/* 掲示板スライドショーのレイアウト */
+.wrap {
+    display: flex;
+    align-items: center;
+    height: 340px;
+    overflow: hidden;
+}
+
+.slideshow {
+    list-style: none;
+    display: flex;
+    animation: loop-slide 20s infinite linear 1s both;
+}
+
+.slideshow img {
+    margin: auto;
+    display: block;
+}
+
+.slideshow p {
+    text-align: center;
+}
+
+.slideshow a {
+    text-decoration: none;
+    color: #333;
+    font-weight:600;
+}
+
+.content {
+    width: 300px;
+    height: 200px;
+}
+
+@keyframes loop-slide {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.slide-paused:hover .slideshow {
+    animation-play-state: paused;
+}
+
+.content-hover {
+    transition: all 0.2s;
+}
+
+.content-hover:hover {
+    transform: translateY(-20px);
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.no_users {
+    padding-left: 50px;
 }

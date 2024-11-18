@@ -37,42 +37,24 @@ form {
 }
 
 .form-item {
+  display: flex;
+  flex-wrap: wrap;
   width: 100%;
-}
-
-.form-item p {
   border-bottom: 0.5px solid #c0c0c0;
   outline: none;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
-span .name{
-  text-indent: 1em;
+.signup_label {
+  width: 130px;
 }
 
-span .email{
-  text-indent: 1em;
+.signup_input {
+  width: 170px;
 }
 
-span .password{
-  text-indent: 1em;
-}
-
-span .profile{
-  text-indent: 1em;
-}
-
-textarea{
+.signup_input_profile {
   width: 300px;
-  max-width: 300px;
-  height: 105px;
-  background: #fafafa;
-  border: none;
-  border-bottom: 2px solid #e9e9e9;
-  color: #666;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1em;
-  transition: border-color 0.3s;
 }
 
 .button-panel {

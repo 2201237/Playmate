@@ -1,3 +1,4 @@
+//大会スケジュールの処理
 jQuery(document).ready(function($) {
     "use strict";
     //  TESTIMONIALS CAROUSEL HOOK

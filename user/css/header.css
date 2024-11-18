@@ -1,67 +1,117 @@
 @charset "utf-8";
 
-
-body{
-    background-color: #ffffff;
-}
-
-.header{
-    border-bottom: inset;
-}
-
-nav{
-    text-align: center;
-    }
-    nav ul{
-    border-top: outset;
-    margin: 0 ;
-    padding: 0 ;
-    }
-    nav li{
+.gNav ol,ul {
     list-style: none;
-    display: inline-block;
-    width: 13%;
-    min-width: 90px;
-    }
-    nav li:not(:last-child){
-    border-right:2px solid #ddd;
-    }
-    nav a{
+    list-style-type: none;
+}
+
+.gNav a {
     text-decoration: none;
-    color: #333;
-    }
-    nav a.current{
-    color: #00B0F0;
-    border-bottom:2px solid #00B0F0;
-    }
-    nav a:hover{
-    color:#F7CB4D;
-    border-bottom:2px solid #F7CB4D;
-    }
-.logo {
-
+    color: #000000;
+    font-size: 17px;
+    font-weight: 600;
 }
 
-.icon_user{
+.gNav a:hover {
+    color: #67b1f4;
+}
+
+.hamburger {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hamburger .btn-gNav {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 24px;
+    z-index: 12;
+    box-sizing: border-box;
+    cursor: pointer;
+    -webkit-transition: all 400ms;
+    transition: all 400ms;
+}
+
+.hamburger .btn-gNav span {
     position: absolute;
+    width: 100%;
+    height: 4px;
+    background: #ffffff;
+    border-radius: 10px;
+    -webkit-transition: all 400ms;
+    transition: all 400ms;
+}
 
+.hamburger .btn-gNav span:nth-child(1) {
+    top: 0;
+}
+
+.hamburger .btn-gNav span:nth-child(2) {
+    top: 10px;
+}
+
+.hamburger .btn-gNav span:nth-child(3) {
+    top: 20px;
+}
+
+.hamburger .btn-gNav.open span:nth-child(1) {
+    background: #ffffff;
+    top: 6px;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.hamburger .btn-gNav.open span:nth-child(2),
+.hamburger .btn-gNav.open span:nth-child(3) {
+    top: 6px;
+    background: #ffffff;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
 
-@media screen and (max-width: 600px) {
-    a {
-        text-decoration: none;
-        color: #fff;
-        font-size: 20px;
-        letter-spacing: 0.1em;
-    }
+.btn-gNav {
+    display: none;
+}
 
+.gNav .gNav-menu {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: 10px;
+    left: 350px;
+}
+
+.hamburger .icon_user {
+    position: relative;
+    top: 10px;
+    left: 300px;
+}
+
+.gNav .gNav-menu li {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.gNav .gNav-menu  li:not(:last-child) {
+    border-right: 2px solid #cccccc;
+}
+
+@media screen and (max-width: 750px) {
     .btn-gNav {
         display: block;
     }
 
     .gNav {
-        color: #000;
         position: fixed;
         top: 0;
         right: -100%;
