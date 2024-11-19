@@ -108,6 +108,7 @@ try {
         <textarea name="chat" id="chat" rows="5" required></textarea>
         <br><br>
         <button type="submit">送信</button>
+        <button type="button" onclick="location.href='chatboard-title.php'">戻る</button>
     </form>
 </body>
 </html>
