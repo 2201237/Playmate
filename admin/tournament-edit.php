@@ -7,8 +7,8 @@
     <title>大会管理（更新・削除）</title>
 </head>
 <body>
-        <a href="tournament.php" class="back">←戻る</a>
-        <a href="login.php" class="logout">ログアウト</a>
+    <a href="tournament.php" class="back">←戻る</a>
+    <a href="login.php" class="logout">ログアウト</a>
     
     <div class="container">
         <h2>大会管理（更新・削除）</h2>
@@ -27,9 +27,10 @@ try {
         $update_id = $_POST['tournament_id'];
         $new_name = $_POST['tournament_name'];
         $new_rules = $_POST['rule'];
+        $new_deadline = $_POST['deadline'];
         
-        $stmt = $pdo->prepare("UPDATE tournament SET tournament_name = ?, rule = ? WHERE tournament_id = ?");
-        if ($stmt->execute([$new_name, $new_rules, $update_id])) {
+        $stmt = $pdo->prepare("UPDATE tournament SET tournament_name = ?, rule = ?, deadline = ? WHERE tournament_id = ?");
+        if ($stmt->execute([$new_name, $new_rules, $new_deadline, $update_id])) {
             echo '<div class="message success">大会情報が更新されました。</div>';
         } else {
             echo '<div class="message error">更新中にエラーが発生しました。</div>';
@@ -61,7 +62,7 @@ try {
     }
     
     // 大会一覧の取得と表示
-    $sql = "SELECT t.tournament_id, t.tournament_name, t.rule,
+    $sql = "SELECT t.tournament_id, t.tournament_name, t.rule, t.deadline,
                   (SELECT COUNT(*) FROM tournament_member tm WHERE tm.tournament_id = t.tournament_id) as participant_count 
            FROM tournament t 
            ORDER BY t.tournament_id ASC";
@@ -83,6 +84,12 @@ try {
         echo '<div class="input-group">';
         echo '<label>ルール:</label>';
         echo '<textarea name="rule" rows="4" required>' . htmlspecialchars($row['rule'], ENT_QUOTES, 'UTF-8') . '</textarea>';
+        echo '</div>';
+        
+        // 締め切り時間入力フィールド
+        echo '<div class="input-group">';
+        echo '<label>締め切り時間:</label>';
+        echo '<input type="datetime-local" name="deadline" value="' . date('Y-m-d\TH:i', strtotime($row['deadline'])) . '" required>';
         echo '</div>';
         
         echo '<p>参加者数: ' . $row['participant_count'] . '人</p>';
