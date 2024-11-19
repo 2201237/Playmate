@@ -50,20 +50,15 @@ function createSorting($pdo, $tournament_id, $round) {
 }
 
 // POSTデータの処理
-$message = null;
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['check_registration'])) {
     $tournament_id = $_POST['tournament_id'] ?? null;
     $round = $_POST['round'] ?? null;
 
     if ($tournament_id && $round) {
-        if (isRoundRegistered($pdo, $tournament_id, $round)) {
-            $message = '既にこの大会のこの回戦の組み分けが登録されています。';
-        } else {
-            $message = createSorting($pdo, $tournament_id, $round);
-        }
-    } else {
-        $message = '大会と回戦を選択してください。';
+        echo isRoundRegistered($pdo, $tournament_id, $round) ? '1' : '0';
     }
+
+    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -99,19 +94,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             color: red;
         }
     </style>
+    <script>
+        // Ajaxを使用して組み分けが登録されているかを確認
+        function checkRegistration() {
+            var tournament_id = document.getElementById('tournament_id').value;
+            var round = document.getElementById('round').value;
+            var submitButton = document.getElementById('submit_button');
+            var messageDiv = document.getElementById('message');
+
+            if (!tournament_id || !round) {
+                submitButton.disabled = true;
+                messageDiv.innerHTML = '';
+                return;
+            }
+
+            var formData = new FormData();
+            formData.append('check_registration', true);
+            formData.append('tournament_id', tournament_id);
+            formData.append('round', round);
+
+            fetch('tournament-sorting.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data == '1') {
+                    submitButton.disabled = true;
+                    messageDiv.innerHTML = '<p class="error">既にこの大会のこの回戦の組み分けが登録されています。</p>';
+                } else {
+                    submitButton.disabled = false;
+                    messageDiv.innerHTML = '';
+                }
+            });
+        }
+
+        // ページ読み込み時に初期状態でボタンをチェック
+        window.onload = checkRegistration;
+    </script>
 </head>
 <body>
     <h1>大会組み分け</h1>
 
-    <?php if ($message): ?>
-        <p class="message <?= strpos($message, '既に') !== false ? 'error' : ''; ?>">
-            <?= htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?>
-        </p>
-    <?php endif; ?>
+    <div id="message"></div>
 
     <form method="post" action="tournament-sorting.php">
         <label for="tournament_id">大会を選択:</label>
-        <select name="tournament_id" id="tournament_id" required>
+        <select name="tournament_id" id="tournament_id" required onchange="checkRegistration()">
             <option value="">-- 大会を選択 --</option>
             <?php
             $tournaments = getTournamentList($pdo);
@@ -122,13 +151,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ?>
         </select>
         <label for="round">回戦を選択:</label>
-        <select name="round" id="round" required>
+        <select name="round" id="round" required onchange="checkRegistration()">
             <option value="">-- 回戦を選択 --</option>
             <?php for ($i = 1; $i <= 10; $i++): ?>
                 <option value="<?= $i ?>" <?= ($_POST['round'] ?? '') == $i ? 'selected' : '' ?>>第<?= $i ?>回戦</option>
             <?php endfor; ?>
         </select>
-        <button type="submit" <?= isset($_POST['tournament_id'], $_POST['round']) && isRoundRegistered($pdo, $_POST['tournament_id'], $_POST['round']) ? 'disabled' : ''; ?>>
+        <button type="submit" id="submit_button">
             組み分けを実行
         </button>
     </form>
