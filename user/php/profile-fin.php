@@ -15,10 +15,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_name'], $_POST['
     $userProfile = $_POST['profile'];
     $userPass = password_hash($_POST['user_pass'], PASSWORD_DEFAULT);
 
-    // デフォルトアイコンのパスを取得または画像のアップロード処理
+    // アイコンの初期値は現在のアイコン
+    $iconPath = $userIcon;
+
+    // デフォルトアイコンの選択を確認
     if (isset($_POST['use_default_icon'])) {
-        $iconPath = '../img/icon_user.png';
+        $iconPath = '../img/icon_user.png'; // デフォルトアイコンを使用
     } else {
+        // 画像がアップロードされた場合は処理
         if (isset($_FILES['icon']) && $_FILES['icon']['error'] === UPLOAD_ERR_OK) {
             $uploadDir = '../user_images/';
             if (!is_dir($uploadDir)) {
@@ -39,18 +43,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_name'], $_POST['
 
     // データベースを更新
     $stmt = $pdo->prepare('UPDATE users SET user_name = ?, profile = ?, user_pass = ?, icon = ? WHERE user_id = ?');
-    $stmt->execute([$userName, $userProfile, $userPass, $iconPath ?? $userIcon, $userId]);
+    $stmt->execute([$userName, $userProfile, $userPass, $iconPath, $userId]);
 
     // セッションを更新
     $_SESSION['User']['user_name'] = $userName;
     $_SESSION['User']['user_profile'] = $userProfile;
-    $_SESSION['User']['icon'] = $iconPath ?? $userIcon;
+    $_SESSION['User']['icon'] = $iconPath;
 
     $_SESSION['update_message'] = "更新できました";
-    $cacheBuster = file_exists($iconPath) ? filemtime($iconPath) : time();
     header('Location: profile-input.php');
     exit();
-
 }
-
 ?>

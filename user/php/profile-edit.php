@@ -96,4 +96,3 @@ $userProfile = isset($_SESSION['User']['user_profile']) ? $_SESSION['User']['use
     </div>
 </body>
 </html>
-//
