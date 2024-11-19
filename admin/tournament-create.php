@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ?>
             </select>
             
-            <textarea id="story" name="story" rows="5" cols="33" required>[ルール]</textarea>
+            <textarea id="story" name="story" rows="5" cols="33" required></textarea>
             
             <!-- 締め切り時間入力フィールドを追加 -->
             <label for="tournament_deadline">締め切り時間:</label>
