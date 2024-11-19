@@ -50,20 +50,27 @@ if (isset($_GET['user_id'])) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['follow_user_id']) && !$isFollowing) {
             // フォロー処理
-            $insertStmt = $pdo->prepare('INSERT INTO follows (follower_id, follow_id) VALUES (?, ?)');
-            $insertStmt->execute([$UserId, $targetUserId]);
-            echo "<script>alert('フォローしました！');</script>";
+            $insertStmt = $pdo->prepare('INSERT INTO follows (follow_id,follower_id) VALUES (?, ?)');
+            $insertStmt->execute([$targetUserId,$UserId]);
+
+            $isFollowing = true;
+
+
         }
 
         if (isset($_POST['unfollow_user_id']) && $isFollowing) {
             // フォロー解除処理
             $deleteStmt = $pdo->prepare('DELETE FROM follows WHERE follow_id=? and follower_id=?');
             $deleteStmt->execute([$targetUserId,$UserId]);
-            echo "<script>alert('フォローを解除しました！');</script>";
+
+
+            $isFollowing = false;
+
+
         }
 
         // フォロー状態を再確認
-        $followStmt->execute([$UserId, $targetUserId]);
+        $followStmt->execute([ $targetUserId,$UserId]);
         $isFollowing = $followStmt->fetchColumn() > 0;
     }
 } else {
@@ -85,8 +92,7 @@ if (isset($_GET['user_id'])) {
 
 <body>
     <div class="profile-container">
-        <a href="#" onclick="history.back(); return false;">←</a><br>
-
+        <a href="#" onclick="window.history.back(); return false;">←</a><br>
         <div class="profile-content">
             <p class="profile-icon">
                 <img src="<?php echo $userIcon; ?>" class="icon_user" width="50" height="50" alt="Profile Icon">
@@ -105,12 +111,12 @@ if (isset($_GET['user_id'])) {
             <?php 
             if ($isFollowing) {
                 echo '<form method="post" action="">';
-                    echo '<input type="hidden" name="unfollow_user_id" value="' . htmlspecialchars($userId, ENT_QUOTES, 'UTF-8') . '">';
-                    echo '<button type="submit" class="unfollow-button">フォロー解除</button>';
+                    echo '<input type="hidden" name="unfollow_user_id" value="' . $userId . '">';
+                    echo '<button type="submit" class="follow-button">フォロー解除</button>';
                 echo '</form>';
             } else {
                 echo '<form method="post" action="">';
-                    echo '<input type="hidden" name="follow_user_id" value="' . htmlspecialchars($userId, ENT_QUOTES, 'UTF-8') . '">';
+                    echo '<input type="hidden" name="follow_user_id" value="' . $userId . '">';
                     echo '<button type="submit" class="follow-button">フォローする</button>';
                 echo '</form>';
             }
