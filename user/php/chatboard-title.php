@@ -1,5 +1,5 @@
 <?php
-require '../header.php';
+require 'header.php';
 
 $pdo = new PDO($connect, USER, PASS);
 
