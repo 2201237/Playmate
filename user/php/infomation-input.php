@@ -1,5 +1,6 @@
 <?php session_start(); 
 require 'db-connect.php';
+
 require 'header.php';
 $pdo=new PDO($connect,USER,PASS);
 
@@ -8,6 +9,8 @@ $sql->execute();
 
 
 ?>
+    <link rel="stylesheet" href="../css/header.css">
+
     <h2 style="text-align:center">お問い合わせ</h2>
     <form action = "infomation-complete.php" method = "post"> 
         <?php

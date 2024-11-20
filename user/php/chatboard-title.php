@@ -1,7 +1,9 @@
 <?php
-require 'header.php';
+require 'db-connect.php';
 
+require 'header.php';
 $pdo = new PDO($connect, USER, PASS);
+
 
 // ゲーム情報を取得
 $gamesql = $pdo->prepare('SELECT * FROM game');
@@ -29,6 +31,8 @@ $boards = $boardsql->fetchAll(PDO::FETCH_ASSOC);
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/header.css">
+
     <title>PlayMate</title>
 </head>
 <body>

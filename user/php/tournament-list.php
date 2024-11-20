@@ -1,8 +1,7 @@
 <?php
-      session_start();
-      require 'db-connect.php';
-      require 'header.php';
-      $pdo=new PDO($connect,USER,PASS);
+    session_start();
+    require 'db-connect.php';
+    $pdo=new PDO($connect,USER,PASS);
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -10,9 +9,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../css/header.css">
     <title>Document</title>
 </head>
 <body>
+        <?php require 'header.php'; ?>
         <div>
             <h1  style='text-align:center'>大会一覧</h1>
             <table border="1" >
