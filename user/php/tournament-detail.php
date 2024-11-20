@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'db-connect.php';
-require 'header.php';
+require '../header.html';
 $pdo = new PDO($connect, USER, PASS);
 
 // tournament_id が URL パラメータとして渡されていることを確認
