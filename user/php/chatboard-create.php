@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 ob_start();  // 出力バッファリング開始
 
 require 'db-connect.php';
-require '../header.html';
+require 'header.php';
 
 try {
     // データベース接続

@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'db-connect.php';
-require '../header.html';
+require 'header.php';
 
 $pdo = new PDO($connect, USER, PASS);
 
@@ -15,7 +15,6 @@ if (isset($_GET['tournament_id']) && isset($_GET['round'])) {
     $message_stmt->execute([$tournament_id, $round]);
     $messages = $message_stmt->fetchAll();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -36,15 +35,19 @@ if (isset($_GET['tournament_id']) && isset($_GET['round'])) {
                 <div class="message">
                     <strong><?php echo htmlspecialchars($message['user_name']); ?>:</strong>
                     <p><?php echo htmlspecialchars($message['chat']); ?></p>
+                    <?php if (!empty($message['image_path'])): ?>
+                        <img src="<?php echo htmlspecialchars($message['image_path']); ?>" alt="アップロード画像" style="max-width: 200px;">
+                    <?php endif; ?>
                     <span><?php echo htmlspecialchars($message['created_at']); ?></span>
                 </div>
             <?php endforeach; ?>
         </div>
 
-        <form action="tournament-chat-post.php" method="post">
+        <form action="tournament-chat-post.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="tournament_id" value="<?php echo htmlspecialchars($tournament_id); ?>">
             <input type="hidden" name="round" value="<?php echo htmlspecialchars($round); ?>">
             <textarea name="chat" required></textarea>
+            <input type="file" name="image" accept="image/*">
             <button type="submit">送信</button>
         </form>
 
