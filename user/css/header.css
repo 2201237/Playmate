@@ -1,6 +1,14 @@
 @charset "utf-8";
 
-.gNav ol,ul {
+/* ロゴのレイアウト */
+.logo {
+    width: 130px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.gNav ol,
+ul {
     list-style: none;
     list-style-type: none;
 }
@@ -102,9 +110,10 @@
     padding-right: 10px;
 }
 
-.gNav .gNav-menu  li:not(:last-child) {
+.gNav .gNav-menu li:not(:last-child) {
     border-right: 2px solid #cccccc;
 }
+
 
 @media screen and (max-width: 750px) {
     .btn-gNav {
