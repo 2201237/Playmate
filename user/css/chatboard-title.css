@@ -1,0 +1,27 @@
+.headline {
+    margin-top: 10px;
+    padding-left: 30px;
+    padding-bottom: 8px;
+    font-weight: bold;
+    font-size: 1.17em;
+    position: relative;
+    overflow: hidden;
+}
+
+.headline::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background: #f16272;
+}
+
+.headline::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background: #cccccc;
+}
