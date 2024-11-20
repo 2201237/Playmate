@@ -105,7 +105,7 @@ if (isset($_GET['user_id'])) {
 
         <div class="profile-actions">
             <!-- チャットリンク -->
-            <a href="chat.php?user_id=<?php echo $userId; ?>" class="chat-button">チャット</a>
+            <a href="chat.php?user_id=<?php echo $userId; ?>" class="chat-button">✉</a>
 
             <!-- フォローボタンおよびフォロー解除ボタン -->
             <?php 
