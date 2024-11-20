@@ -3,27 +3,19 @@
       require 'db-connect.php';
       require 'header.php';
       $pdo=new PDO($connect,USER,PASS);
-<<<<<<< Updated upstream
-=======
 session_start();
 require 'db-connect.php';
 require '../header.html';
 
 $pdo = new PDO($connect, USER, PASS);
->>>>>>> Stashed changes
 ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< Updated upstream
     <link rel="icon" href="../img/favicon.ico">
-    <title>Document</title>
-=======
-    <title>Document</title>
     <title>大会一覧</title>
->>>>>>> Stashed changes
 </head>
 <body>
         <div>
@@ -55,9 +47,6 @@ $pdo = new PDO($connect, USER, PASS);
             ?>
         </div>
     </table>
-<<<<<<< Updated upstream
-</body>
-=======
     <div>
         <h1 style='text-align:center'>大会一覧</h1>
         <table border="1">
@@ -98,5 +87,4 @@ $pdo = new PDO($connect, USER, PASS);
     </div>
 </body>
 </html>
->>>>>>> Stashed changes
 </html>
