@@ -37,7 +37,8 @@ $boards = $boardsql->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <div class="container">
-        <h1>掲示板一覧</h1>
+        <a href="chatboard-create.php">チャット作成</a>
+
         
         <!-- ゲームタイトルセクション -->
         <div class="game-title-list">
@@ -52,6 +53,7 @@ $boards = $boardsql->fetchAll(PDO::FETCH_ASSOC);
         </div>
 
         <!-- 掲示板一覧セクション -->
+        <h1>掲示板一覧</h1>
         <div class="board-list">
             <?php if ($boards): ?>
                 <?php foreach ($boards as $board) : ?>
@@ -76,6 +78,7 @@ $boards = $boardsql->fetchAll(PDO::FETCH_ASSOC);
                             ゲーム: <?php echo htmlspecialchars($board['game_title'], ENT_QUOTES, 'UTF-8'); ?> | 
                             書き込み数: <?php echo htmlspecialchars($post_count['post_count'] ?? '0', ENT_QUOTES, 'UTF-8'); ?>
                         </p>
+                    
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
