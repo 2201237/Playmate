@@ -1,45 +1,125 @@
+/* 全体設定 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 20px 0;
-}
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-body{
+/* bodyのスタイル */
+body {
+    font-family: Arial, sans-serif;
     background-color: #b2fab4;
-}
-th {
-    background-color: #b2fab4;
-}
-tr:nth-child(even) {
-    background-color: #b2fab4;
-}
-.container {
-    max-width: 800px;
-    margin: 0 auto;
+    color: #333;
     padding: 20px;
 }
-h2 {
-    color: #333;
-    margin-top: 30px;
+
+/* リンクスタイル */
+a {
+    text-decoration: none;
+    color: inherit;
 }
-.tournament-select {
-    margin: 20px 0;
-    padding: 5px;
-}
+
+/* 戻るボタンとログアウトボタン */
 .back, .logout {
     position: absolute;
     top: 20px;
+    color: #4109ec;
     font-size: 20px;
+    text-decoration: none;
+    font-weight: bold;
 }
+
 .back {
     left: 20px;
 }
 
-.logout{
+.logout {
     right: 20px;
+}
+
+.back:hover, .logout:hover {
+    color: #e9e01c;
+    text-decoration: underline;
+}
+
+/* コンテナのスタイル */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* フォームスタイル */
+form {
+    margin-bottom: 20px;
+}
+
+select {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+input[type="submit"] {
+    padding: 8px 15px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* 見出し */
+h2 {
+    font-size: 28px;
+    position: absolute;
+    left: 565px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* テーブルスタイル */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+}
+
+th {
+    background-color: #f1f1f1;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f0f0f0;
+}
+
+/* メッセージ */
+p {
+    font-size: 18px;
+    color: #555;
 }

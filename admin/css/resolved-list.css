@@ -19,9 +19,10 @@ h1 {
 .back, .logout {
     position: absolute;
     top: 20px;
+    color: #4109ec;
     font-size: 20px;
-    color: #007bff; /* 青色 */
     text-decoration: none;
+    font-weight: bold;
 }
 
 .back {
@@ -33,6 +34,7 @@ h1 {
 }
 
 .back:hover, .logout:hover {
+    color: #e9e01c;
     text-decoration: underline;
 }
 
@@ -120,18 +122,21 @@ button.hold:hover {
 }
 
 /* 戻すボタンのスタイル */
-button.return {
-    background-color: #f44336;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
+.restore-button {
+    background-color: #e74c3c; /* ボタンの背景色（赤） */
+    color: white;              /* ボタンの文字色（白） */
+    border: none;              /* ボタンの枠線を削除 */
+    padding: 10px 20px;        /* ボタンの内側に余白を追加 */
+    font-size: 16px;           /* 文字サイズ */
+    font-weight: bold;         /* 文字を太字に */
+    border-radius: 5px;        /* 角を丸くする */
+    cursor: pointer;          /* ボタンにカーソルを合わせると指カーソルに */
+    transition: background-color 0.3s ease; /* ホバー時に色が変わるトランジション */
 }
 
-button.return:hover {
-    background-color: #d32f2f;
+/* ボタンにホバー時の効果 */
+.restore-button:hover {
+    background-color: #c0392b;
 }
 
 /* メッセージ表示エリア */

@@ -84,6 +84,7 @@ try {
             echo '<td>
                     <form action="reply.php" method="get">
                         <input type="hidden" name="contacts_id" value="' . htmlspecialchars($row["contacts_id"]) . '">
+                        <input type="hidden" name="user_id" value="' . htmlspecialchars($row["user_id"]) . '">
                         <button type="submit" style="background-color: green; color: white;">返信</button>
                     </form>
                   </td>';
