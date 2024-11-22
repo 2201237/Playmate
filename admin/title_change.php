@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/title_change.css">
-    <title>PlayMate Admin</title>                               
+    <title>PlayMate Admin</title>                              
 </head>
 <body>
     <script>
@@ -15,7 +15,7 @@
                 window.name = "any";
             } else {        
                 window.name = "";
-
+ 
             }
         }
     </script>
@@ -23,22 +23,31 @@
         <a href="game-manage.php" return false;" class="back">←戻る</a>
         <h1>ゲームタイトル変更</h1>
         <a href="login.php" class="logout">ログアウト</a>
-        
+       
         <form action="title_change.php" method="post" class="submit-form">
         <input type="text" name="user_name" placeholder="キーワード検索">
         <button type="submit">検索</button>
         </form>
-        
+ 
+        <form action="title_change.php" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="action" value="add">
+ 
+    <label for="game_title">ゲームタイトル</label>
+    <input type="text" name="game_title" id="game_title" required>
+ 
+    <button type="submit">追加</button>
+</form>
+       
         <div class="grouptable">
             <table align="center" border="1">
                 <tr>
                     <th>ゲームタイトル</th>
                     <th>更新</th>
                 </tr>
-                
+               
                 <?php
                 $pdo = new PDO($connect, USER, PASS);
-                
+               
                 // ゲーム情報を1回のクエリで取得
                 $sql = $pdo->query('SELECT * FROM game');
                 foreach ($sql as $row) {
@@ -55,13 +64,14 @@
             </table>
         </div>
     </div>
-
+ 
     <?php
+ 
     // フォームがPOSTされたときに処理を行う
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'], $_POST['game_id'])) {
         $game_id = $_POST['game_id'];
         $new_title = $_POST['title'];
-
+ 
         // 入力されたタイトルが空でないか確認
         if (!empty($new_title)) {
             // ゲームタイトルを更新するクエリ

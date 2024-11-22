@@ -24,6 +24,7 @@ if (!isset($_SESSION['admins']['admin_id'])) {
     <div>
         <button class="menu-button" onclick="location.href='inquiry-list.php'">お問い合わせ一覧</button><br>
         <button class="menu-button" onclick="location.href='resolved-list.php'">お問い合わせ解決</button><br>
+        <button class="menu-button" onclick="location.href='on-hold-list.php'">お問い合わせ保留</button><br>
         <button class="menu-button" onclick="location.href='contacts_ge.php'">ジャンル管理</button>
     </div>
 </body>

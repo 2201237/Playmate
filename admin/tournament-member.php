@@ -4,7 +4,7 @@ class Database {
     private $USER = 'LAA1516826';
     private $PASS = 'joyman';
     private $conn;
-
+ 
     public function getConnection() {
         $this->conn = null;
         try {
@@ -16,84 +16,84 @@ class Database {
         return $this->conn;
     }
 }
-
+ 
 class TournamentParticipant {
     private $conn;
-
+ 
     public function __construct($db) {
         $this->conn = $db;
     }
-
+ 
     // 全参加者を取得（大会名を含む）
     public function getAllParticipants() {
         try {
-            $query = "SELECT 
+            $query = "SELECT
                         u.user_id,
                         u.user_name,
                         t.tournament_id,
                         t.tournament_name,
                         tm.tournament_member_id
-                    FROM 
+                    FROM
                         users u
                         INNER JOIN tournament_member tm ON u.user_id = tm.user_id
                         INNER JOIN tournament t ON tm.tournament_id = t.tournament_id
-                    ORDER BY 
+                    ORDER BY
                         t.tournament_id, u.user_id";
-
+ 
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+ 
         } catch(PDOException $e) {
             echo "エラー: " . $e->getMessage();
             return false;
         }
     }
-
+ 
     // 特定の大会の参加者を取得（大会名を含む）
     public function getParticipantsByTournament($tournamentId) {
         try {
-            $query = "SELECT 
+            $query = "SELECT
                         u.user_id,
                         u.user_name,
                         t.tournament_id,
                         t.tournament_name,
                         tm.tournament_member_id
-                    FROM 
+                    FROM
                         users u
                         INNER JOIN tournament_member tm ON u.user_id = tm.user_id
                         INNER JOIN tournament t ON tm.tournament_id = t.tournament_id
                     WHERE
                         tm.tournament_id = :tournament_id
-                    ORDER BY 
+                    ORDER BY
                         u.user_id";
-
+ 
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(":tournament_id", $tournamentId);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+ 
         } catch(PDOException $e) {
             echo "エラー: " . $e->getMessage();
             return false;
         }
     }
-
+ 
     // 全大会のリストを取得
     public function getAllTournaments() {
         try {
-            $query = "SELECT 
+            $query = "SELECT
                         tournament_id,
                         tournament_name
-                    FROM 
+                    FROM
                         tournament
-                    ORDER BY 
+                    ORDER BY
                         tournament_id";
-
+ 
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+ 
         } catch(PDOException $e) {
             echo "エラー: " . $e->getMessage();
             return false;
@@ -111,15 +111,20 @@ class TournamentParticipant {
 <body>
 <a href="tournament-view.php" class="back">←戻る</a>
 <a href="login.php" class="logout">ログアウト</a>
+<h2>大会参加一覧</h2>
+<br>
+<br>
+<br>
+<br>
     <div class="container">
         <?php
         // データベース接続
         $database = new Database();
         $db = $database->getConnection();
-
+ 
         // TournamentParticipantクラスのインスタンス化
         $tournamentParticipant = new TournamentParticipant($db);
-
+ 
         // 大会選択フォーム
         $tournaments = $tournamentParticipant->getAllTournaments();
         if ($tournaments) {
@@ -138,16 +143,14 @@ class TournamentParticipant {
             </form>
             <?php
         }
-
+ 
         // 選択された大会の参加者または全参加者を表示
         if (isset($_GET['tournament_id']) && !empty($_GET['tournament_id'])) {
             $participants = $tournamentParticipant->getParticipantsByTournament($_GET['tournament_id']);
-            echo "<h2>選択された大会の参加者一覧</h2>";
         } else {
             $participants = $tournamentParticipant->getAllParticipants();
-            echo "<h2>全大会参加者一覧</h2>";
         }
-
+ 
         if ($participants) {
             ?>
             <table>
