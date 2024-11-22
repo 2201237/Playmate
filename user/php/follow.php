@@ -40,31 +40,49 @@ $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
 $stmt->execute();
 
 $followUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 
-if (count($followUsers) > 0) {
-    foreach ($followUsers as $user) {
-        echo '<a href="profile-partner.php?user_id='. $user["user_id"] . '">';
-        $iconPath = $user['icon'];
-        if (isset($iconPath) && $iconPath !== '') {
-            echo "<img src='".$iconPath."' class='icon_user' width='50' height='50'>";
-        } else {
-            echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
-        }
-        echo '</a>';
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/follow.css">
 
-
-        echo 'User Name: ' . $user['user_name'];
-        echo '<a href = "chat.php" method = "post">チャット</a>';
+    <title>Document</title>
+</head>
+<body>
     
-        echo '
-        <form method="post" action="">
-            <input type="hidden" name="unfollow_user_id" value="' . $user['user_id'] . '">
-            <button type="submit">フォロー解除</button>
-        </form>';
-        echo '<hr>';
+<?php
+    if (count($followUsers) > 0) {
+        foreach ($followUsers as $user) {
+            echo '<div class = user-info>';
+                echo '<a href="profile-partner.php?user_id='. $user["user_id"] . '"></a>';
+                $iconPath = isset($user['icon']) ? $user['icon'] : '';
+                if (isset($iconPath) && file_exists($iconPath)) {
+                    echo "<img src='".$iconPath."' class='icon_user' width='50' height='50'>";
+                } else {
+                    echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
+                }
+
+
+                echo 'User Name: ' . $user['user_name'];
+                echo '<form action="chat.php" method="post">';
+                    echo '<button type="submit" class="button">チャット</button>';
+                echo '</form>';
+                
+            
+                echo '
+                <form method="post" action="">
+                    <input type="hidden" name="unfollow_user_id" value="' . $user['user_id'] . '">
+                    <button type="submit" class="button">フォロー解除</button>
+                </form>';
+            echo '</div>';
+        }
+    } else {
+        echo 'フォローしている人がいません。';
     }
-} else {
-    echo 'フォローしている人がいません。';
-}
 
 ?>
+</body>
+</html>

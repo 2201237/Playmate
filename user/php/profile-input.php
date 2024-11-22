@@ -79,7 +79,7 @@ $cacheBuster = file_exists($iconPath) ? filemtime($iconPath) : time();
         
 
 
-        echo "<p class = 'profile-icon'>";
+        echo "<div class = 'profile-icon'>";
             if (isset($iconPath) && $iconPath !== '') {
                 echo "<input type = 'hidden' name = '" . $iconPath . "' value = '" . $iconPath . "'></input>";
 
@@ -87,7 +87,6 @@ $cacheBuster = file_exists($iconPath) ? filemtime($iconPath) : time();
             } else {
                 echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
             }
-        echo "</p>";
 
         echo "<p class = 'user' >" . $userName . "</p>";
         echo "<p class = 'user' >" . $userMail . "</p>";
@@ -103,7 +102,7 @@ $cacheBuster = file_exists($iconPath) ? filemtime($iconPath) : time();
                 echo '</textarea><br>';
             }
         echo "<input type='submit' class='edit' value='Profile edit'>";
-        
+        echo "</div>";
    ?>
    </form>
 
