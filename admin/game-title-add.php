@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 // ジャンルデータを取得（ジャンルをプルダウンに表示）
 $genre_options = [];
 try {
-    $stmt = $conn->query("SELECT id, name FROM genre");
+    $stmt = $conn->query("SELECT genre_id, name FROM genre");
     $genre_options = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     $error_message = "ジャンルの取得に失敗しました: " . $e->getMessage();
