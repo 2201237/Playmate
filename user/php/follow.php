@@ -59,7 +59,8 @@ $followUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
             echo '<div class = user-info>';
                 echo '<a href="profile-partner.php?user_id='. $user["user_id"] . '"></a>';
                 $iconPath = isset($user['icon']) ? $user['icon'] : '';
-                if (isset($iconPath) && file_exists($iconPath)) {
+                // var_dump($iconPath);
+                if (isset($iconPath)) {
                     echo "<img src='".$iconPath."' class='icon_user' width='50' height='50'>";
                 } else {
                     echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";

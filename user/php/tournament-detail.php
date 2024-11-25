@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'db-connect.php';
-require '../header.html';
+require 'header.php';
 $pdo = new PDO($connect, USER, PASS);
 
 // tournament_id が URL パラメータとして渡されていることを確認
@@ -35,6 +35,8 @@ if (isset($_GET['tournament_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/header.css">
+
     <title>大会詳細</title>
 </head>
 <body>

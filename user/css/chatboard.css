@@ -8,7 +8,7 @@ h3 {
     text-align: center;
 }
 
-form {
+.create {
     background-color: #fff;
     padding: 20px 40px;
     border-radius: 10px;
@@ -26,7 +26,7 @@ label {
     color: #333;
 }
 
-input[type="text"],
+.ctext,
 textarea,
 select {
     width: 100%;
@@ -39,7 +39,7 @@ select {
     transition: border-color 0.3s;
 }
 
-input[type="text"]:focus,
+.ctext:focus,
 textarea:focus,
 select:focus {
     border-color: #007bff;
@@ -47,7 +47,7 @@ select:focus {
 }
 
 /* ボタンのスタイル */
-button {
+.cbut {
     width: 48%;
     padding: 10px;
     font-size: 1em;
@@ -61,15 +61,15 @@ button {
     text-align: center;
 }
 
-button[type="button"] {
+button[type="cbut"] {
     background-color: #6c757d; /* 戻るボタンの色を少し変える */
 }
 
-button:hover {
+.cbut:hover {
     background-color: #0056b3;
 }
 
-button[type="button"]:hover {
+button[type="cbut"]:hover {
     background-color: #5a6268;
 }
 

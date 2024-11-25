@@ -5,6 +5,11 @@
     list-style-type: none;
 }
 
+.logo {
+    width: 130px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
 .gNav a {
     text-decoration: none;
     color: #000000;
@@ -145,4 +150,13 @@
         border-bottom: #525252 1px solid;
     }
 
+}
+.search{
+    background-color: #525252;
+}
+.sbut{
+    background-color: #67b1f4;
+}
+.stext{
+    color: aqua;
 }
