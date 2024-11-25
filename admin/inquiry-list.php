@@ -39,7 +39,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
     // 未解決のcontactsデータを取得
-    $sql = "SELECT contacts.contacts_id, contacts.contacts, users.user_name, contacts_ge.conge_name 
+    $sql = "SELECT contacts.contacts_id, contacts.contacts, users.user_name, contacts_ge.conge_name
             FROM contacts 
             JOIN users ON contacts.user_id = users.user_id
             JOIN contacts_ge ON contacts.contacts_ge_id = contacts_ge.conge_id
@@ -84,7 +84,6 @@ try {
             echo '<td>
                     <form action="reply.php" method="get">
                         <input type="hidden" name="contacts_id" value="' . htmlspecialchars($row["contacts_id"]) . '">
-                        <input type="hidden" name="user_id" value="' . htmlspecialchars($row["user_id"]) . '">
                         <button type="submit" style="background-color: green; color: white;">返信</button>
                     </form>
                   </td>';

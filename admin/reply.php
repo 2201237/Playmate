@@ -10,6 +10,7 @@
 <form method="POST" action="reply-output.php" class="message-form">
 <textarea name="message" placeholder="メッセージ入力"></textarea>
     <div class="input-container">
+        <input type = "hidden" name = "reply_id" value = "<?php echo $_GET['contacts_id']; ?> ">
     <button type="submit">送信</button>
     </div>
 </form>
