@@ -1,5 +1,5 @@
 <?php
-// DB接続設定
+// DB接続クラス
 class Database {
     private $connect = 'mysql:host=mysql311.phy.lolipop.lan;dbname=LAA1516826-playmate;charset=utf8';
     private $USER = 'LAA1516826';
@@ -11,12 +11,18 @@ class Database {
         try {
             $this->conn = new PDO($this->connect, $this->USER, $this->PASS);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             echo "接続エラー: " . $e->getMessage();
         }
         return $this->conn;
     }
 }
+
+// データベース接続
+$db = new Database();
+$conn = $db->getConnection();
+
+$error_message = ""; // エラーメッセージ用
 
 // フォームが送信された場合の処理
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -46,28 +52,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // データベースにデータを挿入
     if (empty($error_message)) {
-        $stmt = $conn->prepare("INSERT INTO game (genre_id, title, game_icon) VALUES (?, ?, ?)");
-        $stmt->bind_param("iss", $genre, $title, $icon_path);
+        try {
+            $stmt = $conn->prepare("INSERT INTO game (genre_id, title, game_icon) VALUES (:genre, :title, :icon_path)");
+            $stmt->bindParam(':genre', $genre, PDO::PARAM_INT);
+            $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+            $stmt->bindParam(':icon_path', $icon_path, PDO::PARAM_STR);
 
-        if ($stmt->execute()) {
-            echo "新しいゲームタイトルが追加されました！";
-        } else {
-            $error_message = "データベースへの保存に失敗しました: " . $stmt->error;
+            if ($stmt->execute()) {
+                echo "新しいゲームタイトルが追加されました！";
+            } else {
+                $error_message = "データベースへの保存に失敗しました。";
+            }
+        } catch (PDOException $e) {
+            $error_message = "エラー: " . $e->getMessage();
         }
-
-        $stmt->close();
     }
 }
 
 // ジャンルデータを取得（ジャンルをプルダウンに表示）
 $genre_options = [];
-$result = $conn->query("SELECT id, name FROM genre");
-if ($result && $result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $genre_options[] = $row;
-    }
+try {
+    $stmt = $conn->query("SELECT id, name FROM genre");
+    $genre_options = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    $error_message = "ジャンルの取得に失敗しました: " . $e->getMessage();
 }
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -81,7 +90,7 @@ $conn->close();
     <h1>新規ゲームタイトル追加</h1>
 
     <?php if (!empty($error_message)) : ?>
-        <p style="color: red;"><?php echo $error_message; ?></p>
+        <p style="color: red;"><?php echo htmlspecialchars($error_message, ENT_QUOTES, 'UTF-8'); ?></p>
     <?php endif; ?>
 
     <form action="" method="post" enctype="multipart/form-data">
@@ -89,7 +98,9 @@ $conn->close();
         <label for="genre">ジャンル:</label>
         <select name="genre" id="genre" required>
             <?php foreach ($genre_options as $genre) : ?>
-                <option value="<?php echo $genre['id']; ?>"><?php echo $genre['name']; ?></option>
+                <option value="<?php echo htmlspecialchars($genre['id'], ENT_QUOTES, 'UTF-8'); ?>">
+                    <?php echo htmlspecialchars($genre['name'], ENT_QUOTES, 'UTF-8'); ?>
+                </option>
             <?php endforeach; ?>
         </select>
         <br><br>
