@@ -1,5 +1,7 @@
 <?php
-    require 'db-connect.php';
+session_start();
+
+require 'db-connect.php';
 
     $pdo = new PDO($connect, USER, PASS);
 

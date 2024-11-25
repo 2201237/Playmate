@@ -39,6 +39,11 @@ $userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '../i
                 <li class = "header-li"><nobr><a class=”current” href="#">掲示板</a></nobr></li>
                 <li class = "header-li"><nobr><a class=”current” href="#">ランキング</a></nobr></li>
                 <li class = "header-li"><nobr><a class=”current” href="infomation-input.php">お問い合わせ</a></nobr></li>
+                <form action="search.php" method="get">
+                    <label for="username">ユーザー名を検索:</label>
+                    <input type="text" id="username" name="username">
+                    <button type="submit">検索</button>
+                </form>
             </ul>
         </nav>
     </div>

@@ -65,6 +65,8 @@ ob_end_flush();  // 出力バッファをフラッシュ
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/chatboard.css">
+    <link rel="stylesheet" href="../css/header.css">
+
     <title>PlayMate - 掲示板作成</title>
 </head>
 <body>

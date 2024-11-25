@@ -13,8 +13,8 @@ $sql->execute();
         <?php
             $contacts_ge = $sql->fetchAll(PDO::FETCH_ASSOC);
             echo "<div  style='text-align:center'>";
-            echo "<select name = 'conge_id'> ";
-            echo "<option value='選択してください'>選択してください</option>";
+            echo "<select name = 'conge_id' required> ";
+            echo "<option value='' hidden>選択してください</option>";
                 foreach ($contacts_ge as $contacts_ges){
                     echo "<option value='" . $contacts_ges['conge_id'] . "'>" . $contacts_ges['conge_name'] . "</option>";
                 }
