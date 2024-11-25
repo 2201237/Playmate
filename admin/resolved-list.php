@@ -76,7 +76,7 @@ try {
                     <form action="update-status.php" method="post">
                         <input type="hidden" name="contacts_id" value="' . htmlspecialchars($row["contacts_id"]) . '">
                         <input type="hidden" name="status" value="0">
-                        <button type="submit" style="background-color: #555; color: white;">戻す</button>
+                        <button type="submit" class="restore-button">戻す</button>
                     </form>
                   </td>';
             echo '</tr>';

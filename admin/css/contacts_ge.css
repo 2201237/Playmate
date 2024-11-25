@@ -1,43 +1,135 @@
-/* 背景と全体の設定 */
-body { 
-    background-color: #aaffaa; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
+/* ベースのスタイル */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #b2fab4;
 }
-h1 { text-align: center; }
-form { 
-    margin: 10px 0; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
+
+h1 {
+    text-align: center;
+    padding: 20px;
+    margin: 0;
 }
+
+/* ナビゲーション */
+a.back, a.logout {
+    position: absolute;
+    top: 20px;
+    color: #4109ec;
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a.back {
+    left: 20px;
+}
+
+a.logout {
+    right: 20px;
+}
+
+a.back:hover, a.logout:hover {
+    color: #e9e01c;
+    text-decoration: underline;
+}
+
+/* メッセージエリア */
+p {
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* フォーム */
+form {
+    margin: 20px auto;
+    text-align: center;
+    max-width: 500px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* テーブル */
 table {
-    border-collapse: collapse; 
-    margin-top: 20px;
-}
-td, th {
-    border: 1px solid black; 
-    padding: 5px; 
-}
-.back, .logout {
-position: absolute;
-top: 20px;
-color: #4109ec;
-font-size: 20px;
-text-decoration: none;
-font-weight: bold;
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.back {
-left: 20px;
+table th,
+table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
 }
 
-.logout {
-right: 20px;
+table th {
+    background-color: #007BFF;
+    color: white;
 }
 
-.back:hover, .logout:hover {
-color: #e9e01c;
-text-decoration: underline;
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* 編集用フォームと削除リンク */
+input[type="text"] {
+    width: 70%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+button[type="submit"] {
+    padding: 8px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+a {
+    color: #dc3545;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #c82333;
 }
