@@ -1,0 +1,122 @@
+html{
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: #b2fab4;
+    width: 100%;
+    margin: 0;
+  }
+
+  h1{
+    text-align: center;
+}
+
+  .back, .logout {
+    position: absolute;
+    top: 20px;
+    color: #4109ec;
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back {
+    left: 20px;
+}
+
+.logout {
+    right: 20px;
+}
+
+.back:hover, .logout:hover {
+    color: #e9e01c;
+    text-decoration: underline;
+}
+
+  .message {
+    width: 100%; /* テキストエリアの幅を親要素に合わせる */
+    max-width: 600px; /* 最大幅を指定 */
+    height: 150px; /* 高さを設定 */
+    padding: 10px; /* 内側の余白 */
+    font-size: 16px; /* テキストのサイズ */
+    font-family: Arial, sans-serif; /* フォントを設定 */
+    color: #333; /* テキストの色 */
+    border: 2px solid #ccc; /* 境界線の色と太さ */
+    border-radius: 8px; /* 角を丸める */
+    background-color: #f9f9f9; /* 背景色 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 影を追加 */
+    resize: vertical; /* 縦方向にリサイズ可能 */
+    outline: none; /* フォーカス時のデフォルトのアウトラインを削除 */
+    transition: border-color 0.3s, box-shadow 0.3s; /* フォーカス時のアニメーション */
+    /* position: absolute;
+    left: 320px; */
+    margin-left: 26%;
+}
+
+.message:focus {
+    border-color: #66afe9; /* フォーカス時の境界線の色 */
+    box-shadow: 0 0 6px rgba(102, 175, 233, 0.5); /* フォーカス時の影 */
+    background-color: #fff; /* 背景色を明るく変更 */
+}
+
+button[type="submit"] {
+    display: inline-block; /* インラインブロックでサイズを指定可能に */
+    padding: 10px 20px; /* ボタン内の余白（上下・左右） */
+    font-size: 16px; /* テキストサイズ */
+    font-family: Arial, sans-serif; /* フォントを設定 */
+    font-weight: bold; /* 太字に設定 */
+    color: #fff; /* テキスト色を白に */
+    background-color: #007bff; /* 背景色（青色） */
+    border: none; /* ボーダーを削除 */
+    border-radius: 8px; /* 角を丸める */
+    cursor: pointer; /* マウスホバー時にポインターを表示 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+    transition: background-color 0.3s, box-shadow 0.3s; /* ホバー時のアニメーション */
+    /* position: absolute;
+    top: 300px;
+    left: 320px; */
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3; /* ホバー時の背景色（濃い青色） */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* ホバー時に影を強調 */
+}
+
+button[type="submit"]:active {
+    background-color: #004085; /* クリック時の背景色 */
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2); /* クリック時の影 */
+    transform: translateY(2px); /* ボタンが押し込まれるような演出 */
+}
+
+button[type="submit"]:disabled {
+    background-color: #cccccc; /* 無効時の背景色（薄いグレー） */
+    color: #666666; /* 無効時の文字色 */
+    cursor: not-allowed; /* 無効時にカーソルを禁止マークに変更 */
+    box-shadow: none; /* 無効時は影を除去 */
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #4caf50;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
