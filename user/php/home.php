@@ -79,7 +79,7 @@ $rsql->execute();
                 $game_id = $game['game_id'];
                 $image_path = "../img/" . $game_id . ".jpg";
                 echo '<li class="content content-hover">',
-                        '<a href = "board-list.php?game_id=' . $game_id . '">',
+                        '<a href = "chatboard-title.php?game_id=' . $game_id . '">',
                             '<img src = "' . $image_path . '" width = "215px" alt="ゲーム画像">',
                             '<p>'.$game['title'],
                         '</a></p>

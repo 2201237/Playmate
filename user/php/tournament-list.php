@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'db-connect.php';
-require '../header.html';
+require 'header.php';
 
 $pdo = new PDO($connect, USER, PASS);
 ?>
@@ -10,6 +10,8 @@ $pdo = new PDO($connect, USER, PASS);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/header.css">
+
     <title>大会一覧</title>
 </head>
 <body>
