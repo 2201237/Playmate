@@ -58,10 +58,10 @@ $followUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($followUsers as $user) {
             echo '<div class = user-info>';
                 echo '<a href="profile-partner.php?user_id='. $user["user_id"] . '"></a>';
-                $iconPath = isset($user['icon']) ? $user['icon'] : '';
-                // var_dump($iconPath);
+                $iconPath = $user['icon'];
+                var_dump($iconPath);
                 if (isset($iconPath)) {
-                    echo "<img src='".$iconPath."' class='icon_user' width='50' height='50'>";
+                    echo "<img src='".$iconPath."' class='icon_user' widtfh='50' height='50'>";
                 } else {
                     echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
                 }

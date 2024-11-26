@@ -1,5 +1,4 @@
 <?php
-
 require '../header_profile.php';
 $pdo = new PDO($connect, USER, PASS);
 
