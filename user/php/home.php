@@ -51,7 +51,7 @@ $rsql->execute();
                                     <span>', $tournament['tournament_name'], '</span>
                                     <p>', $tournament['rule'], '</p>
                                 </div>
-                                <a href = "tournament-join.php?tournament_id= '. $tournament['tournament_id'] . '">
+                                <a href = "tournament-detail.php?tournament_id= '. $tournament['tournament_id'] . '">
                                     <div class="testimonial-name">
                                         詳細はこちら
                                     </div>
