@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'db-connect.php';
-$userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '../img/icon_user.png';
+$userIcon = isset($_SESSION['User']['icon']) ?'https://aso2201222.kill.jp/'. $_SESSION['User']['icon'] : '../img/icon_user.png';
 
 // エラーメッセージを表示
 ini_set('display_errors', 1);

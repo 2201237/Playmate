@@ -1,5 +1,5 @@
 <?php
-require '../header_profile.php';
+require 'header_profile.php';
 $pdo = new PDO($connect, USER, PASS);
 
 $userId = $_SESSION['User']['user_id'];
@@ -7,7 +7,7 @@ $userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '../i
 $userName = $_SESSION['User']['user_name'];
 $userProfile = isset($_SESSION['User']['user_profile']) ? $_SESSION['User']['user_profile'] : '';
 $userMail = isset($_SESSION['User']['user_mail']) ? $_SESSION['User']['user_mail'] : '';
-$iconPath = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '';
+$iconPath = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/'.$_SESSION['User']['icon'] : '';
 $cacheBuster = file_exists($iconPath) ? filemtime($iconPath) : time();
 
 

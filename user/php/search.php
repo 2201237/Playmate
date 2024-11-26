@@ -10,9 +10,11 @@ if (isset($_GET['username'])) {
     $searchName = $_GET['username'];
 
     // ユーザー名を検索（部分一致）
-    $stmt = $pdo->prepare('SELECT user_id, user_name, user_mail, profile, icon FROM users WHERE user_name LIKE ?');
-    $stmt->execute(['%' . $searchName . '%']);
+    $stmt = $pdo->prepare('SELECT user_id, user_name, user_mail, profile, icon FROM users WHERE user_name LIKE ? and user_id not in (?)');
+    $stmt->execute(['%' . $searchName . '%', $_SESSION['User']['user_id']]);
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
 
     if (empty($users)) {
         $message = "ユーザーが見つかりません。";
@@ -49,13 +51,14 @@ if (isset($_GET['username'])) {
                 echo "<div class='user-info'>";
                 echo "<a href='profile-partner.php?user_id=". $user['user_id']. "'></a>";
 
-                if (isset($iconPath) && $iconPath !== '') {
-                    echo "<input type = 'hidden' name = '" . $iconPath . "' value = '" . $iconPath . "'></input>";
-    
-                    echo "<img src='".$iconPath."' class='icon_user' width='50' height='50'>";
-                } else {
-                    echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
-                }
+            $iconPath = isset($user['icon']) ?  'https://aso2201222.kill.jp/'.$user['icon'] : '';
+            if (isset($iconPath) && $iconPath !== '') {
+                echo "<input type = 'hidden' name = '" . $iconPath . "' value = '" . $iconPath . "'></input>";
+
+                echo "<img src='".$iconPath."' class='icon_user' width='50' height='50'>";
+            } else {
+                echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
+            }
                     echo "<strong>". $user['user_name'] . "</strong><br>";
                     echo $user['user_mail'] ;
                 echo "</div>";

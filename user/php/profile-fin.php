@@ -4,7 +4,7 @@ require 'db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 
 $userId = $_SESSION['User']['user_id'];
-$userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '../img/icon_user.png';
+$userIcon = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/'. $_SESSION['User']['icon'] : '../img/icon_user.png';
 $userName = $_SESSION['User']['user_name'];
 $userProfile = isset($_SESSION['User']['user_profile']) ? $_SESSION['User']['user_profile'] : '';
 $userMail = isset($_SESSION['User']['user_mail']) ? $_SESSION['User']['user_mail'] : '';
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_name'], $_POST['
             $ftpHost = 'ftp.aso2201222.kill.jp'; // FTPサーバーのホスト名
             $ftpUser = 'kill.jp-aso2201222';       // FTPユーザー名
             $ftpPass = 'Pass0830';   // FTPパスワード
-            $ftpDir  = '/Playmate/user/user_images/'; // アップロード先ディレクトリ
+            $ftpDir  = 'Playmate/user/user_images/'; // アップロード先ディレクトリ
 
             // ファイル情報
             $fileTmpPath = $_FILES['icon']['tmp_name'];

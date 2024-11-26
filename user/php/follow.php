@@ -1,6 +1,6 @@
 <?php
 
-require '../header_profile.php';
+require 'header_profile.php';
 $pdo = new PDO($connect, USER, PASS);
 
 // 自身のユーザーIDの取得
@@ -58,14 +58,16 @@ $followUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($followUsers as $user) {
             echo '<div class = user-info>';
                 echo '<a href="profile-partner.php?user_id='. $user["user_id"] . '"></a>';
-                $iconPath = $user['icon'];
-                var_dump($iconPath);
-                if (isset($iconPath)) {
-                    echo "<img src='".$iconPath."' class='icon_user' widtfh='50' height='50'>";
+                $iconPath = isset($user['icon']) ? 'https://aso2201222.kill.jp/'.$user['icon'] : '';
+                if (isset($iconPath) && $iconPath !== '') {
+                    echo "<input type = 'hidden' name = '" . $iconPath . "' value = '" . $iconPath . "'></input>";
+    
+                    echo "<img src='".$iconPath."' class='icon_user' width='50' height='50'>";
                 } else {
                     echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
                 }
-
+    
+    
 
                 echo 'User Name: ' . $user['user_name'];
                 echo '<form action="chat.php" method="post">';

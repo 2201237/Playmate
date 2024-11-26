@@ -1,7 +1,7 @@
 <?php
 
 // セッションからアイコンのパスを取得
-$userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '../img/icon_user.png';
+$userIcon = isset($_SESSION['User']['icon']) ?  'https://aso2201222.kill.jp/'.$_SESSION['User']['icon'] : '../img/icon_user.png';
 ?>
 
 <div class="hamburger">
