@@ -49,7 +49,7 @@ if (isset($_GET['username'])) {
         }else{
             foreach ($users as $user){
                 echo "<div class='user-info'>";
-                echo "<a href='profile-partner.php?user_id=". $user['user_id']. "'></a>";
+                echo "<a href='profile-partner.php?user_id=". $user['user_id']. "' class = 'a-search' ></a>";
 
             $iconPath = isset($user['icon']) ?  'https://aso2201222.kill.jp/'.$user['icon'] : '';
             if (isset($iconPath) && $iconPath !== '') {

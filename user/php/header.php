@@ -1,12 +1,9 @@
-<<<<<<< HEAD
-=======
 <?php
 
 // セッションからアイコンのパスを取得
 $userIcon = isset($_SESSION['User']['icon']) ?  'https://aso2201222.kill.jp/'.$_SESSION['User']['icon'] : '../img/icon_user.png';
 ?>
 
->>>>>>> ad1cf0bf8e3e11dd237b8ad92cc3d8e2b01cd933
 <div class="hamburger">
 
     <div class="logo">
