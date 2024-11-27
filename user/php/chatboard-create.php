@@ -89,7 +89,7 @@ ob_end_flush();  // 出力バッファをフラッシュ
         <br><br>
 
         <button type="submit">作成</button>
-        <button type="button" onclick="location.href='index.php'">戻る</button>
+        <button type="button" class = "cbut" onclick="location.href='chatboard-title.php'">戻る</button>
     </form>
 </body>
 </html>

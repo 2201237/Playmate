@@ -7,15 +7,9 @@ $userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '../i
 $userName = $_SESSION['User']['user_name'];
 $userProfile = isset($_SESSION['User']['user_profile']) ? $_SESSION['User']['user_profile'] : '';
 $userMail = isset($_SESSION['User']['user_mail']) ? $_SESSION['User']['user_mail'] : '';
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 $iconPath = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/' . $_SESSION['User']['icon'] : '';
-=======
-$iconPath = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/'.$_SESSION['User']['icon'] : '';
->>>>>>> ad1cf0bf8e3e11dd237b8ad92cc3d8e2b01cd933
-=======
-$iconPath = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/'.$_SESSION['User']['icon'] : '';
->>>>>>> ad1cf0bf8e3e11dd237b8ad92cc3d8e2b01cd933
+
 $cacheBuster = file_exists($iconPath) ? filemtime($iconPath) : time();
 
 

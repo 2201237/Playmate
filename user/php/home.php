@@ -55,7 +55,7 @@
                                     <span>', $tournament['tournament_name'], '</span>
                                     <p>', $tournament['rule'], '</p>
                                 </div>
-                                <a href = "tournament-join.php?tournament_id=" ', $tournament['tournament_id'], '">
+                                <a href = "tournament-detail.php?tournament_id= '. $tournament['tournament_id'] . '">
                                     <div class="testimonial-name">
                                         <span class="name_text">詳細はこちら</span>
                                     </div>

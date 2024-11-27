@@ -27,14 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_name'], $_POST['
             $ftpUser = 'kill.jp-aso2201222';       // FTPユーザー名
             $ftpPass = 'Pass0830';   // FTPパスワード
             $ftpDir  = 'Playmate/user/user_images/'; // アップロード先ディレクトリ
-<<<<<<< HEAD
-<<<<<<< HEAD
- 
- 
-=======
->>>>>>> ad1cf0bf8e3e11dd237b8ad92cc3d8e2b01cd933
-=======
->>>>>>> ad1cf0bf8e3e11dd237b8ad92cc3d8e2b01cd933
 
             // ファイル情報
             $fileTmpPath = $_FILES['icon']['tmp_name'];
