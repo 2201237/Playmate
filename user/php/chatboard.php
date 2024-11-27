@@ -40,12 +40,13 @@ try {
 
         // チャットメッセージをデータベースに挿入
         $stmt = $pdo->prepare("
-            INSERT INTO board_chat (board_title_id, chat, created_at)
-            VALUES (:board_title_id, :chat, NOW())
+            INSERT INTO board_chat (board_title_id, chat, user_id, created_at)
+            VALUES (:board_title_id, :chat, :user_id, NOW())
         ");
         $stmt->execute([
             ':board_title_id' => $board_title_id,
             ':chat' => $chat_message,
+            ':user_id' => $current_user_id, // セッションから取得した現在のユーザーID
         ]);
 
         // 再読み込みしてチャットを更新
@@ -55,12 +56,20 @@ try {
 
     // board_chatテーブルから特定のboard_title_idに関連するチャットデータを取得
     $stmt = $pdo->prepare("
-        SELECT c.chat, c.created_at, u.user_id, u.user_name, u.icon 
-        FROM board_chat AS c
-        JOIN board_title AS bt ON bt.board_title_id = c.board_title_id
-        JOIN users AS u ON u.user_id = bt.user_id
-        WHERE c.board_title_id = :board_title_id
-        ORDER BY c.created_at ASC
+        SELECT 
+            c.chat, 
+            c.created_at, 
+            u.user_id, 
+            u.user_name, 
+            u.icon 
+        FROM 
+            board_chat AS c
+        JOIN 
+            users AS u ON c.user_id = u.user_id
+        WHERE 
+            c.board_title_id = :board_title_id
+        ORDER BY 
+            c.created_at ASC
     ");
     $stmt->bindParam(':board_title_id', $board_title_id, PDO::PARAM_INT);
     $stmt->execute();
@@ -91,10 +100,13 @@ try {
             <div class="chat-message <?php echo ($chat['user_id'] == $current_user_id) ? 'self' : 'other'; ?>">
                 <div class="user-info">
                     <!-- アイコンの表示 -->
-                    <img src="../icons/<?= htmlspecialchars($chat['icon'] ?? $userIcon) ?>" class="icon_user" width="50" height="50">
+                    <a href="profile-partner.php?user_id=<?= htmlspecialchars($chat['user_id']) ?>">
+                        <!-- 各ユーザーのアイコンを個別に表示 -->
+                        <img src="../img/<?= htmlspecialchars($chat['icon'] ?? 'icon_user.png') ?>" class="icon_user" width="50" height="50">
+                    </a>
                     <span><?= htmlspecialchars($chat['user_name']) ?></span>
                 </div>
-                <div class="chat-box <?php echo ($chat['user_id'] == $current_user_id) ? 'self' : 'other'; ?>">
+                <div class="chat-box">
                     <!-- チャットメッセージの表示 -->
                     <p><?= htmlspecialchars($chat['chat']) ?></p>
                     <div class="chat-time"><?= htmlspecialchars($chat['created_at']) ?></div>
