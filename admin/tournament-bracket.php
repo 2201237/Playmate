@@ -147,6 +147,18 @@ if ($tournament_id) {
         <button type="submit">表示</button>
     </form>
 
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="tournament.php" style="
+            display: inline-block;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 16px;
+        ">戻る</a>
+    </div>
+
     <?php if ($tournament_id && $round): ?>
         <h2><?= htmlspecialchars($tournament_name, ENT_QUOTES, 'UTF-8') ?> - 第<?= htmlspecialchars($round, ENT_QUOTES, 'UTF-8') ?>回戦</h2>
         <?php displayMatchList($pdo, $tournament_id, $round); ?>

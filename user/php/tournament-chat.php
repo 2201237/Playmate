@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'db-connect.php';
-require 'header.php';
+require '../header.html';
 
 $pdo = new PDO($connect, USER, PASS);
 
@@ -36,7 +36,8 @@ if (isset($_GET['tournament_id']) && isset($_GET['round'])) {
                     <strong><?php echo htmlspecialchars($message['user_name']); ?>:</strong>
                     <p><?php echo htmlspecialchars($message['chat']); ?></p>
                     <?php if (!empty($message['image_path'])): ?>
-                        <img src="<?php echo htmlspecialchars($message['image_path']); ?>" alt="アップロード画像" style="max-width: 200px;">
+                        <img src="<?php echo '../../admin/win-loss-image/' . htmlspecialchars($message['image_path']); ?>" 
+                             alt="アップロード画像" style="max-width: 200px;">
                     <?php endif; ?>
                     <span><?php echo htmlspecialchars($message['created_at']); ?></span>
                 </div>
@@ -55,4 +56,3 @@ if (isset($_GET['tournament_id']) && isset($_GET['round'])) {
     </div>
 </body>
 </html>
-

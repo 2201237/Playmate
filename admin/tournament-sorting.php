@@ -1,64 +1,93 @@
 <?php
-session_start();
-require 'db-connect.php';
+try {
+    session_start();
+    require 'db-connect.php';
 
-$pdo = new PDO($connect, USER, PASS);
+    $pdo = new PDO($connect, USER, PASS);
 
-// 大会リストを取得する関数
-function getTournamentList($pdo) {
-    $stmt = $pdo->query("SELECT tournament_id, tournament_name FROM tournament ORDER BY tournament_name ASC");
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+    // 1. 大会リストを取得
+    $query = "SELECT tournament_id, tournament_name FROM tournament";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
+    $tournaments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// 指定された大会・回戦の組み分けが存在するか確認する関数
-function isRoundRegistered($pdo, $tournament_id, $round) {
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM tournament_kumi WHERE tournament_id = ? AND round = ?");
-    $stmt->execute([$tournament_id, $round]);
-    return $stmt->fetchColumn() > 0;
-}
+    // エラーメッセージ用
+    $error_message = "";
 
-// 組み分け処理の関数
-function createSorting($pdo, $tournament_id, $round) {
-    // 参加者を取得（loser=1のプレイヤーを除外）
-    $stmt = $pdo->prepare("
-        SELECT user_id 
-        FROM tournament_member 
-        WHERE tournament_id = ? AND (loser IS NULL OR loser = 0)
-    ");
-    $stmt->execute([$tournament_id]);
-    $participants = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    // 2. POSTリクエストがある場合の処理
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['tournament_id']) && isset($_POST['round'])) {
+            $tournament_id = (int)$_POST['tournament_id'];
+            $round = (int)$_POST['round'];
 
-    if (count($participants) < 2) {
-        return '参加者が2人未満のため、組み分けができません。';
+            // 組み分けが既に存在するか確認
+            $query = "
+                SELECT COUNT(*) AS count
+                FROM tournament_kumi
+                WHERE tournament_id = :tournament_id AND round = :round;
+            ";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(':tournament_id', $tournament_id, PDO::PARAM_INT);
+            $stmt->bindParam(':round', $round, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($result['count'] > 0) {
+                $error_message = "エラー: この大会とラウンドの組み分けデータはすでに存在します。";
+            } else {
+                // losserが1でないユーザーをランダムに取得
+                $query = "
+                    SELECT user_id
+                    FROM tournament_member
+                    WHERE tournament_id = :tournament_id AND loser != 1
+                    ORDER BY RAND();
+                ";
+                $stmt = $pdo->prepare($query);
+                $stmt->bindParam(':tournament_id', $tournament_id, PDO::PARAM_INT);
+                $stmt->execute();
+                $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                // ユーザーが偶数でない場合の警告
+                if (count($users) % 2 != 0) {
+                    echo "警告: ユーザー数が奇数です。最後の1人が残ります。\n";
+                }
+
+                // 組み分け処理 (2人1組)
+                for ($i = 0; $i < count($users); $i += 2) {
+                    if (isset($users[$i + 1])) {
+                        // 正常な組み合わせ
+                        $query = "
+                            INSERT INTO tournament_kumi (tournament_id, round, user_id1, user_id2)
+                            VALUES (:tournament_id, :round, :user_id1, :user_id2);
+                        ";
+                        $stmt = $pdo->prepare($query);
+                        $stmt->bindParam(':tournament_id', $tournament_id, PDO::PARAM_INT);
+                        $stmt->bindParam(':round', $round, PDO::PARAM_INT);
+                        $stmt->bindParam(':user_id1', $users[$i]['user_id'], PDO::PARAM_INT);
+                        $stmt->bindParam(':user_id2', $users[$i + 1]['user_id'], PDO::PARAM_INT);
+                        $stmt->execute();
+                    } else {
+                        // 奇数の場合
+                        $query = "
+                            INSERT INTO tournament_kumi (tournament_id, round, user_id1, user_id2)
+                            VALUES (:tournament_id, :round, :user_id1, NULL);
+                        ";
+                        $stmt = $pdo->prepare($query);
+                        $stmt->bindParam(':tournament_id', $tournament_id, PDO::PARAM_INT);
+                        $stmt->bindParam(':round', $round, PDO::PARAM_INT);
+                        $stmt->bindParam(':user_id1', $users[$i]['user_id'], PDO::PARAM_INT);
+                        $stmt->execute();
+                    }
+                }
+
+                // 成功メッセージ
+                echo "組み分けが完了しました！<br>";
+            }
+        }
     }
-
-    shuffle($participants);
-
-    $stmt = $pdo->prepare("
-        INSERT INTO tournament_kumi (tournament_id, round, user_id1, user_id2) 
-        VALUES (?, ?, ?, ?)
-    ");
-
-    for ($i = 0; $i < count($participants); $i += 2) {
-        $user1 = $participants[$i];
-        $user2 = $participants[$i + 1] ?? null;
-
-        $stmt->execute([$tournament_id, $round, $user1, $user2]);
-    }
-
-    return '組み分けが完了しました。';
-}
-
-// POSTデータの処理
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['check_registration'])) {
-    $tournament_id = $_POST['tournament_id'] ?? null;
-    $round = $_POST['round'] ?? null;
-
-    if ($tournament_id && $round) {
-        echo isRoundRegistered($pdo, $tournament_id, $round) ? '1' : '0';
-    }
-
-    exit;
+} catch (PDOException $e) {
+    // エラーハンドリング
+    echo "エラー: " . $e->getMessage();
 }
 ?>
 <!DOCTYPE html>
@@ -67,99 +96,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['check_registration'])
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>大会組み分け</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1, h2 {
-            text-align: center;
-            color: #333;
-        }
-        form {
-            text-align: center;
-            margin: 20px 0;
-        }
-        select, button {
-            font-size: 16px;
-            padding: 5px 10px;
-            margin: 5px;
-        }
-        .message {
-            text-align: center;
-            font-size: 18px;
-            color: #666;
-        }
-        .error {
-            color: red;
-        }
-    </style>
-    <script>
-        // Ajaxを使用して組み分けが登録されているかを確認
-        function checkRegistration() {
-            var tournament_id = document.getElementById('tournament_id').value;
-            var round = document.getElementById('round').value;
-            var submitButton = document.getElementById('submit_button');
-            var messageDiv = document.getElementById('message');
-
-            if (!tournament_id || !round) {
-                submitButton.disabled = true;
-                messageDiv.innerHTML = '';
-                return;
-            }
-
-            var formData = new FormData();
-            formData.append('check_registration', true);
-            formData.append('tournament_id', tournament_id);
-            formData.append('round', round);
-
-            fetch('tournament-sorting.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                if (data == '1') {
-                    submitButton.disabled = true;
-                    messageDiv.innerHTML = '<p class="error">既にこの大会のこの回戦の組み分けが登録されています。</p>';
-                } else {
-                    submitButton.disabled = false;
-                    messageDiv.innerHTML = '';
-                }
-            });
-        }
-
-        // ページ読み込み時に初期状態でボタンをチェック
-        window.onload = checkRegistration;
-    </script>
 </head>
 <body>
-    <h1>大会組み分け</h1>
-
-    <div id="message"></div>
-
-    <form method="post" action="tournament-sorting.php">
+    <h1>大会組み分けフォーム</h1>
+    <form action="tournament-sorting.php" method="POST">
         <label for="tournament_id">大会を選択:</label>
-        <select name="tournament_id" id="tournament_id" required onchange="checkRegistration()">
-            <option value="">-- 大会を選択 --</option>
+        <select name="tournament_id" id="tournament_id" required>
+            <option value="">選択してください</option>
             <?php
-            $tournaments = getTournamentList($pdo);
             foreach ($tournaments as $tournament) {
-                $selected = ($_POST['tournament_id'] ?? '') == $tournament['tournament_id'] ? 'selected' : '';
-                echo "<option value=\"{$tournament['tournament_id']}\" $selected>" . htmlspecialchars($tournament['tournament_name'], ENT_QUOTES, 'UTF-8') . "</option>";
+                echo "<option value=\"{$tournament['tournament_id']}\">{$tournament['tournament_name']}</option>";
             }
             ?>
         </select>
-        <label for="round">回戦を選択:</label>
-        <select name="round" id="round" required onchange="checkRegistration()">
-            <option value="">-- 回戦を選択 --</option>
-            <?php for ($i = 1; $i <= 10; $i++): ?>
-                <option value="<?= $i ?>" <?= ($_POST['round'] ?? '') == $i ? 'selected' : '' ?>>第<?= $i ?>回戦</option>
-            <?php endfor; ?>
-        </select>
-        <button type="submit" id="submit_button">
-            組み分けを実行
-        </button>
+        <br><br>
+        <label for="round">ラウンド番号:</label>
+        <input type="number" name="round" id="round" min="1" required>
+        <br><br>
+        <button type="submit">組み分け開始</button>
     </form>
+
+    <?php if (!empty($error_message)): ?>
+        <p style="color: red;"><?= htmlspecialchars($error_message) ?></p>
+    <?php endif; ?>
+
+    <hr>
+
+    <!-- 常に表示されるボタン -->
+    <a href="tournament-bracket.php" style="display: inline-block; margin-right: 10px;">
+        <button type="button">トーナメント表を見る</button>
+    </a>
+    <a href="tournament.php" style="display: inline-block;">
+        <button type="button">戻る</button>
+    </a>
 </body>
 </html>
