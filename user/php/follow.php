@@ -15,8 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['unfollow_user_id'])) 
     $deleteStmt = $pdo->prepare('delete from follows where follow_id=? and follower_id=?');
     $deleteStmt->execute([$unfollowUserId, $userId]);
 
-    // var_dump(["user_id"]);
-    // var_dump(["unfollow_user_id"]);
     
     // プレースホルダーに値をバインド
     // $deleteStmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
