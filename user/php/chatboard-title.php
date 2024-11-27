@@ -1,7 +1,5 @@
 <?php
-session_start();
-
-require 'db-connect.php';
+    require 'db-connect.php';
 
     $pdo = new PDO($connect, USER, PASS);
 
@@ -35,6 +33,7 @@ require 'db-connect.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../img/favicon.ico">
     <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/chatboard-title.css">
     <title>PlayMate掲示板一覧</title>
 </head>

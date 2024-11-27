@@ -1,115 +1,124 @@
+<<<<<<< Updated upstream
 @charset "utf-8";
 
-.gNav ol,ul {
-    list-style: none;
-    list-style-type: none;
-}
-
+/* ロゴのレイアウト */
 .logo {
     width: 130px;
     margin-top: 5px;
     margin-left: 5px;
 }
-.gNav a {
-    text-decoration: none;
-    color: #000000;
-    font-size: 17px;
-    font-weight: 600;
+
+.gNav ol,
+ul {
+    list-style: none;
+    list-style-type: none;
+=======
+body {
+  background: #2E2F40;
+  font-family: "Montserrat", sans-serif;
+>>>>>>> Stashed changes
 }
 
-.gNav a:hover {
-    color: #67b1f4;
+nav {
+  max-width: 1000px;
+  height: 0px;
+  border-bottom: 100px solid #860255;
+  border-left: 40px solid transparent;
+  position: relative;
+  margin: 0 auto;
+  box-shadow: 20px 17px 27px rgba(0, 0, 0, 0.15);
 }
-
-.hamburger {
-    width: 100%;
-    max-width: 900px;
-    display: flex;
-    justify-content: space-between;
+nav::before {
+  content: "";
+  margin-top: 10%;
+  display: block;
 }
-
-.hamburger .btn-gNav {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 30px;
-    height: 24px;
-    z-index: 12;
-    box-sizing: border-box;
-    cursor: pointer;
-    -webkit-transition: all 400ms;
-    transition: all 400ms;
+nav .inner {
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  right: 0;
+  overflow: hidden;
+  background: #860255;
+  /* Webkit (Safari/Chrome 10) */
+  /* IE10+ */
+  /* Mozilla Firefox */
+  /* Opera */
+  /* Webkit (Chrome 11+) */
+  /* W3C Markup */
+  background-image: linear-gradient(to right, #860255 0%, #EF4B3F 100%);
 }
-
-.hamburger .btn-gNav span {
-    position: absolute;
-    width: 100%;
-    height: 4px;
-    background: #ffffff;
-    border-radius: 10px;
-    -webkit-transition: all 400ms;
-    transition: all 400ms;
+nav .active {
+  top: 80px !important;
+  position: relative;
+  transition: all 0.3s;
 }
-
-.hamburger .btn-gNav span:nth-child(1) {
-    top: 0;
+nav ul {
+  float: right;
+  list-style-type: none;
+  line-height: 6.2;
+  padding: 0;
+  margin: 0;
+  transition: all 0.3s;
+  position: relative;
+  top: 0;
 }
-
-.hamburger .btn-gNav span:nth-child(2) {
-    top: 10px;
+nav li {
+  display: inline-block;
+  margin: 0;
 }
-
-.hamburger .btn-gNav span:nth-child(3) {
-    top: 20px;
+nav li::before {
+  content: " / ";
+  margin: 0 10px;
+  color: rgba(255, 255, 255, 0.5);
 }
-
-.hamburger .btn-gNav.open span:nth-child(1) {
-    background: #ffffff;
-    top: 6px;
-    -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-    transform: rotate(-45deg);
+nav li:first-child::before {
+  display: none;
 }
-
-.hamburger .btn-gNav.open span:nth-child(2),
-.hamburger .btn-gNav.open span:nth-child(3) {
-    top: 6px;
-    background: #ffffff;
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    transform: rotate(45deg);
+nav .search {
+  width: 80px;
+  height: 0px;
+  float: right;
+  color: #fff;
+  font-size: 18px;
+  border-bottom: 100px solid rgba(0, 0, 0, 0.1);
+  border-left: 40px solid transparent;
+  position: relative;
+  transition: 0.3s;
 }
-
-
-.btn-gNav {
-    display: none;
+nav .search::before {
+  content: "";
 }
-
-.gNav .gNav-menu {
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    top: 10px;
-    left: 350px;
+nav .search:hover {
+  border-bottom: 100px solid rgba(0, 0, 0, 0.3);
 }
-
-.hamburger .icon_user {
-    position: relative;
-    top: 10px;
-    left: 300px;
+nav .fa-search {
+  position: relative;
+  left: 25px;
+  top: 38px;
 }
-
-.gNav .gNav-menu li {
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 5px;
-    padding-left: 10px;
-    padding-right: 10px;
+nav input[type=search] {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  -webkit-appearance: none;
 }
+nav input.search_box {
+  position: absolute;
+  font-size: 16px;
+  color: #fff;
+  line-height: 4;
+  top: -100px;
+  width: 320px;
+  right: 130px;
+  transition: all 0.3s;
+}
+<<<<<<< Updated upstream
 
-.gNav .gNav-menu  li:not(:last-child) {
+.gNav .gNav-menu li:not(:last-child) {
     border-right: 2px solid #cccccc;
 }
+
 
 @media screen and (max-width: 750px) {
     .btn-gNav {
@@ -151,12 +160,35 @@
     }
 
 }
-.search{
-    background-color: #525252;
+=======
+nav .search_box_active {
+  top: 15px !important;
+  transition: all 0.3s;
 }
-.sbut{
-    background-color: #67b1f4;
+nav input:focus {
+  outline: none;
 }
-.stext{
-    color: aqua;
+nav input::-webkit-input-placeholder {
+  color: #fff;
 }
+nav input[type=search]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 1px;
+  width: 15px;
+  background: transparent;
+  border-radius: 50%;
+}
+nav input[type=search]::-webkit-search-cancel-button::before {
+  content: "+";
+  color: #fff;
+  font-weight: bold;
+  -webkit-transform: rotate(45deg);
+  font-size: 21px;
+  position: absolute;
+  top: -10px;
+}
+nav a {
+  color: #fff;
+  text-decoration: none;
+}/*# sourceMappingURL=header.css.map */
+>>>>>>> Stashed changes
