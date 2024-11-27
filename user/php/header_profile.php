@@ -52,7 +52,7 @@ $userIcon = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/'.$_S
                 <li class = "profile"><nobr><a class = "profile <?php echo ($current_page == 'profile-input.php') ? 'active' : ''; ?>"  href="profile-input.php">プロフィール</a></nobr></li>
                 <li class = "profile"><nobr><a class = "profile <?php echo ($current_page == 'follow.php') ? 'active' : ''; ?>" href="follow.php">フォロー</a></nobr></li>
 
-                <li class = "profile"><nobr><a class = "profile <?php echo ($current_page == 'folloewr.php') ? 'active' : ''; ?>" href="folloewr.php">フォロワー</a></nobr></li>
+                <li class = "profile"><nobr><a class = "profile <?php echo ($current_page == 'follower.php') ? 'active' : ''; ?>" href="follower.php">フォロワー</a></nobr></li>
             </ul>
         </nav>
     </div>

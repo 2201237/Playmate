@@ -1,12 +1,9 @@
-<<<<<<< HEAD
-=======
 <?php
 
 // セッションからアイコンのパスを取得
 $userIcon = isset($_SESSION['User']['icon']) ?  'https://aso2201222.kill.jp/'.$_SESSION['User']['icon'] : '../img/icon_user.png';
 ?>
 
->>>>>>> ad1cf0bf8e3e11dd237b8ad92cc3d8e2b01cd933
 <div class="hamburger">
 
     <div class="logo">
@@ -25,13 +22,26 @@ $userIcon = isset($_SESSION['User']['icon']) ?  'https://aso2201222.kill.jp/'.$_
         <ul class="gNav-menu">
             <li><a class=”current” href="home.php">ホーム</a></li>
             <li><a href="tournament-list.php">大会一覧</a></li>
-            <li><a href="#">掲示板</a></li>
+            <li><a href="chatboard-title.php">掲示板</a></li>
             <li><a href="#">ランキング</a></li>
             <li><a href="infomation-input.php">お問い合わせ</a></li>
+            <form action="search.php" class = "search" method="get">
+                <input type="text" id="username" class = "stext" name="username" placeholder="ユーザー名を検索">
+            <button type="submit" class = "sbut">🔍</button>
+            </form>
         </ul>
     </nav>
 
+
     <a href="profile-input.php">
-        <img src="../img/icon_user.png" class="icon_user" width="70" height="70" alt="ユーザーアイコン画像">
+        <?php 
+           if (isset($userIcon) && $userIcon !== '') {
+
+            echo "<img src='".$userIcon."' class='icon_user' width='50' height='50'>";
+            } else {
+                echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
+            }
+        ?>
     </a>
+
 </div>
