@@ -32,9 +32,9 @@ if(isset($_GET['id'])){
     $sql->execute([$_GET['id']]);
 }
 
-if(isset($_POST['keyword'])){
+if(!empty($_GET['user_name'])){
     $sql = $pdo->prepare('SELECT * FROM users where (user_mail=? || user_name=? || profile=?) and user_id not in (select user_id from ban)');
-    $sql->execute([$_POST['keyword'], $_POST['keyword'], $_POST['keyword']]);
+    $sql->execute([$_GET['user_name'], $_GET['user_name'], $_GET['user_name']]);
     foreach($sql as $row){
         echo '<tr>';
         echo '<td>', $row['user_mail'], '</td>';
