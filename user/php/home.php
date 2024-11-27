@@ -18,10 +18,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../img/favicon.ico">
     <link rel="stylesheet" href="../css/header.css">
+<<<<<<< Updated upstream
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/tournament-slide.css">
     <link rel="stylesheet" href="../css/board-slide.css">
     <link rel="stylesheet" href="../css/ranking.css">
+=======
+    <link rel="stylesheet" href="../css/saerch-box.css">
+    <link rel="stylesheet" href="../css/home.css">
+>>>>>>> Stashed changes
     <link rel="stylesheet" href="../css/owl.carousel.min.css">
     <link rel="stylesheet" href="../css/owl.theme.default.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />

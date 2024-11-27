@@ -24,6 +24,8 @@ if (!isset($_SESSION['admins']['admin_id'])) {
     <div>
         <button class="menu-button" onclick="location.href='game-title-add.php'">ゲームタイトル追加</button><br>
         <button class="menu-button" onclick="location.href='title_change.php'">ゲームタイトル変更</button><br>
+        <button class="menu-button" onclick="location.href='game-genre-add.php'">ゲームジャンル追加</button><br>
+        <button class="menu-button" onclick="location.href='genre_change.php'">ゲームジャンル変更</button><br>
     </div>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/title_change.css">
-    <title>PlayMate Admin</title>                              
+    <title>ゲームジャンル変更</title>                              
 </head>
 <body>
     <script>
@@ -20,18 +20,18 @@
     </script>
     <div class="list_field">
         <a href="game-manage.php" return false;" class="back">←戻る</a>
-        <h1>ゲームタイトル変更</h1>
+        <h1>ゲームジャンル変更</h1>
         <a href="login.php" class="logout">ログアウト</a>
        
-        <form method="GET" action="title_change.php" class="submit-form">
-            <input type="text" name="title" placeholder="タイトル検索" value="<?= htmlspecialchars($_GET['title'] ?? '', ENT_QUOTES) ?>">
+        <form method="GET" action="genre_change.php" class="submit-form">
+            <input type="text" name="title" placeholder="ゲームジャンル検索" value="<?= htmlspecialchars($_GET['genre'] ?? '', ENT_QUOTES) ?>">
             <button type="submit">検索</button>
         </form>
        
         <div class="grouptable">
             <table align="center" border="1">
                 <tr>
-                    <th>ゲームタイトル</th>
+                    <th>ゲームジャンル</th>
                     <th>更新</th>
                 </tr>
                
@@ -41,22 +41,22 @@
                     $pdo = new PDO($connect, USER, PASS);
 
                     // 検索条件を取得
-                    $searchTitle = $_GET['title'] ?? '';
+                    $searchGenre = $_GET['genre'] ?? '';
 
                     // SQLクエリの組み立て
-                    if (!empty($searchTitle)) {
-                        $sql = $pdo->prepare('SELECT * FROM game WHERE title LIKE :title');
-                        $sql->execute([':title' => '%' . $searchTitle . '%']);
+                    if (!empty($searchGenre)) {
+                        $sql = $pdo->prepare('SELECT * FROM genre WHERE genre LIKE :genre');
+                        $sql->execute([':genre' => '%' . $searchGenre . '%']);
                     } else {
-                        $sql = $pdo->query('SELECT * FROM game');
+                        $sql = $pdo->query('SELECT * FROM genre');
                     }
 
                     // 結果をテーブルに表示
                     foreach ($sql as $row) {
                         echo '<tr>';
-                        echo '<form action="title_change.php" method="post">';
-                        echo '<input type="hidden" name="game_id" value="' . htmlspecialchars($row['game_id'], ENT_QUOTES) . '">';
-                        echo '<td><input type="text" name="title" value="' . htmlspecialchars($row['title'], ENT_QUOTES) . '"></td>';
+                        echo '<form action="genre_change.php" method="post">';
+                        echo '<input type="hidden" name="genre_id" value="' . htmlspecialchars($row['genre_id'], ENT_QUOTES) . '">';
+                        echo '<td><input type="text" name="genre" value="' . htmlspecialchars($row['genre'], ENT_QUOTES) . '"></td>';
                         echo '<td><button type="submit">更新</button></td>';
                         echo '</form>';
                         echo '</tr>';
@@ -71,19 +71,19 @@
 
     <?php
     // タイトル更新処理
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['game_id'], $_POST['title'])) {
-        $game_id = $_POST['game_id'];
-        $new_title = $_POST['title'];
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['genre_id'], $_POST['genre'])) {
+        $genre_id = $_POST['genre_id'];
+        $new_genre = $_POST['genre'];
 
-        if (!empty($new_title)) {
-            $update_sql = $pdo->prepare('UPDATE game SET title = :title WHERE game_id = :game_id');
+        if (!empty($new_genre)) {
+            $update_sql = $pdo->prepare('UPDATE genre SET genre = :genre WHERE genre_id = :genre_id');
             $update_sql->execute([
-                ':title' => $new_title,
-                ':game_id' => $game_id
+                ':genre' => $new_genre,
+                ':genre_id' => $genre_id
             ]);
-            echo '<p>タイトルが更新されました。</p>';
+            echo '<p>ゲームジャンルが更新されました。</p>';
         } else {
-            echo '<p>タイトルを入力してください。</p>';
+            echo '<p>ゲームジャンルを入力してください。</p>';
         }
     }
     ?>
