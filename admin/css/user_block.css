@@ -46,31 +46,31 @@ table{
     padding-bottom: 5%;
 }
 
-.submit-form {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
+.search-form {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
 }
 
-.submit-form input[type="text"] {
-    padding: 8px;
-    width: 200px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.search-form input[type="text"] {
+  padding: 8px;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-.submit-form button {
-    padding: 8px 12px;
-    margin-left: 5px;
-    border: none;
-    background-color: #5bc0de;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
+.search-form button {
+  padding: 8px 12px;
+  margin-left: 5px;
+  border: none;
+  background-color: #5bc0de;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.submit-form button:hover {
-    background-color: #31b0d5;
+.search-form button:hover {
+  background-color: #31b0d5;
 }
 
    .add {

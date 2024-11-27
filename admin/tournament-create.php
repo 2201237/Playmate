@@ -36,7 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>大会作成</title>
 </head>
 <body>
+    <a href="tournament.php" return false;" class="back">←戻る</a>
     <h1>大会作成</h1>
+    <a href="login.php" class="logout">ログアウト</a>
     <div class="container">
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
             <input type="text" name="tournament-name" placeholder="大会名" required><br>
@@ -64,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="datetime-local" id="tournament_deadline" name="tournament_deadline" required><br>
             
             <div class="button-group">
-                <button type="button" class="back" onclick="history.back()">戻る</button>
                 <button type="submit" class="create">作成</button>
             </div>
         </form>

@@ -1,215 +1,75 @@
-/* 全体のレイアウト */
-body {
-    background-color: #fafafa;
-    font-family: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic", sans-serif;
-}
-
-
-
-/* ロゴのレイアウト */
-.logo {
-    width: 130px;
-    margin-top: 5px;
-    margin-left: 5px;
-}
-
-
-
-/* 見出しのレイアウト */
-.headline {
-    margin-top: 10px;
-    padding-left: 30px;
-    padding-bottom: 8px;
-    font-weight: bold;
-    font-size: 1.17em;
-    position: relative;
-    overflow: hidden;
-}
-
-.headline::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 3px;
-    background: #f16272;
-}
-
-.headline::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 3px;
-    background: #cccccc;
-}
-
-
-
-
-/* 大会スライドショーのレイアウト */
 .shadow-effect {
-    background: #fff;
-    padding: 20px;
-    border-radius: 4px;
-    text-align: center;
-    border: 1px solid #ECECEC;
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.10), 0 15px 12px rgba(0, 0, 0, 0.02);
-}
-
-.shadow-effect span {
-    font-weight: bold;
-    display: block;
-    text-align: left;
-}
-
-.shadow-effect p {
-    text-align: center;
-    font-size: 17px;
-    font-weight: 700;
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  text-align: center;
+  border: 1px solid #ECECEC;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.1), 0 15px 12px rgba(0, 0, 0, 0.02);
 }
 
 #customers-testimonials .shadow-effect p {
-    font-family: inherit;
-    font-size: 13px;
-    text-align: left;
-    line-height: 1.5;
-    margin: 0 0 17px 0;
-    padding-left: 10px;
-    font-weight: 300;
+  font-family: inherit;
+  font-size: 17px;
+  line-height: 1.5;
+  margin: 0 0 17px 0;
+  font-weight: 300;
 }
 
 .testimonial-name {
-    margin: -17px auto 0;
-    display: table;
-    width: auto;
-    background: #3190E7;
-    padding: 9px 35px;
-    border-radius: 12px;
-    text-align: center;
-    color: #fff;
-    box-shadow: 0 9px 18px rgba(0, 0, 0, 0.12), 0 5px 7px rgba(0, 0, 0, 0.05);
-}
-
-.testimonial-name:hover {
-    background: #006ccf;
+  margin: -17px auto 0;
+  display: table;
+  width: auto;
+  background: #3190E7;
+  padding: 9px 35px;
+  border-radius: 12px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 9px 18px rgba(0, 0, 0, 0.12), 0 5px 7px rgba(0, 0, 0, 0.05);
 }
 
 #customers-testimonials .item {
-    text-align: center;
-    padding: 50px;
-    margin-bottom: 80px;
-    opacity: .2;
-    -webkit-transform: scale3d(0.8, 0.8, 1);
-    transform: scale3d(0.8, 0.8, 1);
-    -webkit-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
+  text-align: center;
+  padding: 50px;
+  margin-bottom: 80px;
+  opacity: 0.2;
+  transform: scale3d(0.8, 0.8, 1);
+  transition: all 0.3s ease-in-out;
 }
 
 #customers-testimonials .owl-item.active.center .item {
-    opacity: 1;
-    -webkit-transform: scale3d(1.0, 1.0, 1);
-    transform: scale3d(1.0, 1.0, 1);
+  opacity: 1;
+  transform: scale3d(1, 1, 1);
 }
 
 .owl-carousel .owl-item img {
-    transform-style: preserve-3d;
-    max-width: 100%;
-    margin: 0 auto 17px;
+  transform-style: preserve-3d;
+  max-width: 90px;
+  margin: 0 auto 17px;
 }
 
 #customers-testimonials.owl-carousel .owl-dots .owl-dot.active span,
 #customers-testimonials.owl-carousel .owl-dots .owl-dot:hover span {
-    background: #3190E7;
-    transform: translate3d(0px, -50%, 0px) scale(0.7);
+  background: #3190E7;
+  transform: translate3d(0px, -50%, 0px) scale(0.7);
 }
 
 #customers-testimonials.owl-carousel .owl-dots {
-    display: inline-block;
-    width: 100%;
-    text-align: center;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
 }
 
 #customers-testimonials.owl-carousel .owl-dots .owl-dot {
-    display: inline-block;
+  display: inline-block;
 }
 
 #customers-testimonials.owl-carousel .owl-dots .owl-dot span {
-    background: #3190E7;
-    display: inline-block;
-    height: 20px;
-    margin: 0 2px 5px;
-    transform: translate3d(0px, -50%, 0px) scale(0.3);
-    transform-origin: 50% 50% 0;
-    transition: all 250ms ease-out 0s;
-    width: 20px;
-}
-
-.item a {
-    text-decoration: none;
-}
-
-
-
-/* 掲示板スライドショーのレイアウト */
-.wrap {
-    display: flex;
-    align-items: center;
-    height: 340px;
-    overflow: hidden;
-}
-
-.slideshow {
-    list-style: none;
-    display: flex;
-    animation: loop-slide 20s infinite linear 1s both;
-}
-
-.slideshow img {
-    margin: auto;
-    display: block;
-}
-
-.slideshow p {
-    text-align: center;
-}
-
-.slideshow a {
-    text-decoration: none;
-    color: #333;
-    font-weight:600;
-}
-
-.content {
-    width: 300px;
-    height: 200px;
-}
-
-@keyframes loop-slide {
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translateX(-100%);
-    }
-}
-
-.slide-paused:hover .slideshow {
-    animation-play-state: paused;
-}
-
-.content-hover {
-    transition: all 0.2s;
-}
-
-.content-hover:hover {
-    transform: translateY(-20px);
-    opacity: 0.8;
-    cursor: pointer;
-}
-
-.no_users {
-    padding-left: 50px;
-}
+  background: #3190E7;
+  display: inline-block;
+  height: 20px;
+  margin: 0 2px 5px;
+  transform: translate3d(0px, -50%, 0px) scale(0.3);
+  transform-origin: 50% 50% 0;
+  transition: all 250ms ease-out 0s;
+  width: 20px;
+}/*# sourceMappingURL=home.css.map */

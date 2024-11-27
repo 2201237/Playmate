@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-require 'php/db-connect.php';
+require 'db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 $current_page = basename($_SERVER['REQUEST_URI']);
 
 // セッションからアイコンのパスを取得
-$userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '../img/icon_user.png';
+$userIcon = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/'.$_SESSION['User']['icon'] : '../img/icon_user.png';
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -39,6 +39,10 @@ $userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '../i
                 <li class = "header-li"><nobr><a class=”current” href="#">掲示板</a></nobr></li>
                 <li class = "header-li"><nobr><a class=”current” href="#">ランキング</a></nobr></li>
                 <li class = "header-li"><nobr><a class=”current” href="infomation-input.php">お問い合わせ</a></nobr></li>
+                <form action="search.php" class = "search" method="get">
+                    <input type="text" id="username" class = "stext" name="username" placeholder="ユーザー名を検索">
+                    <button type="submit" class = "sbut">🔍</button>
+                </form>
             </ul>
         </nav>
     </div>
@@ -47,7 +51,8 @@ $userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '../i
             <ul class = "profile-ul">
                 <li class = "profile"><nobr><a class = "profile <?php echo ($current_page == 'profile-input.php') ? 'active' : ''; ?>"  href="profile-input.php">プロフィール</a></nobr></li>
                 <li class = "profile"><nobr><a class = "profile <?php echo ($current_page == 'follow.php') ? 'active' : ''; ?>" href="follow.php">フォロー</a></nobr></li>
-                <li class = "profile"><nobr><a class = "profile <?php echo ($current_page == 'folloewr.php') ? 'active' : ''; ?>" href="folloewr.php">フォロワー</a></nobr></li>
+
+                <li class = "profile"><nobr><a class = "profile <?php echo ($current_page == 'follower.php') ? 'active' : ''; ?>" href="follower.php">フォロワー</a></nobr></li>
             </ul>
         </nav>
     </div>

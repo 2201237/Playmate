@@ -39,7 +39,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
     // 未解決のcontactsデータを取得
-    $sql = "SELECT contacts.contacts_id, contacts.contacts, users.user_name, contacts_ge.conge_name 
+    $sql = "SELECT contacts.contacts_id, contacts.contacts, users.user_name, contacts_ge.conge_name
             FROM contacts 
             JOIN users ON contacts.user_id = users.user_id
             JOIN contacts_ge ON contacts.contacts_ge_id = contacts_ge.conge_id

@@ -1,6 +1,5 @@
 <?php
-
-require '../header_profile.php';
+require 'header_profile.php';
 $pdo = new PDO($connect, USER, PASS);
 
 $userId = $_SESSION['User']['user_id'];
@@ -8,7 +7,9 @@ $userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '../i
 $userName = $_SESSION['User']['user_name'];
 $userProfile = isset($_SESSION['User']['user_profile']) ? $_SESSION['User']['user_profile'] : '';
 $userMail = isset($_SESSION['User']['user_mail']) ? $_SESSION['User']['user_mail'] : '';
-$iconPath = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '';
+
+$iconPath = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/' . $_SESSION['User']['icon'] : '';
+
 $cacheBuster = file_exists($iconPath) ? filemtime($iconPath) : time();
 
 
@@ -79,7 +80,7 @@ $cacheBuster = file_exists($iconPath) ? filemtime($iconPath) : time();
         
 
 
-        echo "<p class = 'profile-icon'>";
+        echo "<div class = 'profile-icon'>";
             if (isset($iconPath) && $iconPath !== '') {
                 echo "<input type = 'hidden' name = '" . $iconPath . "' value = '" . $iconPath . "'></input>";
 
@@ -87,7 +88,6 @@ $cacheBuster = file_exists($iconPath) ? filemtime($iconPath) : time();
             } else {
                 echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
             }
-        echo "</p>";
 
         echo "<p class = 'user' >" . $userName . "</p>";
         echo "<p class = 'user' >" . $userMail . "</p>";
@@ -103,7 +103,7 @@ $cacheBuster = file_exists($iconPath) ? filemtime($iconPath) : time();
                 echo '</textarea><br>';
             }
         echo "<input type='submit' class='edit' value='Profile edit'>";
-        
+        echo "</div>";
    ?>
    </form>
 

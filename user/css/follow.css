@@ -1,0 +1,28 @@
+.user-info{
+    position:relative;
+    padding:10px;
+    width:50%;
+
+}
+.user-info a{
+    display: block;
+    position:absolute;
+    top:0;
+    left:0;
+    width:50%;
+    height:100%;
+}
+.user-info:hover{
+    background-color: rgb(198, 196, 196);
+}
+.button{
+    border: none;
+    border-radius: 8px;
+    margin-top: 8px;
+    padding: 4px 16px;
+    position: relative;
+  }
+  
+  .button:hover {
+    cursor: pointer;
+  }

@@ -8,7 +8,7 @@ $userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '';
 $userId = $_SESSION['User']['user_id'];
 $userName = $_SESSION['User']['user_name'];
 $userPass = isset($_SESSION['User']['user_pass']) ? $_SESSION['User']['user_pass'] : '';
-$userProfile = isset($_SESSION['User']['user_profile']) ? $_SESSION['User']['user_profile'] : '';
+$userProfile = isset($_SESSION['User']['user_profile']) ? 'https://aso2201222.kill.jp/'. $_SESSION['User']['user_profile'] : '';
 ?>
 
 <!DOCTYPE html>
@@ -96,3 +96,4 @@ $userProfile = isset($_SESSION['User']['user_profile']) ? $_SESSION['User']['use
     </div>
 </body>
 </html>
+//
