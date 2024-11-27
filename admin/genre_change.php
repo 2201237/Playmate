@@ -24,7 +24,7 @@
         <a href="login.php" class="logout">ログアウト</a>
        
         <form method="GET" action="genre_change.php" class="submit-form">
-            <input type="text" name="title" placeholder="ゲームジャンル検索" value="<?= htmlspecialchars($_GET['genre'] ?? '', ENT_QUOTES) ?>">
+            <input type="text" name="genre" placeholder="ゲームジャンル検索" value="<?= htmlspecialchars($_GET['genre'] ?? '', ENT_QUOTES) ?>">
             <button type="submit">検索</button>
         </form>
        
