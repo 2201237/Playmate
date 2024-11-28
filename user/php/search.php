@@ -61,6 +61,12 @@ if (isset($_GET['username'])) {
             }
                     echo "<strong>". $user['user_name'] . "</strong><br>";
                     echo $user['user_mail'] ;
+                    echo 'User Name: ' . $user['user_name'];
+                    echo "<form action='user_chat.php?user_id=". $user['user_id']. "' class = 'user_c' method='post'>";
+                        echo '<button type="submit" class="button">チャット</button>';
+                    echo '</form>';
+                    
+    
                 echo "</div>";
                 }
             }
