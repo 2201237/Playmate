@@ -18,7 +18,7 @@ if (isset($_POST['chat']) && isset($_POST['tournament_id']) && isset($_POST['rou
 
     // 画像アップロード処理
     if (!empty($_FILES['image']['name'])) {
-        $upload_dir = '../img/'; // ../img フォルダに変更
+        $upload_dir = '../../admin/win-loss-image/'; // アップロード先を指定
         $filename = uniqid() . '_' . basename($_FILES['image']['name']);
         $target_path = $upload_dir . $filename;
 
