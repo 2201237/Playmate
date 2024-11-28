@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #b2fab4;
+    line-height: 1.6;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    border-bottom: 2px solid #4a4a4a;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+.back, .logout {
+    position: absolute;
+    top: 20px;
+    color: #4109ec;
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back {
+    left: 20px;
+}
+
+.logout {
+    right: 20px;
+}
+
+.back:hover, .logout:hover {
+    color: #e9e01c;
+    text-decoration: underline;
+}
+
+form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: bold;
+}
+
+select, input[type="text"], input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+select {
+    appearance: none;
+    background: white url('data:image/svg+xml;utf8,<svg fill="%23333" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>') no-repeat right 10px center;
+    background-size: 30px;
+    padding-right: 40px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #51f856;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #519c54;
+}
+
+input[type="file"] {
+    padding: 5px;
+}
+
+p[style*="color: red"] {
+    background-color: #ffebee;
+    border: 1px solid #f44336;
+    color: #d32f2f !important;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+}
