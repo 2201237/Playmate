@@ -4,11 +4,11 @@ require 'db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 
 // セッションからデータを取得
-$userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '';
+$userIcon = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/'. $_SESSION['User']['icon'] : '';
 $userId = $_SESSION['User']['user_id'];
 $userName = $_SESSION['User']['user_name'];
 $userPass = isset($_SESSION['User']['user_pass']) ? $_SESSION['User']['user_pass'] : '';
-$userProfile = isset($_SESSION['User']['user_profile']) ? 'https://aso2201222.kill.jp/'. $_SESSION['User']['user_profile'] : '';
+$userProfile = isset($_SESSION['User']['user_profile']) ? $_SESSION['User']['user_profile'] : '';
 ?>
 
 <!DOCTYPE html>
@@ -54,6 +54,7 @@ $userProfile = isset($_SESSION['User']['user_profile']) ? 'https://aso2201222.ki
             <input type='submit' class='input' name = "upload" value='編集完了'>
 
             </form>
+            <a href="#" onclick="window.history.back(); return false;">戻る</a><br>
 
 
             <script>
@@ -96,4 +97,3 @@ $userProfile = isset($_SESSION['User']['user_profile']) ? 'https://aso2201222.ki
     </div>
 </body>
 </html>
-//
