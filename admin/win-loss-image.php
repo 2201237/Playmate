@@ -81,15 +81,15 @@ try {
 
         // 組に画像を紐付け
         foreach ($matches as $match) {
-            $user1_image = $chat_images[$match['user_id1']] ?? [];
-            $user2_image = $chat_images[$match['user_id2']] ?? [];
+            $user1_images = $chat_images[$match['user_id1']] ?? [];
+            $user2_images = $chat_images[$match['user_id2']] ?? [];
             $results[] = [
                 'user1_id' => $match['user_id1'],
                 'user2_id' => $match['user_id2'],
                 'user1_name' => $match['user1_name'],
                 'user2_name' => $match['user2_name'],
-                'user1_image' => $user1_image[0]['image_path'] ?? null,
-                'user2_image' => $user2_image[0]['image_path'] ?? null,
+                'user1_images' => array_column($user1_images, 'image_path'),
+                'user2_images' => array_column($user2_images, 'image_path'),
                 'loser1' => $match['loser1'],
                 'loser2' => $match['loser2'],
             ];
@@ -188,18 +188,22 @@ try {
                 <tr>
                     <td><?= htmlspecialchars($row['user1_name']) ?> (<?= htmlspecialchars($row['user1_id']) ?>)</td>
                     <td>
-                        <?php if ($row['user1_image']): ?>
-                            <img src="win-loss-image/<?= urlencode(htmlspecialchars($row['user1_image'])) ?>" alt="画像">
+                        <?php if (!empty($row['user1_images'])): ?>
+                            <?php foreach ($row['user1_images'] as $image): ?>
+                                <img src="win-loss-image/<?= htmlspecialchars($image) ?>" alt="画像">
+                            <?php endforeach; ?>
                         <?php else: ?>
-                            画像なし
+                            <p>画像なし</p>
                         <?php endif; ?>
                     </td>
                     <td><?= htmlspecialchars($row['user2_name']) ?> (<?= htmlspecialchars($row['user2_id']) ?>)</td>
                     <td>
-                        <?php if ($row['user2_image']): ?>
-                            <img src="win-loss-image/<?= urlencode(htmlspecialchars($row['user2_image'])) ?>" alt="画像">
+                        <?php if (!empty($row['user2_images'])): ?>
+                            <?php foreach ($row['user2_images'] as $image): ?>
+                                <img src="win-loss-image/<?= htmlspecialchars($image) ?>" alt="画像">
+                            <?php endforeach; ?>
                         <?php else: ?>
-                            画像なし
+                            <p>画像なし</p>
                         <?php endif; ?>
                     </td>
                     <td>

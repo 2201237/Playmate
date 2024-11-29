@@ -1,0 +1,73 @@
+
+body {
+    font-family: sans-serif;
+    margin: 20px;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.tournament-item {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+.btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    color: white;
+}
+.btn-update {
+    background-color: #4CAF50;
+}
+.btn-delete {
+    background-color: #f44336;
+}
+.back {
+    display: inline-block;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #333;
+}
+.message {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 3px;
+}
+.success {
+    background-color: #dff0d8;
+    color: #3c763d;
+    border: 1px solid #d6e9c6;
+}
+.error {
+    background-color: #f2dede;
+    color: #a94442;
+    border: 1px solid #ebccd1;
+}
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}

@@ -102,7 +102,7 @@ try {
                     <!-- アイコンの表示 -->
                     <a href="profile-partner.php?user_id=<?= htmlspecialchars($chat['user_id']) ?>">
                         <!-- 各ユーザーのアイコンを個別に表示 -->
-                        <img src="../img/<?= htmlspecialchars($chat['icon'] ?? 'icon_user.png') ?>" class="icon_user" width="50" height="50">
+                        <img src="<?= htmlspecialchars($iconBaseUrl . $chat['icon'] ?? 'icon_user.png') ?>" class="icon_user" width="50" height="50">
                     </a>
                     <span><?= htmlspecialchars($chat['user_name']) ?></span>
                 </div>
@@ -118,9 +118,10 @@ try {
     <form method="POST" action="">
         <label for="chat">新しいメッセージ</label>
         <textarea name="chat" id="chat" rows="5" required></textarea>
-        <br><br>
-        <button type="submit">送信</button>
-        <button type="button" onclick="location.href='chatboard-title.php'">戻る</button>
+        <div class="button-group">
+            <button type="submit">送信</button>
+            <button type="button" onclick="location.href='chatboard-title.php'">戻る</button>
+        </div>
     </form>
 </body>
 </html>
