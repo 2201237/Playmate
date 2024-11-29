@@ -1,7 +1,7 @@
 <?php
 
 // セッションからアイコンのパスを取得
-$userIcon = isset($_SESSION['User']['icon']) ?  'https://aso2201222.kill.jp/'.$_SESSION['User']['icon'] : '../img/icon_user.png';
+$userIcon = 'https://aso2201222.kill.jp/'.$_SESSION['User']['user_icon'];
 ?>
 
 <div class="hamburger">
@@ -35,12 +35,7 @@ $userIcon = isset($_SESSION['User']['icon']) ?  'https://aso2201222.kill.jp/'.$_
 
     <a href="profile-input.php">
         <?php 
-           if (isset($userIcon) && $userIcon !== '') {
-
             echo "<img src='".$userIcon."' class='icon_user' width='50' height='50'>";
-            } else {
-                echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
-            }
         ?>
     </a>
 

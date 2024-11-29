@@ -6,7 +6,7 @@ $pdo = new PDO($connect, USER, PASS);
 $current_page = basename($_SERVER['REQUEST_URI']);
 
 // セッションからアイコンのパスを取得
-$userIcon = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/'.$_SESSION['User']['icon'] : '../img/icon_user.png';
+$userIcon = 'https://aso2201222.kill.jp/'.$_SESSION['User']['user_icon'];
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -23,12 +23,7 @@ $userIcon = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/'.$_S
             <img src="../img/logo.png" class="logo" width="180" height="">
         <a href="./profile-input.php">
         <?php 
-           if (isset($userIcon) && $userIcon !== '') {
-
             echo "<img src='".$userIcon."' class='icon_user' width='50' height='50'>";
-            } else {
-                echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
-            }
         ?>
         </a>
 
