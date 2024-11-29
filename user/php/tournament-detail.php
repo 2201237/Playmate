@@ -76,6 +76,12 @@ if (isset($_GET['tournament_id'])) {
         
         <p>ゲーム名: <?php echo htmlspecialchars($game['title']); ?></p>
         <p>ルール: <?php echo htmlspecialchars($tournament['rule']); ?></p>
+        <p>参加締切: 
+            <?php
+            $deadline = new DateTime($tournament['tournament_deadline']);
+            echo htmlspecialchars($deadline->format('Y年m月d日 H:i'));
+            ?>
+        </p>
 
         <!-- すでに参加している場合は参加ボタンを表示しない -->
         <?php if ($is_participating == 0): ?>

@@ -20,6 +20,24 @@ if (!isset($_SESSION['User']['user_id'])) {
 $user_id = $_SESSION['User']['user_id'];
 
 try {
+    // 締切時間の取得
+    $deadline_sql = $pdo->prepare("SELECT tournament_deadline FROM tournament WHERE tournament_id = ?");
+    $deadline_sql->execute([$tournament_id]);
+    $tournament = $deadline_sql->fetch();
+
+    if (!$tournament) {
+        echo "<script>alert('エラー: 大会情報が見つかりません。'); history.back();</script>";
+        exit();
+    }
+
+    // 締切時間を現在時刻と比較
+    $current_time = new DateTime();
+    $deadline_time = new DateTime($tournament['tournament_deadline']);
+    if ($current_time > $deadline_time) {
+        echo "<script>alert('エラー: 締切時間を過ぎているため、大会に参加できません。'); history.back();</script>";
+        exit();
+    }
+
     // すでに参加しているか確認するクエリ
     $check_sql = $pdo->prepare("SELECT COUNT(*) FROM tournament_member WHERE tournament_id = ? AND user_id = ?");
     $check_sql->execute([$tournament_id, $user_id]);
