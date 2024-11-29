@@ -14,7 +14,7 @@
     <h2>大会管理</h2>
 
     <div>
-    <button class="menu-button" onclick="location.href='tournament-results.php'">大会戦績管理</button><br>
+        <button class="menu-button" onclick="location.href='stats.php'">戦績管理</button><br>
         <button class="menu-button" onclick="location.href='win-loss-image.php'">勝敗画像管理</button><br>
         <button class="menu-button" onclick="location.href='tournament-create.php'">大会作成</button><br>
         <button class="menu-button" onclick="location.href='tournament-edit.php'">大会削除・更新</button><br>
