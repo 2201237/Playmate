@@ -4,6 +4,12 @@ require 'db-connect.php';
 require 'header.php';
 $pdo = new PDO($connect, USER, PASS);
 
+// ログインチェック
+if (!isset($_SESSION['User'])) {
+    echo "ログインしてください。";
+    exit;
+}
+
 // tournament_id が URL パラメータとして渡されていることを確認
 if (isset($_GET['tournament_id'])) {
     $tournament_id = $_GET['tournament_id'];
@@ -13,10 +19,20 @@ if (isset($_GET['tournament_id'])) {
     $stmt->execute([$tournament_id]);
     $tournament = $stmt->fetch();
 
+    if (!$tournament) {
+        echo "大会情報が見つかりませんでした。";
+        exit;
+    }
+
     // ゲームの情報を取得
     $game_stmt = $pdo->prepare('SELECT * FROM game WHERE game_id = ?');
     $game_stmt->execute([$tournament['game_id']]);
     $game = $game_stmt->fetch();
+
+    if (!$game) {
+        echo "ゲーム情報が見つかりませんでした。";
+        exit;
+    }
 
     // ゲームアイコンのパス
     $image_path = "../img/" . $game['game_id'] . ".jpg";
@@ -28,6 +44,14 @@ if (isset($_GET['tournament_id'])) {
     $check_participation = $pdo->prepare('SELECT COUNT(*) FROM tournament_member WHERE tournament_id = ? AND user_id = ?');
     $check_participation->execute([$tournament_id, $user_id]);
     $is_participating = $check_participation->fetchColumn();
+
+    // ログインユーザーに関連するラウンドを取得
+    $round_stmt = $pdo->prepare('SELECT DISTINCT round FROM tournament_kumi WHERE tournament_id = ? AND (user_id1 = ? OR user_id2 = ?)');
+    $round_stmt->execute([$tournament_id, $user_id, $user_id]);
+    $rounds = $round_stmt->fetchAll(PDO::FETCH_COLUMN);
+} else {
+    echo "大会IDが指定されていません。";
+    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -63,9 +87,17 @@ if (isset($_GET['tournament_id'])) {
         <?php endif; ?>
 
         <a href="tournament-list.php">戻る</a>
-        <a href="tournament-chat.php?tournament_id=<?php echo $tournament_id; ?>&round=0">大会チャット（全体）</a>
-        <a href="tournament-chat.php?tournament_id=<?php echo $tournament_id; ?>&round=1">大会チャット（1回戦）</a>
-        <!-- 必要に応じて追加のラウンドのリンクを追加 -->
+
+        <!-- チャットリンク -->
+        <div>
+            <h2>大会チャット</h2>
+            <a href="tournament-chat.php?tournament_id=<?php echo $tournament_id; ?>&round=0">全体チャット</a>
+            <?php foreach ($rounds as $round): ?>
+                <a href="tournament-chat.php?tournament_id=<?php echo $tournament_id; ?>&round=<?php echo $round; ?>">
+                    <?php echo htmlspecialchars($round); ?>回戦チャット
+                </a>
+            <?php endforeach; ?>
+        </div>
     </div>
 </body>
 </html>
