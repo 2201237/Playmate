@@ -72,19 +72,23 @@ try {
     <?php require 'header.php'; ?>
 
     <div class="container">
-        <a href="chatboard-create.php">チャット作成</a>
+    <button onclick="window.location.href='chatboard-create.php';">チャット作成</button>
+
+
 
         <!-- ゲームタイトルセクション -->
-        <div class="game-title-list">
-            <div class="headline">ゲームタイトル</div>
-            <ul>
-                <?php foreach ($games as $game): ?>
-                    <li><a href="?game_id=<?php echo htmlspecialchars($game['game_id'], ENT_QUOTES, 'UTF-8'); ?>">
-                            <?php echo htmlspecialchars($game['title'], ENT_QUOTES, 'UTF-8'); ?>
-                        </a></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
+        <div class="game-title-dropdown">
+    <label for="game-title">ゲームタイトル</label>
+    <select id="game-title" name="game_id">
+        <option value="">選択してください</option>
+        <?php foreach ($games as $game): ?>
+            <option value="<?php echo htmlspecialchars($game['game_id'], ENT_QUOTES, 'UTF-8'); ?>">
+                <?php echo htmlspecialchars($game['title'], ENT_QUOTES, 'UTF-8'); ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+</div>
+
 
         <!-- 掲示板一覧セクション -->
         <div class="headline">掲示板一覧</div>
