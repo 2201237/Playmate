@@ -1,140 +1,127 @@
-body{
-    justify-content: center;
-    align-items: center;
-}
-h3 {
-    color: #555;
-    margin-bottom: 20px;
-    text-align: center;
+/* 全体のレイアウト */
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
 }
 
-form {
-    background-color: #fff;
-    padding: 20px 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* ヘッダーのスタイル */
+header {
+    height: 60px;
+    background-color: #f8f9fa;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 500px;
-    text-align: left;
+    z-index: 1000;
 }
 
-/* ラベルと入力欄のスタイル */
-label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-    color: #333;
-}
-
-input[type="text"],
-textarea,
-select {
-    width: 100%;
+/* ゲームタイトルリスト */
+.game-title-list {
+    position: fixed;
+    top: 60px; /* ヘッダーの下に配置 */
+    left: 0;
+    width: 20%; /* 幅の調整 */
+    height: calc(100vh - 60px);
+    background-color: #f1f1f1;
     padding: 10px;
-    margin: 8px 0 20px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1em;
-    color: #333;
-    transition: border-color 0.3s;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    z-index: 500;
+    margin-right: 20px; /* 右側の余白 */
 }
 
-input[type="text"]:focus,
-textarea:focus,
-select:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-/* ボタンのスタイル */
-button {
-    width: 48%;
-    padding: 10px;
-    font-size: 1em;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin: 5px 1%;
-    text-align: center;
-}
-
-button[type="button"] {
-    background-color: #6c757d; /* 戻るボタンの色を少し変える */
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-button[type="button"]:hover {
-    background-color: #5a6268;
-}
-
-/* メディアクエリでモバイル対応 */
-@media (max-width: 500px) {
-    form {
-        padding: 20px;
-    }
-    button {
-        width: 100%;
-        margin: 10px 0;
-    }
-}
-/* チャットコンテナのスクロール対応 */
+/* チャットエリア */
 .chat-container {
-    max-height: calc(100vh - 220px); /* 画面サイズに応じて高さを調整 */
-    overflow-y: auto; /* スクロール可能にする */
-    margin-bottom: 80px; /* フォーム分のスペースを確保 */
-    padding: 10px;
-    background-color: #f9f9f9; /* 背景色 */
+    flex-grow: 1;
+    margin-left: 20%; /* ゲームタイトルリストの幅を考慮 */
+    background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* 入力フォームを画面の下部に固定 */
-form {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 500px;
-    background-color: #fff;
-    padding: 15px 20px;
-    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1); /* 上方向の影を付ける */
-    z-index: 1000;
-    border-radius: 10px 10px 0 0; /* 上部の角を丸くする */
-}
-
-/* メッセージ入力欄のスタイル調整 */
-form textarea {
-    resize: none; /* サイズ変更を無効化 */
-    height: 80px;
-}
-
-/* ボタンの横並び対応 */
-form .button-group {
+    padding: 20px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    height: calc(100vh - 120px); /* フォームの高さを考慮 */
+    padding-bottom: 80px; /* 入力欄とチャット内容が重ならないように */
+    margin-top: 10px; /* ゲームタイトルリストとの余白 */
+}
+
+/* チャットメッセージ */
+.chat-message {
+    display: flex;
+    align-items: flex-start;
     gap: 10px;
 }
 
-form button {
-    width: 48%; /* 横並びにした場合のボタンの幅 */
+.chat-message.self {
+    justify-content: flex-end;
 }
 
-/* スクロールバーのスタイル (オプション) */
-.chat-container::-webkit-scrollbar {
-    width: 8px;
+.chat-box {
+    max-width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    word-wrap: break-word;
+    font-size: 1.1em;
 }
-.chat-container::-webkit-scrollbar-thumb {
-    background-color: #bbb;
-    border-radius: 4px;
+
+.chat-time {
+    font-size: 0.8em;
+    color: #888;
+    text-align: right;
+    margin-top: 5px;
 }
-.chat-container::-webkit-scrollbar-thumb:hover {
-    background-color: #999;
+
+/* フォームのスタイル */
+form {
+    position: fixed;
+    bottom: 0;
+    left: 20%; /* ゲームタイトルリストの幅を考慮 */
+    width: 80%; /* ゲームタイトルリストを除いた幅 */
+    background-color: #fff;
+    padding: 10px 15px;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    flex-direction: row; /* 横並びに配置 */
+    gap: 10px;
+    align-items: center; /* 中央に配置 */
+}
+
+/* 入力欄 */
+form textarea {
+    resize: none;
+    height: 40px; /* 高さを縮小 */
+    width: 70%; /* 幅を縮小 */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* 送信ボタン */
+.up-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.5em;
+    transition: background-color 0.3s;
+    margin-left: 10px; /* ボタンと入力欄の間の余白 */
+}
+
+.up-button:hover {
+    background-color: #0056b3;
 }

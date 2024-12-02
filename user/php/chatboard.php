@@ -23,6 +23,11 @@ try {
     // 現在のユーザーIDを取得
     $current_user_id = $_SESSION['User']['user_id'];
 
+    // ゲームタイトル一覧を取得
+    $stmt = $pdo->prepare("SELECT game_id, title FROM game ORDER BY title ASC");
+    $stmt->execute();
+    $games = $stmt->fetchAll();
+
     // URLパラメータからboard_title_idを取得
     $board_title_id = isset($_GET['board_title_id']) ? (int)$_GET['board_title_id'] : null;
 
@@ -89,25 +94,41 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/chatboard.css">
     <title>PlayMate - チャットボード</title>
 </head>
+<script>
+document.querySelector('.up-button').addEventListener('click', function() {
+    const chatContainer = document.querySelector('.chat-container');
+    chatContainer.scrollTop = chatContainer.scrollHeight - chatContainer.clientHeight;
+});
+</script>
 <body>
-    <h3>チャットボード</h3>
+    <?php require 'header.php'; ?>
+
+    <div class="game-title-list">
+        <div class="headline">ゲームタイトル</div>
+        <ul>
+            <?php foreach ($games as $game): ?>
+                <li><a href="chatboard-title.php?game_id=<?php echo htmlspecialchars($game['game_id'], ENT_QUOTES, 'UTF-8'); ?>">
+                    <?php echo htmlspecialchars($game['title'], ENT_QUOTES, 'UTF-8'); ?>
+                </a></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+
 
     <div class="chat-container">
         <?php foreach ($chats as $chat): ?>
             <div class="chat-message <?php echo ($chat['user_id'] == $current_user_id) ? 'self' : 'other'; ?>">
                 <div class="user-info">
-                    <!-- アイコンの表示 -->
                     <a href="profile-partner.php?user_id=<?= htmlspecialchars($chat['user_id']) ?>">
-                        <!-- 各ユーザーのアイコンを個別に表示 -->
                         <img src="<?= htmlspecialchars($iconBaseUrl . $chat['icon'] ?? 'icon_user.png') ?>" class="icon_user" width="50" height="50">
                     </a>
                     <span><?= htmlspecialchars($chat['user_name']) ?></span>
                 </div>
                 <div class="chat-box">
-                    <!-- チャットメッセージの表示 -->
                     <p><?= htmlspecialchars($chat['chat']) ?></p>
                     <div class="chat-time"><?= htmlspecialchars($chat['created_at']) ?></div>
                 </div>
@@ -116,12 +137,8 @@ try {
     </div>
 
     <form method="POST" action="">
-        <label for="chat">新しいメッセージ</label>
-        <textarea name="chat" id="chat" rows="5" required></textarea>
-        <div class="button-group">
-            <button type="submit">送信</button>
-            <button type="button" onclick="location.href='chatboard-title.php'">戻る</button>
-        </div>
+        <textarea name="chat" id="chat" rows="3"></textarea>
+        <button class="up-button" type="submit">↑</button>
     </form>
 </body>
 </html>
