@@ -51,14 +51,11 @@ if (isset($_GET['username'])) {
                 echo "<div class='user-info'>";
                 echo "<a href='profile-partner.php?user_id=". $user['user_id']. "' class = 'a-search' ></a>";
 
-            $iconPath = isset($user['icon']) ?  'https://aso2201222.kill.jp/'.$user['icon'] : 'https://aso2201222.kill.jp/Playmate/user/img/icon_user.png';
-            if (isset($iconPath) && $iconPath !== '') {
+            $iconPath = $user['icon'];
                 echo "<input type = 'hidden' name = '" . $iconPath . "' value = '" . $iconPath . "'></input>";
 
                 echo "<img src='".$iconPath."' class='icon_user' width='50' height='50'>";
-            } else {
-                echo "<img src='https://aso2201222.kill.jp/Playmate/user/img/icon_user.png' class='icon_user' width='50' height='50'>";
-            }
+            
                     echo "<strong>". $user['user_name'] . "</strong><br>";
                     echo $user['user_mail'] ;
                     echo 'User Name: ' . $user['user_name'];

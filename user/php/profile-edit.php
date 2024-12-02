@@ -4,7 +4,7 @@ require 'db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 
 // セッションからデータを取得
-$iconPath = 'https://aso2201222.kill.jp/'.$_SESSION['User']['user_icon'];
+$iconPath = $_SESSION['User']['user_icon'];
 $userId = $_SESSION['User']['user_id'];
 $userName = $_SESSION['User']['user_name'];
 $userPass = isset($_SESSION['User']['user_pass']) ? $_SESSION['User']['user_pass'] : '';

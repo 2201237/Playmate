@@ -36,7 +36,7 @@ if (isset($_GET['user_id'])) {
 
     // プロフィール情報を変数に格納
     $userId = $targetUser['user_id'];
-    $iconPath = 'https://aso2201222.kill.jp/'.$_SESSION['User']['user_icon'];
+    $iconPath = $targetUser['icon'] ;
     $userName = $targetUser['user_name'];
     $userProfile = $targetUser['profile'] ? $targetUser['profile'] : 'プロフィールは未設定です。';
     $userMail = $targetUser['user_mail'];

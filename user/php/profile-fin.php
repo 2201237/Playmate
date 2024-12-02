@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_name'], $_POST['
             $uniqueFileName = uniqid() . '.' . $fileExtension;
 
             // アップロード先のパス
-            $remoteFilePath =  $ftpDir . $uniqueFileName;
+            $remoteFilePath = $ftpDir . $uniqueFileName;
 
             // FTP接続とアップロード
             $ftpConnection = ftp_connect($ftpHost);

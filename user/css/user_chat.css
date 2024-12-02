@@ -1,6 +1,12 @@
 .my_chat{
-    left: 70%;
-    background-color: red;
+    width: 50%;
+    /* left: 70%; */
+    text-align: right;
+    float: right;
+    background-color: #00ff0e54;
+    margin: 30px;
+    border: groove;
+    border-radius: 20px 20px 0px 30px;
 }
 .you_chat{
     background-color: aqua;

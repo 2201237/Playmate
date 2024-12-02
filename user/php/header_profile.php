@@ -6,7 +6,7 @@ $pdo = new PDO($connect, USER, PASS);
 $current_page = basename($_SERVER['REQUEST_URI']);
 
 // セッションからアイコンのパスを取得
-$userIcon = 'https://aso2201222.kill.jp/'.$_SESSION['User']['user_icon'];
+$iconPath = $_SESSION['User']['user_icon'];
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -23,7 +23,7 @@ $userIcon = 'https://aso2201222.kill.jp/'.$_SESSION['User']['user_icon'];
             <img src="../img/logo.png" class="logo" width="180" height="">
         <a href="./profile-input.php">
         <?php 
-            echo "<img src='".$userIcon."' class='icon_user' width='50' height='50'>";
+            echo "<img src='".$iconPath."' class='icon_user' width='50' height='50'>";
         ?>
         </a>
 
@@ -31,7 +31,7 @@ $userIcon = 'https://aso2201222.kill.jp/'.$_SESSION['User']['user_icon'];
             <ul class = "header-ul " >
                 <li class = "header-li"><nobr><a class=”current” href="home.php">ホーム</a></nobr></li>
                 <li class = "header-li"><nobr><a class=”current” href="tournament-list.php">大会一覧</a></nobr></li>
-                <li class = "header-li"><nobr><a class=”current” href="#">掲示板</a></nobr></li>
+                <li class = "header-li"><nobr><a class=”current” href="chatboard-title.php">掲示板</a></nobr></li>
                 <li class = "header-li"><nobr><a class=”current” href="#">ランキング</a></nobr></li>
                 <li class = "header-li"><nobr><a class=”current” href="query-top.php">お問い合わせ</a></nobr></li>
                 <form action="search.php" class = "search" method="get">

@@ -1,7 +1,7 @@
 <?php
 
 // セッションからアイコンのパスを取得
-$userIcon = 'https://aso2201222.kill.jp/'.$_SESSION['User']['user_icon'];
+$iconPath = $_SESSION['User']['user_icon'];
 ?>
 
 <div class="hamburger">
@@ -35,7 +35,7 @@ $userIcon = 'https://aso2201222.kill.jp/'.$_SESSION['User']['user_icon'];
 
     <a href="profile-input.php">
         <?php 
-            echo "<img src='".$userIcon."' class='icon_user' width='50' height='50'>";
+            echo "<img src='".$iconPath."' class='icon_user' width='50' height='50'>";
         ?>
     </a>
 

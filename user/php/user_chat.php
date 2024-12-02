@@ -22,6 +22,20 @@ try {
     // 現在のユーザーIDを取得
     $UserId = $_SESSION['User']['user_id'];
 
+    // GETリクエストから相手のユーザーIDを取得
+    if (!isset($_GET['user_id'])) {
+        throw new Exception("相手のユーザーIDが指定されていません。");
+    }
+    $partnerId = (int)$_GET['user_id'];
+
+    // 相手のユーザー情報を取得
+    $stmt = $pdo->prepare('SELECT user_name, icon FROM users WHERE user_id = ?');
+    $stmt->execute([$partnerId]);
+    $partnerInfo = $stmt->fetch();
+    if (!$partnerInfo) {
+        throw new Exception("相手のユーザー情報が見つかりません。");
+    }
+
     // POSTされたチャットメッセージを処理
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['chat'])) {
         $chat_message = trim($_POST['chat']);
@@ -33,18 +47,16 @@ try {
         ");
         $stmt->execute([
             ':chat' => $chat_message,
-            ':user_id1' => $UserId, // セッションから取得した現在のユーザーID
-            ':user_id2' => $_GET['user_id'],
+            ':user_id1' => $UserId,
+            ':user_id2' => $partnerId,
         ]);
 
-        // チャットを更新
+        // ページをリロードしてチャットを更新
         header("Location: " . $_SERVER['REQUEST_URI']);
         exit;
     }
 
-    // チャットメッセージを取得するコード
-    $user_id1 = $UserId;
-    $user_id2 = $_GET['user_id'];
+    // チャットメッセージを取得
     $stmt = $pdo->prepare("
         SELECT 
             c.chat, 
@@ -62,9 +74,10 @@ try {
         ORDER BY 
             c.created_at ASC
     ");
-    $stmt->bindParam(':user_id1', $user_id1, PDO::PARAM_INT);
-    $stmt->bindParam(':user_id2', $user_id2, PDO::PARAM_INT);
-    $stmt->execute();
+    $stmt->execute([
+        ':user_id1' => $UserId,
+        ':user_id2' => $partnerId,
+    ]);
     $chats = $stmt->fetchAll();
 
 } catch (PDOException $e) {
@@ -85,58 +98,59 @@ try {
     <title>PlayMate - チャットボード</title>
 </head>
 <body>
+    <!-- 上部に相手の情報を表示 -->
+    <div class="user-header">
+        <a href="profile-partner.php?user_id=<?= ($partnerId); ?>">
+            <img src="<?= ($partnerInfo['icon'] ?: '../img/icon_user.png'); ?>" 
+                 class="icon_user" width="50" height="50" alt="Profile Icon">
+        </a>
+        <span><?= ($partnerInfo['user_name']); ?></span>
+    </div>
+
+    <!-- チャットメッセージ表示 -->
     <div class="chat-container">
         <?php foreach ($chats as $chat): ?>
             <div class="chat-message">
                 <div class="user-info">
-                    <?php
-                    $iconPath = isset($chat['icon']) ? 'https://aso2201222.kill.jp/'.$chat['icon'] : '';
-                    
-                    if ($chat['user_id'] == $user_id1) {
-                        // 自身のメッセージ
-                        echo "<div class = 'my_chat'>";
-                        echo "<span>あなた: </span>";
-
-                            echo "<img src='" . $iconPath . "' class='icon_user' width='50' height='50'>";
-                            
-                        echo '<div class="chat-box">';
-                        echo '<p>' . $chat["chat"]. ' </p>';
-                        echo '<div class="chat-time">' . $chat["created_at"] .'</div>';
-                        echo '</div>';
-    
-                        echo "</div>";
-                    } else {
-                        // 相手のメッセージ
-                        echo "<div class = 'you_chat'>";
-                        echo "<a href='profile-partner.php?user_id=" . $chat['user_id'] . "'>";
-                        if ($iconPath !== '') {
-                            echo "<img src='" . $iconPath . "' class='icon_user' width='50' height='50'>";
-                        } else {
-                            echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
-                        }
-                        echo "</a>";
-                        echo "<span>" . $chat['user_name'] . ": </span>";
-                        echo '<div class="chat-box">';
-                        echo '<p>' . $chat["chat"]. ' </p>';
-                        echo '<div class="chat-time">' . $chat["created_at"] .'</div>';
-                        echo '</div>';
-    
-                        echo "</div>";
-                    }
-                    ?>
+                    <?php if ($chat['user_id'] == $UserId): ?>
+                        <!-- 自分のメッセージ -->
+                        <div class="my_chat">
+                            <span>あなた: </span>
+                            <img src="<?= ($chat['icon']); ?>" 
+                                 class="icon_user" width="50" height="50" alt="Profile Icon">
+                            <div class="chat-box">
+                                <p><?= ($chat['chat']); ?></p>
+                                <div class="chat-time"><?= ($chat['created_at']); ?></div>
+                            </div>
+                        </div>
+                    <?php else: ?>
+                        <!-- 相手のメッセージ -->
+                        <div class="you_chat">
+                            <a href="profile-partner.php?user_id=<?= ($chat['user_id']); ?>">
+                                <img src="<?= ($chat['icon'] ?: '../img/icon_user.png'); ?>" 
+                                     class="icon_user" width="50" height="50" alt="Profile Icon">
+                            </a>
+                            <span><?= ($chat['user_name']); ?>:</span>
+                            <div class="chat-box">
+                                <p><?= ($chat['chat']); ?></p>
+                                <div class="chat-time"><?= ($chat['created_at']); ?></div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         <?php endforeach; ?>
     </div>
 
+    <!-- チャット送信フォーム -->
     <form method="POST" action="">
         <label for="chat">新しいメッセージ</label>
         <textarea name="chat" id="chat" rows="5" required></textarea>
         <br><br>
         <button type="submit">送信</button>
     </form>
-    <form action = "home.php" method = "POST">
-        <button type = "submit">ホームに戻る</button>
+    <form action="home.php" method="POST">
+        <button type="submit">ホームに戻る</button>
     </form>
 </body>
 </html>
