@@ -49,7 +49,7 @@ if (isset($_GET['username'])) {
         }else{
             foreach ($users as $user){
                 echo "<div class='user-info'>";
-                echo "<a href='profile-partner.php?user_id=". $user['user_id']. "' class = 'a-search' ></a>";
+                echo "<a href='profile-partner.php?user_id=". $user['user_id']. "'></a>";
 
             $iconPath = isset($user['icon']) ?  'https://aso2201222.kill.jp/'.$user['icon'] : '';
             if (isset($iconPath) && $iconPath !== '') {
@@ -61,12 +61,6 @@ if (isset($_GET['username'])) {
             }
                     echo "<strong>". $user['user_name'] . "</strong><br>";
                     echo $user['user_mail'] ;
-                    echo 'User Name: ' . $user['user_name'];
-                    echo "<form action='user_chat.php?user_id=". $user['user_id']. "' class = 'user_c' method='post'>";
-                        echo '<button type="submit" class="button">チャット</button>';
-                    echo '</form>';
-                    
-    
                 echo "</div>";
                 }
             }

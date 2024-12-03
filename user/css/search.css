@@ -13,14 +13,3 @@
 .user-info:hover{
     background-color: rgb(198, 196, 196);
 }
-.button{
-    border: none;
-    border-radius: 8px;
-    margin-top: 8px;
-    padding: 4px 16px;
-    position: relative;
-  }
-  
-  .button:hover {
-    cursor: pointer;
-  }

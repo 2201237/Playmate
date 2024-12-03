@@ -64,15 +64,12 @@ ob_end_flush();  // 出力バッファをフラッシュ
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/chatboard.css">
-
-
     <title>PlayMate - 掲示板作成</title>
 </head>
 <body>
     <h3>掲示板作成</h3>
-    <form method="POST" class = "create" action="">
+    <form method="POST" action="">
         <label for="game_id">ゲームタイトル</label>
         <select name="game_id" id="game_id" required>
             <?php foreach ($games as $game): ?>
@@ -84,7 +81,7 @@ ob_end_flush();  // 出力バッファをフラッシュ
         <br><br>
 
         <label for="title">タイトル</label>
-        <input type="text" id="title" class = "ctext" name="title" required>
+        <input type="text" id="title" name="title" required>
         <br><br>
 
         <label for="chat">投稿内容</label>
@@ -92,7 +89,7 @@ ob_end_flush();  // 出力バッファをフラッシュ
         <br><br>
 
         <button type="submit">作成</button>
-        <button type="button" class = "cbut" onclick="location.href='chatboard-title.php'">戻る</button>
+        <button type="button" onclick="location.href='index.php'">戻る</button>
     </form>
 </body>
 </html>

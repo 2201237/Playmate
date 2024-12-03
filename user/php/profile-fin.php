@@ -4,7 +4,7 @@ require 'db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 
 $userId = $_SESSION['User']['user_id'];
-$userIcon = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/'. $_SESSION['User']['icon'] : '../img/icon_user.png';
+$iconPath = $_SESSION['User']['user_icon'];
 $userName = $_SESSION['User']['user_name'];
 $userProfile = isset($_SESSION['User']['user_profile']) ? $_SESSION['User']['user_profile'] : '';
 $userMail = isset($_SESSION['User']['user_mail']) ? $_SESSION['User']['user_mail'] : '';
@@ -15,11 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_name'], $_POST['
     $userProfile = $_POST['profile'];
     $userPass = password_hash($_POST['user_pass'], PASSWORD_DEFAULT);
 
-    // アイコンの初期値は現在のアイコン
-    $iconPath = $userIcon;
 
     if (isset($_POST['use_default_icon'])) {
-        $iconPath = '../img/icon_user.png'; // デフォルトアイコンを使用
+        $iconPath = 'https://aso2201222.kill.jp/Playmate/user/img/icon_user.png'; // デフォルトアイコンを使用
+        // $_SESSION['User']['icon'] = $iconPath;
+
     } else {
         if (isset($_FILES['icon']) && $_FILES['icon']['error'] === UPLOAD_ERR_OK) {
             // FTPサーバーの情報
@@ -56,10 +56,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_name'], $_POST['
 
             // ファイルアップロード
             if (ftp_put($ftpConnection, $remoteFilePath, $fileTmpPath, FTP_BINARY)) {
-                $iconPath = $remoteFilePath; // アップロードしたファイルのパスを保存
+                $iconPath = 'https://aso2201222.kill.jp/'. $remoteFilePath; // アップロードしたファイルのパスを保存
+
             } else {
                 echo "ファイルアップロードに失敗しました。";
             }
+            // $_SESSION['User']['icon'] = $iconPath;
 
             // 接続を閉じる
             ftp_close($ftpConnection);
@@ -74,36 +76,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_name'], $_POST['
     // セッションを更新
     $_SESSION['User']['user_name'] = $userName;
     $_SESSION['User']['user_profile'] = $userProfile;
-    $_SESSION['User']['icon'] = $iconPath;
+    $_SESSION['User']['user_icon'] = $iconPath;
 
     $_SESSION['update_message'] = "更新できました";
     header('Location: profile-input.php');
     exit();
     
-
-    // 画像がアップロードされた場合は処理
-    //     if (isset($_FILES['icon']) && $_FILES['icon']['error'] === UPLOAD_ERR_OK) {
-    //         $uploadDir = '../user_images/';
-    //         if (!is_dir($uploadDir)) {
-    //             mkdir($uploadDir, 0777, true);
-    //         }
-
-    //         // アップロードされた元のファイル名を取得
-    //         $originalFileName = basename($_FILES['icon']['name']);
-    //         $destPath = $uploadDir . $originalFileName;
-
-    //         // ファイル名が重複していた場合、既存ファイルを削除
-    //         if (file_exists($destPath)) {
-    //             unlink($destPath);
-    //         }
-
-    //         // ファイルを移動
-    //         if (move_uploaded_file($_FILES['icon']['tmp_name'], $destPath)) {
-    //             $iconPath = $destPath;
-    //         } else {
-    //             echo "画像のアップロードに失敗しました。";
-    //         }
-    //     }
 
 }
 ?>

@@ -19,12 +19,12 @@ if (isset($_POST['chat']) && isset($_POST['tournament_id']) && isset($_POST['rou
     // 画像アップロード処理
     if (!empty($_FILES['image']['name'])) {
         $upload_dir = '../../admin/win-loss-image/'; // アップロード先を指定
-        $filename = uniqid() . '_' . basename($_FILES['image']['name']);
+        $filename = uniqid() . '_' . basename($_FILES['image']['name']); // ファイル名生成
         $target_path = $upload_dir . $filename;
 
         // ファイルを指定ディレクトリに移動
         if (move_uploaded_file($_FILES['image']['tmp_name'], $target_path)) {
-            $image_path = $target_path;
+            $image_path = $filename; // ファイル名のみ保存
         } else {
             echo "画像のアップロードに失敗しました。";
             exit;

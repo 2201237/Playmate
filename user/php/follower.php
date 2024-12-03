@@ -49,7 +49,7 @@ $followerUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
 
                 echo 'User Name: ' . $user['user_name'];
-                echo "<form action='user_chat.php?user_id=". $user['user_id']. "' class = 'user_c' method='post'>";
+                echo '<form action="chat.php" method="post">';
                     echo '<button type="submit" class="button">チャット</button>';
                 echo '</form>';
                 

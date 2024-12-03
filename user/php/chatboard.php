@@ -1,10 +1,7 @@
 <?php
 session_start();
 require 'db-connect.php';
-
-// ユーザーのアイコンURLを設定
-$iconBaseUrl = 'https://aso2201222.kill.jp/';
-$userIcon = isset($_SESSION['User']['icon']) ? $iconBaseUrl . $_SESSION['User']['icon'] : '../img/icon_user.png';
+$userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '../img/icon_user.png';
 
 // エラーメッセージを表示
 ini_set('display_errors', 1);
@@ -43,13 +40,12 @@ try {
 
         // チャットメッセージをデータベースに挿入
         $stmt = $pdo->prepare("
-            INSERT INTO board_chat (board_title_id, chat, user_id, created_at)
-            VALUES (:board_title_id, :chat, :user_id, NOW())
+            INSERT INTO board_chat (board_title_id, chat, created_at)
+            VALUES (:board_title_id, :chat, NOW())
         ");
         $stmt->execute([
             ':board_title_id' => $board_title_id,
             ':chat' => $chat_message,
-            ':user_id' => $current_user_id, // セッションから取得した現在のユーザーID
         ]);
 
         // 再読み込みしてチャットを更新
@@ -59,20 +55,12 @@ try {
 
     // board_chatテーブルから特定のboard_title_idに関連するチャットデータを取得
     $stmt = $pdo->prepare("
-        SELECT 
-            c.chat, 
-            c.created_at, 
-            u.user_id, 
-            u.user_name, 
-            u.icon 
-        FROM 
-            board_chat AS c
-        JOIN 
-            users AS u ON c.user_id = u.user_id
-        WHERE 
-            c.board_title_id = :board_title_id
-        ORDER BY 
-            c.created_at ASC
+        SELECT c.chat, c.created_at, u.user_id, u.user_name, u.icon 
+        FROM board_chat AS c
+        JOIN board_title AS bt ON bt.board_title_id = c.board_title_id
+        JOIN users AS u ON u.user_id = bt.user_id
+        WHERE c.board_title_id = :board_title_id
+        ORDER BY c.created_at ASC
     ");
     $stmt->bindParam(':board_title_id', $board_title_id, PDO::PARAM_INT);
     $stmt->execute();
@@ -103,13 +91,10 @@ try {
             <div class="chat-message <?php echo ($chat['user_id'] == $current_user_id) ? 'self' : 'other'; ?>">
                 <div class="user-info">
                     <!-- アイコンの表示 -->
-                    <a href="profile-partner.php?user_id=<?= htmlspecialchars($chat['user_id']) ?>">
-                        <!-- 各ユーザーのアイコンを個別に表示 -->
-                        <img src="<?= htmlspecialchars($iconBaseUrl . $chat['icon'] ?? 'icon_user.png') ?>" class="icon_user" width="50" height="50">
-                    </a>
+                    <img src="../icons/<?= htmlspecialchars($chat['icon'] ?? $userIcon) ?>" class="icon_user" width="50" height="50">
                     <span><?= htmlspecialchars($chat['user_name']) ?></span>
                 </div>
-                <div class="chat-box">
+                <div class="chat-box <?php echo ($chat['user_id'] == $current_user_id) ? 'self' : 'other'; ?>">
                     <!-- チャットメッセージの表示 -->
                     <p><?= htmlspecialchars($chat['chat']) ?></p>
                     <div class="chat-time"><?= htmlspecialchars($chat['created_at']) ?></div>
@@ -121,10 +106,9 @@ try {
     <form method="POST" action="">
         <label for="chat">新しいメッセージ</label>
         <textarea name="chat" id="chat" rows="5" required></textarea>
-        <div class="button-group">
-            <button type="submit">送信</button>
-            <button type="button" onclick="location.href='chatboard-title.php'">戻る</button>
-        </div>
+        <br><br>
+        <button type="submit">送信</button>
+        <button type="button" onclick="location.href='chatboard-title.php'">戻る</button>
     </form>
 </body>
 </html>
