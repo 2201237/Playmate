@@ -159,6 +159,7 @@ button[type="button"]:hover {
         width: 100%;
         margin: 10px 0;
     }
+<<<<<<< HEAD
 }
 /* チャットコンテナのスクロール対応 */
 .chat-container {
@@ -216,4 +217,6 @@ form button {
     background-color: #999;
 =======
 >>>>>>> cd0bb936e7dcc76c789ffb2bce7adc380da5d1ff
+=======
+>>>>>>> parent of eb71ce9 (commit)
 }

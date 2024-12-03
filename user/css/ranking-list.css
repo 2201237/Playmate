@@ -198,8 +198,12 @@ body {
 
 /* 4位以下のテーブル */
 /* Page Wrapper/Container Style */
+<<<<<<< HEAD
 .container_not_3 {
   color: #20297e;
+=======
+.container {
+>>>>>>> parent of eb71ce9 (commit)
   font-family: "Poppins", sans-serif;
   width: 100%;
   max-width: 1140px;
@@ -209,7 +213,11 @@ body {
 
 /* Responsive Table Style */
 .responsive-table {
+<<<<<<< HEAD
   background-color: #fff;
+=======
+  background-color: #e7e7e7;
+>>>>>>> parent of eb71ce9 (commit)
   border-collapse: collapse;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.02);

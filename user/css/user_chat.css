@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* body {
      font-family: Arial, sans-serif; 
      background-color: #f4f4f9; 
@@ -120,3 +121,18 @@ textarea.chat {
     background-color: #36556d;
     text-decoration: none;
 }
+=======
+.my_chat{
+    width: 50%;
+    /* left: 70%; */
+    text-align: right;
+    float: right;
+    background-color: #00ff0e54;
+    margin: 30px;
+    border: groove;
+    border-radius: 20px 20px 0px 30px;
+}
+.you_chat{
+    background-color: aqua;
+}
+>>>>>>> parent of eb71ce9 (commit)
