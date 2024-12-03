@@ -95,46 +95,49 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/user_chat.css">
+    <link rel="stylesheet" href="../css/style.css">
+
     <title>PlayMate - チャットボード</title>
 </head>
 <body>
+        
     <!-- 上部に相手の情報を表示 -->
     <div class="user-header">
-        <a href="profile-partner.php?user_id=<?= ($partnerId); ?>">
-            <img src="<?= ($partnerInfo['icon'] ?: '../img/icon_user.png'); ?>" 
-                 class="icon_user" width="50" height="50" alt="Profile Icon">
-        </a>
-        <span><?= ($partnerInfo['user_name']); ?></span>
+        <form action="#" class = "home-header" method="POST">
+            <a href="profile-partner.php?user_id=<?= ($partnerId); ?>" class="link">
+                <img src = "../img/back.png"  class="icon" width="50" height="50">
+                <img src="<?= ($partnerInfo['icon']); ?>" class="icon" width="50" height="50" alt="Profile Icon">
+            </a>
+            <span class = "you-name"><?= ($partnerInfo['user_name']); ?></span>
+        </form>
     </div>
 
     <!-- チャットメッセージ表示 -->
-    <div class="chat-container">
+    <div class="chat-container" id="chatContainer">
         <?php foreach ($chats as $chat): ?>
             <div class="chat-message">
                 <div class="user-info">
                     <?php if ($chat['user_id'] == $UserId): ?>
                         <!-- 自分のメッセージ -->
-                        <div class="my_chat">
-                            <span>あなた: </span>
-                            <img src="<?= ($chat['icon']); ?>" 
-                                 class="icon_user" width="50" height="50" alt="Profile Icon">
-                            <div class="chat-box">
-                                <p><?= ($chat['chat']); ?></p>
-                                <div class="chat-time"><?= ($chat['created_at']); ?></div>
-                            </div>
+                        <div class="my-chat">
+                            <img src="<?= ($chat['icon']); ?>" class="my-icon" width="50" height="50" alt="Profile Icon">
+                        </div>
+                        <div class="my-chat-box">
+                            <p><?= ($chat['chat']); ?></p>
+                            <div class="chat-time"><?= ($chat['created_at']); ?></div>
                         </div>
                     <?php else: ?>
                         <!-- 相手のメッセージ -->
-                        <div class="you_chat">
+                        <div class="you-chat">
                             <a href="profile-partner.php?user_id=<?= ($chat['user_id']); ?>">
-                                <img src="<?= ($chat['icon'] ?: '../img/icon_user.png'); ?>" 
-                                     class="icon_user" width="50" height="50" alt="Profile Icon">
+                                <img src="<?= ($chat['icon']); ?>" 
+                                     class="you-icon" width="50" height="50" alt="Profile Icon">
                             </a>
-                            <span><?= ($chat['user_name']); ?>:</span>
-                            <div class="chat-box">
-                                <p><?= ($chat['chat']); ?></p>
-                                <div class="chat-time"><?= ($chat['created_at']); ?></div>
-                            </div>
+                            <span class="you-name"><?= ($chat['user_name']); ?></span>
+                        </div>
+                        <div class="you-chat-box">
+                            <p><?= ($chat['chat']); ?></p>
+                            <div class="chat-time"><?= ($chat['created_at']); ?></div>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -143,14 +146,41 @@ try {
     </div>
 
     <!-- チャット送信フォーム -->
-    <form method="POST" action="">
-        <label for="chat">新しいメッセージ</label>
-        <textarea name="chat" id="chat" rows="5" required></textarea>
-        <br><br>
-        <button type="submit">送信</button>
-    </form>
-    <form action="home.php" method="POST">
-        <button type="submit">ホームに戻る</button>
-    </form>
+    <div class="form-chat">
+        <form method="POST" action="">
+            <textarea name="chat" id="chat" class="chat" width="200" rows="6" placeholder="メッセージ" wrap="hard" required></textarea>
+            <label for="image-upload" class="image-upload-label"> 📷 
+                <input type="file" id="image-upload" name="image" accept="image/*" style="display: none;"> 
+            </label>
+            <button type="submit">送信</button>
+            <a href="#jump" class="jump">↓</a>
+        </form>
+        <div id="jump"></div>
+    </div>
+
+    <script>
+    window.onload = function() {
+        jump(); // ページロード時に最下部にスクロール
+    };
+
+    function jump() {
+        var chatContainer = document.getElementById('chatContainer');
+        chatContainer.scrollTop = chatContainer.scrollHeight; // 必ず最下部にスクロール
+    }
+
+        if (chatContainer.scrollHeight - chatContainer.scrollTop > chatContainer.clientHeight + 10) {
+            scrollButton.style.display = 'block'; // ボタンを表示
+        } else {
+            scrollButton.style.display = 'none'; // ボタンを非表示
+        };
+
+    document.querySelector('.jump').addEventListener('click', function() {
+        jump(); // 最下部にスクロール
+    });
+
+    document.querySelector('form').addEventListener('submit', function() {
+        setTimeout(jump, 100); // 少し遅延させて最下部にスクロール
+    });
+    </script>
 </body>
 </html>
