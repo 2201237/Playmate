@@ -1,4 +1,125 @@
-body{
+/* 全体のレイアウト */
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+/* ヘッダーのスタイル */
+header {
+    height: 60px;
+    background-color: #f8f9fa;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* ゲームタイトルリスト */
+#game-title-list {
+    display: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 20%; /* 必要に応じて調整 */
+    height: calc(100vh - 70px);
+    background-color: #f1f1f1;
+    padding: 10px;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    z-index: 500;
+    margin-right: 20px;
+}
+
+/* リストが表示されたとき */
+#game-title-list.show {
+    display: block;
+}
+
+/* チャットエリア */
+.chat-container {
+    flex-grow: 1;
+    margin-left: 20%; /* ゲームタイトルリストの幅を考慮 */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    height: calc(100vh - 120px); /* フォームの高さを考慮 */
+    padding-bottom: 80px; /* 入力欄とチャット内容が重ならないように */
+    margin-top: 10px; /* ゲームタイトルリストとの余白 */
+}
+
+/* チャットメッセージ */
+.chat-message {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.chat-message.self {
+    justify-content: flex-end;
+}
+
+.chat-box {
+    max-width: 80%;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    word-wrap: break-word;
+    font-size: 1.1em;
+}
+
+.chat-time {
+    font-size: 0.8em;
+    color: #888;
+    text-align: right;
+    margin-top: 5px;
+}
+
+/* フォームのスタイル */
+form {
+    position: fixed;
+    bottom: 0;
+    left: 20%; /* ゲームタイトルリストの幅を考慮 */
+    width: 80%; /* ゲームタイトルリストを除いた幅 */
+    background-color: #fff;
+    padding: 10px 15px;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    flex-direction: row; /* 横並びに配置 */
+    gap: 10px;
+    align-items: center; /* 中央に配置 */
+}
+
+/* 入力欄 */
+form textarea {
+    resize: none;
+    height: 30px; /* 高さを縮小 */
+    width: 40%; /* 幅を縮小 */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* 送信ボタン */
+.up-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    width: 50px;
+    height: 50px;
+    display: flex;
     justify-content: center;
     align-items: center;
 }

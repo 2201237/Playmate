@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'db-connect.php';
-$userIcon = isset($_SESSION['User']['icon']) ? $_SESSION['User']['icon'] : '../img/icon_user.png';
+$userIcon = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/' . $_SESSION['User']['icon'] : 'https://aso2201222.kill.jp/Playmate/user/img/icon_user.png';
 
 // エラーメッセージを表示
 ini_set('display_errors', 1);
@@ -26,7 +26,6 @@ try {
     // URLパラメータからboard_title_idを取得
     $board_title_id = isset($_GET['board_title_id']) ? (int)$_GET['board_title_id'] : null;
 
-    // board_title_idが指定されていない場合はエラーメッセージを表示して終了
     if ($board_title_id === null) {
         echo "掲示板IDが指定されていません。<br>";
         echo "現在のURL: " . htmlspecialchars($_SERVER['REQUEST_URI']) . "<br>";
@@ -38,7 +37,6 @@ try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['chat'])) {
         $chat_message = trim($_POST['chat']);
 
-        // チャットメッセージをデータベースに挿入
         $stmt = $pdo->prepare("
             INSERT INTO board_chat (board_title_id, chat, created_at)
             VALUES (:board_title_id, :chat, NOW())
@@ -46,19 +44,18 @@ try {
         $stmt->execute([
             ':board_title_id' => $board_title_id,
             ':chat' => $chat_message,
+            ':user_id' => $current_user_id,
         ]);
 
-        // 再読み込みしてチャットを更新
         header("Location: " . $_SERVER['REQUEST_URI']);
         exit;
     }
 
-    // board_chatテーブルから特定のboard_title_idに関連するチャットデータを取得
+    // チャットデータを取得
     $stmt = $pdo->prepare("
         SELECT c.chat, c.created_at, u.user_id, u.user_name, u.icon 
         FROM board_chat AS c
-        JOIN board_title AS bt ON bt.board_title_id = c.board_title_id
-        JOIN users AS u ON u.user_id = bt.user_id
+        JOIN users AS u ON c.user_id = u.user_id
         WHERE c.board_title_id = :board_title_id
         ORDER BY c.created_at ASC
     ");
@@ -80,18 +77,33 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/chatboard.css">
     <title>PlayMate - チャットボード</title>
+    <link rel="stylesheet" href="../css/chatboard.css">
 </head>
 <body>
-    <h3>チャットボード</h3>
+    <?php require 'header.php'; ?>
+
+    <!-- ゲームタイトルを表示するボタン -->
+    <button onclick="toggleGameList()" style="position: fixed; top: 70px; left: 20px; z-index: 1001;">ゲームタイトル</button>
+
+    <div id="game-title-list" class="game-title-list">
+        <div class="headline">ゲームタイトル</div>
+        <ul>
+            <?php foreach ($games as $game): ?>
+                <li><a href="chatboard-title.php?game_id=<?php echo htmlspecialchars($game['game_id'], ENT_QUOTES, 'UTF-8'); ?>">
+                    <?php echo htmlspecialchars($game['title'], ENT_QUOTES, 'UTF-8'); ?>
+                </a></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
 
     <div class="chat-container">
         <?php foreach ($chats as $chat): ?>
             <div class="chat-message <?php echo ($chat['user_id'] == $current_user_id) ? 'self' : 'other'; ?>">
                 <div class="user-info">
-                    <!-- アイコンの表示 -->
-                    <img src="../icons/<?= htmlspecialchars($chat['icon'] ?? $userIcon) ?>" class="icon_user" width="50" height="50">
+                    <a href="profile-partner.php?user_id=<?= htmlspecialchars($chat['user_id']) ?>">
+                        <img src="<?= htmlspecialchars($userIcon . $chat['icon'] ?? 'icon_user.png') ?>" class="icon_user" width="50" height="50">
+                    </a>
                     <span><?= htmlspecialchars($chat['user_name']) ?></span>
                 </div>
                 <div class="chat-box <?php echo ($chat['user_id'] == $current_user_id) ? 'self' : 'other'; ?>">
@@ -110,5 +122,14 @@ try {
         <button type="submit">送信</button>
         <button type="button" onclick="location.href='chatboard-title.php'">戻る</button>
     </form>
+
+    <script>
+        function toggleGameList() {
+            const gameList = document.getElementById('game-title-list');
+            if (gameList) {
+                gameList.classList.toggle('show');
+            }
+        }
+    </script>
 </body>
 </html>
