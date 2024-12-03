@@ -1,12 +1,3 @@
-/* Fonts */
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400);
-
-/* fontawesome */
-@import url(http://weloveiconfonts.com/api/?family=fontawesome);
-[class*="fontawesome-"]:before {
-  font-family: 'FontAwesome', sans-serif;
-}
-
 /* 初期状態でモーダルを非表示にする */
 #logoutModal {
     display: none;
@@ -31,59 +22,3 @@
     width: 300px;
     text-align: center;
 }
-
-.profile-icon {
-    width: 200px;
-    height: 200px;
-    margin: auto;
-}
-
-.profile-icon img {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-}
-
-p {
-    text-align: center;
-}
-
-textarea {
-    display: block;
-    margin: auto;
-}
-
-.user {
-  margin-top: 10px;
-  font-weight: bold;
-  font-size: 1.17em;
-}
-
-.edit {
-    display: block;
-    margin: auto;
-}
-
-.modal-content {
-    text-align: center;
-}
-
-.edit{
-    background: #f16272;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    height: 50px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 1.2em;
-    letter-spacing: 0.05em;
-    text-align: center;
-    text-transform: uppercase;
-    transition: background 0.3s ease-in-out;
-    width: 80px;
-    margin-bottom: 8px;
-  }
-  
-  .edit:hover {
-    background: #ee3e52;
-  }

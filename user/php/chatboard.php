@@ -1,7 +1,14 @@
 <?php
 session_start();
 require 'db-connect.php';
+<<<<<<< HEAD
 $userIcon = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/' . $_SESSION['User']['icon'] : 'https://aso2201222.kill.jp/Playmate/user/img/icon_user.png';
+=======
+
+// ユーザーのアイコンURLを設定
+$iconBaseUrl = 'https://aso2201222.kill.jp/';
+$userIcon = isset($_SESSION['User']['icon']) ? $iconBaseUrl . $_SESSION['User']['icon'] : '../img/icon_user.png';
+>>>>>>> parent of 1c6f849 (Merge branch 'main' of https://github.com/2201237/Playmate)
 
 // エラーメッセージを表示
 ini_set('display_errors', 1);
@@ -38,13 +45,17 @@ try {
         $chat_message = trim($_POST['chat']);
 
         $stmt = $pdo->prepare("
-            INSERT INTO board_chat (board_title_id, chat, created_at)
-            VALUES (:board_title_id, :chat, NOW())
+            INSERT INTO board_chat (board_title_id, chat, user_id, created_at)
+            VALUES (:board_title_id, :chat, :user_id, NOW())
         ");
         $stmt->execute([
             ':board_title_id' => $board_title_id,
             ':chat' => $chat_message,
+<<<<<<< HEAD
             ':user_id' => $current_user_id,
+=======
+            ':user_id' => $current_user_id, // セッションから取得した現在のユーザーID
+>>>>>>> parent of 1c6f849 (Merge branch 'main' of https://github.com/2201237/Playmate)
         ]);
 
         header("Location: " . $_SERVER['REQUEST_URI']);
@@ -53,11 +64,28 @@ try {
 
     // チャットデータを取得
     $stmt = $pdo->prepare("
+<<<<<<< HEAD
         SELECT c.chat, c.created_at, u.user_id, u.user_name, u.icon 
         FROM board_chat AS c
         JOIN users AS u ON c.user_id = u.user_id
         WHERE c.board_title_id = :board_title_id
         ORDER BY c.created_at ASC
+=======
+        SELECT 
+            c.chat, 
+            c.created_at, 
+            u.user_id, 
+            u.user_name, 
+            u.icon 
+        FROM 
+            board_chat AS c
+        JOIN 
+            users AS u ON c.user_id = u.user_id
+        WHERE 
+            c.board_title_id = :board_title_id
+        ORDER BY 
+            c.created_at ASC
+>>>>>>> parent of 1c6f849 (Merge branch 'main' of https://github.com/2201237/Playmate)
     ");
     $stmt->bindParam(':board_title_id', $board_title_id, PDO::PARAM_INT);
     $stmt->execute();
@@ -101,12 +129,19 @@ try {
         <?php foreach ($chats as $chat): ?>
             <div class="chat-message <?php echo ($chat['user_id'] == $current_user_id) ? 'self' : 'other'; ?>">
                 <div class="user-info">
+<<<<<<< HEAD
                     <a href="profile-partner.php?user_id=<?= htmlspecialchars($chat['user_id']) ?>">
                         <img src="<?= htmlspecialchars($userIcon . $chat['icon'] ?? 'icon_user.png') ?>" class="icon_user" width="50" height="50">
+=======
+                    <!-- アイコンの表示 -->
+                    <a href="profile-partner.php?user_id=<?= htmlspecialchars($chat['user_id']) ?>">
+                        <!-- 各ユーザーのアイコンを個別に表示 -->
+                        <img src="<?= htmlspecialchars($iconBaseUrl . $chat['icon'] ?? 'icon_user.png') ?>" class="icon_user" width="50" height="50">
+>>>>>>> parent of 1c6f849 (Merge branch 'main' of https://github.com/2201237/Playmate)
                     </a>
                     <span><?= htmlspecialchars($chat['user_name']) ?></span>
                 </div>
-                <div class="chat-box <?php echo ($chat['user_id'] == $current_user_id) ? 'self' : 'other'; ?>">
+                <div class="chat-box">
                     <!-- チャットメッセージの表示 -->
                     <p><?= htmlspecialchars($chat['chat']) ?></p>
                     <div class="chat-time"><?= htmlspecialchars($chat['created_at']) ?></div>
@@ -118,9 +153,10 @@ try {
     <form method="POST" action="">
         <label for="chat">新しいメッセージ</label>
         <textarea name="chat" id="chat" rows="5" required></textarea>
-        <br><br>
-        <button type="submit">送信</button>
-        <button type="button" onclick="location.href='chatboard-title.php'">戻る</button>
+        <div class="button-group">
+            <button type="submit">送信</button>
+            <button type="button" onclick="location.href='chatboard-title.php'">戻る</button>
+        </div>
     </form>
 
     <script>

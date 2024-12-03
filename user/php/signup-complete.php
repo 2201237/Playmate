@@ -5,10 +5,9 @@
 
         $lastId=$pdo->lastInsertId();
 
-        $sql=$pdo->prepare('insert into users(user_name,profile, user_pass, user_mail, icon) values(?,?,?,?,?)');
+        $sql=$pdo->prepare('insert into users(user_name,profile, user_pass, user_mail) values(?,?,?,?)');
         $sql->execute([$_POST['name'],$_POST['profile'] ,
-                password_hash($_POST['password'], PASSWORD_DEFAULT),$_POST['email'],
-                'https://aso2201222.kill.jp/Playmate/user/img/icon_user.png']);
+                password_hash($_POST['password'], PASSWORD_DEFAULT),$_POST['email']]);
 
         $_SESSION['User']['message'] = '登録が完了しました';
         header('Location:login-input.php');
