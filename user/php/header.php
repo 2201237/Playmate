@@ -1,23 +1,27 @@
-<?php
+<!--ヘッダー-->
+    <header>
 
-// セッションからアイコンのパスを取得
-$userIcon = isset($_SESSION['User']['icon']) ?  'https://aso2201222.kill.jp/'.$_SESSION['User']['icon'] : '../img/icon_user.png';
-?>
 
-<div class="hamburger">
+<!--▽▽ヘッダーロゴ▽▽-->
+      <div class="logo">
+          <a href="home.php">
+            <img src="../img/logo.png" >
+          </a>
+      </div>
+<!--△△ヘッダーロゴ△△-->
 
-    <div class="logo">
-        <a href="home.php">
-            <img src="../img/logo.png" class="logo" alt="ロゴ画像">
-        </a>
-    </div>
 
-    <p class="btn-gNav">
-        <span></span>
-        <span></span>
-        <span></span>
-    </p>
+<!--▽▽ハンバーガーメニュー▽▽-->
+      <div id="hamburger">
+          <div class="hm-icon">
+              <span></span>
+              <span></span>
+              <span></span>
+          </div>
+      </div>
+<!--△△ハンバーガーメニュー△△-->
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     <nav class="gNav">
         <ul class="gNav-menu">
@@ -31,6 +35,8 @@ $userIcon = isset($_SESSION['User']['icon']) ?  'https://aso2201222.kill.jp/'.$_
             <button type="submit" class = "sbut">🔍</button>
             </form>
 =======
+=======
+>>>>>>> parent of eb71ce9 (commit)
 
 <!--▽▽ハンバーガーメニューのリスト▽▽-->
       <nav class="sm">
@@ -45,6 +51,7 @@ $userIcon = isset($_SESSION['User']['icon']) ?  'https://aso2201222.kill.jp/'.$_
 <!--△△ハンバーガーメニューのリスト△△-->
 
 
+<<<<<<< HEAD
 
 
 <!--▽▽ヘッダーリスト▽▽-->
@@ -56,25 +63,25 @@ $userIcon = isset($_SESSION['User']['icon']) ?  'https://aso2201222.kill.jp/'.$_
     </label>
 </form></li>
           <li><a href="home.php">ホーム</a></li>
+=======
+<!--▽▽ヘッダーリスト▽▽-->
+      <nav class="pc">  <!--pcクラスを追記-->
+        <ul>
+          <li><a href="#">ホーム</a></li>
+>>>>>>> parent of eb71ce9 (commit)
           <li><a href="chatboard-title.php">掲示板</a></li>
           <li><a href="#">大会一覧</a></li>
           <li><a href="ranking.php">ランキング</a></li>
           <li><a href="infomation-input.php">お問い合わせ</a></li>
           <li><a href="profile-input.php"><img src=<?php echo $_SESSION['User']['user_icon']?>></a></li>
+<<<<<<< HEAD
 >>>>>>> cd0bb936e7dcc76c789ffb2bce7adc380da5d1ff
+=======
+>>>>>>> parent of eb71ce9 (commit)
         </ul>
-    </nav>
+      </nav>
+<!--△△ヘッダーリスト△△-->
 
 
-    <a href="profile-input.php">
-        <?php 
-           if (isset($userIcon) && $userIcon !== '') {
-
-            echo "<img src='".$userIcon."' class='icon_user' width='50' height='50'>";
-            } else {
-                echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
-            }
-        ?>
-    </a>
-
-</div>
+    </header>
+  
