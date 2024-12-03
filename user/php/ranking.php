@@ -1,22 +1,13 @@
 <?php
     session_start();
     require 'db-connect.php';
-
     $pdo = new PDO($connect, USER, PASS);
-    $tsql = $pdo->prepare('select * FROM tournament');
-    $tsql->execute();
-
-    $rsql = $pdo->prepare('select * FROM ranking');
-    $rsql->execute();
-
-    $iconPath = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/' . $_SESSION['User']['icon'] : '';
 ?>
 
 <!DOCTYPE html>
-<html lang="ja">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../img/favicon.ico">
     <link rel="stylesheet" href="../css/header.css">
@@ -29,106 +20,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="../js/owl.carousel.min"></script>
-    <title>PlayMate</title>
+    <title>PlayMateランキング</title>
 </head>
-
-<body>
-
-    <?php require 'header.php'; ?>
-
-    <div class="headline">現在開催中の大会</div>
-    <!-- 大会スライドショー -->
-    <section class="testimonials">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div id="customers-testimonials" class="owl-carousel">
-                        <!-- DBに登録されている大会情報を表示 -->
-                        <?php
-                        $tournaments = $tsql->fetchAll(PDO::FETCH_ASSOC);
-                        foreach ($tournaments as $tournament) {
-                            $game_id = $tournament['game_id'];
-                            $game_image_path = "../img/" . $game_id . ".jpg";
-                            echo '<div class="item">
-                                <div class="shadow-effect">
-                                    <img class="img-circle" src="', $game_image_path, '" alt="ゲーム画像">
-                                    <span>', $tournament['tournament_name'], '</span>
-                                    <p>', $tournament['rule'], '</p>
-                                </div>
-                                <a href = "tournament-join.php?tournament_id=" ', $tournament['tournament_id'], '">
-                                    <div class="testimonial-name">
-                                        <span class="name_text">詳細はこちら</span>
-                                    </div>
-                                </a>
-                            </div>';
-                        }
-                        ?>
-                        <!-- 処理終了 -->
-                    </div>
-                </div>
-            </div>
-    </section>
-    <!-- 大会スライドショー終了 -->
-
-
-
-    <div class='headline'>掲示板</div>
-    <!-- 掲示板スライドショー -->
-    <div class="wrap slide-paused">
-        <ul class="slideshow">
-            <?php
-            $gsql = $pdo->query('select * FROM game');
-            $games = $gsql->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($games as $game) {
-                $game_id = $game['game_id'];
-                $image_path = "../img/" . $game_id . ".jpg";
-                echo '<li class="content content-hover">',
-                        '<a href = "chatboard-title.php?game_id=' . $game_id . '">',
-                            '<img src = "' . $image_path . '" width = "215px" alt="ゲーム画像">',
-                            '<p>'.$game['title'],
-                        '</a></p>
-                    </li>';
-            }
-            ?>
-        </ul>
-        <ul class="slideshow">
-            <?php
-                $gsql = $pdo->query('select * FROM game');
-                $games = $gsql->fetchAll(PDO::FETCH_ASSOC);
-                foreach ($games as $game) {
-                    $game_id = $game['game_id'];
-                    $image_path = "../img/" . $game_id . ".jpg";
-                    echo '<li class="content content-hover">',
-                            '<a href = "board-list.php?game_id=' . $game_id . '">',
-                                '<img src = "' . $image_path . '" width = "215px" alt="ゲーム画像">',
-                                '<p>'.$game['title'],
-                            '</a></p>
-                        </li>';
-            }
-            ?>
-        </ul>
-        <ul class="slideshow">
-            <?php
-                $gsql = $pdo->query('select * FROM game');
-                $games = $gsql->fetchAll(PDO::FETCH_ASSOC);
-                foreach ($games as $game) {
-                    $game_id = $game['game_id'];
-                    $image_path = "../img/" . $game_id . ".jpg";
-                    echo '<li class="content content-hover">',
-                            '<a href = "board-list.php?game_id=' . $game_id . '">',
-                                '<img src = "' . $image_path . '" width = "215px" alt="ゲーム画像">',
-                                '<p>'.$game['title'],
-                            '</a></p>
-                        </li>';
-                }
-                ?>
-        </ul>
-    </div>
-    <!-- 大会スライドショー終了 -->
-
-
-
-    <div class='headline'>ランキング</div>
+<div class='headline'>ランキング</div>
     
     <!-- TOP3を表示する処理 -->
     <section class="ranking_top3">
@@ -176,7 +70,7 @@
                                         '<img src="' .$win_lose['icon']. '">',
                                     '</div>
                                     <div class="icon">
-                                        <a href="profile-partner.php?user_id='. $win_lose['user_id']. '"class="iconBox"> <span class="material-symbols-outlined">
+                                        <a href="#" class="iconBox"> <span class="material-symbols-outlined">
                                             arrow_outward
                                         </span></a>
                                     </div>

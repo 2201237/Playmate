@@ -18,18 +18,24 @@ header {
 }
 
 /* ゲームタイトルリスト */
-.game-title-list {
+#game-title-list {
+    display: none;
     position: fixed;
-    top: 60px; /* ヘッダーの下に配置 */
+    top: 70px;
     left: 0;
-    width: 20%; /* 幅の調整 */
-    height: calc(100vh - 60px);
+    width: 20%; /* 必要に応じて調整 */
+    height: calc(100vh - 70px);
     background-color: #f1f1f1;
     padding: 10px;
     box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
     z-index: 500;
-    margin-right: 20px; /* 右側の余白 */
+    margin-right: 20px;
+}
+
+/* リストが表示されたとき */
+#game-title-list.show {
+    display: block;
 }
 
 /* チャットエリア */
@@ -62,7 +68,7 @@ header {
 }
 
 .chat-box {
-    max-width: 100%;
+    max-width: 80%;
     padding: 10px;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -98,8 +104,8 @@ form {
 /* 入力欄 */
 form textarea {
     resize: none;
-    height: 40px; /* 高さを縮小 */
-    width: 70%; /* 幅を縮小 */
+    height: 30px; /* 高さを縮小 */
+    width: 40%; /* 幅を縮小 */
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -116,12 +122,85 @@ form textarea {
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-    font-size: 1.5em;
-    transition: background-color 0.3s;
-    margin-left: 10px; /* ボタンと入力欄の間の余白 */
+}
+h3 {
+    color: #555;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-.up-button:hover {
+form {
+    background-color: #fff;
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: left;
+}
+
+/* ラベルと入力欄のスタイル */
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* ボタンのスタイル */
+button {
+    width: 48%;
+    padding: 10px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 5px 1%;
+    text-align: center;
+}
+
+button[type="button"] {
+    background-color: #6c757d; /* 戻るボタンの色を少し変える */
+}
+
+button:hover {
     background-color: #0056b3;
+}
+
+button[type="button"]:hover {
+    background-color: #5a6268;
+}
+
+/* メディアクエリでモバイル対応 */
+@media (max-width: 500px) {
+    form {
+        padding: 20px;
+    }
+    button {
+        width: 100%;
+        margin: 10px 0;
+    }
 }

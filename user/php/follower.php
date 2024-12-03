@@ -37,13 +37,19 @@ $followerUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($followerUsers as $user) {
             echo '<div class = user-info>';
                 echo '<a href="profile-partner.php?user_id='. $user["user_id"] . '"></a>';
-                $iconPath =$user['icon'];
+                $iconPath = isset($user['icon']) ? 'https://aso2201222.kill.jp/'.$user['icon'] : '';
+                if (isset($iconPath) && $iconPath !== '') {
                     echo "<input type = 'hidden' name = '" . $iconPath . "' value = '" . $iconPath . "'></input>";
     
                     echo "<img src='".$iconPath."' class='icon_user' width='50' height='50'>";
+                } else {
+                    echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
+                }
+    
+    
 
                 echo 'User Name: ' . $user['user_name'];
-                echo "<form action='user_chat.php?user_id=". $user['user_id']. "' class = 'user_c' method='post'>";
+                echo '<form action="chat.php" method="post">';
                     echo '<button type="submit" class="button">チャット</button>';
                 echo '</form>';
                 

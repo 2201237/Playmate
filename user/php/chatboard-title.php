@@ -1,35 +1,12 @@
 <?php
-session_start();
-require 'db-connect.php';
+    require 'db-connect.php';
 
-// ユーザーのアイコンURLを設定
-$iconBaseUrl = 'https://aso2201222.kill.jp/';
-$userIcon = isset($_SESSION['User']['icon']) ? $iconBaseUrl . $_SESSION['User']['icon'] : '../img/icon_user.png';
+    $pdo = new PDO($connect, USER, PASS);
 
-// エラーメッセージを表示
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
-// ユーザーIDがセッションに設定されているか確認
-if (!isset($_SESSION['User']['user_id'])) {
-    header('Location: login-input.php');
-    exit;
-}
-
-try {
-    // データベース接続
-    $pdo = new PDO($connect, USER, PASS, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    ]);
-
-    // 現在のユーザーIDを取得
-    $current_user_id = $_SESSION['User']['user_id'];
-
-    // ゲームタイトル一覧を取得
-    $stmt = $pdo->prepare("SELECT game_id, title FROM game ORDER BY title ASC");
-    $stmt->execute();
-    $games = $stmt->fetchAll();
+    // ゲーム情報を取得
+    $gamesql = $pdo->prepare('SELECT * FROM game');
+    $gamesql->execute();
+    $games = $gamesql->fetchAll(PDO::FETCH_ASSOC);
 
     // URLパラメータでgame_idが指定されている場合、そのゲームIDに対応する掲示板タイトルのみを取得
     $game_id = $_GET['game_id'] ?? null;
@@ -45,14 +22,7 @@ try {
             JOIN game AS g ON bt.game_id = g.game_id');
         $boardsql->execute();
     }
-    $boards = $boardsql->fetchAll();
-} catch (PDOException $e) {
-    echo "データベースエラー: " . htmlspecialchars($e->getMessage());
-    exit;
-} catch (Exception $e) {
-    echo "エラー: " . htmlspecialchars($e->getMessage());
-    exit;
-}
+    $boards = $boardsql->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -69,26 +39,24 @@ try {
 </head>
 
 <body>
+
     <?php require 'header.php'; ?>
 
     <div class="container">
-    <button onclick="window.location.href='chatboard-create.php';">チャット作成</button>
-
+        <a href="chatboard-create.php">チャット作成</a>
 
 
         <!-- ゲームタイトルセクション -->
-        <div class="game-title-dropdown">
-    <label for="game-title">ゲームタイトル</label>
-    <select id="game-title" name="game_id">
-        <option value="">選択してください</option>
-        <?php foreach ($games as $game): ?>
-            <option value="<?php echo htmlspecialchars($game['game_id'], ENT_QUOTES, 'UTF-8'); ?>">
-                <?php echo htmlspecialchars($game['title'], ENT_QUOTES, 'UTF-8'); ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-</div>
-
+        <div class="game-title-list">
+        <div class="headline">ゲームタイトル</div>
+            <ul>
+                <?php foreach ($games as $game): ?>
+                    <li><a href="?game_id=<?php echo htmlspecialchars($game['game_id'], ENT_QUOTES, 'UTF-8'); ?>">
+                            <?php echo htmlspecialchars($game['title'], ENT_QUOTES, 'UTF-8'); ?>
+                        </a></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
 
         <!-- 掲示板一覧セクション -->
         <div class="headline">掲示板一覧</div>
@@ -107,7 +75,8 @@ try {
 
                     <div class="board-item">
                         <p class="board-title">
-                            <a href="chatboard.php?board_title_id=<?php echo htmlspecialchars($board['board_id'], ENT_QUOTES, 'UTF-8'); ?>">
+                            <a
+                                href="chatboard.php?board_title_id=<?php echo htmlspecialchars($board['board_id'], ENT_QUOTES, 'UTF-8'); ?>">
                                 <?php echo htmlspecialchars($board['board_title'], ENT_QUOTES, 'UTF-8'); ?>
                             </a>
                         </p>
@@ -116,6 +85,7 @@ try {
                             ゲーム: <?php echo htmlspecialchars($board['game_title'], ENT_QUOTES, 'UTF-8'); ?> |
                             書き込み数: <?php echo htmlspecialchars($post_count['post_count'] ?? '0', ENT_QUOTES, 'UTF-8'); ?>
                         </p>
+
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'db-connect.php';
-require 'header.php';
+require '../header.html';
 
 $pdo = new PDO($connect, USER, PASS);
 
@@ -45,19 +45,8 @@ if (isset($_GET['tournament_id']) && isset($_GET['round'])) {
         // 対戦相手のuser_idを取得
         $opponent_id = ($opponent['user_id1'] == $user_id) ? $opponent['user_id2'] : $opponent['user_id1'];
     } else {
-        // $round == 0 の場合は対戦相手情報を設定しない
         $opponent_id = null;
     }
-
-    // チャットメッセージを取得
-    $message_stmt = $pdo->prepare('
-        SELECT m.*, u.user_name FROM tournament_chat m
-        JOIN users u ON m.user_id = u.user_id
-        WHERE m.tournament_id = ? AND m.round = ?
-        ORDER BY m.created_at ASC
-    ');
-    $message_stmt->execute([$tournament_id, $round]);
-    $messages = $message_stmt->fetchAll();
 } else {
     echo "大会IDまたは回戦が指定されていません。";
     exit;
@@ -81,20 +70,7 @@ if (isset($_GET['tournament_id']) && isset($_GET['round'])) {
         </h1>
 
         <div id="chat-box">
-            <?php foreach ($messages as $message): ?>
-                <!-- $round == 0 の場合は全メッセージを表示、それ以外はログインユーザーまたは対戦相手のメッセージのみ表示 -->
-                <?php if ($round == 0 || $message['user_id'] == $user_id || $message['user_id'] == $opponent_id): ?>
-                    <div class="message">
-                        <strong><?php echo htmlspecialchars($message['user_name']); ?>:</strong>
-                        <p><?php echo htmlspecialchars($message['chat']); ?></p>
-                        <?php if (!empty($message['image_path'])): ?>
-                            <img src="<?php echo '../../admin/win-loss-image/' . htmlspecialchars($message['image_path']); ?>" 
-                                 alt="アップロード画像" style="max-width: 200px;">
-                        <?php endif; ?>
-                        <span><?php echo htmlspecialchars($message['created_at']); ?></span>
-                    </div>
-                <?php endif; ?>
-            <?php endforeach; ?>
+            <!-- チャットメッセージはJavaScriptで動的に表示 -->
         </div>
 
         <form action="tournament-chat-post.php" method="post" enctype="multipart/form-data">
@@ -107,5 +83,46 @@ if (isset($_GET['tournament_id']) && isset($_GET['round'])) {
 
         <a href="tournament-list.php">戻る</a>
     </div>
+
+    <script>
+        // チャット更新関数
+        async function fetchChat() {
+            const tournamentId = "<?php echo htmlspecialchars($tournament_id); ?>";
+            const round = "<?php echo htmlspecialchars($round); ?>";
+
+            try {
+                const response = await fetch(`fetch-tournament-chat.php?tournament_id=${tournamentId}&round=${round}`);
+                const messages = await response.json();
+
+                if (Array.isArray(messages)) {
+                    const chatBox = document.getElementById('chat-box');
+                    chatBox.innerHTML = ''; // 現在の内容をクリア
+
+                    messages.forEach(message => {
+                        const messageDiv = document.createElement('div');
+                        messageDiv.classList.add('message');
+
+                        messageDiv.innerHTML = `
+                            <strong>${message.user_name}:</strong>
+                            <p>${message.chat}</p>
+                            ${message.image_path ? `<img src="../../admin/win-loss-image/${message.image_path}" style="max-width: 200px;">` : ''}
+                            <span>${message.created_at}</span>
+                        `;
+                        chatBox.appendChild(messageDiv);
+                    });
+                } else {
+                    console.error('エラー:', messages.error || '不明なエラー');
+                }
+            } catch (error) {
+                console.error('通信エラー:', error);
+            }
+        }
+
+        // 定期的にチャットを更新（2秒ごと）
+        setInterval(fetchChat, 2000);
+
+        // 初回のデータを取得
+        fetchChat();
+    </script>
 </body>
 </html>

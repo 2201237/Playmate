@@ -24,7 +24,7 @@
             echo "<h1>" . $tournament['tournament_name'] . "</h1>";
             echo "<img src = '$image_path' width = '180' height = '' >";
             echo '<div class="rure">';
-            echo "<p> ~ルール~ <br>" . $tournament['rule']. "</p>";
+            echo "<p> ~ルール~ <br>" . $tournament['rure']. "</p>";
             echo "</div>";
             echo '<input type ="submit" class = "button" value = "参加">';
             echo "</div>";
