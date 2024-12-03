@@ -18,6 +18,7 @@ $userIcon = isset($_SESSION['User']['icon']) ?  'https://aso2201222.kill.jp/'.$_
         <span></span>
     </p>
 
+<<<<<<< HEAD
     <nav class="gNav">
         <ul class="gNav-menu">
             <li><a class=”current” href="home.php">ホーム</a></li>
@@ -29,6 +30,38 @@ $userIcon = isset($_SESSION['User']['icon']) ?  'https://aso2201222.kill.jp/'.$_
                 <input type="text" id="username" class = "stext" name="username" placeholder="ユーザー名を検索">
             <button type="submit" class = "sbut">🔍</button>
             </form>
+=======
+
+<!--▽▽ハンバーガーメニューのリスト▽▽-->
+      <nav class="sm">
+        <ul>
+          <li><a href="#">ホーム</a></li>
+          <li><a href="#">掲示板</a></li>
+          <li><a href="#">大会一覧</a></li>
+          <li><a href="#">ランキング</a></li>
+          <li><a href="#">お問い合わせ</a></li>
+       </ul>
+     </nav>
+<!--△△ハンバーガーメニューのリスト△△-->
+
+
+
+
+<!--▽▽ヘッダーリスト▽▽-->
+      <nav class="pc">  <!--pcクラスを追記-->
+        <ul>
+          <li><form action="search.php" class="search-form-6" method="get">
+    <label>
+        <input type="text" name="username" aria-label="キーワードを入力">
+    </label>
+</form></li>
+          <li><a href="home.php">ホーム</a></li>
+          <li><a href="chatboard-title.php">掲示板</a></li>
+          <li><a href="#">大会一覧</a></li>
+          <li><a href="ranking.php">ランキング</a></li>
+          <li><a href="infomation-input.php">お問い合わせ</a></li>
+          <li><a href="profile-input.php"><img src=<?php echo $_SESSION['User']['user_icon']?>></a></li>
+>>>>>>> cd0bb936e7dcc76c789ffb2bce7adc380da5d1ff
         </ul>
     </nav>
 
