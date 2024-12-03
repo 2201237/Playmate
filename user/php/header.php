@@ -35,10 +35,17 @@
 <!--△△ハンバーガーメニューのリスト△△-->
 
 
+
+
 <!--▽▽ヘッダーリスト▽▽-->
       <nav class="pc">  <!--pcクラスを追記-->
         <ul>
-          <li><a href="#">ホーム</a></li>
+          <li><form action="search.php" class="search-form-6" method="get">
+    <label>
+        <input type="text" name="username" aria-label="キーワードを入力">
+    </label>
+</form></li>
+          <li><a href="home.php">ホーム</a></li>
           <li><a href="chatboard-title.php">掲示板</a></li>
           <li><a href="#">大会一覧</a></li>
           <li><a href="ranking.php">ランキング</a></li>
