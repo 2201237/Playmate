@@ -1,18 +1,7 @@
 <?php
 session_start();
 require 'db-connect.php';
-<<<<<<< HEAD
-<<<<<<< HEAD
-$userIcon = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/' . $_SESSION['User']['icon'] : 'https://aso2201222.kill.jp/Playmate/user/img/icon_user.png';
-=======
-
-// ユーザーのアイコンURLを設定
-$iconBaseUrl = 'https://aso2201222.kill.jp/';
-$userIcon = isset($_SESSION['User']['icon']) ? $iconBaseUrl . $_SESSION['User']['icon'] : '../img/icon_user.png';
->>>>>>> parent of 1c6f849 (Merge branch 'main' of https://github.com/2201237/Playmate)
-=======
 $userIcon = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/' . $_SESSION['User']['icon'] : 'https://aso2201222.kill.jp/Playmate/user/icon_user.png';
->>>>>>> cd0bb936e7dcc76c789ffb2bce7adc380da5d1ff
 
 // エラーメッセージを表示
 ini_set('display_errors', 1);
@@ -62,15 +51,7 @@ try {
         $stmt->execute([
             ':board_title_id' => $board_title_id,
             ':chat' => $chat_message,
-<<<<<<< HEAD
-<<<<<<< HEAD
-            ':user_id' => $current_user_id,
-=======
             ':user_id' => $current_user_id, // セッションから取得した現在のユーザーID
->>>>>>> parent of 1c6f849 (Merge branch 'main' of https://github.com/2201237/Playmate)
-=======
-            ':user_id' => $current_user_id, // セッションから取得した現在のユーザーID
->>>>>>> cd0bb936e7dcc76c789ffb2bce7adc380da5d1ff
         ]);
 
         // 再読み込みしてチャットを更新
@@ -80,16 +61,6 @@ try {
 
     // board_chatテーブルから特定のboard_title_idに関連するチャットデータを取得
     $stmt = $pdo->prepare("
-<<<<<<< HEAD
-<<<<<<< HEAD
-        SELECT c.chat, c.created_at, u.user_id, u.user_name, u.icon 
-        FROM board_chat AS c
-        JOIN users AS u ON c.user_id = u.user_id
-        WHERE c.board_title_id = :board_title_id
-        ORDER BY c.created_at ASC
-=======
-=======
->>>>>>> cd0bb936e7dcc76c789ffb2bce7adc380da5d1ff
         SELECT 
             c.chat, 
             c.created_at, 
@@ -104,10 +75,6 @@ try {
             c.board_title_id = :board_title_id
         ORDER BY 
             c.created_at ASC
-<<<<<<< HEAD
->>>>>>> parent of 1c6f849 (Merge branch 'main' of https://github.com/2201237/Playmate)
-=======
->>>>>>> cd0bb936e7dcc76c789ffb2bce7adc380da5d1ff
     ");
     $stmt->bindParam(':board_title_id', $board_title_id, PDO::PARAM_INT);
     $stmt->execute();
@@ -170,23 +137,12 @@ function toggleGameList() {
         <?php foreach ($chats as $chat): ?>
             <div class="chat-message <?php echo ($chat['user_id'] == $current_user_id) ? 'self' : 'other'; ?>">
                 <div class="user-info">
-<<<<<<< HEAD
                     <a href="profile-partner.php?user_id=<?= htmlspecialchars($chat['user_id']) ?>">
                         <img src="<?= htmlspecialchars($userIcon . $chat['icon'] ?? 'icon_user.png') ?>" class="icon_user" width="50" height="50">
-=======
-                    <!-- アイコンの表示 -->
-                    <a href="profile-partner.php?user_id=<?= htmlspecialchars($chat['user_id']) ?>">
-                        <!-- 各ユーザーのアイコンを個別に表示 -->
-                        <img src="<?= htmlspecialchars($iconBaseUrl . $chat['icon'] ?? 'icon_user.png') ?>" class="icon_user" width="50" height="50">
->>>>>>> parent of 1c6f849 (Merge branch 'main' of https://github.com/2201237/Playmate)
                     </a>
                     <span><?= htmlspecialchars($chat['user_name']) ?></span>
                 </div>
                 <div class="chat-box">
-<<<<<<< HEAD
-                    <!-- チャットメッセージの表示 -->
-=======
->>>>>>> cd0bb936e7dcc76c789ffb2bce7adc380da5d1ff
                     <p><?= htmlspecialchars($chat['chat']) ?></p>
                     <div class="chat-time"><?= htmlspecialchars($chat['created_at']) ?></div>
                 </div>
@@ -195,17 +151,8 @@ function toggleGameList() {
     </div>
 
     <form method="POST" action="">
-<<<<<<< HEAD
-        <label for="chat">新しいメッセージ</label>
-        <textarea name="chat" id="chat" rows="5" required></textarea>
-        <div class="button-group">
-            <button type="submit">送信</button>
-            <button type="button" onclick="location.href='chatboard-title.php'">戻る</button>
-        </div>
-=======
         <textarea name="chat" id="chat" rows="3"></textarea>
         <button class="up-button" type="submit">↑</button>
->>>>>>> cd0bb936e7dcc76c789ffb2bce7adc380da5d1ff
     </form>
 </body>
 </html>
