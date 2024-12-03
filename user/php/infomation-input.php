@@ -28,19 +28,16 @@ $sql->execute();
                 foreach ($contacts_ge as $contacts_ges){
                     echo "<option value='" . $contacts_ges['conge_id'] . "'>" . $contacts_ges['conge_name'] . "</option>";
                 }
-            ?>
-        </select>
-    </div>
-    <form action="infomation-complete.php" method="post">
+            echo "</select>";
+            echo "</div>";
+        ?>
         
         <div style="text-align:center">お問い合わせ内容<br>
-            <textarea name="infomation" required="required"></textarea>
-        </div>
+        <textarea name="infomation" required="required"></textarea></div>
 
-        <div style='text-align:center'>
-            <input type="submit" class="button" value="送信">
+        <div  style='text-align:center'>
+            <input type ="submit" class = "button" value = "送信">
         </div>
     </form>
 </body>
-
 </html>

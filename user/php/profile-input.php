@@ -1,18 +1,16 @@
 <?php
-require 'header_profile.php';
-$pdo = new PDO($connect, USER, PASS);
+    session_start();
+    require 'db-connect.php';
+    $pdo = new PDO($connect, USER, PASS);
 
-$userId = $_SESSION['User']['user_id'];
-$userName = $_SESSION['User']['user_name'];
-$userProfile = isset($_SESSION['User']['user_profile']) ? $_SESSION['User']['user_profile'] : '';
-$userMail = isset($_SESSION['User']['user_mail']) ? $_SESSION['User']['user_mail'] : '';
+    $userId = $_SESSION['User']['user_id'];
+    $userName = $_SESSION['User']['user_name'];
+    $userProfile = isset($_SESSION['User']['user_profile']) ? $_SESSION['User']['user_profile'] : '';
+    $userMail = isset($_SESSION['User']['user_mail']) ? $_SESSION['User']['user_mail'] : '';
 
-$iconPath = $_SESSION['User']['user_icon'];
+    $iconPath = $_SESSION['User']['user_icon'];
 
-$cacheBuster = file_exists($iconPath) ? filemtime($iconPath) : time();
-
-
-
+    $cacheBuster = file_exists($iconPath) ? filemtime($iconPath) : time(); 
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -20,15 +18,16 @@ $cacheBuster = file_exists($iconPath) ? filemtime($iconPath) : time();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" type="text/css" href="../css/profile-input.css">
     <title>Playmate</title>
 </head>
 
 <body>
-    <div class="modal-content">
-        <!-- ログアウトボタンにIDを追加 -->
-        <a href="" id="logoutButton">ログアウト</a>
-    </div>
+
+    <?php require 'header.php'; ?>
 
     <form action='profile-edit.php' method='post'>
 
@@ -36,7 +35,7 @@ $cacheBuster = file_exists($iconPath) ? filemtime($iconPath) : time();
 
         echo "<div class = 'profile-icon'>";
                 echo "<input type = 'hidden' name = '" . $iconPath . "' value = '" . $iconPath . "'></input>";
-                echo "<img src='".$iconPath. "' class='icon_user' width='50' height='50'>";
+                echo "<img src='".$iconPath. "' class='icon_user'>";
         echo "</div>";
 
         echo "<p class = 'user' >" . $userName . "</p>";
@@ -51,9 +50,14 @@ $cacheBuster = file_exists($iconPath) ? filemtime($iconPath) : time();
                 echo '<textarea rows="4" cols="50" class = "profile-area" readonly placeholder="プロフィールは未設定です">';
                 echo '</textarea><br>';
             }
-        echo "<input type='submit' class='edit' value='Profile edit'>";
+        echo "<input type='submit' class='edit' value='編集'>";
    ?>
    </form>
+
+   <div class="modal-content">
+        <!-- ログアウトボタンにIDを追加 -->
+        <a href="" id="logoutButton">ログアウト</a>
+    </div>
 
 
     <div id="logoutModal" class="modal-logout">
