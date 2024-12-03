@@ -14,9 +14,11 @@
     <h2>大会管理</h2>
 
     <div>
-    <button class="menu-button" onclick="location.href='tournament-view.php'">大会一覧</button><br>
+        <button class="menu-button" onclick="location.href='stats.php'">戦績管理</button><br>
+        <button class="menu-button" onclick="location.href='win-loss-image.php'">勝敗画像管理</button><br>
         <button class="menu-button" onclick="location.href='tournament-create.php'">大会作成</button><br>
         <button class="menu-button" onclick="location.href='tournament-edit.php'">大会削除・更新</button><br>
+        <button class="menu-button" onclick="location.href='tournament-view.php'">大会一覧</button><br>
         <button class="menu-button" onclick="location.href='tournament-bracket.php'">組み分け表</button><br>
         <button class="menu-button" onclick="location.href='tournament-sorting.php'">組み分け</button>
     </div>
