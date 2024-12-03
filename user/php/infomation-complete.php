@@ -10,6 +10,5 @@ $sql->execute([$_POST['infomation'],$_SESSION['User']['user_id'],$_POST['conge_i
 
 echo '<h1>お問い合わせ内容が送信されました。</h1>';
 echo '<p>返信内容が返却されるまでしばらくお待ちください</p>';
-echo "<a href = 'home.php'>戻る";
-
 ?>
+<button class="menu-button" onclick="location.href='infomation-reception.php'">戻る</button>
