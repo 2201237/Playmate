@@ -79,6 +79,7 @@
 }
 .ranking_top3 .container .card .content h3 {
   margin-top: 0px;
+  margin-bottom: 0px;
   text-transform: capitalize;
   /* font-size: clamp(1.5rem, 1.3909rem + 0.4364vw, 1.8rem); */
   font-weight: 600;
@@ -88,6 +89,14 @@
   margin: 0.625rem 0 1.25rem;
   color: #565656;
 }
+
+.ranking_top3 .container .card .content p .top3_prf {
+  font-weight: 600;
+  display: block;
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
 .ranking_top3 .container .card-inner {
   position: relative;
   width: inherit;
@@ -198,12 +207,8 @@ body {
 
 /* 4位以下のテーブル */
 /* Page Wrapper/Container Style */
-<<<<<<< HEAD
 .container_not_3 {
   color: #20297e;
-=======
-.container {
->>>>>>> parent of eb71ce9 (commit)
   font-family: "Poppins", sans-serif;
   width: 100%;
   max-width: 1140px;
@@ -213,11 +218,7 @@ body {
 
 /* Responsive Table Style */
 .responsive-table {
-<<<<<<< HEAD
   background-color: #fff;
-=======
-  background-color: #e7e7e7;
->>>>>>> parent of eb71ce9 (commit)
   border-collapse: collapse;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.02);
