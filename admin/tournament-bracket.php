@@ -74,49 +74,8 @@ if ($tournament_id) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/tournament-bracket.css">
     <title>組み分け一覧</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1, h2 {
-            text-align: center;
-            color: #333;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        table, th, td {
-            border: 1px solid #ccc;
-        }
-        th, td {
-            padding: 10px;
-            text-align: center;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-        p {
-            text-align: center;
-            font-size: 18px;
-            color: #666;
-        }
-        .error {
-            color: red;
-            text-align: center;
-        }
-        form {
-            text-align: center;
-            margin: 20px 0;
-        }
-        select, button {
-            font-size: 16px;
-            padding: 5px 10px;
-        }
-    </style>
 </head>
 <body>
     <h1>組み分け一覧</h1>
@@ -152,7 +111,7 @@ if ($tournament_id) {
             display: inline-block;
             text-decoration: none;
             padding: 10px 20px;
-            background-color: #007BFF;
+            background-color: #1fcb24;
             color: #fff;
             border-radius: 5px;
             font-size: 16px;
