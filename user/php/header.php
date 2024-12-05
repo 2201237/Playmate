@@ -47,7 +47,7 @@
 </form></li>
           <li><a href="home.php">ホーム</a></li>
           <li><a href="chatboard-title.php">掲示板</a></li>
-          <li><a href="#">大会一覧</a></li>
+          <li><a href="tournament-list.php">大会一覧</a></li>
           <li><a href="ranking.php">ランキング</a></li>
           <li><a href="infomation-input.php">お問い合わせ</a></li>
           <li><a href="profile-input.php"><img src=<?php echo $_SESSION['User']['user_icon']?>></a></li>
