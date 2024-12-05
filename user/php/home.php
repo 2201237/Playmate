@@ -185,11 +185,12 @@
                             <div class="content">
                                 <h3><img src="../img/rank_', $cnt ,'.png" class="f"><div class="name">', $win_lose['user_name'] ,'</div></h3>
                                 <p>',
+                                    '<span class="top3_prf">',
+                                    $win_lose['profile'], '</span>',
                                     '勝率：',round( $win_lose['wp'], 4 )*100,'%　',
-                                    '試合数：'.$win_lose['user_games'].'　'.$win_lose['user_win'].'勝' .$lose_num. '敗<br>',
-                                    $win_lose['profile'], '</p>
+                                    '試合数：'.$win_lose['user_games'].'　'.$win_lose['user_win'].'勝' .$lose_num. '敗</p>
                                 <ul>',
-                                '<li style="--clr-tag:#d3b19a;" class="branding">大乱闘スマッシュブラザーズ</li>
+                                '<li style="--clr-tag:#d3b19a;" class="branding">League of Legends</li>
                                 <li style="--clr-tag:#70b3b1;" class="packaging">マリオカート 8DX</li>
                                 </ul>
                             </div>

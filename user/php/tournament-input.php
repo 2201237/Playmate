@@ -12,7 +12,7 @@
     <title>大会参加</title>
 </head>
 <body>
-    <form action="tournament-output.php" method="post">
+    <form action="tournament-join.php" method="post">
     <?php
         $lastId=$pdo->lastInsertId();
         $sql=$pdo->prepare('select * from tournament where tournament_id = ?');

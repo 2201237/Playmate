@@ -4,7 +4,7 @@ require 'db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 
 // セッションからデータを取得
-$iconPath = $_SESSION['User']['user_icon'];
+$userIcon = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/'. $_SESSION['User']['icon'] : '';
 $userId = $_SESSION['User']['user_id'];
 $userName = $_SESSION['User']['user_name'];
 $userPass = isset($_SESSION['User']['user_pass']) ? $_SESSION['User']['user_pass'] : '';
@@ -30,8 +30,11 @@ $userProfile = isset($_SESSION['User']['user_profile']) ? $_SESSION['User']['use
 
             <label for="fileInput" id="fileLabel">画像を選択：</label><br>
             <input type="file" name="icon" id="fileInput" accept="image/*" onchange="previewImage(event)">
-            <?php
-                echo '<img id="preview" src="'.$iconPath.'" alt="Profile Image" width="50" height="50" ><br>';
+            <?php if (isset($userIcon) && $userIcon !== ''){
+                echo '<img id="preview" src="'.$userIcon.'" alt="Profile Image" width="50" height="50" ><br>';
+            } else{ 
+                echo "<img id='preview' src='../img/icon_user.png' class='icon_user' width='50' height='50' ><br>";
+            }
             ?>
 
         <label>
@@ -74,7 +77,7 @@ $userProfile = isset($_SESSION['User']['user_profile']) ? $_SESSION['User']['use
             const fileInput = document.getElementById('fileInput');
 
             if (document.getElementById("useDefaultIcon").checked) {
-                preview.src = 'https://aso2201222.kill.jp/Playmate/user/img/icon_user.png'; // デフォルトアイコン表示
+                preview.src = '../img/icon_user.png'; // デフォルトアイコン表示
                 fileInput.value = ''; // アップロード選択解除
             }
         }
