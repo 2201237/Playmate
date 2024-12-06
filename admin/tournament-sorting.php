@@ -164,5 +164,9 @@ try {
             <?php endforeach; ?>
         </table>
     <?php endif; ?>
+
+    <!-- 戻るボタン -->
+    <br><br>
+    <button onclick="location.href='tournament.php'">戻る</button>
 </body>
 </html>
