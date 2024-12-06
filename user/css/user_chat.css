@@ -47,7 +47,7 @@ html {
 .my-chat-box{
     background-color: #00ff0e54;
     border: groove;
-    border-radius: 20px 20px 0px 30px;
+    border-radius: 20px 20px 0px 20px;
 
 }
 .my-chat, .my-chat-box{

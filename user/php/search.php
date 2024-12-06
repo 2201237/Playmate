@@ -4,6 +4,7 @@ require 'db-connect.php';
 
 $pdo = new PDO($connect, USER, PASS);
 
+$UserId = $_SESSION['User']['user_id'];
 
 // 検索されたユーザー名を取得
 if (isset($_GET['username'])) {
@@ -11,9 +12,8 @@ if (isset($_GET['username'])) {
 
     // ユーザー名を検索（部分一致）
     $stmt = $pdo->prepare('SELECT user_id, user_name, user_mail, profile, icon FROM users WHERE user_name LIKE ? and user_id not in (?)');
-    $stmt->execute(['%' . $searchName . '%', $_SESSION['User']['user_id']]);
+    $stmt->execute(['%' . $searchName . '%', $UserId]);
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 
 
     if (empty($users)) {
@@ -22,6 +22,7 @@ if (isset($_GET['username'])) {
 } else {
     $message = "検索条件が指定されていません。";
 }
+
 
 ?>
 
@@ -34,39 +35,32 @@ if (isset($_GET['username'])) {
     <link rel="stylesheet" href="../css/header.css">
 
     <link rel="stylesheet" type="text/css" href="../css/search.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+
+
     <title>ユーザー検索結果</title>
 </head>
 
 <body>
 <?php require 'header.php';?>
 
+    <div class = "headline" >ユーザー検索結果</div>
     <div class="search-container">
-        <a href="#" onclick="window.history.back(); return false;">←</a><br>
-        <h1>ユーザー検索結果</h1>
         <?php 
         if (isset($message)){
             echo "<p>" .  $message . "</p>";
         }else{
             foreach ($users as $user){
                 echo "<div class='user-info'>";
-                echo "<a href='profile-partner.php?user_id=". $user['user_id']. "' class = 'a-search' ></a>";
+                echo "<a href='profile-partner.php?user_id=". $user['user_id']. "' class = 'search-id'></a>";
 
-            $iconPath = isset($user['icon']) ?  'https://aso2201222.kill.jp/'.$user['icon'] : '';
-            if (isset($iconPath) && $iconPath !== '') {
+                $iconPath = $user['icon'];
                 echo "<input type = 'hidden' name = '" . $iconPath . "' value = '" . $iconPath . "'></input>";
-
                 echo "<img src='".$iconPath."' class='icon_user' width='50' height='50'>";
-            } else {
-                echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
-            }
-                    echo "<strong>". $user['user_name'] . "</strong><br>";
-                    echo $user['user_mail'] ;
-                    echo 'User Name: ' . $user['user_name'];
-                    echo "<form action='user_chat.php?user_id=". $user['user_id']. "' class = 'user_c' method='post'>";
-                        echo '<button type="submit" class="button">チャット</button>';
-                    echo '</form>';
-                    
-    
+
+                echo "<div class = 'follow-name'>" . $user['user_name'] . "</div><br>";
+                echo "<div class = 'follow-mail'>" . $user['user_mail'] . "</div>";
+        
                 echo "</div>";
                 }
             }

@@ -1,26 +1,58 @@
-.user-info{
-    position:relative;
-    padding:10px;
+.search-container{
+    border: solid 1px darkblue;
+    margin-top: 10px;
+    margin-left: 30px;
 }
-.user-info a{
+.user-info {
+  background: lavender;
+  position: relative;
+  padding: 10px 10px 10px 30px;
+  margin: 10px;
+  width: 80%;
+  z-index: 1;
+  }
+  .user-info .search-id{
     display: block;
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-}
-.user-info:hover{
-    background-color: rgb(198, 196, 196);
-}
-.button{
-    border: none;
-    border-radius: 8px;
-    margin-top: 8px;
-    padding: 4px 16px;
-    position: relative;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    }
+  .user-info:nth-child(odd){
+    background-color: #eee
   }
+
   
-  .button:hover {
-    cursor: pointer;
+  .user-info::after {
+    background: #ff9e66;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 100%;
+    transform: scale(0, 1);
+    transform-origin: left top;
+    transition: .2s cubic-bezier(0.45, 0, 0.55, 1);
+    z-index: -1;
   }
+  .user-info:hover::after {
+    transform: scale(1, 1);
+  }
+.icon_user{
+    border-radius: 30px;
+
+}
+.follow-name{
+    color: #2a2727;
+    font-style: oblique;
+    font-weight: bolder;
+}
+.follow-mail{
+    color: #8c8c8c;
+    font: -webkit-control;
+    font-weight: bolder;
+
+}
+
