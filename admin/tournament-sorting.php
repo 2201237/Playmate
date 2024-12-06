@@ -14,6 +14,11 @@ try {
     // エラーメッセージ用
     $error_message = "";
 
+    // 表示用データ初期化
+    $selected_tournament_id = null;
+    $selected_round = null;
+    $kumi_data = [];
+
     // 2. POSTリクエストがある場合の処理
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['tournament_id']) && isset($_POST['round'])) {
@@ -83,7 +88,25 @@ try {
                 // 成功メッセージ
                 echo "組み分けが完了しました！<br>";
             }
+
+            // 選択された大会とラウンドを保持
+            $selected_tournament_id = $tournament_id;
+            $selected_round = $round;
         }
+    }
+
+    // 組み分け結果を取得
+    if ($selected_tournament_id !== null && $selected_round !== null) {
+        $query = "
+            SELECT user_id1, user_id2
+            FROM tournament_kumi
+            WHERE tournament_id = :tournament_id AND round = :round;
+        ";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':tournament_id', $selected_tournament_id, PDO::PARAM_INT);
+        $stmt->bindParam(':round', $selected_round, PDO::PARAM_INT);
+        $stmt->execute();
+        $kumi_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 } catch (PDOException $e) {
     // エラーハンドリング
@@ -105,13 +128,15 @@ try {
             <option value="">選択してください</option>
             <?php
             foreach ($tournaments as $tournament) {
-                echo "<option value=\"{$tournament['tournament_id']}\">{$tournament['tournament_name']}</option>";
+                // 選択済みの大会IDの場合は selected を付与
+                $selected = ($tournament['tournament_id'] == $selected_tournament_id) ? 'selected' : '';
+                echo "<option value=\"{$tournament['tournament_id']}\" $selected>{$tournament['tournament_name']}</option>";
             }
             ?>
         </select>
         <br><br>
         <label for="round">ラウンド番号:</label>
-        <input type="number" name="round" id="round" min="1" required>
+        <input type="number" name="round" id="round" min="1" value="<?= htmlspecialchars($selected_round) ?>" required>
         <br><br>
         <button type="submit">組み分け開始</button>
     </form>
@@ -122,12 +147,21 @@ try {
 
     <hr>
 
-    <!-- 常に表示されるボタン -->
-    <a href="tournament-bracket.php" style="display: inline-block; margin-right: 10px;">
-        <button type="button">トーナメント表を見る</button>
-    </a>
-    <a href="tournament.php" style="display: inline-block;">
-        <button type="button">戻る</button>
-    </a>
+    <!-- 組み分け表を表示 -->
+    <?php if (!empty($kumi_data)): ?>
+        <h2>組み分け結果 (大会ID: <?= htmlspecialchars($selected_tournament_id) ?>, ラウンド: <?= htmlspecialchars($selected_round) ?>)</h2>
+        <table border="1">
+            <tr>
+                <th>ユーザー1</th>
+                <th>ユーザー2</th>
+            </tr>
+            <?php foreach ($kumi_data as $kumi): ?>
+                <tr>
+                    <td><?= htmlspecialchars($kumi['user_id1']) ?></td>
+                    <td><?= htmlspecialchars($kumi['user_id2'] ?? '不戦勝') ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    <?php endif; ?>
 </body>
 </html>
