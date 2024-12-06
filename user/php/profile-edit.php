@@ -4,7 +4,7 @@ require 'db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 
 // セッションからデータを取得
-$userIcon = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/'. $_SESSION['User']['icon'] : '';
+$iconPath = $_SESSION['User']['user_icon'];
 $userId = $_SESSION['User']['user_id'];
 $userName = $_SESSION['User']['user_name'];
 $userPass = isset($_SESSION['User']['user_pass']) ? $_SESSION['User']['user_pass'] : '';
@@ -18,7 +18,6 @@ $userProfile = isset($_SESSION['User']['user_profile']) ? $_SESSION['User']['use
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Playmate</title>
     <link rel="stylesheet" href="../css/profile-edit.css">
-
 </head>
 <body>
 <input type = 'hidden' name = 'user_id' value = "<?php echo $userId; ?>"></input>
@@ -30,11 +29,8 @@ $userProfile = isset($_SESSION['User']['user_profile']) ? $_SESSION['User']['use
 
             <label for="fileInput" id="fileLabel">画像を選択：</label><br>
             <input type="file" name="icon" id="fileInput" accept="image/*" onchange="previewImage(event)">
-            <?php if (isset($userIcon) && $userIcon !== ''){
-                echo '<img id="preview" src="'.$userIcon.'" alt="Profile Image" width="50" height="50" ><br>';
-            } else{ 
-                echo "<img id='preview' src='../img/icon_user.png' class='icon_user' width='50' height='50' ><br>";
-            }
+            <?php
+                echo '<img id="preview" src="'.$iconPath.'" alt="Profile Image" width="50" height="50" ><br>';
             ?>
 
         <label>
@@ -51,49 +47,22 @@ $userProfile = isset($_SESSION['User']['user_profile']) ? $_SESSION['User']['use
             <label for="profile">Profile：</label><br>
             <textarea name="profile" id="profile" placeholder="User Profile" pattern=".*\S+.*"><?php echo $userProfile; ?></textarea><br>
 
+            <!-- セレクトボックス -->
+            <select multiple data-placeholder="Add tools">
+                <option>Sketch</option>
+                <option selected>Framer X</option>
+                <option>Photoshop</option>
+                <option>Principle</option>
+                <option>Invision</option>
+            </select>
+            <!-- dribbble -->
+            <a class="dribbble" href="https://dribbble.com/shots/5112850-Multiple-select-animation-field" target="_blank"><img src="https://cdn.dribbble.com/assets/dribbble-ball-1col-dnld-e29e0436f93d2f9c430fde5f3da66f94493fdca66351408ab0f96e2ec518ab17.png" alt=""></a>
+
             <input type='submit' class='input' name = "upload" value='編集完了'>
 
             </form>
             <a href="#" onclick="window.history.back(); return false;">戻る</a><br>
-
-
-            <script>
-                // プレビュー画像表示のJavaScript
-        function previewImage(event) {
-            const reader = new FileReader();
-            reader.onload = function () {
-                const preview = document.getElementById('preview');
-                preview.src = reader.result;
-            };
-            reader.readAsDataURL(event.target.files[0]);
-
-            // チェックボックスを無効化
-            document.getElementById("useDefaultIcon").checked = false;
-        }
-
-        // デフォルトアイコンの表示切替
-        function toggleDefaultIcon() {
-            const preview = document.getElementById('preview');
-            const fileInput = document.getElementById('fileInput');
-
-            if (document.getElementById("useDefaultIcon").checked) {
-                preview.src = '../img/icon_user.png'; // デフォルトアイコン表示
-                fileInput.value = ''; // アップロード選択解除
-            }
-        }
-
-                // 表示/非表示切替のJavaScript
-                const passwordField = document.getElementById("password");
-                const togglePasswordButton = document.getElementById("togglePassword");
-
-                togglePasswordButton.addEventListener("click", function () {
-                    const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
-                    passwordField.setAttribute("type", type);
-                    this.textContent = type === "password" ? "👁️" : "🙈";
-                });
-            </script>
-
-
     </div>
+    <script src="../js/profile-edit.js"></script>
 </body>
 </html>

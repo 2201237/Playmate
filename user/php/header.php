@@ -1,3 +1,4 @@
+<?php     $iconPath = $_SESSION['User']['user_icon']; ?>
 <!--ヘッダー-->
     <header>
 
@@ -50,7 +51,7 @@
           <li><a href="tournament-list.php">大会一覧</a></li>
           <li><a href="ranking.php">ランキング</a></li>
           <li><a href="infomation-input.php">お問い合わせ</a></li>
-          <li><a href="profile-input.php"><img src=<?php echo $_SESSION['User']['user_icon']?>></a></li>
+          <li><a href="profile-input.php"><img src=<?php echo $iconPath ?>></a></li>
         </ul>
       </nav>
 <!--△△ヘッダーリスト△△-->
