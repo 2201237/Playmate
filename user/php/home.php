@@ -9,7 +9,7 @@
     $rsql = $pdo->prepare('select * FROM ranking');
     $rsql->execute();
 
-    $iconPath = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/' . $_SESSION['User']['icon'] : '';
+    $iconPath = $_SESSION['User']['user_icon'];
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +55,7 @@
                                     <span>', $tournament['tournament_name'], '</span>
                                     <p>', $tournament['rule'], '</p>
                                 </div>
-                                <a href = "tournament-join.php?tournament_id= ', $tournament['tournament_id'], '">
+                                <a href = "tournament-join.php?tournament_id=" ', $tournament['tournament_id'], '">
                                     <div class="testimonial-name">
                                         <span class="name_text">詳細はこちら</span>
                                     </div>

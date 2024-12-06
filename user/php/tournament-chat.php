@@ -1,7 +1,6 @@
 <?php
 session_start();
 require 'db-connect.php';
-require '../header.html';
 
 $pdo = new PDO($connect, USER, PASS);
 
@@ -62,6 +61,8 @@ if (isset($_GET['tournament_id']) && isset($_GET['round'])) {
     <title>大会チャット</title>
 </head>
 <body>
+    <?php require 'header.php'; ?>
+
     <div>
         <h1>
             大会チャット（
