@@ -1,49 +1,56 @@
 <?php
 session_start();
 require 'db-connect.php';
-$userIcon = isset($_SESSION['User']['icon']) ? 'https://aso2201222.kill.jp/' . $_SESSION['User']['icon'] : 'https://aso2201222.kill.jp/Playmate/user/icon_user.png';
 
-// エラーメッセージを表示
+// デバッグ用エラー表示
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// ユーザーIDがセッションに設定されているか確認
+// セッションにユーザー情報が設定されているか確認
 if (!isset($_SESSION['User']['user_id'])) {
     header('Location: login-input.php');
     exit;
 }
 
+// データベース接続処理
 try {
-    // データベース接続
     $pdo = new PDO($connect, USER, PASS, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     ]);
+} catch (PDOException $e) {
+    echo "データベース接続エラー: " . htmlspecialchars($e->getMessage());
+    exit;
+}
 
-    // 現在のユーザーIDを取得
-    $current_user_id = $_SESSION['User']['user_id'];
+// 現在のユーザーIDを取得
+$current_user_id = $_SESSION['User']['user_id'];
+$current_user_icon = $_SESSION['User']['icon'] ?? 'icon_user.png';
 
-    // ゲームタイトル一覧を取得
+// URLパラメータからboard_title_idを取得
+$board_title_id = isset($_GET['board_title_id']) ? (int)$_GET['board_title_id'] : null;
+
+// board_title_idが指定されていない場合はエラー表示
+if ($board_title_id === null) {
+    echo "掲示板IDが指定されていません。<br>";
+    echo "現在のURL: " . htmlspecialchars($_SERVER['REQUEST_URI']) . "<br>";
+    exit;
+}
+
+// ゲームタイトル一覧を取得
+try {
     $stmt = $pdo->prepare("SELECT game_id, title FROM game ORDER BY title ASC");
     $stmt->execute();
     $games = $stmt->fetchAll();
+} catch (PDOException $e) {
+    echo "ゲームタイトル取得エラー: " . htmlspecialchars($e->getMessage());
+    exit;
+}
 
-    // URLパラメータからboard_title_idを取得
-    $board_title_id = isset($_GET['board_title_id']) ? (int)$_GET['board_title_id'] : null;
-
-    // board_title_idが指定されていない場合はエラーメッセージを表示して終了
-    if ($board_title_id === null) {
-        echo "掲示板IDが指定されていません。<br>";
-        echo "現在のURL: " . htmlspecialchars($_SERVER['REQUEST_URI']) . "<br>";
-        var_dump($_GET);
-        exit;
-    }
-
-    // POSTされたチャットメッセージを処理
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['chat'])) {
-        $chat_message = trim($_POST['chat']);
-
-        // チャットメッセージをデータベースに挿入
+// POSTされたチャットメッセージを処理
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['chat'])) {
+    $chat_message = trim($_POST['chat']);
+    try {
         $stmt = $pdo->prepare("
             INSERT INTO board_chat (board_title_id, chat, user_id, created_at)
             VALUES (:board_title_id, :chat, :user_id, NOW())
@@ -51,15 +58,19 @@ try {
         $stmt->execute([
             ':board_title_id' => $board_title_id,
             ':chat' => $chat_message,
-            ':user_id' => $current_user_id, // セッションから取得した現在のユーザーID
+            ':user_id' => $current_user_id,
         ]);
-
         // 再読み込みしてチャットを更新
         header("Location: " . $_SERVER['REQUEST_URI']);
         exit;
+    } catch (PDOException $e) {
+        echo "チャットメッセージ挿入エラー: " . htmlspecialchars($e->getMessage());
+        exit;
     }
+}
 
-    // board_chatテーブルから特定のboard_title_idに関連するチャットデータを取得
+// チャット履歴を取得
+try {
     $stmt = $pdo->prepare("
         SELECT 
             c.chat, 
@@ -79,12 +90,8 @@ try {
     $stmt->bindParam(':board_title_id', $board_title_id, PDO::PARAM_INT);
     $stmt->execute();
     $chats = $stmt->fetchAll();
-
 } catch (PDOException $e) {
-    echo "データベースエラー: " . htmlspecialchars($e->getMessage());
-    exit;
-} catch (Exception $e) {
-    echo "エラー: " . htmlspecialchars($e->getMessage());
+    echo "チャット履歴取得エラー: " . htmlspecialchars($e->getMessage());
     exit;
 }
 ?>
@@ -99,21 +106,21 @@ try {
     <title>PlayMate - チャットボード</title>
 </head>
 <script>
-document.querySelector('.up-button').addEventListener('click', function() {
-    const chatContainer = document.querySelector('.chat-container');
-    chatContainer.scrollTop = chatContainer.scrollHeight - chatContainer.clientHeight;
-});
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.up-button').addEventListener('click', function() {
+        const chatContainer = document.querySelector('.chat-container');
+        chatContainer.scrollTop = chatContainer.scrollHeight - chatContainer.clientHeight;
+    });
 
-function toggleGameList() {
-    const gameList = document.getElementById('game-title-list');
-    if (gameList) {
+    document.querySelector('button[onclick="toggleGameList()"]').addEventListener('click', function() {
+        const gameList = document.getElementById('game-title-list');
         if (gameList.style.display === 'none' || gameList.style.display === '') {
             gameList.style.display = 'block';
         } else {
             gameList.style.display = 'none';
         }
-    }
-}
+    });
+});
 </script>
 <body>
     <?php require 'header.php'; ?>
@@ -123,7 +130,6 @@ function toggleGameList() {
 
     <!-- ゲームタイトルリスト -->
     <div id="game-title-list" class="game-title-list" style="display: none;">
-        <div class="headline"></div>
         <ul>
             <?php foreach ($games as $game): ?>
                 <li><a href="chatboard-title.php?game_id=<?php echo htmlspecialchars($game['game_id'], ENT_QUOTES, 'UTF-8'); ?>">
@@ -138,7 +144,7 @@ function toggleGameList() {
             <div class="chat-message <?php echo ($chat['user_id'] == $current_user_id) ? 'self' : 'other'; ?>">
                 <div class="user-info">
                     <a href="profile-partner.php?user_id=<?= htmlspecialchars($chat['user_id']) ?>">
-                        <img src="<?= htmlspecialchars($userIcon . $chat['icon'] ?? 'icon_user.png') ?>" class="icon_user" width="50" height="50">
+                        <img src="https://aso2201222.kill.jp/<?= htmlspecialchars($chat['icon'] ?? 'icon_user.png') ?>" class="icon_user" width="50" height="50">
                     </a>
                     <span><?= htmlspecialchars($chat['user_name']) ?></span>
                 </div>
