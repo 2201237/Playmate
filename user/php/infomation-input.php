@@ -14,6 +14,8 @@ $sql->execute();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/header.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <link rel="stylesheet" href="../css/infomation-input.css">
 
     <title>Document</title>
@@ -44,6 +46,8 @@ $sql->execute();
         </div>
     </form>
     <button class="menu-button" onclick="location.href='query-top.php'">戻る</button>
+    <script src="../js/header.js"></script>
+
 </body>
 
 </html>
