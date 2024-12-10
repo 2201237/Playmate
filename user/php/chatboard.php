@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="chat-message <?php echo ($chat['user_id'] == $current_user_id) ? 'self' : 'other'; ?>">
                 <div class="user-info">
                     <a href="profile-partner.php?user_id=<?= htmlspecialchars($chat['user_id']) ?>">
-                        <img src="https://aso2201222.kill.jp/<?= htmlspecialchars($chat['icon'] ?? 'icon_user.png') ?>" class="icon_user" width="50" height="50">
+                    <img src="<?php echo htmlspecialchars($chat['icon'] ?? 'icon_user.png', ENT_QUOTES, 'UTF-8'); ?>" alt="Profile Icon" style="width: 50px; height: 50px;">
                     </a>
                     <span><?= htmlspecialchars($chat['user_name']) ?></span>
                 </div>
