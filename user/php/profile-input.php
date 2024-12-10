@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" type="text/css" href="../css/profile-input.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Playmate</title>
 </head>
 
@@ -97,5 +98,7 @@
             }
         });
     </script>
+        <script src="../js/header.js"></script>
+
 </body>
 </html>

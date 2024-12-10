@@ -46,6 +46,7 @@
     color: #2a2727;
     font-style: oblique;
     font-weight: bolder;
+    width: fit-content;
     }
   .follow-form{
     display: inline-flex;
