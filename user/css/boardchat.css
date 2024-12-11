@@ -12,8 +12,9 @@ body {
 
 /* ヘッダー */
 header {
-    height: 60px;
-    background-color: #f8f9fa;
+    background-color: #f4f7f6;
+
+    /* height: 60px;
     position: fixed;
     top: 0;
     left: 0;
@@ -22,7 +23,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
 }
 
 /* コンテナ */
@@ -44,7 +45,7 @@ label {
 }
 
 /* セレクトボックス */
-select, input[type="text"], textarea {
+select, .ctext, textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;

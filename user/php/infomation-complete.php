@@ -11,4 +11,4 @@ $sql->execute([$_POST['infomation'],$_SESSION['User']['user_id'],$_POST['conge_i
 echo '<h1>お問い合わせ内容が送信されました。</h1>';
 echo '<p>返信内容が返却されるまでしばらくお待ちください</p>';
 ?>
-<button class="menu-button" onclick="location.href='infomation-reception.php'">戻る</button>
+<button class="menu-button" onclick="location.href='query-top.php'">メニューへ</button>

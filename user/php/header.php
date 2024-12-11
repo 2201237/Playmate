@@ -8,7 +8,7 @@ $current_page = basename($_SERVER['REQUEST_URI']);
 
 <!--▽▽ヘッダーロゴ▽▽-->
       <div class="logo">
-          <a href="home.php">
+          <a class = "logo" href="home.php">
             <img src="../img/logo.png" >
           </a>
       </div>
@@ -41,7 +41,7 @@ $current_page = basename($_SERVER['REQUEST_URI']);
         <li><a href="chatboard-title.php" class="<?php echo ($current_page == 'chatboard-title.php') ? 'active' : ''; ?>">掲示板</a></li>
         <li><a href="tournament-list.php" class="<?php echo ($current_page == 'tournament-list.php') ? 'active' : ''; ?>">大会一覧</a></li>
         <li><a href="ranking.php" class="<?php echo ($current_page == 'ranking.php') ? 'active' : ''; ?>">ランキング</a></li>
-        <li><a href="infomation-input" class="<?php echo ($current_page == 'infomation-input') ? 'active' : ''; ?>">お問い合わせ</a></li>
+        <li><a href="query-top" class="<?php echo ($current_page == 'query-top') ? 'active' : ''; ?>">お問い合わせ</a></li>
         <li><a href="profile-input.php" class = " <?php echo ($current_page == 'profile-input.php') ? 'active' : ''; ?>"  >プロフィール</a></li>
         <li><a href="follow.php" class = " <?php echo ($current_page == 'follow.php') ? 'active' : ''; ?>" >フォロー</a></li>
         <li><a href="follower.php" class = " <?php echo ($current_page == 'follower.php') ? 'active' : ''; ?>" >フォロワー</a></li>
@@ -57,16 +57,20 @@ $current_page = basename($_SERVER['REQUEST_URI']);
 <!--▽▽ヘッダーリスト▽▽-->
       <nav class="pc">  <!--pcクラスを追記-->
         <ul>
-          <li><form action="search.php" class="search-form-6" method="get">
+          <!-- <li><form action="search.php" class="search-form-6" method="get">
     <label>
         <input type="text" name="username" aria-label="キーワードを入力">
-    </label>
+    </label> -->
 </form></li>
-          <li><a href="home.php">ホーム</a></li>
-          <li><a href="chatboard-title.php">掲示板</a></li>
-          <li><a href="tournament-list.php">大会一覧</a></li>
-          <li><a href="ranking.php">ランキング</a></li>
-          <li><a href="infomation-input.php">お問い合わせ</a></li>
+        <li><a href="home.php" class="<?php echo ($current_page == 'home.php') ? 'active' : ''; ?>">ホーム</a></li>
+        <li><a href="chatboard-title.php" class="<?php echo ($current_page == 'chatboard-title.php') ? 'active' : ''; ?>">掲示板</a></li>
+        <li><a href="tournament-list.php" class="<?php echo ($current_page == 'tournament-list.php') ? 'active' : ''; ?>">大会一覧</a></li>
+        <li><a href="ranking.php" class="<?php echo ($current_page == 'ranking.php') ? 'active' : ''; ?>">ランキング</a></li>
+        <li><a href="query-top" class="<?php echo ($current_page == 'query-top') ? 'active' : ''; ?>">お問い合わせ</a></li>
+        <li><a href="profile-input.php" class = " <?php echo ($current_page == 'profile-input.php') ? 'active' : ''; ?>"  >プロフィール</a></li>
+        <li><a href="follow.php" class = " <?php echo ($current_page == 'follow.php') ? 'active' : ''; ?>" >フォロー</a></li>
+        <li><a href="follower.php" class = " <?php echo ($current_page == 'follower.php') ? 'active' : ''; ?>" >フォロワー</a></li>
+
           <li><a href="profile-input.php"><img src=<?php echo $iconPath ?>></a></li>
         </ul>
       </nav>

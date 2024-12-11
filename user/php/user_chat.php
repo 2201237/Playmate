@@ -143,8 +143,8 @@ try {
                 </div>
             </div>
         <?php endforeach; ?>
+        
     </div>
-
     <!-- チャット送信フォーム -->
     <div class="form-chat">
         <form method="POST" action="">
@@ -155,8 +155,8 @@ try {
             <button type="submit">送信</button>
             <a href="#jump" class="jump">↓</a>
         </form>
-        <div id="jump"></div>
     </div>
+    <div  id="jump"></div>
 
     <script>
     window.onload = function() {
@@ -181,6 +181,12 @@ try {
     document.querySelector('form').addEventListener('submit', function() {
         setTimeout(jump, 100); // 少し遅延させて最下部にスクロール
     });
+    window.addEventListener("popstate", function (e) {
+
+history.pushState(null, null, null);
+return;
+
+});
     </script>
 </body>
 </html>

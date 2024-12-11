@@ -23,7 +23,7 @@ $sql->execute();
 <body>
     
     <h2 style="text-align:center">お問い合わせ</h2>
-    <form action ="infomation-complete.php" method ="post"> 
+    <form class="info" action ="infomation-complete.php" method ="post"> 
         <?php
             $contacts_ge = $sql->fetchAll(PDO::FETCH_ASSOC);
             echo "<div  style='text-align:center'>";
@@ -35,7 +35,7 @@ $sql->execute();
             ?>
         </select>
     </div>
-    <form action="infomation-complete.php" method="post">
+    <form class = "info" action="infomation-complete.php" method="post">
         
         <div style="text-align:center">お問い合わせ内容<br>
             <textarea name="infomation" required="required"></textarea>
@@ -45,7 +45,7 @@ $sql->execute();
             <input type="submit" class="button" value="送信">
         </div>
     </form>
-    <button class="menu-button" onclick="location.href='query-top.php'">戻る</button>
+    <button class="menu-button" onclick="location.href='query-top.php'">メニューへ</button>
     <script src="../js/header.js"></script>
 
 </body>

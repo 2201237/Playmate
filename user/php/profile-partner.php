@@ -1,6 +1,9 @@
 <?php
 
-require 'header_profile.php';
+session_start();
+require 'db-connect.php';
+require 'header.php';
+
 $pdo = new PDO($connect, USER, PASS);
 
 // 現在のログインユーザーのID
@@ -87,10 +90,14 @@ if (isset($_GET['user_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/profile-input.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <title>相手のプロフィール</title>
 </head>
 
 <body>
+
     <div class="profile-container">
         <a href="#" onclick="window.history.back(); return false;">←</a><br>
         <div class="profile-content">
@@ -110,18 +117,65 @@ if (isset($_GET['user_id'])) {
             <!-- フォローボタンおよびフォロー解除ボタン -->
             <?php 
             if ($isFollowing) {
-                echo '<form method="post" action="">';
-                    echo '<input type="hidden" name="unfollow_user_id" value="' . $userId . '">';
-                    echo '<button type="submit" class="follow-button">フォロー解除</button>';
-                echo '</form>';
+                echo    '<div class="modal-content">
+                             <button href="" id="followButton">フォロー解除</button>
+                        </div>
+        
+        
+                        <div id="followModal" class="modal-logout">
+                            <spqn class = "close"></span>
+                            <div class="modal-pro">
+                                <p>フォロー解除しますか？</p>
+                                <form method="post" action="">
+                                <input type="hidden" name="unfollow_user_id" value="' . $userId . '">
+                                    <button type="submit" class="confirm-button">はい</button>
+                                    <button type="button" class="cancel-button">いいえ</button>
+                                </form>
+                            </div>
+                        </div>';
+        
+                // echo '<form method="post" action="">';
+                //     echo '<input type="hidden" name="unfollow_user_id" value="' . $userId . '">';
+                //     echo '<button type="submit" class="follow-button">フォロー解除</button>';
+                // echo '</form>';
             } else {
                 echo '<form method="post" action="">';
                     echo '<input type="hidden" name="follow_user_id" value="' . $userId . '">';
                     echo '<button type="submit" class="follow-button">フォローする</button>';
                 echo '</form>';
             }
+            
             ?>
         </div>
     </div>
+    <script>
+        // ログアウトボタンをクリックしたときの処理
+        const followButton = document.getElementById('followButton');
+        const followModal = document.getElementById('followModal');
+        const closeButton = document.querySelector('.close');
+        const cancelButton = document.querySelector('.cancel-button');
+
+        followButton.addEventListener('click', function (event) {
+            event.preventDefault(); // デフォルトのリンク動作を防ぐ
+            followModal.style.display = 'block'; // モーダルを表示
+        });
+
+        closeButton.addEventListener('click', function () {
+            followModal.style.display = 'none'; // モーダルを非表示
+        });
+
+        cancelButton.addEventListener('click', function () {
+            followModal.style.display = 'none'; // モーダルを非表示
+        });
+
+        window.addEventListener('click', function (event) {
+            if (event.target == followModal) {
+                followModal.style.display = 'none'; // モーダルを非表示
+            }
+        });
+    </script>
+
+    <script src="../js/header.js"></script>
+
 </body>
 </html>

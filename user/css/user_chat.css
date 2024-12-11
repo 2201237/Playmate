@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* body {
      font-family: Arial, sans-serif; 
      background-color: #f4f4f9; 
@@ -12,11 +11,15 @@ html {
 
 
 .user-header {
+    position: fixed;
     font-family: monospace;
     padding: 20px;
     margin: auto;
     border-bottom: solid;
-    background: #0088ff21;
+    background: #a9eeff;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 .link{
     text-decoration: none; 
@@ -31,7 +34,7 @@ html {
     margin: 20px;
 }
 .chat-container {
-    padding: 20px; /* 内側余白 */
+    padding: 70px; /* 内側余白 */
     margin: 20px auto; /* 上下中央寄せ */
     max-width: 800px; /* 最大幅を設定 */
     max-height: 600px; /* 最大高さを設定 */
@@ -84,7 +87,7 @@ textarea.chat {
 
 /* チャット送信ボタン */
 .form-chat button {
-    margin-top: 10px; /* ボタンとテキストエリアの間隔 */
+    /* margin-top: 10px; ボタンとテキストエリアの間隔 */
     padding: 10px 20px; /* ボタンの内側余白 */
     background-color: #007bff; /* ボタン背景色 */
     color: white; /* ボタン文字色 */
@@ -121,18 +124,4 @@ textarea.chat {
     background-color: #36556d;
     text-decoration: none;
 }
-=======
-.my_chat{
-    width: 50%;
-    /* left: 70%; */
-    text-align: right;
-    float: right;
-    background-color: #00ff0e54;
-    margin: 30px;
-    border: groove;
-    border-radius: 20px 20px 0px 30px;
-}
-.you_chat{
-    background-color: aqua;
-}
->>>>>>> parent of eb71ce9 (commit)
+
