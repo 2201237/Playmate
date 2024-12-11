@@ -41,9 +41,10 @@ try {
         $board_title_id = $pdo->lastInsertId();
 
         // board_chatテーブルに投稿内容を挿入
-        $stmt = $pdo->prepare("INSERT INTO board_chat (board_title_id, chat) VALUES (:board_title_id, :chat)");
+        $stmt = $pdo->prepare("INSERT INTO board_chat (board_title_id, chat, user_id) VALUES (:board_title_id, :chat, :user_id)");
         $stmt->bindParam(':board_title_id', $board_title_id, PDO::PARAM_INT);
         $stmt->bindParam(':chat', $chat, PDO::PARAM_STR);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT); // 修正ポイント
         $stmt->execute();
 
         // リダイレクト
@@ -71,7 +72,7 @@ ob_end_flush();  // 出力バッファをフラッシュ
     
 </head>
 <body>
-    <h3>掲示板作成</h3>
+    
     <form method="POST" class = "create" action="">
         <label for="game_id">ゲームタイトル</label>
         <select name="game_id" id="game_id" required>
