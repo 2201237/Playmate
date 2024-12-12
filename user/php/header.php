@@ -1,7 +1,8 @@
+<?php     $iconPath = $_SESSION['User']['user_icon']; ?>
 <!--ヘッダー-->
     <header>
-
-
+ 
+ 
 <!--▽▽ヘッダーロゴ▽▽-->
       <div class="logo">
           <a href="home.php">
@@ -9,8 +10,8 @@
           </a>
       </div>
 <!--△△ヘッダーロゴ△△-->
-
-
+ 
+ 
 <!--▽▽ハンバーガーメニュー▽▽-->
       <div id="hamburger">
           <div class="hm-icon">
@@ -20,8 +21,8 @@
           </div>
       </div>
 <!--△△ハンバーガーメニュー△△-->
-
-
+ 
+ 
 <!--▽▽ハンバーガーメニューのリスト▽▽-->
       <nav class="sm">
         <ul>
@@ -33,10 +34,10 @@
        </ul>
      </nav>
 <!--△△ハンバーガーメニューのリスト△△-->
-
-
-
-
+ 
+ 
+ 
+ 
 <!--▽▽ヘッダーリスト▽▽-->
       <nav class="pc">  <!--pcクラスを追記-->
         <ul>
@@ -49,12 +50,11 @@
           <li><a href="chatboard-title.php">掲示板</a></li>
           <li><a href="tournament-list.php">大会一覧</a></li>
           <li><a href="ranking.php">ランキング</a></li>
-          <li><a href="infomation-input.php">お問い合わせ</a></li>
-          <li><a href="profile-input.php"><img src=<?php echo $_SESSION['User']['user_icon']?>></a></li>
+          <li><a href="query-top.php">お問い合わせ</a></li>
+          <li><a href="profile-input.php"><img src=<?php echo $iconPath ?>></a></li>
         </ul>
       </nav>
 <!--△△ヘッダーリスト△△-->
-
-
+ 
+ 
     </header>
-  

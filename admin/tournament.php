@@ -20,6 +20,7 @@
         <button class="menu-button" onclick="location.href='tournament-bracket.php'">組み分け表</button><br>
         <button class="menu-button" onclick="location.href='tournament-sorting.php'">組み分け</button><br>
         <button class="menu-button" onclick="location.href='win-loss-image.php'">勝敗画像管理</button><br>
+        <button class="menu-button" onclick="location.href='winlose-input.php'">勝敗登録</button><br>
     </div>
 </body>
 </html>

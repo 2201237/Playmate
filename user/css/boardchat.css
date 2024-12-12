@@ -1,109 +1,105 @@
+/* 全体のスタイル */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f7f6;
+    font-family: 'Arial', sans-serif;
+    background-color: #fafafa;
     color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
-header {
-    background-color: #ffcccb;
+ 
+/* ヘッダー */
+/* header {
+    height: 60px;
+    background-color: #f4f7f6;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+} */
+ 
+/* コンテナ */
+.create {
+    position: absolute;
+    top: 10%;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 80px; /* ヘッダーの高さ分を考慮 */
     padding: 20px;
-    text-align: center;
-    font-size: 2em;
-    font-weight: bold;
-}
-
-.chat-container {
-    width: 60%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
-.chat-box {
-    max-height: 400px;
-    overflow-y: scroll;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-.chat-message {
-    display: flex;
-    margin-bottom: 10px;
-    align-items: flex-start;
-}
-
-.chat-message.self {
-    justify-content: flex-end;
-}
-
-.chat-message.other {
-    justify-content: flex-start;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
-}
-
-.user-icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-right: 5px;
-}
-
-.user-name {
-    font-weight: bold;
-    color: #555;
-}
-
-.chat-content {
-    background-color: #e6e6e6;
-    padding: 10px;
-    border-radius: 10px;
-    position: relative;
-    max-width: 60%;
-}
-
-.chat-message.self .chat-content {
-    background-color: #d1e7dd;
-    align-self: flex-end;
-}
-
-.chat-time {
+ 
+/* フォームのラベル */
+label {
     display: block;
-    font-size: 0.8em;
-    color: #888;
-    margin-top: 5px;
-    text-align: right;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
-
-.chat-form {
-    display: flex;
-    padding: 10px 0;
-    margin-top: 10px;
-}
-
-.chat-form input[type="text"] {
-    flex: 1;
+ 
+/* セレクトボックス */
+select, .ctext, .textarea2 {
+    width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
 }
-
-.chat-form button {
+ 
+/* テキストエリア */
+textarea {
+    resize: vertical; /* 縦方向のリサイズを可能にする */
+}
+ 
+/* ボタン */
+button {
     padding: 10px 20px;
     background-color: #007bff;
-    color: #fff;
+    color: #ffffff;
     border: none;
     border-radius: 5px;
-    margin-left: 10px;
     cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 10px;
 }
-
-.chat-form button:hover {
+ 
+button:hover {
     background-color: #0056b3;
+}
+ 
+/* 戻るボタンに異なる色を設定 */
+.cbut {
+    background-color: #6c757d;
+}
+ 
+.cbut:hover {
+    background-color: #5a6268;
+}
+ 
+/* スペーシング */
+br {
+    display: block;
+    margin-bottom: 15px;
+}
+ 
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .create {
+        width: 90%; /* スマホ画面対応 */
+        margin-top: 60px; /* ヘッダー分のスペース調整 */
+    }
+    button {
+        width: 100%; /* ボタンを幅いっぱいに */
+        margin-right: 0; /* 右マージンをリセット */
+        margin-bottom: 10px; /* ボタン同士のスペース */
+    }
 }

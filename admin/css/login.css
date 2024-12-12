@@ -1,4 +1,4 @@
-/* アニメーションの設定 */
+
 @keyframes waveAnimation {
   0% {
     background-position: 0% 50%;
@@ -11,7 +11,6 @@
   }
 }
 
-/* アニメーションを適用 */
 body {
   font-family: Arial, sans-serif;
   animation: waveAnimation 8s ease-in-out infinite;
@@ -27,7 +26,6 @@ body {
 
 
   
-  /* ログインコンテナのスタイル */
   .login-container {
     background-color: rgba(0, 209, 245, 0.961);
     padding: 30px;
@@ -37,7 +35,6 @@ body {
     max-width: 400px;
   }
   
-  /* タイトルのスタイル */
   h1 {
     text-align: center;
     color: #000000;
@@ -55,19 +52,16 @@ body {
     background-color: #ff0000;
   }
   
-  /* フォームグループのスタイル */
   .form-group {
     margin-bottom: 20px;
   }
   
-  /* ラベルのスタイル */
   label {
     display: block;
     margin-bottom: 5px;
     color: #000000;
   }
   
-  /* テキスト入力のスタイル */
   input[type="text"],
   input[type="password"] {
     width: 100%;
@@ -77,13 +71,12 @@ body {
     box-sizing: border-box;
   }
   
-  /* エラーメッセージのスタイル */
+  /* エラーメッセージ*/
   .error-message {
     color: #ff0000;
     margin-bottom: 15px;
   }
   
-  /* ボタンのスタイル */
   button {
     width: 100%;
     padding: 10px;

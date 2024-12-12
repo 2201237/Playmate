@@ -19,7 +19,7 @@ $sql->execute();
 </head>
 <body>
     
-    <h2 style="text-align:center">お問い合わせ送信</h2>
+    <h2 style="text-align:center">お問い合わせ一覧</h2>
 <?php
 try {
     $pdo = new PDO($connect, USER, PASS);
