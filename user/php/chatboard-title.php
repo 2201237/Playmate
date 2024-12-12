@@ -40,8 +40,6 @@
 
 <body>
 
-    <?php require 'header.php'; ?>
-
     <div class="container">
         <a href="chatboard-create.php">チャット作成</a>
 
