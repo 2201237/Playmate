@@ -20,7 +20,11 @@
         <button class="menu-button" onclick="location.href='tournament-bracket.php'">組み分け表</button><br>
         <button class="menu-button" onclick="location.href='tournament-sorting.php'">組み分け</button><br>
         <button class="menu-button" onclick="location.href='win-loss-image.php'">勝敗画像管理</button><br>
+<<<<<<< HEAD
         <button class="menu-button" onclick="location.href='winlose-input.php'">勝敗登録</button><br>
+=======
+        <button class="menu-button" onclick="location.href='admin_tournament_chat.php'">大会アナウンス</button><br>
+>>>>>>> 99c818f858e1113856a70ed5a7d0a0f0faf082b2
     </div>
 </body>
 </html>
