@@ -1,12 +1,7 @@
-/* Fonts */
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400);
-
-/* fontawesome */
-@import url(http://weloveiconfonts.com/api/?family=fontawesome);
-[class*="fontawesome-"]:before {
-  font-family: 'FontAwesome', sans-serif;
+.headline{
+    padding-left: 0;
+    color: #000000;
 }
-
 /* 初期状態でモーダルを非表示にする */
 #logoutModal {
     display: none;
@@ -42,6 +37,19 @@
     width: 300px;
     text-align: center;
 }
+.pro-form{
+    border: solid;
+    width: max-content;
+    margin: 0 auto 20px auto;
+    padding: 20px 50px 20px 50px;
+    background-color: lightyellow;
+    transition: .3s cubic-bezier(0.5, 1, 0.89, 1);
+  }
+  .pro-form:hover {
+    background: #f9dbca;
+    color: #ff701e;
+    transform: scale(1.03);
+  }
 
 .profile-icon {
     width: 200px;
@@ -55,19 +63,32 @@
     border-radius: 50%;
 }
 
-p {
-    text-align: center;
-}
-
 textarea {
+    resize: none;
     display: block;
+    max-width: 100%;
     margin: auto;
+    font-family: serif;
+    font-size: large;
+    font-weight: lighter;
+    padding: 10px;
+    border: 4mm ridge rgba(221, 220, 50, .5);
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
 }
-
-.user {
-  margin-top: 10px;
-  font-weight: bold;
-  font-size: 1.17em;
+.username{
+    margin-top: 10px;
+    font-weight: bold;
+    font-family: MS Mincho;
+    font-size: x-large;
+    text-align: center;
+    color: black;
+}
+.usermail {
+    margin-top: 10px;
+    font-weight: lighter;
+    font-size: large;
+    text-align: center;
+    color: darkgrey;
 }
 
 .edit {
@@ -76,7 +97,11 @@ textarea {
 }
 
 .modal-content {
-    text-align: center;
+    text-align: right;
+}
+.log{
+    text-decoration: none;
+
 }
 
 .edit{
@@ -98,6 +123,87 @@ textarea {
   .edit:hover {
     background: #ee3e52;
   }
+  /* .unfollow-button{
+    float: right;
+    background-color: #ee3e52;
+    border: thick double #ffffff;
+    font-size: 15px;
+  } */
+  .unfollow-button{
+    float: right;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 5px 0 #e6d900;
+    box-shadow: 0 5px 0 #9c9c9c;
+    position: relative;
+    display: inline-block;
+    padding: 10px 8px 10px 8px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: all 0.3s;
+    text-align: center;
+    text-decoration: none;
+    color: #212529;
+    background: linear-gradient(to bottom right, #ee3e52, pink);
+  }
+  .unfollow-button:hover{
+    -webkit-transform: translate(0, 3px);
+    transform: translate(0, 3px);
+    -webkit-box-shadow: 0 2px 0 #000000;
+    box-shadow: 0 2px 0 #000000;
+    background: linear-gradient(to bottom right, red, pink);
+    color: white;
+  }
   .follow-button{
+    float: right;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 5px 0 #e6d900;
+    box-shadow: 0 5px 0 #9c9c9c;
+    position: relative;
+    display: inline-block;
+    padding: 10px 8px 10px 8px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: all 0.3s;
+    text-align: center;
+    text-decoration: none;
+    color: #212529;
+    background: linear-gradient(to bottom right, #39c2ff, hsl(0deg 0% 100%));
+    }
+  .follow-button:hover{
+    -webkit-transform: translate(0, 3px);
+    transform: translate(0, 3px);
+    -webkit-box-shadow: 0 2px 0 #000000;
+    box-shadow: 0 2px 0 #000000;
+    background: linear-gradient(to bottom right, #0033ff, #ffffff);
+    color: white;
+  }
+
+
+
+  /* .follow-button{
+    float: right;
+    background-color: aqua;
+    border: thick double #ffffff;
+    font-size: 15px;
+
+} */
+  .back{
+    top: -25px;
+    position: relative;
+    text-decoration: none;
+    font-size: xx-large;
+  }
+  .chat-button{
+    color: black;
+    font-size: xx-large;
+    text-decoration: none;
+  }
+  .chat-button:hover{
+    color: #009dff;
+    text-decoration: none;
 
   }

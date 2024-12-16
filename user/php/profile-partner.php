@@ -91,89 +91,55 @@ if (isset($_GET['user_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/profile-input.css">
     <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/style.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <title>相手のプロフィール</title>
 </head>
 
 <body>
+    
+<div class = "pro-form">
+                <!-- フォローボタンおよびフォロー解除ボタン -->
+
+<?php 
+
+            if ($isFollowing) {
+                echo '<form method="post" action="">';
+                echo '<input type="hidden" name="unfollow_user_id" value="' . $userId . '">';
+                echo '<button type="submit" class="unfollow-button">フォロー解除</button>';
+            echo '</form>';
+        } else {
+            echo '<form method="post" action="">';
+                echo '<input type="hidden" name="follow_user_id" value="' . $userId . '">';
+                echo '<button type="submit" class="follow-button">フォローする</button>';
+            echo '</form>';
+        }
+        
+        ?>
+        <a class = "back" href="#" onclick="window.history.back(); return false;">←</a><br>
 
     <div class="profile-container">
-        <a href="#" onclick="window.history.back(); return false;">←</a><br>
         <div class="profile-content">
             <p class="profile-icon">
                 <img src="<?php echo $iconPath; ?>" width="50" height="50" alt="Profile Icon">
             </p>
-            <p class="user-name"><?php echo $userName; ?></p>
-            <p class="user-mail"><?php echo $userMail; ?></p>
-            <p class="profile-p">自己紹介</p>
+            <p class = "headline" >名前</p>
+            <p class="username"><?php echo $userName; ?></p>
+            <p class = "headline" >メールアドレス</p>
+            <p class="usermail"><?php echo $userMail; ?></p>
+            <p class="headline">自己紹介</p>
             <textarea rows="4" cols="50" class="profile-area" readonly><?php echo $userProfile; ?></textarea>
         </div>
+</div>
 
         <div class="profile-actions">
             <!-- チャットリンク -->
             <a href="user_chat.php?user_id=<?php echo $userId; ?>" class="chat-button">✉</a>
 
-            <!-- フォローボタンおよびフォロー解除ボタン -->
-            <?php 
-            if ($isFollowing) {
-                echo    '<div class="modal-content">
-                             <button href="" id="followButton">フォロー解除</button>
-                        </div>
-        
-        
-                        <div id="followModal" class="modal-logout">
-                            <spqn class = "close"></span>
-                            <div class="modal-pro">
-                                <p>フォロー解除しますか？</p>
-                                <form method="post" action="">
-                                <input type="hidden" name="unfollow_user_id" value="' . $userId . '">
-                                    <button type="submit" class="confirm-button">はい</button>
-                                    <button type="button" class="cancel-button">いいえ</button>
-                                </form>
-                            </div>
-                        </div>';
-        
-                // echo '<form method="post" action="">';
-                //     echo '<input type="hidden" name="unfollow_user_id" value="' . $userId . '">';
-                //     echo '<button type="submit" class="follow-button">フォロー解除</button>';
-                // echo '</form>';
-            } else {
-                echo '<form method="post" action="">';
-                    echo '<input type="hidden" name="follow_user_id" value="' . $userId . '">';
-                    echo '<button type="submit" class="follow-button">フォローする</button>';
-                echo '</form>';
-            }
-            
-            ?>
         </div>
     </div>
-    <script>
-        // ログアウトボタンをクリックしたときの処理
-        const followButton = document.getElementById('followButton');
-        const followModal = document.getElementById('followModal');
-        const closeButton = document.querySelector('.close');
-        const cancelButton = document.querySelector('.cancel-button');
-
-        followButton.addEventListener('click', function (event) {
-            event.preventDefault(); // デフォルトのリンク動作を防ぐ
-            followModal.style.display = 'block'; // モーダルを表示
-        });
-
-        closeButton.addEventListener('click', function () {
-            followModal.style.display = 'none'; // モーダルを非表示
-        });
-
-        cancelButton.addEventListener('click', function () {
-            followModal.style.display = 'none'; // モーダルを非表示
-        });
-
-        window.addEventListener('click', function (event) {
-            if (event.target == followModal) {
-                followModal.style.display = 'none'; // モーダルを非表示
-            }
-        });
-    </script>
 
     <script src="../js/header.js"></script>
 

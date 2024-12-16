@@ -30,7 +30,12 @@
 
     <?php require 'header.php'; ?>
 
-    <form action='profile-edit.php' method='post'>
+    <form class = "pro-form" action='profile-edit.php' method='post'>
+    <div class="modal-content">
+        <!-- ログアウトボタンにIDを追加 -->
+        <a class = "log" href="" id="logoutButton">ログアウト</a>
+    </div>
+
 
     <?php
 
@@ -39,10 +44,13 @@
                 echo "<img src='".$iconPath. "' class='icon_user'>";
         echo "</div>";
 
-        echo "<p class = 'user' >" . $userName . "</p>";
-        echo "<p class = 'user' >" . $userMail . "</p>";
+        echo '<p class = "headline" >名前</p>';
+        echo "<p class = 'username' >" . $userName . "</p>";
 
-        echo '<p class = "profile-p" >自己紹介</p>';
+        echo '<p class = "headline" >メールアドレス</p>';
+        echo "<p class = 'usermail' >" . $userMail . "</p>";
+
+        echo '<p class = "headline" >自己紹介</p>';
             if(isset($userProfile) && $userProfile !== ''){
 
                 echo '<textarea rows="4" cols="50" class = "profile-area">' .$userProfile. '</textarea>';
@@ -55,10 +63,6 @@
    ?>
    </form>
 
-   <div class="modal-content">
-        <!-- ログアウトボタンにIDを追加 -->
-        <a href="" id="logoutButton">ログアウト</a>
-    </div>
 
 
     <div id="logoutModal" class="modal-logout">
