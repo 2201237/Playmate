@@ -1,6 +1,9 @@
 <?php
 
-require 'header_profile.php';
+session_start();
+require 'db-connect.php';
+require 'header.php';
+
 $pdo = new PDO($connect, USER, PASS);
 
 // 現在のログインユーザーのID
@@ -36,7 +39,7 @@ if (isset($_GET['user_id'])) {
 
     // プロフィール情報を変数に格納
     $userId = $targetUser['user_id'];
-    $userIcon = $targetUser['icon'] ? 'https://aso2201222.kill.jp/'.$targetUser['icon'] : '../img/icon_user.png';
+    $iconPath = $targetUser['icon'] ;
     $userName = $targetUser['user_name'];
     $userProfile = $targetUser['profile'] ? $targetUser['profile'] : 'プロフィールは未設定です。';
     $userMail = $targetUser['user_mail'];
@@ -120,7 +123,7 @@ if (isset($_GET['user_id'])) {
     <div class="profile-container">
         <div class="profile-content">
             <p class="profile-icon">
-                <img src="<?php echo $userIcon; ?>" class="icon_user" width="50" height="50" alt="Profile Icon">
+                <img src="<?php echo $iconPath; ?>" width="50" height="50" alt="Profile Icon">
             </p>
             <p class = "headline" >名前</p>
             <p class="username"><?php echo $userName; ?></p>

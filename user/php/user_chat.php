@@ -1,7 +1,6 @@
 <?php
 session_start();
 require 'db-connect.php';
-$userIcon = isset($_SESSION['User']['icon']) ?'https://aso2201222.kill.jp/'. $_SESSION['User']['icon'] : '../img/icon_user.png';
 
 // エラーメッセージを表示
 ini_set('display_errors', 1);
@@ -23,6 +22,19 @@ try {
     // 現在のユーザーIDを取得
     $UserId = $_SESSION['User']['user_id'];
 
+    // GETリクエストから相手のユーザーIDを取得
+    if (!isset($_GET['user_id'])) {
+        throw new Exception("相手のユーザーIDが指定されていません。");
+    }
+    $partnerId = (int)$_GET['user_id'];
+
+    // 相手のユーザー情報を取得
+    $stmt = $pdo->prepare('SELECT user_name, icon FROM users WHERE user_id = ?');
+    $stmt->execute([$partnerId]);
+    $partnerInfo = $stmt->fetch();
+    if (!$partnerInfo) {
+        throw new Exception("相手のユーザー情報が見つかりません。");
+    }
 
     // POSTされたチャットメッセージを処理
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['chat'])) {
@@ -30,21 +42,21 @@ try {
 
         // チャットメッセージをデータベースに挿入
         $stmt = $pdo->prepare("
-            INSERT INTO users_chat (users_chat_id, chat,is_read, user_id1, created_at,user_id2)
-            VALUES (?, :chat, :is_read, :user_id1, NOW(), :user_id2)
+            INSERT INTO users_chat (chat, is_read, user_id1, created_at, user_id2)
+            VALUES (:chat, 0, :user_id1, NOW(), :user_id2)
         ");
         $stmt->execute([
             ':chat' => $chat_message,
-            ':user_id1' => $UserId, // セッションから取得した現在のユーザーID
-            ':user_id2' => $_GET['user_id'],
+            ':user_id1' => $UserId,
+            ':user_id2' => $partnerId,
         ]);
 
-        // 再読み込みしてチャットを更新
+        // ページをリロードしてチャットを更新
         header("Location: " . $_SERVER['REQUEST_URI']);
         exit;
     }
 
-    // board_chatテーブルから特定のusers_chat_idに関連するチャットデータを取得
+    // チャットメッセージを取得
     $stmt = $pdo->prepare("
         SELECT 
             c.chat, 
@@ -57,12 +69,15 @@ try {
         JOIN 
             users AS u ON c.user_id1 = u.user_id
         WHERE 
-            c.users_chat_id = :users_chat_id
+            (c.user_id1 = :user_id1 AND c.user_id2 = :user_id2)
+            OR (c.user_id1 = :user_id2 AND c.user_id2 = :user_id1)
         ORDER BY 
             c.created_at ASC
     ");
-    $stmt->bindParam(':users_chat_id', $users_chat_id, PDO::PARAM_INT);
-    $stmt->execute();
+    $stmt->execute([
+        ':user_id1' => $UserId,
+        ':user_id2' => $partnerId,
+    ]);
     $chats = $stmt->fetchAll();
 
 } catch (PDOException $e) {
@@ -79,25 +94,6 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-    <link rel="stylesheet" href="../css/chatboard.css">
-    <title>PlayMate - チャットボード</title>
-</head>
-<body>
-    <h3><?php $chat['user_name'] ?></h3>
-        <?php
-        if (isset($iconPath) && $iconPath !== '') {
-            echo "<input type = 'hidden' name = '" . $iconPath . "' value = '" . $iconPath . "'></input>";
-
-            echo "<img src='".$iconPath."' class='icon_user' width='50' height='50'>";
-        } else {
-            echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
-        }
-    ?>
-    
-
-    <div class="chat-container">
-=======
     <link rel="stylesheet" href="../css/user_chat.css">
     <link rel="stylesheet" href="../css/style.css">
 
@@ -118,31 +114,9 @@ try {
 
     <!-- チャットメッセージ表示 -->
     <div class="chat-container" id="chatContainer">
->>>>>>> cd0bb936e7dcc76c789ffb2bce7adc380da5d1ff
         <?php foreach ($chats as $chat): ?>
-            <div class="chat-message <?php echo ($chat['user_id'] == $UserId) ? 'self' : 'other'; ?>">
+            <div class="chat-message">
                 <div class="user-info">
-<<<<<<< HEAD
-                    <!-- アイコンの表示 -->
-                    <a href="profile-partner.php?user_id=<?= $chat['user_id'] ?>">
-                        <!-- 各ユーザーのアイコンを個別に表示 -->
-                    <?php
-                        if (isset($iconPath) && $iconPath !== '') {
-                            echo "<input type = 'hidden' name = '" . $iconPath . "' value = '" . $iconPath . "'></input>";
-            
-                            echo "<img src='".$iconPath."' class='icon_user' width='50' height='50'>";
-                        } else {
-                            echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
-                        }
-                    ?>
-                    </a>
-                    <span><?= $chat['user_name'] ?></span>
-                </div>
-                <div class="chat-box">
-                    <!-- チャットメッセージの表示 -->
-                    <p><?= $chat['chat'] ?></p>
-                    <div class="chat-time"><?= $chat['created_at'] ?></div>
-=======
                     <?php if ($chat['user_id'] == $UserId): ?>
                         <!-- 自分のメッセージ -->
                         <div class="my-chat">
@@ -166,21 +140,11 @@ try {
                             <div class="chat-time"><?= ($chat['created_at']); ?></div>
                         </div>
                     <?php endif; ?>
->>>>>>> cd0bb936e7dcc76c789ffb2bce7adc380da5d1ff
                 </div>
             </div>
         <?php endforeach; ?>
+        
     </div>
-
-<<<<<<< HEAD
-    <form method="POST" action="">
-        <label for="chat">新しいメッセージ</label>
-        <textarea name="chat" id="chat" rows="5" required></textarea>
-        <br><br>
-        <button type="submit">送信</button>
-        <button type="button" onclick="location.href='chatboard-title.php'">戻る</button>
-    </form>
-=======
     <!-- チャット送信フォーム -->
     <div class="form-chat">
         <form method="POST" action="">
@@ -191,8 +155,8 @@ try {
             <button type="submit">送信</button>
             <a href="#jump" class="jump">↓</a>
         </form>
-        <div id="jump"></div>
     </div>
+    <div  id="jump"></div>
 
     <script>
     window.onload = function() {
@@ -217,7 +181,12 @@ try {
     document.querySelector('form').addEventListener('submit', function() {
         setTimeout(jump, 100); // 少し遅延させて最下部にスクロール
     });
+    window.addEventListener("popstate", function (e) {
+
+history.pushState(null, null, null);
+return;
+
+});
     </script>
->>>>>>> cd0bb936e7dcc76c789ffb2bce7adc380da5d1ff
 </body>
 </html>

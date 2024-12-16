@@ -1,12 +1,12 @@
-<?php
-session_start();
+<?php 
+session_start(); 
 require 'db-connect.php';
 require 'header.php';
 $pdo=new PDO($connect,USER,PASS);
- 
+
 $sql=$pdo->prepare('select * FROM contacts_ge');
 $sql->execute();
- 
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -15,15 +15,15 @@ $sql->execute();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/header.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
- 
+
     <link rel="stylesheet" href="../css/infomation-input.css">
- 
+
     <title>Document</title>
 </head>
 <body>
-   
+    
     <h2 style="text-align:center">お問い合わせ</h2>
-    <form class="info" action ="infomation-complete.php" method ="post">
+    <form class="info" action ="infomation-complete.php" method ="post"> 
         <?php
             $contacts_ge = $sql->fetchAll(PDO::FETCH_ASSOC);
             echo "<div  style='text-align:center'>";
@@ -36,18 +36,18 @@ $sql->execute();
         </select>
     </div>
     <form class = "info" action="infomation-complete.php" method="post">
-       
+        
         <div style="text-align:center">お問い合わせ内容<br>
             <textarea name="infomation" required="required"></textarea>
         </div>
- 
+
         <div style='text-align:center'>
             <input type="submit" class="button" value="送信">
         </div>
     </form>
     <button class="menu-button" onclick="location.href='query-top.php'">メニューへ</button>
     <script src="../js/header.js"></script>
- 
+
 </body>
- 
+
 </html>
