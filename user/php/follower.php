@@ -1,8 +1,6 @@
 <?php
-    session_start();
-    require 'db-connect.php';
 
-
+require 'header_profile.php';
 $pdo = new PDO($connect, USER, PASS);
 
 // 自身のユーザーIDの取得
@@ -28,39 +26,32 @@ $followerUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/header.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
     <link rel="stylesheet" type="text/css" href="../css/follow.css">
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
 
     <title>Document</title>
 </head>
 <body>
-<?php require 'header.php'; ?>
-
-    <div class = "headline" >フォロワー一覧</div>
-    <div class = "follow-container">
-
-
+    
 <?php
     if (count($followerUsers) > 0) {
         foreach ($followerUsers as $user) {
             echo '<div class = user-info>';
-                echo '<a href="profile-partner.php?user_id='. $user["user_id"] . '" class = "follow_id"></a>';
-                $iconPath = $user['icon'];
-                echo "<input type = 'hidden' name = '" . $iconPath . "' value = '" . $iconPath . "'></input>";
-
-                echo "<img src='".$iconPath."' class='follow-icon' width='50' height='50'>";
-
+                echo '<a href="profile-partner.php?user_id='. $user["user_id"] . '"></a>';
+                $iconPath = isset($user['icon']) ? 'https://aso2201222.kill.jp/'.$user['icon'] : '';
+                if (isset($iconPath) && $iconPath !== '') {
+                    echo "<input type = 'hidden' name = '" . $iconPath . "' value = '" . $iconPath . "'></input>";
+    
+                    echo "<img src='".$iconPath."' class='icon_user' width='50' height='50'>";
+                } else {
+                    echo "<img src='../img/icon_user.png' class='icon_user' width='50' height='50'>";
+                }
+    
     
 
-                echo "<div class = 'follow-name'>" . $user['user_name'] . "</div>";
-                echo "<div class = 'follow-form'>";
-                    echo "<form action='user_chat.php?user_id=". $user['user_id']. "' class = 'user_c' method='post'>";
-                        echo '<button type="submit" class="follow-button">チャット</button>';
-                    echo '</form>';
-                echo "</div>";
+                echo 'User Name: ' . $user['user_name'];
+                echo "<form action='user_chat.php?user_id=". $user['user_id']. "' class = 'user_c' method='post'>";
+                    echo '<button type="submit" class="button">チャット</button>';
+                echo '</form>';
                 
             
             echo '</div>';
@@ -68,9 +59,7 @@ $followerUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } else {
         echo 'フォロワーがいません。';
     }
-?>
-    </div>
-    <script src="../js/header.js"></script>
 
+?>
 </body>
 </html>

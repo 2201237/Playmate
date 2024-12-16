@@ -1,17 +1,17 @@
 <?php
 session_start();
 require 'db-connect.php';
-
+ 
 // デバッグ用エラー表示
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-
+ 
 // セッションにユーザー情報が設定されているか確認
 if (!isset($_SESSION['User']['user_id'])) {
     header('Location: login-input.php');
     exit;
 }
-
+ 
 // データベース接続処理
 try {
     $pdo = new PDO($connect, USER, PASS, [
@@ -22,21 +22,21 @@ try {
     echo "データベース接続エラー: " . htmlspecialchars($e->getMessage());
     exit;
 }
-
+ 
 // 現在のユーザーIDを取得
 $current_user_id = $_SESSION['User']['user_id'];
 $current_user_icon = $_SESSION['User']['icon'] ?? 'icon_user.png';
-
+ 
 // URLパラメータからboard_title_idを取得
 $board_title_id = isset($_GET['board_title_id']) ? (int)$_GET['board_title_id'] : null;
-
+ 
 // board_title_idが指定されていない場合はエラー表示
 if ($board_title_id === null) {
     echo "掲示板IDが指定されていません。<br>";
     echo "現在のURL: " . htmlspecialchars($_SERVER['REQUEST_URI']) . "<br>";
     exit;
 }
-
+ 
 // ゲームタイトル一覧を取得
 try {
     $stmt = $pdo->prepare("SELECT game_id, title FROM game ORDER BY title ASC");
@@ -46,7 +46,7 @@ try {
     echo "ゲームタイトル取得エラー: " . htmlspecialchars($e->getMessage());
     exit;
 }
-
+ 
 // POSTされたチャットメッセージを処理
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['chat'])) {
     $chat_message = trim($_POST['chat']);
@@ -68,23 +68,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['chat'])) {
         exit;
     }
 }
-
+ 
 // チャット履歴を取得
 try {
     $stmt = $pdo->prepare("
-        SELECT 
-            c.chat, 
-            c.created_at, 
-            u.user_id, 
-            u.user_name, 
-            u.icon 
-        FROM 
+        SELECT
+            c.chat,
+            c.created_at,
+            u.user_id,
+            u.user_name,
+            u.icon
+        FROM
             board_chat AS c
-        JOIN 
+        JOIN
             users AS u ON c.user_id = u.user_id
-        WHERE 
+        WHERE
             c.board_title_id = :board_title_id
-        ORDER BY 
+        ORDER BY
             c.created_at ASC
     ");
     $stmt->bindParam(':board_title_id', $board_title_id, PDO::PARAM_INT);
@@ -95,7 +95,7 @@ try {
     exit;
 }
 ?>
-
+ 
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const chatContainer = document.querySelector('.chat-container');
         chatContainer.scrollTop = chatContainer.scrollHeight - chatContainer.clientHeight;
     });
-
+ 
     document.querySelector('button[onclick="toggleGameList()"]').addEventListener('click', function() {
         const gameList = document.getElementById('game-title-list');
         if (gameList.style.display === 'none' || gameList.style.display === '') {
@@ -124,10 +124,10 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 <body>
     <?php require 'header.php'; ?>
-
+ 
     <!-- ゲームタイトルを表示するボタン -->
-    <button onclick="toggleGameList()" style="position: fixed; top: 70px; left: 20px; z-index: 1001;">ゲームタイトル</button>
-
+    <button onclick="toggleGameList()" style="position: fixed; top: 55px; left: 165px; z-index: 1001;">タイトル表示</button>
+ 
     <!-- ゲームタイトルリスト -->
     <div id="game-title-list" class="game-title-list" style="display: none;">
         <ul>
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <?php endforeach; ?>
         </ul>
     </div>
-
+ 
     <div class="chat-container">
         <?php foreach ($chats as $chat): ?>
             <div class="chat-message <?php echo ($chat['user_id'] == $current_user_id) ? 'self' : 'other'; ?>">
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         <?php endforeach; ?>
     </div>
-
+ 
     <form method="POST" action="">
         <textarea name="chat" id="chat" rows="3"></textarea>
         <button class="up-button" type="submit">↑</button>

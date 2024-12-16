@@ -3,8 +3,8 @@ require 'db-connect.php';
 require 'header.php';
 $pdo=new PDO($connect,USER,PASS);
 
-$sql=$pdo->prepare('select * FROM contacts where user_id = ?');
-$sql->execute([$_SESSION['User']['user_id']]);
+$sql=$pdo->prepare('select * FROM contacts_ge');
+$sql->execute();
 
 ?>
 <!DOCTYPE html>
@@ -12,16 +12,14 @@ $sql->execute([$_SESSION['User']['user_id']]);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/infomation-reception.css">
     <link rel="stylesheet" href="../css/header.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
+    <link rel="stylesheet" href="../css/infomation-reception.css">
 
     <title>Document</title>
 </head>
 <body>
     
-    <h2 style="text-align:center">お問い合わせ返信</h2>
+    <h2 style="text-align:center">お問い合わせ一覧</h2>
 <?php
 try {
     $pdo = new PDO($connect, USER, PASS);
@@ -31,8 +29,7 @@ try {
     $sql = "SELECT contacts.contacts_id, contacts.contacts, users.user_name, contacts.reply
             FROM contacts 
             JOIN users ON contacts.user_id = users.user_id
-            WHERE contacts.status = 1 AND users.user_id = ?" ;
-
+            WHERE contacts.status = 1";
 
     // ユーザー名でのフィルタリング
     if (!empty($user_name)) {
@@ -46,7 +43,7 @@ try {
         $stmt->bindValue(':user_name', '%' . $user_name . '%', PDO::PARAM_STR);
     }
 
-    $stmt->execute([$_SESSION['User']['user_id']]);
+    $stmt->execute();
 
     // テーブル表示
     if ($stmt->rowCount() > 0) {
@@ -83,7 +80,5 @@ try {
 }
 ?>
     <button class="menu-button" onclick="location.href='query-top.php'">メニューへ</button>
-    <script src="../js/header.js"></script>
-
 </body>
 </html>

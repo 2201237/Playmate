@@ -1,7 +1,7 @@
 /* 全体のスタイル */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f7f6;
+    background-color: #fafafa;
     color: #333;
     margin: 0;
     padding: 0;
@@ -9,12 +9,11 @@ body {
     flex-direction: column;
     align-items: center;
 }
-
+ 
 /* ヘッダー */
-header {
+/* header {
+    height: 60px;
     background-color: #f4f7f6;
-
-    /* height: 60px;
     position: fixed;
     top: 0;
     left: 0;
@@ -23,11 +22,13 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
-}
-
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+} */
+ 
 /* コンテナ */
 .create {
+    position: absolute;
+    top: 10%;
     width: 100%;
     max-width: 800px;
     margin-top: 80px; /* ヘッダーの高さ分を考慮 */
@@ -36,16 +37,16 @@ header {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
+ 
 /* フォームのラベル */
 label {
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
 }
-
+ 
 /* セレクトボックス */
-select, .ctext, textarea {
+select, .ctext, .textarea2 {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -53,12 +54,12 @@ select, .ctext, textarea {
     margin-bottom: 15px;
     box-sizing: border-box;
 }
-
+ 
 /* テキストエリア */
 textarea {
     resize: vertical; /* 縦方向のリサイズを可能にする */
 }
-
+ 
 /* ボタン */
 button {
     padding: 10px 20px;
@@ -70,26 +71,26 @@ button {
     transition: background-color 0.3s;
     margin-right: 10px;
 }
-
+ 
 button:hover {
     background-color: #0056b3;
 }
-
+ 
 /* 戻るボタンに異なる色を設定 */
 .cbut {
     background-color: #6c757d;
 }
-
+ 
 .cbut:hover {
     background-color: #5a6268;
 }
-
+ 
 /* スペーシング */
 br {
     display: block;
     margin-bottom: 15px;
 }
-
+ 
 /* レスポンシブデザイン */
 @media (max-width: 768px) {
     .create {

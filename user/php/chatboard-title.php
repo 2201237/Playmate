@@ -1,5 +1,4 @@
 <?php
-session_start();
     require 'db-connect.php';
 
     $pdo = new PDO($connect, USER, PASS);
@@ -34,15 +33,12 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../img/favicon.ico">
     <link rel="stylesheet" href="../css/header.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/chatboard-title.css">
     <title>PlayMate掲示板一覧</title>
 </head>
 
 <body>
-
-    <?php require 'header.php'; ?>
 
     <div class="container">
         <a href="chatboard-create.php">チャット作成</a>
@@ -95,8 +91,6 @@ session_start();
             <?php endif; ?>
         </div>
     </div>
-    <script src="../js/header.js"></script>
-
 </body>
 
 </html>

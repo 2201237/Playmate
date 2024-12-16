@@ -20,22 +20,10 @@ function getTournamentName($pdo, $tournament_id) {
 // 特定の回戦の組み分け情報を取得して表示する関数
 function displayMatchList($pdo, $tournament_id, $round) {
     $stmt = $pdo->prepare("
-        SELECT 
-            tk.round, 
-            tk.user_id1, 
-            u1.user_name AS user_name1, 
-            tk.user_id2, 
-            u2.user_name AS user_name2
-        FROM 
-            tournament_kumi tk
-        LEFT JOIN 
-            users u1 ON tk.user_id1 = u1.user_id
-        LEFT JOIN 
-            users u2 ON tk.user_id2 = u2.user_id
-        WHERE 
-            tk.tournament_id = ? AND tk.round = ?
-        ORDER BY 
-            tk.round ASC
+        SELECT round, user_id1, user_id2
+        FROM tournament_kumi
+        WHERE tournament_id = ? AND round = ?
+        ORDER BY round ASC
     ");
     $stmt->execute([$tournament_id, $round]);
     $matches = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -49,8 +37,8 @@ function displayMatchList($pdo, $tournament_id, $round) {
     echo '<thead>';
     echo '<tr>';
     echo '<th>ラウンド</th>';
-    echo '<th>対戦者1 (User ID / User Name)</th>';
-    echo '<th>対戦者2 (User ID / User Name)</th>';
+    echo '<th>対戦者1 (User ID)</th>';
+    echo '<th>対戦者2 (User ID)</th>';
     echo '</tr>';
     echo '</thead>';
     echo '<tbody>';
@@ -58,23 +46,14 @@ function displayMatchList($pdo, $tournament_id, $round) {
     foreach ($matches as $match) {
         echo '<tr>';
         echo '<td>第' . htmlspecialchars($match['round'], ENT_QUOTES, 'UTF-8') . '回戦</td>';
-        echo '<td>' 
-            . htmlspecialchars($match['user_id1'], ENT_QUOTES, 'UTF-8') 
-            . ' / ' 
-            . htmlspecialchars($match['user_name1'] ?? '未設定', ENT_QUOTES, 'UTF-8') 
-            . '</td>';
-        echo '<td>' 
-            . htmlspecialchars($match['user_id2'], ENT_QUOTES, 'UTF-8') 
-            . ' / ' 
-            . htmlspecialchars($match['user_name2'] ?? '未設定', ENT_QUOTES, 'UTF-8') 
-            . '</td>';
+        echo '<td>' . htmlspecialchars($match['user_id1'], ENT_QUOTES, 'UTF-8') . '</td>';
+        echo '<td>' . htmlspecialchars($match['user_id2'], ENT_QUOTES, 'UTF-8') . '</td>';
         echo '</tr>';
     }
 
     echo '</tbody>';
     echo '</table>';
 }
-
 
 // URLパラメータまたはPOSTデータから値を取得
 $tournament_id = $_POST['tournament_id'] ?? $_GET['tournament_id'] ?? null;
@@ -97,48 +76,6 @@ if ($tournament_id) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/tournament-bracket.css">
     <title>組み分け一覧</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1, h2 {
-            text-align: center;
-            color: #333;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        table, th, td {
-            border: 1px solid #ccc;
-        }
-        th, td {
-            padding: 10px;
-            text-align: center;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-        p {
-            text-align: center;
-            font-size: 18px;
-            color: #666;
-        }
-        .error {
-            color: red;
-            text-align: center;
-        }
-        form {
-            text-align: center;
-            margin: 20px 0;
-        }
-        select, button {
-            font-size: 16px;
-            padding: 5px 10px;
-        }
-    </style>
 </head>
 <body>
     <h1>組み分け一覧</h1>

@@ -1,12 +1,11 @@
 /* 全体のレイアウト */
-/* 全体のレイアウト */
 body {
     display: flex;
     flex-direction: column;
     margin: 0;
     padding: 0;
 }
-
+ 
 /* ヘッダーのスタイル */
 header {
     height: 60px;
@@ -17,12 +16,12 @@ header {
     width: 100%;
     z-index: 1000;
 }
-
+ 
 /* ゲームタイトルリスト */
 #game-title-list {
     display: none;
     position: fixed;
-    top: 70px;
+    top: 80px;
     left: 0;
     width: 20%;
     height: calc(100vh - 70px);
@@ -32,12 +31,12 @@ header {
     overflow-y: auto;
     z-index: 500;
 }
-
+ 
 /* リストが表示されたとき */
 #game-title-list.show {
     display: block;
 }
-
+ 
 /* チャットエリア */
 .chat-container {
     flex-grow: 1;
@@ -51,54 +50,54 @@ header {
     overflow-y: auto;
     height: calc(100vh - 120px - 60px); /* フォームエリアとヘッダー分を差し引く */
 }
-
+ 
 /* チャットメッセージ */
 .chat-message {
     display: flex;
     align-items: flex-end;
     max-width: 50%;
 }
-
+ 
 .chat-message.self {
     align-self: flex-end; /* 自分のチャットを右寄せ */
     flex-direction: row-reverse; /* アイコンとメッセージの順序を反転 */
     text-align: right;
 }
-
+ 
 .chat-message.other {
     align-self: flex-start; /* 他人のチャットを左寄せ */
     text-align: left;
 }
-
+ 
 .user-info {
     display: flex;
     align-items: center;
     margin: 5px;
 }
-
+ 
 .user-info img {
     border-radius: 50%;
     margin: 0 10px;
 }
-
+ 
 .chat-box {
     background-color: #f1f1f1;
     padding: 10px;
     border-radius: 10px;
     word-wrap: break-word;
 }
-
+ 
 .chat-message.self .chat-box {
     background-color: #007bff; /* 自分のチャットの背景色 */
     color: white;
 }
-
+ 
 .chat-time {
     font-size: 0.8em;
     margin-top: 5px;
     color: #888;
 }
-
+ 
 /* フォームのスタイル */
 form {
     position: fixed;
@@ -114,7 +113,7 @@ form {
     gap: 10px;
     align-items: center;
 }
-
+ 
 /* 入力欄 */
 form textarea {
     resize: none;
@@ -124,13 +123,16 @@ form textarea {
     border: 1px solid #ddd;
     border-radius: 5px;
 }
-
+ 
 /* 送信ボタン */
 .up-button {
     background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 5px;
+    position: absolute;
+    top: 30%;
+    left: 85%;
     width: 50px;
     height: 50px;
     display: flex;
@@ -140,16 +142,16 @@ form textarea {
     font-size: 1.5em;
     transition: background-color 0.3s;
 }
-
+ 
 .up-button:hover {
     background-color: #0056b3;
-
+ 
 }
-
+ 
 button[type="button"]:hover {
     background-color: #5a6268;
 }
-
+ 
 /* メディアクエリでモバイル対応 */
 @media (max-width: 500px) {
     form {
@@ -159,7 +161,7 @@ button[type="button"]:hover {
         width: 100%;
         margin: 10px 0;
     }
-
+ 
 }
 /* チャットコンテナのスクロール対応 */
 .chat-container {
@@ -172,7 +174,7 @@ button[type="button"]:hover {
     border-radius: 10px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
+ 
 /* 入力フォームを画面の下部に固定 */
 form {
     position: fixed;
@@ -187,24 +189,24 @@ form {
     z-index: 1000;
     border-radius: 10px 10px 0 0; /* 上部の角を丸くする */
 }
-
+ 
 /* メッセージ入力欄のスタイル調整 */
 form textarea {
     resize: none; /* サイズ変更を無効化 */
     height: 80px;
 }
-
+ 
 /* ボタンの横並び対応 */
 form .button-group {
     display: flex;
     justify-content: space-between;
     gap: 10px;
 }
-
+ 
 form button {
     width: 48%; /* 横並びにした場合のボタンの幅 */
 }
-
+ 
 /* スクロールバーのスタイル (オプション) */
 .chat-container::-webkit-scrollbar {
     width: 8px;
@@ -215,5 +217,35 @@ form button {
 }
 .chat-container::-webkit-scrollbar-thumb:hover {
     background-color: #999;
-
+ 
 }
+
+button {
+    position: fixed;
+    top: 55px;
+    left: 165px;
+    z-index: 1001;
+    background-color: #4CAF50; /* 緑色 */
+    color: white; /* 文字色 */
+    padding: 5px 5px; /* 内側余白 */
+    border: none; /* ボーダーなし */
+    border-radius: 5px; /* 丸みを帯びた角 */
+    font-size: 16px; /* フォントサイズ */
+    font-family: 'Arial', sans-serif; /* フォントファミリー */
+    cursor: pointer; /* ポインタカーソル */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 影 */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* ホバー時のトランジション */
+}
+
+button:hover {
+    background-color: #45a049; /* ホバー時の背景色 */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* ホバー時の影 */
+}
+
+button:active {
+    background-color: #3e8e41; /* クリック時の背景色 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* クリック時の影 */
+    transform: translateY(1px); /* クリック時の押し下げ効果 */
+}
+
+ 

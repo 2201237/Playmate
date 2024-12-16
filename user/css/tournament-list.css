@@ -1,0 +1,83 @@
+/* 全体のスタイリング */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff; /* 背景色を白に設定 */
+    color: #000000; /* 文字色を黒に設定 */
+}
+
+/* 見出しのスタイル */
+h1 {
+    font-size: 2em;
+    color: #000000;
+    text-align: center;
+    margin: 20px 0;
+    border-bottom: 2px solid #000000; /* 見出しの下に線を追加 */
+    padding-bottom: 10px;
+}
+
+/* テーブルのスタイル */
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #ffffff; /* テーブルの背景色を白に設定 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* わずかな影を付ける */
+}
+
+table thead {
+    background-color: #282828; /* ヘッダー行を黒に設定 */
+    color: #ffffff; /* ヘッダーの文字色を白に設定 */
+}
+
+table th, table td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #000000; /* 枠線を黒に設定 */
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* 偶数行に薄いグレーを設定 */
+}
+
+table tbody tr:hover {
+    background-color: #e0e0e0; /* ホバー時に薄いグレーを強調 */
+}
+
+/* アイコン画像のスタイル */
+table td img {
+    border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #282828; /* 黒い枠線を追加 */
+}
+h3{
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 詳細リンクのスタイル */
+table td a {
+    color: #282828; /* リンク色を黒に設定 */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+    border-bottom: 1px solid transparent; /* 下線をホバー時に表示する */
+}
+
+table td a:hover {
+    color: #555555; /* ホバー時に少し薄くする */
+    border-bottom: 1px solid #000000; /* 黒い下線を表示 */
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    table {
+        font-size: 0.9em;
+    }
+
+    table td img {
+        max-width: 150px;
+    }
+}

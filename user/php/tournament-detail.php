@@ -104,6 +104,17 @@ if (isset($_GET['tournament_id'])) {
                 </a>
             <?php endforeach; ?>
         </div>
+
+        <!-- アナウンスリンク -->
+        <div>
+            <h2>大会アナウンス</h2>
+            <a href="tournament-announce.php?tournament_id=<?php echo $tournament_id; ?>&round=0">全体アナウンス</a>
+            <?php foreach ($rounds as $round): ?>
+                <a href="tournament-announce.php?tournament_id=<?php echo $tournament_id; ?>&round=<?php echo $round; ?>">
+                    <?php echo htmlspecialchars($round); ?>回戦アナウンス
+                </a>
+            <?php endforeach; ?>
+        </div>
     </div>
 </body>
 </html>

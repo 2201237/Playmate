@@ -10,13 +10,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/header.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/tournament-list.css">
     <link rel="icon" href="../img/favicon.ico">
     <title>Document</title>
 </head>
 <body>
         <div>
             <h1  style='text-align:center'>大会一覧</h1>
+            <h2 class="click"> 詳しくはアイコンまたは詳細をクリック!!
             <table border="1" >
             <?php
                 $sql = $pdo->prepare('SELECT * FROM tournament');
@@ -43,9 +44,9 @@
                     $participant_count = $count_sql->fetchColumn();
 
                     echo "<tr>";
-                        echo "<td><img src='$image_path' width='180' height=''></td>";
-                        echo "<td style='word-wrap: break-word; max-width: 150px;'>". htmlspecialchars($list['tournament_name']) ."</td>";
-                        echo "<td>$participant_count</td>";
+                        echo "<td><a href='tournament-detail.php?tournament_id=$tournament_id'><img src='$image_path' width='180' height=''></td>";
+                        echo "<td style='word-wrap: break-word; max-width: 150px;'>". htmlspecialchars($list['tournament_name']) ;
+                        echo "<td><a href='tournament-detail.php?tournament_id=$tournament_id'>$participant_count</td>";
                         echo "<td><a href='tournament-detail.php?tournament_id=$tournament_id'>詳細</a></td>"; // 詳細リンクを追加
                     echo "</tr>";
                 }
@@ -53,7 +54,5 @@
             ?>
         </table>
     </div>
-    <script src="../js/header.js"></script>
-
 </body>
 </html>

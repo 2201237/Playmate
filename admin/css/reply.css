@@ -52,7 +52,7 @@ body {
     transition: border-color 0.3s, box-shadow 0.3s; /* フォーカス時のアニメーション */
     /* position: absolute;
     left: 320px; */
-    margin-left: 26%;
+    margin-left: 30%;
 }
 
 .message:focus {

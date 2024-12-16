@@ -1,3 +1,11 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
 /* タイトルのスタイル */
 h2 {
     margin: 20px 0;
@@ -8,6 +16,7 @@ h2 {
 
 /* ボタンエリアのスタイル */
 div {
+    margin-top: 30px;
     text-align: center;
 }
 
@@ -31,7 +40,7 @@ div {
     transform: scale(1.05); /* 少し大きくなる効果 */
 }
 
-/* レスポンシブ対応 */
+/* レスポンシブ対応
 @media (max-width: 768px) {
     h2 {
         font-size: 24px;
@@ -40,9 +49,9 @@ div {
         font-size: 16px;
         padding: 10px 20px;
     }
-}
+} */
 
-/* スマートフォン対応 */
+/* スマートフォン対応
 @media (max-width: 480px) {
     h2 {
         font-size: 20px;
@@ -50,6 +59,6 @@ div {
     .menu-button {
         font-size: 14px;
         padding: 8px 16px;
-        width: 80%; /* 幅を広くして押しやすく */
+        width: 80%;
     }
-}
+} */
