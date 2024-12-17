@@ -116,18 +116,19 @@ form {
  
 /* 入力欄 */
 form textarea {
-    resize: none;
-    height: 50px;
-    flex-grow: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    resize: none; /* サイズ変更を無効化 */
+    height: 50px; /* 高さを少し小さく */
+    width: 80%; /* 幅を縮小 */
+    max-width: 400px; /* 最大幅の設定 */
+    padding: 10px; /* 内側の余白 */
+    border: 1px solid #ddd; /* 枠線 */
+    border-radius: 5px; /* 角を丸く */
 }
  
 /* 送信ボタン */
 .up-button {
     background-color: #007bff;
-    color: #fff;
+    color: white;
     border: none;
     border-radius: 5px;
     position: absolute;
@@ -145,24 +146,12 @@ form textarea {
  
 .up-button:hover {
     background-color: #0056b3;
- 
 }
  
 button[type="button"]:hover {
     background-color: #5a6268;
 }
  
-/* メディアクエリでモバイル対応 */
-@media (max-width: 500px) {
-    form {
-        padding: 20px;
-    }
-    button {
-        width: 100%;
-        margin: 10px 0;
-    }
- 
-}
 /* チャットコンテナのスクロール対応 */
 .chat-container {
     max-height: calc(100vh - 220px); /* 画面サイズに応じて高さを調整 */
@@ -193,7 +182,7 @@ form {
 /* メッセージ入力欄のスタイル調整 */
 form textarea {
     resize: none; /* サイズ変更を無効化 */
-    height: 80px;
+    height: 50px; /* 高さを少し小さく */
 }
  
 /* ボタンの横並び対応 */
@@ -217,9 +206,9 @@ form button {
 }
 .chat-container::-webkit-scrollbar-thumb:hover {
     background-color: #999;
- 
 }
-
+ 
+/* ボタンスタイル */
 button {
     position: fixed;
     top: 55px;
@@ -247,6 +236,7 @@ button:active {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* クリック時の影 */
     transform: translateY(1px); /* クリック時の押し下げ効果 */
 }
+
 /* 削除ボタンのスタイル */
 .delete-button {
     position: relative; /* fixedの代わりに相対位置 */
@@ -276,5 +266,22 @@ button:active {
 .delete-button i {
     margin-right: 5px; /* アイコンとテキストの間隔 */
 }
+/* ヘッダー内の検索ボックス */
+header .search-box {
+    width: 200px; /* 幅を調整 */
+    height: 30px; /* 高さを調整 */
+    padding: 5px 10px; /* 内側の余白 */
+    border: 1px solid #ccc; /* 枠線 */
+    border-radius: 5px; /* 角を丸くする */
+    font-size: 14px; /* フォントサイズ調整 */
+}
 
+/* 検索ボックスがヘッダーに適切に収まるように調整 */
+header .search-box input {
+    width: 100%;
+    padding: 5px;
+    border: none;
+    font-size: 14px;
+    border-radius: 5px;
+}
  
